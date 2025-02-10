@@ -25,22 +25,24 @@
     var CONFIG = {"hostname":"zywifeliuying.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="公告（更新于10.26.2024​	 一些前言">
+  <meta name="description" content="MinMax算法浅显了解preface:  几天前开发井字棋小游戏时，对困难模式下的人机代码毫无头绪，问了问deepseek，由此得知了MinMax这个名词。下面作浅显的介绍，附带在井字棋中的运用。 参考文章：最清晰易懂的MinMax算法和Alpha-Beta剪枝详解-CSDN博客">
 <meta property="og:type" content="article">
-<meta property="og:title" content="公告">
-<meta property="og:url" content="https://zywifeliuying.top/2024/10/26/top/index.html">
+<meta property="og:title" content="MinMax算法和Alpha-Beta剪枝">
+<meta property="og:url" content="https://zywifeliuying.top/2025/02/07/20250207/index.html">
 <meta property="og:site_name" content="轻流扇">
-<meta property="og:description" content="公告（更新于10.26.2024​	 一些前言">
+<meta property="og:description" content="MinMax算法浅显了解preface:  几天前开发井字棋小游戏时，对困难模式下的人机代码毫无头绪，问了问deepseek，由此得知了MinMax这个名词。下面作浅显的介绍，附带在井字棋中的运用。 参考文章：最清晰易懂的MinMax算法和Alpha-Beta剪枝详解-CSDN博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zywifeliuying.top/2024/10/26/top/1.jpg">
-<meta property="article:published_time" content="2024-10-26T13:43:42.000Z">
-<meta property="article:modified_time" content="2024-10-26T13:45:22.000Z">
+<meta property="og:image" content="https://zywifeliuying.top/2025/02/07/20250207/Snipaste_2025-02-07_16-42-04.png">
+<meta property="article:published_time" content="2025-02-07T08:23:27.000Z">
+<meta property="article:modified_time" content="2025-02-07T11:51:41.227Z">
 <meta property="article:author" content="孑瓜子">
-<meta property="article:tag" content="preface">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="棋类">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zywifeliuying.top/2024/10/26/top/1.jpg">
+<meta name="twitter:image" content="https://zywifeliuying.top/2025/02/07/20250207/Snipaste_2025-02-07_16-42-04.png">
 
-<link rel="canonical" href="https://zywifeliuying.top/2024/10/26/top/">
+<link rel="canonical" href="https://zywifeliuying.top/2025/02/07/20250207/">
 
 
 <script id="page-configurations">
@@ -77,7 +79,7 @@
     storage-name="metingjs" >
   </meting-js>
 
-  <title>公告 | 轻流扇</title>
+  <title>MinMax算法和Alpha-Beta剪枝 | 轻流扇</title>
   
 
 
@@ -234,7 +236,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zywifeliuying.top/2024/10/26/top/">
+    <link itemprop="mainEntityOfPage" href="https://zywifeliuying.top/2025/02/07/20250207/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -247,16 +249,12 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          公告
+          MinMax算法和Alpha-Beta剪枝
         </h1>
 
         <div class="post-meta">
 
 
-
-  <i class="fa fa-thumb-tack"></i>
-  <font color=7D26CD>置顶</font>
-  <span class="post-meta-divider">|</span>
 
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,7 +263,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-10-26 21:43:42 / 修改时间：21:45:22" itemprop="dateCreated datePublished" datetime="2024-10-26T21:43:42+08:00">2024-10-26</time>
+              <time title="创建时间：2025-02-07 16:23:27 / 修改时间：19:51:41" itemprop="dateCreated datePublished" datetime="2025-02-07T16:23:27+08:00">2025-02-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C语言学习</span></a>
+                </span>
             </span>
 
           
@@ -286,27 +293,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="公告（更新于10-26-2024"><a href="#公告（更新于10-26-2024" class="headerlink" title="公告（更新于10.26.2024"></a>公告（更新于10.26.2024</h1><p>​	 一些前言</p>
-<hr>
+        <h1 id="MinMax算法浅显了解"><a href="#MinMax算法浅显了解" class="headerlink" title="MinMax算法浅显了解"></a>MinMax算法浅显了解</h1><p><strong>preface:  几天前开发井字棋小游戏时，对困难模式下的人机代码毫无头绪，问了问deepseek，由此得知了MinMax这个名词。下面作浅显的介绍，附带在井字棋中的运用。</strong></p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42165981/article/details/103263211">最清晰易懂的MinMax算法和Alpha-Beta剪枝详解-CSDN博客</a></p>
 <span id="more"></span>
 
-<p><strong>一些小问题：</strong></p>
-<ul>
-<li><strong>关于界面加载慢，延迟高：背景图大，文章附图，最好耐心等待一会，或者退出浏览器重输网址。建议减少清理浏览器缓存的频率（因为缓存过后进入本站将更流畅</strong></li>
-<li><strong>关于界面的透明，透明确实影响文章字的清晰度，但早已忘记了如何修改，所以就搁置。看不清可以用鼠标选中……</strong></li>
-<li><strong>关于域名。 目前是买了三年（2023），后面极大可能会更换域名，请注意到时候的文章（更换域名的时候也可能会重新搭建blog，文章到时候应该会全部搬迁，有可能会换用其他主题（比如butterfly等等</strong></li>
-<li><strong>关于评论。目前需要magic方可注册账号评论，注册最左边——也就是第一个（liveRe）。极少情况下会出现广子，请勿点击和相信。</strong></li>
-<li><strong>关于wx二维码，真实有效</strong></li>
-<li><strong>关于部分文章需要密码解锁。法1：自己破解。法2：评论区留言。法3：邮件联系</strong></li>
-<li><strong>关于音乐错乱。其为用网yy插件实现，有些vip歌曲实在没办法（有些歌莫名其妙就成了付费的了），而且会出现信息错乱等现象。</strong></li>
-<li><strong>联系方式：请通过邮件发送信息，要求来信请详细说清楚，否则按诈骗分子处理，发送到：<a href="mailto:&#106;&#x69;&#97;&#x71;&#x69;&#x6a;&#105;&#x6e;&#103;&#x6c;&#x69;&#117;&#x40;&#111;&#x75;&#x74;&#x6c;&#111;&#x6f;&#107;&#46;&#99;&#x6f;&#109;">jiaqijingliu@outlook.com</a></strong></li>
-<li><strong>请低调浏览此站，禁止宣传。</strong></li>
-<li><strong>其他：待补充……</strong></li>
-</ul>
-<hr>
-<img src="/2024/10/26/top/1.jpg" class="" title="这是一张图片"> 
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>&emsp;<strong>Minimax算法常用于棋类等由两方较量的游戏和程序。该算法是一个零总和算法，即一方要在可选的选项中选择将其优势最大化的选择，另一方则选择令对手优势最小化的方法。而开始的时候总和为0。很多棋类游戏可以采取此算法，例如井字棋（tic-tac-toe）。</strong></p>
+<p>&emsp;<strong>以上是来自WIKI百科的解释，其实说的通俗一点，就是有两个人下棋，先手希望下一步的局面是自己胜算最大的局面，而后手则希望下一步的局面是先手胜算最小的局面（因为先手输，后手就会赢）。</strong></p>
+<p>&emsp;<strong>那么，如何来判断当前的局面的胜算到底怎么样呢？我们可以设置一个估价函数，按照某种方案来计算当前局面的优劣程度。</strong></p>
+<p>&emsp;<strong>正如图中所示，正方形代表你将要下的地方，圆形代表对手接下来要下的地方（图片里只是列举了对手两种可能的下法），里面的数字代表的你获胜的优势（相当于激励），对你来说，正方形数字要尽可能大；对手回合，其会选择数字最小的（我们假定对手足够厉害）。所以可以得到图中的结果但是这样的计算量十分大，所以一般而言我们会进行剪枝（因为这张图像枝条，然后利用算法能跳过一些分支，故称）</strong></p>
+<img src="/2025/02/07/20250207/Snipaste_2025-02-07_16-42-04.png" class="" title="这是一张图片">
 
-<hr>
+<p>&ensp;<strong>Alpha-beta剪枝的名称来自计算过程中传递的两个边界，这些边界基于已经看到的搜索树部分来限制可能的解决方案集。 其中，α 表示目前所有可能解中的最大下界（◽），β表示目前所有可能解中的最小上界（⚪）。因此，如果搜索树上的一个节点被考虑作为最优解的路上的节点（或者说是这个节点被认为是有必要进行搜索的节点），那么它一定满足以下条件（N是当前节点的估价值）：</strong></p>
+<p>$$<br>α≤N≤β<br>$$<br>  <strong>在我们进行求解的过程中，α 和β会逐渐逼近。如果对于某一个节点，出现了α &gt; β 的情况，那么，说明这个点一定不会产生最优解了，所以，我们就不再对其进行扩展（也就是不再生成子节点），这样就完成了对博弈树的剪枝。从代码的角度来看，其实很简单，就是加了一个break的判定条件，从而减少循环次数。</strong></p>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">这里简略了代码，仅仅展示了必要部分</span><br><span class="line">int alphaBeta(int depth, int alpha, int beta, int isMaximizing) &#123;</span><br><span class="line">    int score = evaluate();</span><br><span class="line">    if (score == 10 || score == -10) return score;  // 胜负已分</span><br><span class="line">    if (isBoardFull()) return 0;  // 平局</span><br><span class="line"></span><br><span class="line">    if (isMaximizing) &#123;</span><br><span class="line">        int best = -INT_MAX;</span><br><span class="line">        for (int i = 0; i &lt; BOARD_SIZE; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; BOARD_SIZE; j++) &#123;</span><br><span class="line">                if (board[i][j] == &#x27; &#x27;) &#123;</span><br><span class="line">                    board[i][j] = &#x27;X&#x27;;  // 假设当前玩家是X</span><br><span class="line">                    best = max(best, alphaBeta(depth + 1, alpha, beta, 0));</span><br><span class="line">                    board[i][j] = &#x27; &#x27;;  // 撤销走法</span><br><span class="line">                    alpha = max(alpha, best);</span><br><span class="line">                    if (alpha &gt;= beta) break;  // 剪枝</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return best;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        int best = INT_MAX;</span><br><span class="line">        for (int i = 0; i &lt; BOARD_SIZE; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; BOARD_SIZE; j++) &#123;</span><br><span class="line">                if (board[i][j] == &#x27; &#x27;) &#123;</span><br><span class="line">                    board[i][j] = &#x27;O&#x27;;  // 假设对手是O</span><br><span class="line">                    best = min(best, alphaBeta(depth + 1, alpha, beta, 1));</span><br><span class="line">                    board[i][j] = &#x27; &#x27;;  // 撤销走法</span><br><span class="line">                    beta = min(beta, best);</span><br><span class="line">                    if (alpha &gt;= beta) break;  // 剪枝</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return best;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    while (1) &#123;</span><br><span class="line">    </span><br><span class="line">        board[row][col] = &#x27;O&#x27;;  // 玩家是O</span><br><span class="line"></span><br><span class="line">        // AI回合</span><br><span class="line">        printf(&quot;AI的回合...\n&quot;);</span><br><span class="line">        int bestScore = -INT_MAX;</span><br><span class="line">        int bestMove[2] = &#123; -1, -1 &#125;;</span><br><span class="line">        for (int i = 0; i &lt; BOARD_SIZE; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; BOARD_SIZE; j++) &#123;</span><br><span class="line">                if (board[i][j] == &#x27; &#x27;) &#123;</span><br><span class="line">                    board[i][j] = &#x27;X&#x27;;  // AI是X</span><br><span class="line">                    int moveScore = alphaBeta(0, -INT_MAX, INT_MAX, 0);  // 使用Alpha-Beta剪枝</span><br><span class="line">                    board[i][j] = &#x27; &#x27;;  // 撤销走法</span><br><span class="line">                    if (moveScore &gt; bestScore) &#123;</span><br><span class="line">                        bestScore = moveScore;</span><br><span class="line">                        bestMove[0] = i;</span><br><span class="line">                        bestMove[1] = j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        board[bestMove[0]][bestMove[1]] = &#x27;X&#x27;;  // AI走法</span><br></pre></td></tr></table></figure>
+
+<p>它这里是main和剪枝函数都用了循环遍历，感觉可以简化，但还是更容易理解，main里面的是人机下一步所有落点的得分，然后用minMax得到分数，比较得分情况。得分有10，0，-10三种。这里的depth是搜索深度，因为是井字棋，所以没有限制depth。要加限制的话在加个<code>if(depth == )</code>的return值。</p>
+<p>总的来看，这个例子还是很容易理解的。通过if，else实现交叉递归，通过最上面的游戏胜利等等条件设定底下得分（其实感觉可以设定更多得分，要不然显得很单薄，但不会编）。</p>
 
     </div>
 
@@ -337,7 +339,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://zywifeliuying.top/2024/10/26/top/" title="公告">https://zywifeliuying.top/2024/10/26/top/</a>
+    <a href="https://zywifeliuying.top/2025/02/07/20250207/" title="MinMax算法和Alpha-Beta剪枝">https://zywifeliuying.top/2025/02/07/20250207/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -349,7 +351,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/preface/" rel="tag"># preface</a>
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+              <a href="/tags/%E6%A3%8B%E7%B1%BB/" rel="tag"># 棋类</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           </div>
 
         
@@ -358,13 +362,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/10/25/20241025/" rel="prev" title="picture">
-      <i class="fa fa-chevron-left"></i> picture
+    <a href="/2025/02/06/20250206/" rel="prev" title="井字棋——windows下的C">
+      <i class="fa fa-chevron-left"></i> 井字棋——windows下的C
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/10/28/20241028/" rel="next" title="听歌中的“首因效应”">
-      听歌中的“首因效应” <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -431,7 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E5%91%8A%EF%BC%88%E6%9B%B4%E6%96%B0%E4%BA%8E10-26-2024"><span class="nav-number">1.</span> <span class="nav-text">公告（更新于10.26.2024</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MinMax%E7%AE%97%E6%B3%95%E6%B5%85%E6%98%BE%E4%BA%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">MinMax算法浅显了解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-number">1.1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">代码分析</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

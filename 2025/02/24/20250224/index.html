@@ -25,20 +25,22 @@
     var CONFIG = {"hostname":"zywifeliuying.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="malloc在C语言中的使用preface: 一般而言，int temp[n];这种写法是不可取的，但利用malloc可以做到。">
+  <meta name="description" content="蒙特卡洛算法浅析**preface:  参考链接：面向初学者的蒙特卡洛树搜索MCTS详解及其实现_mcts算法-CSDN博客 | **">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态分配数组">
-<meta property="og:url" content="https://zywifeliuying.top/2025/02/14/20250214-0/index.html">
+<meta property="og:title" content="蒙特卡洛搜索算法">
+<meta property="og:url" content="https://zywifeliuying.top/2025/02/24/20250224/index.html">
 <meta property="og:site_name" content="轻流扇">
-<meta property="og:description" content="malloc在C语言中的使用preface: 一般而言，int temp[n];这种写法是不可取的，但利用malloc可以做到。">
+<meta property="og:description" content="蒙特卡洛算法浅析**preface:  参考链接：面向初学者的蒙特卡洛树搜索MCTS详解及其实现_mcts算法-CSDN博客 | **">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-02-14T09:35:20.000Z">
-<meta property="article:modified_time" content="2025-02-14T11:47:35.743Z">
+<meta property="article:published_time" content="2025-02-24T13:21:30.000Z">
+<meta property="article:modified_time" content="2025-02-24T14:01:48.804Z">
 <meta property="article:author" content="孑瓜子">
 <meta property="article:tag" content="C语言">
+<meta property="article:tag" content="棋类">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://zywifeliuying.top/2025/02/14/20250214-0/">
+<link rel="canonical" href="https://zywifeliuying.top/2025/02/24/20250224/">
 
 
 <script id="page-configurations">
@@ -75,7 +77,7 @@
     storage-name="metingjs" >
   </meting-js>
 
-  <title>动态分配数组 | 轻流扇</title>
+  <title>蒙特卡洛搜索算法 | 轻流扇</title>
   
 
 
@@ -232,7 +234,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://zywifeliuying.top/2025/02/14/20250214-0/">
+    <link itemprop="mainEntityOfPage" href="https://zywifeliuying.top/2025/02/24/20250224/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -245,7 +247,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          动态分配数组
+          蒙特卡洛搜索算法
         </h1>
 
         <div class="post-meta">
@@ -259,7 +261,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-02-14 17:35:20 / 修改时间：19:47:35" itemprop="dateCreated datePublished" datetime="2025-02-14T17:35:20+08:00">2025-02-14</time>
+              <time title="创建时间：2025-02-24 21:21:30 / 修改时间：22:01:48" itemprop="dateCreated datePublished" datetime="2025-02-24T21:21:30+08:00">2025-02-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,20 +291,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="malloc在C语言中的使用"><a href="#malloc在C语言中的使用" class="headerlink" title="malloc在C语言中的使用"></a>malloc在C语言中的使用</h1><p><strong>preface: 一般而言，<code>int temp[n];</code>这种写法是不可取的，但利用malloc可以做到。</strong></p>
+        <h1 id="蒙特卡洛算法浅析"><a href="#蒙特卡洛算法浅析" class="headerlink" title="蒙特卡洛算法浅析"></a>蒙特卡洛算法浅析</h1><p>**preface:  参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/caozixuan98724/article/details/103213795">面向初学者的蒙特卡洛树搜索MCTS详解及其实现_mcts算法-CSDN博客</a> | **</p>
 <span id="more"></span>
 
-<p>&emsp;一般有</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">double *ptd;</span><br><span class="line">ptd = (double *) malloc(max* sizeof(double));  //  分配 max个double，相当于 double ptd[max];</span><br><span class="line">if(ptd == NULL) // ptd 未能够正常 malloc</span><br><span class="line">&#123;</span><br><span class="line">  	puts(&quot;memory allocation failed&quot;);</span><br><span class="line">  	exit(EXIT_FAILURE);  // 返回，一个值，表示程序异常</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">free(ptd); //注意用完ptd记得释放内存。 ，free释放的是ptd指向的地址，所以只要指向的地址一样，就可以free其他的指针。</span><br><span class="line"></span><br><span class="line">//还可以</span><br><span class="line">int (*p)[6];</span><br><span class="line">p = (int (*)[6]) malloc(n * 6 * sizeof(int)); //注意，我们这里默认不支持变长数组。</span><br></pre></td></tr></table></figure>
-
-<p>关于mallc的中的内存泄漏，可以参考下面的文章。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">free(p-&gt;np);</span><br><span class="line">free(p);</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44718794/article/details/107071169">C&#x2F;C++什么是内存泄露，内存泄露如何避免？_c++中内存泄漏是什么意思-CSDN博客</a></p>
-<h1 id="calloc"><a href="#calloc" class="headerlink" title="calloc"></a>calloc</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">（1）malloc函数。其原型void *malloc(unsigned int num_bytes)；</span><br><span class="line">num_byte为要申请的空间大小，需要我们手动的去计算，如int *p = (int *)malloc(20*sizeof(int)),如果编译器默认int为4字节存储的话，那么计算结果是80Byte，一次申请一个80Byte的连续空间，并将空间基地址强制转换为int类型，赋值给指针p,此时申请的内存值是不确定的。</span><br><span class="line"></span><br><span class="line">（2）calloc函数，其原型void *calloc(size_t n, size_t size)；</span><br><span class="line">其比malloc函数多一个参数，并不需要人为的计算空间的大小，比如如果他要申请20个int类型空间，会int *p = (int *)calloc(20, sizeof(int)）,这样就省去了人为空间计算的麻烦。但这并不是他们之间最重要的区别，malloc申请后空间的值是随机的，并没有进行初始化，而calloc却在申请后，对空间逐一进行初始化，并设置值为0;</span><br><span class="line"></span><br><span class="line">  很多人会疑问：既然calloc不需要计算空间并且可以直接初始化内存，避免错误，那为什么不直接使用calloc函数，那要malloc要什么用呢？</span><br><span class="line">实际上，任何事物都有两面性，有好的一面，必然存在不好的地方。这就是效率。calloc函数由于给每一个空间都要初始化值，那必然效率较malloc要低，并且现实世界，很多情况的空间申请是不需要初始值的，这也就是为什么许多初学者更多的接触malloc函数的原因。</span><br></pre></td></tr></table></figure>
-
-<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weibo1230123/article/details/81503135">https://blog.csdn.net/weibo1230123/article/details/81503135</a>&ensp;</p>
-<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>&emsp;<strong>具体概念就不说了，具体可见上面的链接前面一部分。根据deepseek生成的井字棋算法来看，蒙特卡洛算法就是通过模拟，计算胜率，其核心在于模拟时落子的选择。（这里deepseek就是搞了个完全随机，显然在五子棋等就不可行了，其选择落子需要其他设计，当然我目前不会）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">//这里仅取了必要部分</span><br><span class="line">// 随机模拟游戏</span><br><span class="line">int simulateRandomGame(int player) &#123;</span><br><span class="line">    int currentPlayer = player;</span><br><span class="line">    while (1) &#123;</span><br><span class="line">        // 随机选择一个空位</span><br><span class="line">        int x, y;</span><br><span class="line">        do &#123;</span><br><span class="line">            x = rand() % BOARD_SIZE;</span><br><span class="line">            y = rand() % BOARD_SIZE;</span><br><span class="line">        &#125; while (board[x][y] != EMPTY);</span><br><span class="line"></span><br><span class="line">        // 下子</span><br><span class="line">        board[x][y] = currentPlayer;</span><br><span class="line"></span><br><span class="line">        // 检查是否获胜</span><br><span class="line">        if (checkWin(currentPlayer)) &#123;</span><br><span class="line">            return currentPlayer;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 检查是否平局</span><br><span class="line">        if (isBoardFull()) &#123;</span><br><span class="line">            return 0; // 平局</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 切换玩家</span><br><span class="line">        currentPlayer = (currentPlayer == PLAYER) ? AI : PLAYER;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 蒙特卡洛算法选择最佳走法</span><br><span class="line">void monteCarloMove() &#123;</span><br><span class="line">    int bestMoveX = -1, bestMoveY = -1;</span><br><span class="line">    int bestWinRate = -1;</span><br><span class="line"></span><br><span class="line">    // 遍历所有空位</span><br><span class="line">    for (int i = 0; i &lt; BOARD_SIZE; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; BOARD_SIZE; j++) &#123;</span><br><span class="line">            if (board[i][j] == EMPTY) &#123; //凡是有空位的落点，均进行 模拟</span><br><span class="line">                int wins = 0; //记录这一个落点win的次数</span><br><span class="line"></span><br><span class="line">                // 模拟 SIMULATIONS 次</span><br><span class="line">                for (int k = 0; k &lt; SIMULATIONS; k++) &#123;</span><br><span class="line">                    // 保存当前棋盘状态</span><br><span class="line">                    int tempBoard[BOARD_SIZE][BOARD_SIZE];</span><br><span class="line">                    for (int x = 0; x &lt; BOARD_SIZE; x++) &#123;</span><br><span class="line">                        for (int y = 0; y &lt; BOARD_SIZE; y++) &#123;</span><br><span class="line">                            tempBoard[x][y] = board[x][y];</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; // 储存board</span><br><span class="line"></span><br><span class="line">                    // 下子并模拟游戏</span><br><span class="line">                    board[i][j] = AI;</span><br><span class="line">                    int result = simulateRandomGame(AI); //模拟</span><br><span class="line">                    if (result == AI) wins++;</span><br><span class="line"></span><br><span class="line">                    // 恢复棋盘状态</span><br><span class="line">                    for (int x = 0; x &lt; BOARD_SIZE; x++) &#123;</span><br><span class="line">                        for (int y = 0; y &lt; BOARD_SIZE; y++) &#123;</span><br><span class="line">                            board[x][y] = tempBoard[x][y];</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                // 计算胜率</span><br><span class="line">                int winRate = wins * 100 / SIMULATIONS;</span><br><span class="line">                if (winRate &gt; bestWinRate) &#123;  //将这个落点的胜率和前面模拟的落点的胜率对比</span><br><span class="line">                    bestWinRate = winRate;</span><br><span class="line">                    bestMoveX = i;</span><br><span class="line">                    bestMoveY = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 执行最佳走法</span><br><span class="line">    if (bestMoveX != -1 &amp;&amp; bestMoveY != -1) &#123;</span><br><span class="line">        board[bestMoveX][bestMoveY] = AI;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 主函数</span><br><span class="line">int main() &#123;</span><br><span class="line">        if (currentPlayer == PLAYER) &#123;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // AI回合</span><br><span class="line">            printf(&quot;AI正在思考...\n&quot;);</span><br><span class="line">            monteCarloMove();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -333,7 +326,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://zywifeliuying.top/2025/02/14/20250214-0/" title="动态分配数组">https://zywifeliuying.top/2025/02/14/20250214-0/</a>
+    <a href="https://zywifeliuying.top/2025/02/24/20250224/" title="蒙特卡洛搜索算法">https://zywifeliuying.top/2025/02/24/20250224/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -346,6 +339,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
+              <a href="/tags/%E6%A3%8B%E7%B1%BB/" rel="tag"># 棋类</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           </div>
 
         
@@ -354,12 +349,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/02/14/20250214/" rel="prev" title="VS下的编码问题">
-      <i class="fa fa-chevron-left"></i> VS下的编码问题
+    <a href="/2025/02/22/20250222/" rel="prev" title="把主动提问当作常态">
+      <i class="fa fa-chevron-left"></i> 把主动提问当作常态
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/02/14/20250214-1/" rel="next" title="打包exe程序">
-      打包exe程序 <i class="fa fa-chevron-right"></i>
+    <a href="/2025/02/25/20250225/" rel="next" title="冒泡排序法原理分析">
+      冒泡排序法原理分析 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -427,7 +422,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#malloc%E5%9C%A8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">malloc在C语言中的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#calloc"><span class="nav-number">2.</span> <span class="nav-text">calloc</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E7%AE%97%E6%B3%95%E6%B5%85%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">蒙特卡洛算法浅析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-number">1.1.</span> <span class="nav-text">正文</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

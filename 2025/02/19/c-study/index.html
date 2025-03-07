@@ -33,11 +33,10 @@
 <meta property="og:description" content="C语言学习建议：一定要多手打或者手写代码，不要只看书（因为这样难以应付幽默考试，而且记忆也不深刻">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-19T13:50:08.000Z">
-<meta property="article:modified_time" content="2025-03-04T06:54:43.460Z">
+<meta property="article:modified_time" content="2025-03-07T04:30:53.568Z">
 <meta property="article:author" content="孑瓜子">
-<meta property="article:tag" content="标签1">
-<meta property="article:tag" content="标签2">
-<meta property="article:tag" content="标签3">
+<meta property="article:tag" content="知识">
+<meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://zywifeliuying.top/2025/02/19/c-study/">
@@ -267,8 +266,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-03-04 14:54:43" itemprop="dateModified" datetime="2025-03-04T14:54:43+08:00">2025-03-04</time>
+                <time title="修改时间：2025-03-07 12:30:53" itemprop="dateModified" datetime="2025-03-07T12:30:53+08:00">2025-03-07</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C语言学习</span></a>
+                </span>
+            </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -291,6 +299,12 @@
         <h1 id="C语言学习"><a href="#C语言学习" class="headerlink" title="C语言学习"></a>C语言学习</h1><p>建议：一定要多手打或者手写代码，不要只看书（因为这样难以应付幽默考试，而且记忆也不深刻</p>
 <span id="more"></span>
 
+<h2 id="char就是int"><a href="#char就是int" class="headerlink" title="char就是int"></a>char就是int</h2><p>为什么说char就是int？如果理解、分辨字符和整型之间的区别？</p>
+<p>ASCII码把int和char联系到了一起，通过转义字符“  \ ”，搭起了桥梁。</p>
+<p>字符：如 ‘a’, ‘1’ 等，都可以看作十进制的整型（具体值对应ASCII码中）。我们也可以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int str = &#x27;\10&#x27;; // 这里就的\10 就是八进制对应的字符，所以对应int的8；</span><br><span class="line">int str = &#x27;a&#x27; //那么 str储存的就是a对应的int。</span><br></pre></td></tr></table></figure>
+
+<p>总而言之，字符就是int。</p>
 <h2 id="typedef的另类使用"><a href="#typedef的另类使用" class="headerlink" title="typedef的另类使用"></a>typedef的另类使用</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Andrewniu/article/details/80566324">C&#x2F;C++ typedef用法详解（真的很详细）-CSDN博客</a> |</p>
 <p><strong>typedef中声明的类型在变量名的位置出现！！于是可以理解函数指针中的定义</strong></p>
 <p><code>typedef</code> 是 C 语言中一个非常有用的关键字，它的主要作用是为现有的数据类型定义一个新的别名。通过 <code>typedef</code>，可以让代码更具可读性、简洁性和可维护性。以下是 <code>typedef</code> 在 C 语言中的常见运用场景及其详细说明：</p>
@@ -343,38 +357,170 @@
 <p><strong>使用示例</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef int (*func)(ElemType, ElemType);</span><br><span class="line">int f_compare(ElemType input, ElemType judge);</span><br><span class="line">void LocateElem(func man);</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;    </span><br><span class="line">...</span><br><span class="line">   func f1 = f_compare;</span><br><span class="line">   LocateElem(f1);  </span><br><span class="line">...</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h2><h5 id="ctype-h"><a href="#ctype-h" class="headerlink" title="ctype.h"></a>ctype.h</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">有  isblank() ; //是否为空格、tab。注意，如果为真，则返回一个非0值！！！！，所以如果写if(isblank(a) == TRUE) 是不可取的</span><br><span class="line">	isdigit(); //数字</span><br><span class="line">	等等等等。</span><br><span class="line">	tolower() // 返回小写字母</span><br></pre></td></tr></table></figure>
 
+<h5 id="memset"><a href="#memset" class="headerlink" title="memset"></a>memset</h5><p><code>void *memset(void *str, int c, size_t n)</code></p>
+<ul>
+<li><p><strong>str</strong> – 指向要填充的内存区域的指针。</p>
+</li>
+<li><p><strong>c</strong> – 要设置的值，通常是一个无符号字符。</p>
+</li>
+<li><p><strong>n</strong> – 要被设置为该值的字节数。</p>
+</li>
+<li><pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt; // 引入 string.h 头文件以使用 memset
 
-<h2 id="顺序线性表"><a href="#顺序线性表" class="headerlink" title="顺序线性表"></a>顺序线性表</h2><p><strong>定义</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct &#123;</span><br><span class="line">    ElemType* elem;</span><br><span class="line">    int length;     //当前长度</span><br><span class="line">    int listsize;   //当前分配量</span><br><span class="line">&#125;Sqlist;</span><br></pre></td></tr></table></figure>
+int main() &#123;
+    char buffer[10];
 
-<p><strong>初始化</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> void init_list(Sqlist &amp;L)&#123;  // C++语法。可以认为，把形参（值传递）变成实参。相当于Sqlist *L。</span><br><span class="line">	L.elem = (ElemType *) malloc(LIST_INIT_SIZE * sizeof(ElemType));</span><br><span class="line">	if (!L.elem) exit(OVERFLOW);</span><br><span class="line">	L.length = 0;</span><br><span class="line">	L. listsize = LIST_INIT_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    // 将 buffer 数组的前5个字节设置为字符 &#39;A&#39;，并添加字符串终止符
+    memset(buffer, &#39;A&#39;, 5);
+    buffer[5] = &#39;\0&#39;; // 确保添加字符串终止符
+    printf(&quot;Buffer after memset: %s\n&quot;, buffer);
 
-<p><strong>置零</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Status ClearList_Sq(SqList&amp; L)</span><br><span class="line">&#123;</span><br><span class="line">    L.length = 0;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    // 将 buffer 数组清零，使用 &#39;\0&#39; 替代 0
+    memset(buffer, &#39;\0&#39;, sizeof(buffer)); // 使用&#39;\0&#39;确保一致性及可读性
+    printf(&quot;Buffer after memset: %s\n&quot;, buffer);
 
-<p><strong>销毁</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Status DestroyList_Sq(SqList&amp; L) &#123;</span><br><span class="line">    free(L.elem);</span><br><span class="line">    L.elem = NULL;</span><br><span class="line">    L.length=0;</span><br><span class="line">    L.listsize=0;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    return 0;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 字符串函数</span><br><span class="line"></span><br><span class="line">##### strtol——char *转换为long</span><br><span class="line"></span><br><span class="line">定义在`stdlib.h`</span><br><span class="line"></span><br><span class="line">`long int strtol (const char* str, char** endptr, int base);`</span><br><span class="line"></span><br><span class="line">`str`为要转化的字符串；`base`为转化的进制数，为0时默认10进制，0x采用16进制，0采用8进制；`endstr`为第一个不能转换的字符指针，为NULL时表示不用这个参数。根据这个可以作连续转换</span><br><span class="line"></span><br><span class="line">`strtol()` 会扫描参数 str 字符串，**跳过前面的空白字符**（例如空格，tab缩进等，可以通过 isspace() 函数来检测），直到遇上数字或正负符号才开始做转换，再遇到非数字或字符串结束时(’\0’)结束转换，并将结果返回。**如果不能转换或者 `str` 为空字符串，那么返回 `0(0L)`；**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p>char nm[] &#x3D; “202 22 2 1 3”;<br>char *p_end;<br>int li1 &#x3D; strtol(nm, &amp;p_end, 10); &#x2F;&#x2F; 这里用int是因为win系统下，int long都占4字节<br>int li2 &#x3D; strtol(p_end, &amp;p_end, 10); &#x2F;&#x2F;可以预见的是，li1为202，li2为22；<br>…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### strtok——分割利器</span><br><span class="line"></span><br><span class="line">定义在`string.h`中</span><br><span class="line"></span><br><span class="line">`char *strtok(char *str, const char *delim);`</span><br><span class="line"></span><br><span class="line">`str`：要分割的字符串，第一次调用时传入需要分割的字符串，**之后传入 NULL**。NULL表示：函数将在同⼀个字符串中被保存的位置开始，查找下⼀个标记。（如果字符串中不存在更多的标记，则返回 NULL 指针。）</span><br><span class="line"></span><br><span class="line">`delim`：分隔符字符串，用于指定分隔字符串的**分隔符集合**。</span><br><span class="line"></span><br><span class="line">`strtok`函数找到`str`中的下⼀个标记，并将其⽤ \0 结尾，返回⼀个指向这个标记的指针。</span><br><span class="line"></span><br><span class="line">（注：strtok函数会改变被操作的字符串，所以在使⽤strtok函数切分的字符串⼀般都是临时拷贝的内容并且可修改。）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>&#x2F;&#x2F;示例<br>char arr[] &#x3D; “<a href="mailto:&#72;&#105;&#103;&#104;&#x2d;&#x45;&#97;&#114;&#x70;&#104;&#111;&#x6e;&#101;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;&#x2e;&#54;&#54;&#x36;">High-Earphone@qq.com.666</a>@.gaoerji”;<br>    char* sep &#x3D; “@.”; &#x2F;&#x2F; @  . 作为两个分割符<br>    char* str &#x3D; NULL;<br>    &#x2F;&#x2F; 使用 strtok 函数进行字符串分割，每次调用都会返回被分割出的部分<br>    for (str &#x3D; strtok(arr, sep); str !&#x3D; NULL; str &#x3D; strtok(NULL, sep)) &#x2F;&#x2F;巧妙的利用最开始的参数只初始化一次的特性<br>    {<br>        &#x2F;&#x2F; 输出每次分割得到的子字符串<br>        printf(“%s\n”, str);<br>    }</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### fgets——代替gets</span><br><span class="line"></span><br><span class="line">定义在`stdio.h`中</span><br><span class="line"></span><br><span class="line">`char *fgets(char *str, int n, FILE *stream)` </span><br><span class="line"></span><br><span class="line">fgets会储存换行符（当然，如果你输入超过n，换行符会没地方储存），最大读取为n-1个字符；返回值为指向str的指针，若读取到文件结尾，返回NULL</span><br><span class="line"></span><br><span class="line">第三个参数为**读取**的文件，这里用stdin从键盘读取，后续会在文件操作中介绍</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>while(fgets(words, 10, stdin) !&#x3D; NULL &amp;&amp; word[0] !&#x3D; ‘\n’)<br>{<br>	i &#x3D; 0;<br>	while(words[i] !&#x3D; ‘\n’ &amp;&amp; words[i] !&#x3D; ‘\0’)<br>	i++;<br>	if(words[i] &#x3D;&#x3D; ‘\n’)  &#x2F;&#x2F; 如果先遇到换行符，换成空字符； 先遇到空字符，else便丢弃多的字符<br>	  words[i] &#x3D;&#x3D; ‘\0’;<br>	else<br>	while(getchar() !&#x3D; ‘\n’)   &#x2F;&#x2F;这个操作就是说，一直getchar，知道传入的是‘\n’<br>     	continue; &#x2F;&#x2F;清除缓冲区<br>     puts(words); &#x2F;&#x2F; 上面一番操作使得str一定没有换行符<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### fputs——puts</span><br><span class="line"></span><br><span class="line">`int fputs(const char *str, FILE *stream)`</span><br><span class="line"></span><br><span class="line">fputs不会在输入末尾添加换行符，puts会。第二个为要**写入**数据的文件（把str puts 到 FILE中），在屏幕上用stdout。</span><br><span class="line"></span><br><span class="line">##### 自定义s_gets输入函数</span><br><span class="line"></span><br><span class="line">这个函数读取整行输入并用空字符代替换行符。读取n-1个字符，并丢弃剩下的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>char *s_gets(char * st, int n)<br>{<br>	char * ret_val;<br>	int i &#x3D; 0;<br>	<br>	ret_val &#x3D; fgets(st, n, stdin);<br>	if(ret_val)<br>	{<br>	while(st[i] !&#x3D; ‘\n’ &amp;&amp; st[i] !&#x3D; ‘\0’)<br>	i++;<br>	if(st[i] &#x3D;&#x3D; ‘\n’)<br>	  st[i] &#x3D;&#x3D; ‘\0’;<br>	else<br>	while(getchar() !&#x3D; ‘\n’)<br>     	continue;<br>	}<br>	return ret_val;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### sprintf——合成字符串</span><br><span class="line"></span><br><span class="line">`int sprintf(char *str, const char *format, ...)`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>sprinf(str, “%s, %d, %c”, stri, 2, c);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### strncat——拼接字符串</span><br><span class="line"></span><br><span class="line">`char *strncat(char *dest, const char *src, size_t n)`</span><br><span class="line"></span><br><span class="line">- **dest** -- 指向目标数组，该数组包含了一个 C 字符串，且足够容纳追加后的字符串，包括额外的空字符。</span><br><span class="line">- **src** -- 要追加的字符串。</span><br><span class="line">- **n** -- 要追加的最大字符数。</span><br><span class="line"></span><br><span class="line">##### strncpy——复制</span><br><span class="line"></span><br><span class="line">`char *strncpy(char *dest, const char *src, size_t n)`</span><br><span class="line"></span><br><span class="line">- **dest** -- 指向用于存储复制内容的目标数组。</span><br><span class="line">- **src** -- 要复制的字符串。</span><br><span class="line">- **n** -- 要从源中复制的字符数。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>是否空表</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Status ListEmpty(SqList L)</span><br><span class="line">&#123;</span><br><span class="line">    if (L.length == 0) return TRUE;</span><br><span class="line">    else return FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>   char src[40];<br>   char dest[12];</p>
+<p>   memset(dest, ‘\0’, sizeof(dest));<br>   strcpy(src, “This is runoob.com”);<br>   strncpy(dest, src, 10);<br>&#x2F;&#x2F;	desk 最终的目标字符串： This is ru </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### strncmp——比较</span><br><span class="line"></span><br><span class="line">`int strncmp(const char *str1, const char *str2, size_t n)`</span><br><span class="line"></span><br><span class="line">比较前n个字符有么有相同的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>if(strncmp(list[i], “astro”, 5) &#x3D;&#x3D; 0)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### strcmp</span><br><span class="line"></span><br><span class="line">两个字符串相同则返回0</span><br><span class="line"></span><br><span class="line">##### strlen</span><br><span class="line"></span><br><span class="line">不计算空字符‘\0’</span><br><span class="line"></span><br><span class="line">## 文件操作✨</span><br><span class="line"></span><br><span class="line">#### 1. 文件定义</span><br><span class="line"></span><br><span class="line">FILE</span><br><span class="line"></span><br><span class="line">一般都是通过一个FILE的指针来维护这个FILE结构的变量（通过FILE类型的指针找到文件信息区的起始地址），这样使用起来更加方便。</span><br><span class="line"></span><br><span class="line">####  2.文件操作——打开和关闭</span><br><span class="line"></span><br><span class="line">##### fopen()</span><br><span class="line"></span><br><span class="line">`FILE *fopen(const char *filename, const char *mode)`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>fopen(“C:\“, w); &#x2F;&#x2F;绝对路径<br>fopen(“”.\source\mode.png”)”， w)&#x2F;&#x2F; 这里的.\表示的是当前目录（一般是和.c文件所在的）<br>fopen(“”.&#x2F;source&#x2F;mode.png”)”， w)&#x2F;&#x2F; 使用&#x2F;就是不用搞转义了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">| 文件使用方式 | 含义                                     | 如果指定文件不存在 |</span><br><span class="line">| :----------- | ---------------------------------------- | ------------------ |</span><br><span class="line">| &quot;r&quot;(只读)    | 为了输入数据，打开一个已经存在的文本文件 | 出错               |</span><br><span class="line">| &quot;w&quot;(只写)    | 为了输出数据，打开一个文本文件           | 建立一个新的文件   |</span><br><span class="line">| &quot;a&quot;(追加)    | 向文本文件尾添加数据                     | 建立一个新的文件   |</span><br><span class="line">| &quot;rb&quot;(只读)   | 为了输入数据，打开一个二进制文件         | 出错               |</span><br><span class="line">| “wb&quot;(只写)   | 为了输出数据，打开一个二进制文件         | 建立一个新的文件   |</span><br><span class="line">| &quot;ab&quot;(追加)   | 向一个二进制文件尾添加数据               | 出错               |</span><br><span class="line">| “r+”(读写)   | 为了读和写，打开一个文本文件             | 出错               |</span><br><span class="line">| “w+”(读写)   | 为了读和写，建一个新的文件               | 建立一个新的文件   |</span><br><span class="line">| &quot;a+”(读写)   | 打开一个文件，在文件尾进行读写           | 建立一个新的文件   |</span><br><span class="line">| “rb+”(读写)  | 为了读和写打开一个二进制文件             | 出错               |</span><br><span class="line">| &quot;wb+”(读写)  | 为了读和写，新建一个新的二进制文件       | 建立一个新的文件   |</span><br><span class="line">| “ab+”(读写)  | 打开一个二进制文件，在文件尾进行读和写   | 建立一个新的文件   |</span><br><span class="line"></span><br><span class="line">  注：当使用“w”，“wb”，“w+”，“wb+”打开文件时会清除文件原本存储的数据。</span><br><span class="line"></span><br><span class="line">##### fclose()</span><br><span class="line"></span><br><span class="line">该函数的返回值是int类型的：**如果关闭成功就返回0值，否则返回EOF（-1）值。**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>int main()<br>{<br>	&#x2F;&#x2F;打开<br>	FILE* pf &#x3D; fopen(“text.txt”,”w”);<br>	&#x2F;&#x2F;判断是否打开成功<br>	if (pf &#x3D;&#x3D; NULL)<br>	{<br>		perror(“fopen”);<br>		return 1;<br>	}<br>	&#x2F;&#x2F;关闭<br>	if (fclose(pf) &#x3D;&#x3D; EOF)<br>	{<br>		&#x2F;&#x2F;关闭失败<br>		perror(“fclose”);<br>		return 1;<br>	}<br>	pf &#x3D; NULL;<br>	return 0;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 3.文件读写</span><br><span class="line"></span><br><span class="line">#####  1.顺序读写</span><br><span class="line"></span><br><span class="line">##### fputc</span><br><span class="line"></span><br><span class="line">当该函数成功运行时返回所存入字符的ASCII码值，否则返回EOF（-1）值。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>FILE* pf = fopen(&quot;text.txt&quot;, &quot;w&quot;);
+//写入数据
+int i = &#39;a&#39;;
+for (i = 0; i &lt; 26; i++)
+&#123;
+    fputc(&#39;a&#39; + i, pf);
+&#125;
+//这时候，pf就是字母表：abcde...了
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### fgetc</span><br><span class="line"></span><br><span class="line">  该函数成功读入数据时会返回读取字符的ASCII值，反之则会返回EOF（-1）值。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>FILE* pf = fopen(&quot;text.txt&quot;, &quot;r&quot;);//此时读取文件要用&quot;r&quot;的方式打开
+while ((i = fgetc(pf)) != EOF)
+&#123;
+	printf(&quot;%c &quot;, i);
+&#125;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### fputs</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>fputs(&quot;hello&quot;, pf);
+fputs(&quot;world&quot;, pf);
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### fgets</span><br><span class="line"></span><br><span class="line">**该函数只能读取一行的数据**</span><br><span class="line"></span><br><span class="line">`char *fgets(char *str, int n, FILE *stream)`</span><br><span class="line"></span><br><span class="line">如果成功，该函数返回相同的 str 参数。如果到达文件末尾或者没有读取到任何字符，str 的内容保持不变，并返回一个空指针。</span><br><span class="line"></span><br><span class="line">如果发生错误，返回一个空指针。</span><br><span class="line"></span><br><span class="line">可以使用连续的fgets读取到两行。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>返回第i个元素</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Status GetElem_Sq(SqList L, int i, ElemType&amp; e)</span><br><span class="line">&#123;</span><br><span class="line">    if (i&lt;1 || i&gt;L.length) &#123;</span><br><span class="line">        printf(&quot;超过表长&quot;);</span><br><span class="line">        exit(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line">    else </span><br><span class="line">    e = L.elem[i - 1];</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>FILE* fp;
+char str[20];
+fp = fopen(&quot;file.txt&quot;, &quot;w+&quot;);
+fputs(&quot;abc\ndefgn&quot;, fp);
+fclose(fp);
 
-<p><strong>定位一个元素，返回次序</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Status LocateElem_Sq(SqList L, ElemType choose, int (*func)(ElemType, ElemType))</span><br><span class="line">&#123;</span><br><span class="line">    if (L.length == 0) return ERROR;</span><br><span class="line">    int i;</span><br><span class="line">    for (i = 0; i &lt; L.length; i++) &#123;</span><br><span class="line">        if (func(choose, L.elem[i]) == 1)</span><br><span class="line">        &#123;</span><br><span class="line">            return i + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+fp = fopen(&quot;file.txt&quot;, &quot;r&quot;);
+fgets(str, 8, fp);
+while (fgets(str, 20, fp) == NULL)
+	continue;
+fputs(str, stdout);
+fclose(fp);
+fp = NULL;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### fprintf</span><br><span class="line"></span><br><span class="line">`int fprintf(FILE *stream, const char *format, ...)`</span><br><span class="line"></span><br><span class="line">如果成功，则返回写入的字符总数，否则返回一个负数。</span><br><span class="line"></span><br><span class="line">类似`sprintf`，不过一个写入对象是文件，一个是字符串</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>   fprintf(fp, “%s %s %s %d”, “We”, “are”, “in”, 2014);   </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### fscanf</span><br><span class="line"></span><br><span class="line">`int fscanf(FILE *stream, const char *format, ...)`</span><br><span class="line"></span><br><span class="line">如果成功，该函数返回成功匹配和赋值的个数。如果到达文件末尾或发生读错误，则返回 EOF。</span><br><span class="line"></span><br><span class="line">注意，一般而言，fscanf遇到空格便会停止对这个的读取。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>   char str1[10], str2[10], str3[10];<br>   int year;<br>   FILE * fp;</p>
+<p>   fp &#x3D; fopen (“file.txt”, “w+”);<br>   fputs(“We are in 2014”, fp);</p>
+<p>   rewind(fp);<br>   fscanf(fp, “%s %s %s %d”, str1, str2, str3, &amp;year);</p>
+<p>   printf(“Read String1 |%s|\n”, str1 ); &#x2F;&#x2F; We<br>   printf(“Read String2 |%s|\n”, str2 ); &#x2F;&#x2F; are<br>   printf(“Read String3 |%s|\n”, str3 );<br>   printf(“Read Integer |%d|\n”, year );</p>
+<p>   fclose(fp);</p>
+<p>   return(0);<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 顺序线性表</span><br><span class="line"></span><br><span class="line">##### **定义**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>typedef struct {<br>    ElemType* elem;<br>    int length;     &#x2F;&#x2F;当前长度<br>    int listsize;   &#x2F;&#x2F;当前分配量<br>}Sqlist;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**初始化**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> void init_list(Sqlist &amp;L){  &#x2F;&#x2F; C++语法。可以认为，把形参（值传递）变成实参。相当于Sqlist *L。<br>	L.elem &#x3D; (ElemType *) malloc(LIST_INIT_SIZE * sizeof(ElemType));<br>	if (!L.elem) exit(OVERFLOW);<br>	L.length &#x3D; 0;<br>	L. listsize &#x3D; LIST_INIT_SIZE;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**置零**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Status ClearList_Sq(SqList&amp; L)<br>{<br>    L.length &#x3D; 0;<br>    return OK;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**销毁**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Status DestroyList_Sq(SqList&amp; L) {<br>    free(L.elem);<br>    L.elem &#x3D; NULL;<br>    L.length&#x3D;0;<br>    L.listsize&#x3D;0;<br>    return OK;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**是否空表**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Status ListEmpty(SqList L)<br>{<br>    if (L.length &#x3D;&#x3D; 0) return TRUE;<br>    else return FALSE;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**返回第i个元素**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Status GetElem_Sq(SqList L, int i, ElemType&amp; e)<br>{<br>    if (i&lt;1 || i&gt;L.length) {<br>        printf(“超过表长”);<br>        exit(EXIT_FAILURE);<br>    }<br>    else<br>    e &#x3D; L.elem[i - 1];<br>    return OK;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**定位一个元素，返回次序**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Status LocateElem_Sq(SqList L, ElemType choose, int (*func)(ElemType, ElemType))<br>{<br>    if (L.length &#x3D;&#x3D; 0) return ERROR;<br>    int i;<br>    for (i &#x3D; 0; i &lt; L.length; i++) {<br>        if (func(choose, L.elem[i]) &#x3D;&#x3D; 1)<br>        {<br>            return i + 1;<br>        }<br>    }<br>    return 0;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**插入**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Status ListInsert_Sq(SqList&amp; L, int i, ElemType e) {<br>    if (i&lt;1 || i&gt;L.length) return ERROR;<br>    if (L.length &gt; L.listsize)<br>    {<br>        ElemType* newbase &#x3D; (ElemType*)realloc(L.elem, (L.listsize + LISTINCREASE) * sizeof(ElemType));<br>        if (!newbase) exit(OVERFLOW);<br>       &#x2F;&#x2F; free(L.elem);<br>        L.elem &#x3D; newbase;<br>        L.listsize +&#x3D; LISTINCREASE;<br>    }<br>    ElemType* q &#x3D; &amp;(L.elem[i - 1]);<br>    for (ElemType* p &#x3D; &amp;(L.elem[L.length - 1]); p &gt;&#x3D; q; –p)<br>    {<br>        *(p + 1) &#x3D; *p;<br>    }<br>    *q &#x3D; e;<br>    ++L.length;<br>    return OK;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**删除**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Status ListDelet_Sq(SqList&amp; L, int i, ElemType&amp; e)<br>{<br>    if (i&lt;1 || i&gt;L.length) return ERROR;</p>
+<pre><code>ElemType* p = &amp;(L.elem[i - 1]);
+e = *p;
+ElemType* q = L.elem + L.length - 1; //指向最后一位。L.elem为首地址，后面为移动位数
+//为什么不写成 = &amp;(L.elem[L.length - 1])  ??
+for (++p; p &lt;= q; ++p)
+&#123;
+    *(p - 1) = *p;
+&#125;
+--L.length;
+return OK;
+</code></pre>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **线性表赋值★**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>void Sq_input(SqList&amp; L) {<br>    printf(“请依次输入顺序线性表的数字，用空格分隔\n”);<br>    char* str &#x3D; (char*)malloc(L.listsize);<br>    if (!str) {<br>        printf(“内存分配失败\n”);<br>        return;<br>    }</p>
+<pre><code>if (!fgets(str, L.listsize, stdin)) &#123;
+    printf(&quot;读取输入失败\n&quot;);
+    free(str);
+    return;
+&#125;
 
-<p><strong>插入</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Status ListInsert_Sq(SqList&amp; L, int i, ElemType e) &#123;</span><br><span class="line">    if (i&lt;1 || i&gt;L.length) return ERROR;</span><br><span class="line">    if (L.length &gt; L.listsize)</span><br><span class="line">    &#123;</span><br><span class="line">        ElemType* newbase = (ElemType*)realloc(L.elem, (L.listsize + LISTINCREASE) * sizeof(ElemType));</span><br><span class="line">        if (!newbase) exit(OVERFLOW);</span><br><span class="line">       // free(L.elem);</span><br><span class="line">        L.elem = newbase;</span><br><span class="line">        L.listsize += LISTINCREASE;</span><br><span class="line">    &#125;</span><br><span class="line">    ElemType* q = &amp;(L.elem[i - 1]);</span><br><span class="line">    for (ElemType* p = &amp;(L.elem[L.length - 1]); p &gt;= q; --p)</span><br><span class="line">    &#123;</span><br><span class="line">        *(p + 1) = *p;</span><br><span class="line">    &#125;</span><br><span class="line">    *q = e;</span><br><span class="line">    ++L.length;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+char* token = NULL;
+char* endptr = NULL;
+const char* delimiters = &quot; \t\n&quot;;  // 扩展分隔符
+int i = 0;
 
-<p><strong>删除</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Status ListDelet_Sq(SqList&amp; L, int i, ElemType&amp; e) </span><br><span class="line">&#123;</span><br><span class="line">    if (i&lt;1 || i&gt;L.length) return ERROR;</span><br><span class="line"></span><br><span class="line">    ElemType* p = &amp;(L.elem[i - 1]);</span><br><span class="line">    e = *p;</span><br><span class="line">    ElemType* q = L.elem + L.length - 1; //指向最后一位。L.elem为首地址，后面为移动位数</span><br><span class="line">    //为什么不写成 = &amp;(L.elem[L.length - 1])  ??</span><br><span class="line">    for (++p; p &lt;= q; ++p)</span><br><span class="line">    &#123;</span><br><span class="line">        *(p - 1) = *p;</span><br><span class="line">    &#125;</span><br><span class="line">    --L.length;</span><br><span class="line">    return OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+token = strtok(str, delimiters);
+while (token != NULL &amp;&amp; i &lt; L.listsize) &#123;
+    long num = strtol(token, &amp;endptr, 10);
 
-<p><strong>线性表赋值★</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">void Sq_input(SqList&amp; L) &#123;</span><br><span class="line">    printf(&quot;请依次输入顺序线性表的数字，用空格分隔\n&quot;);</span><br><span class="line">    char* str = (char*)malloc(L.listsize);</span><br><span class="line">    if (!str) &#123;</span><br><span class="line">        printf(&quot;内存分配失败\n&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (!fgets(str, L.listsize, stdin)) &#123;</span><br><span class="line">        printf(&quot;读取输入失败\n&quot;);</span><br><span class="line">        free(str);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    char* token = NULL;</span><br><span class="line">    char* endptr = NULL;</span><br><span class="line">    const char* delimiters = &quot; \t\n&quot;;  // 扩展分隔符</span><br><span class="line">    int i = 0;</span><br><span class="line"></span><br><span class="line">    token = strtok(str, delimiters);</span><br><span class="line">    while (token != NULL &amp;&amp; i &lt; L.listsize) &#123;</span><br><span class="line">        long num = strtol(token, &amp;endptr, 10);</span><br><span class="line"></span><br><span class="line">        // 验证转换有效性</span><br><span class="line">        if (*endptr != &#x27;\0&#x27; || endptr == token) &#123;</span><br><span class="line">            printf(&quot;跳过非法输入: %s\n&quot;, token);</span><br><span class="line">            token = strtok(NULL, delimiters);</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        L.elem[i++] = (int)num;</span><br><span class="line">        L.length++;</span><br><span class="line">        token = strtok(NULL, delimiters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printf(&quot;成功输入 %d 个有效数字\n&quot;, i);</span><br><span class="line">    free(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    // 验证转换有效性
+    if (*endptr != &#39;\0&#39; || endptr == token) &#123; 
+    //分析：若强制传入空字符串（如 token = &quot;&quot;），此时：strtol 返回 0，endptr == token（即指向空字符串起始位置）。
+	//*endptr == &#39;\0&#39;，条件 *endptr != &#39;\0&#39; 不成立，会错误接受该 token 为数字 0。
+	
+        printf(&quot;跳过非法输入: %s\n&quot;, token);
+        token = strtok(NULL, delimiters);
+        continue;
+    &#125;
 
+    L.elem[i++] = (int)num;
+    L.length++;
+    token = strtok(NULL, delimiters);
+&#125;
+
+printf(&quot;成功输入 %d 个有效数字\n&quot;, i);
+free(str);
+</code></pre>
+<p>}</p>
+<pre><code>
+</code></pre>
 
     </div>
 
@@ -417,9 +563,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%A0%87%E7%AD%BE1/" rel="tag"># 标签1</a>
-              <a href="/tags/%E6%A0%87%E7%AD%BE2/" rel="tag"># 标签2</a>
-              <a href="/tags/%E6%A0%87%E7%AD%BE3/" rel="tag"># 标签3</a>
+              <a href="/tags/%E7%9F%A5%E8%AF%86/" rel="tag"># 知识</a>
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"># C语言</a>
           </div>
 
         
@@ -501,7 +646,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">C语言学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#typedef%E7%9A%84%E5%8F%A6%E7%B1%BB%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">typedef的另类使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8Dmalloc%E7%9A%84%E5%86%8D%E6%8E%A2%E7%B4%A2%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%9A%84%E7%A0%94%E7%A9%B6"><span class="nav-number">1.2.</span> <span class="nav-text">动态内存分配malloc的再探索与形参实参的研究</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82%EF%BC%9Amalloc%E4%B8%BA%E4%BE%8B"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">形参和实参：malloc为例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D%EF%BC%9Arealloc"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">函数介绍：realloc</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-number">1.3.</span> <span class="nav-text">函数指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="nav-number">1.4.</span> <span class="nav-text">顺序线性表</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">C语言学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#char%E5%B0%B1%E6%98%AFint"><span class="nav-number">1.1.</span> <span class="nav-text">char就是int</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typedef%E7%9A%84%E5%8F%A6%E7%B1%BB%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">typedef的另类使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8Dmalloc%E7%9A%84%E5%86%8D%E6%8E%A2%E7%B4%A2%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%AE%9E%E5%8F%82%E7%9A%84%E7%A0%94%E7%A9%B6"><span class="nav-number">1.3.</span> <span class="nav-text">动态内存分配malloc的再探索与形参实参的研究</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%8F%82%E5%92%8C%E5%AE%9E%E5%8F%82%EF%BC%9Amalloc%E4%B8%BA%E4%BE%8B"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">形参和实参：malloc为例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D%EF%BC%9Arealloc"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">函数介绍：realloc</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-number">1.4.</span> <span class="nav-text">函数指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">字符函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ctype-h"><span class="nav-number">1.5.0.0.1.</span> <span class="nav-text">ctype.h</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#memset"><span class="nav-number">1.5.0.0.2.</span> <span class="nav-text">memset</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -530,7 +675,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -570,7 +715,7 @@
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共70.9k字</span>
+  <span class="post-count">博客全站共73.5k字</span>
   <span class="post-meta-divider">|</span>
   本站总访问量<span id="busuanzi_value_site_pv"></span>次
   <span class="post-meta-divider">|</span>

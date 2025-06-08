@@ -1169,7 +1169,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c40f88;
+  background: #701252;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2721,31 +2721,12 @@ ul.breadcrumb li + li:last-child {
     margin: 8px 0 0;
   }
 }
-@media screen and (min-width: 801px) {
-  body {
-    background: url("/images/background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 50% 50%;
-    position: fixed;
-  }
-}
-@media screen and (max-width: 800px) {
-  body {
-    background-image: url("/images/background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 50% 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+body {
+  background: url("/images/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
 }
 .content-wrap {
   opacity: 0.8;

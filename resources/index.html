@@ -614,6 +614,10 @@
     }
 
     .reward-tabs .tabs {
+        /* 这里修改了 */
+        display: flex;
+        justify-content: center;
+
         height: 38px;
         margin: 10px auto;
         padding-left: 0;
@@ -644,6 +648,8 @@
     }
 
     .reward-tabs .alipay-tab .active {
+        display: none;  
+        /* 这里因为删掉了支付宝 */
         color: #fff !important;
         background-color: #019FE8 !important;
     }
@@ -651,6 +657,11 @@
     .reward-tabs .reward-img {
         width: 210px;
         height: 210px;
+    }
+
+    /* 下面是为了消除红色细线改的代码,因为那个细线不知道放在哪里了，似乎是用js生成的，其源css在libs/materialize/materialize.min.css 中，懒得找改*/
+    .tabs .indicator {
+        display: none;
     }
 </style>
 
@@ -661,16 +672,17 @@
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">留下万分之一点，采得孤人所笑言</h4>
+            <h6 class="reward-title">留下万分之一点，采得孤人所笑言</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                        <!-- <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li> -->
+                        <li class="tab col s6 wechat-tab waves-effect waves-light" style="margin-left: 0;"><a href="#wechat">微 信</a></li>
                     </ul>
-                    <div id="alipay">
+                    <!-- 这里的margin-left修改了 -->
+                    <!-- <div id="alipay">
                         <img src="/" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
+                    </div>这里因为用不到支付宝，所以直接注释了 -->
                     <div id="wechat">
                         <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
@@ -1011,12 +1023,13 @@
             
             <span id="year">2024</span>
             <a href="/about" target="_blank">孑瓜子</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+
+           <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 这里是尾部的powered by什么的 -->
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">75</span>&nbsp;字
+                class="white-color">15.3k</span>&nbsp;字
             
             
             

@@ -475,7 +475,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    251
+                    250
                 </div>
                 
 
@@ -506,13 +506,13 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 摘要：深入探讨了写文章时插入图片的语法<span id="more"></span>。</p>
-<p><strong>preface:  上互联网搜寻了很多资料，都发现引用方式<code>i[](*.jpg)</code>总是莫名失败，经过界面审查、对Html代码分析，终于找到了问题所在。</strong></p>
+<p><strong>preface:  上互联网搜寻了很多资料，都发现引用方式<code>！[](*.jpg)</code>总是莫名失败，经过界面审查、对Html代码分析，终于找到了问题所在。</strong></p>
 <p>有两种插入图片方式，分别为：</p>
 <p><code>&#123;% asset_img *.png 这是一张图片%&#125;</code></p>
 <p><code>！[图片描述](*.jpg)</code></p>
-<p>他们的能否使用，取决于下图中relative_link是否启用。启用了，则使用第二种方可；为false，则是用第一种形式。目前未发现这种东西对其他有任何影响。比如下载文件的语法不会有改变。目前还未搞懂具体原因，但是两种方法都无法在编辑器中显示图片，就比如我用的typora，要显示得改成 <code>！[图片描述](./这篇文章的名字/*.jpg)</code>，因为图片是放在同名文件夹下的。比较好的解决方式目前未找到。</p>
-<p><code>[描述](/download/*.7z)</code></p>
-<p><img src="image-20250706215449624.png" alt="image-20250706215449624"></p>
+<p>他们的能否使用，取决于下图中relative_link是否启用。启用了，则使用第二种方可；为false，则是用第一种形式。目前未发现这种东西对其他有任何影响。比如下载文件的语法不会有改变：<code>[描述](/download/*.7z)</code></p>
+<p>目前还未搞懂具体原因，但是两种方法都无法在编辑器中显示图片，就比如我用的typora，要显示得改成 <code>！[图片描述](./这篇文章的名字/*.jpg)</code>，因为图片是放在同名文件夹下的。比较好的解决方式目前未找到。</p>
+<p><img src="image-20250706215449624.png"></p>
 <p><a href="/download/1.jpg">测试下载</a></p>
 
                 

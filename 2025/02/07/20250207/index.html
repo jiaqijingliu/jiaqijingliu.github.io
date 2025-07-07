@@ -472,7 +472,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-06-16
+                    2025-07-07
                 </div>
                 
 
@@ -509,15 +509,14 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 摘要：本文简单介绍了MinMax算法的原理<span id="more"></span>。</p>
+                <p> 摘要：本文简单介绍了MinMax算法的原理。</p>
 <p><strong>preface:  几天前开发井字棋小游戏时，对困难模式下的人机代码毫无头绪，问了问deepseek，由此得知了MinMax这个名词。下面作浅显的介绍，附带在井字棋中的运用。</strong></p>
 <p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42165981/article/details/103263211">最清晰易懂的MinMax算法和Alpha-Beta剪枝详解-CSDN博客</a></p>
 <p>&emsp;Minimax算法常用于棋类等由两方较量的游戏和程序。该算法是一个零总和算法，即一方要在可选的选项中选择将其优势最大化的选择，另一方则选择令对手优势最小化的方法。而开始的时候总和为0。很多棋类游戏可以采取此算法，例如井字棋（tic-tac-toe）。</p>
 <p>&emsp;以上是来自WIKI百科的解释，其实说的通俗一点，就是有两个人下棋，先手希望下一步的局面是自己胜算最大的局面，而后手则希望下一步的局面是先手胜算最小的局面（因为先手输，后手就会赢）。</p>
 <p>&emsp;那么，如何来判断当前的局面的胜算到底怎么样呢？我们可以设置一个估价函数，按照某种方案来计算当前局面的优劣程度。</p>
 <p>&emsp;正如图中所示，正方形代表你将要下的地方，圆形代表对手接下来要下的地方（图片里只是列举了对手两种可能的下法），里面的数字代表的你获胜的优势（相当于激励），对你来说，正方形数字要尽可能大；对手回合，其会选择数字最小的（我们假定对手足够厉害）。所以可以得到图中的结果但是这样的计算量十分大，所以一般而言我们会进行剪枝（因为这张图像枝条，然后利用算法能跳过一些分支，故称）</p>
-<img src="2025/02/07/20250207/Snipaste_2025-02-07_16-42-04.png" class="" title="这是一张图片">
-
+<p><img src="Snipaste_2025-02-07_16-42-04.png"></p>
 <p>&ensp;Alpha-beta剪枝的名称来自计算过程中传递的两个边界，这些边界基于已经看到的搜索树部分来限制可能的解决方案集。 其中，α 表示目前所有可能解中的最大下界（◽），β表示目前所有可能解中的最小上界（⚪）。因此，如果搜索树上的一个节点被考虑作为最优解的路上的节点（或者说是这个节点被认为是有必要进行搜索的节点），那么它一定满足以下条件（N是当前节点的估价值）：</p>
 <p>$$<br>α≤N≤β<br>$$<br>  在我们进行求解的过程中，α 和β会逐渐逼近。如果对于某一个节点，出现了α &gt; β 的情况，那么，说明这个点一定不会产生最优解了，所以，我们就不再对其进行扩展（也就是不再生成子节点），这样就完成了对博弈树的剪枝。从代码的角度来看，其实很简单，就是加了一个break的判定条件，从而减少循环次数。</p>
 <p><strong>代码分析</strong></p>
@@ -858,7 +857,7 @@ int alphaBeta(int depth, int alpha, int beta, int isMaximizing) &#123;
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             摘要：本文主要介绍编码问题
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -911,7 +910,7 @@ int alphaBeta(int depth, int alpha, int beta, int isMaximizing) &#123;
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             摘要：本文给出了windows下基于easyx库的C语言编写的简单应用
+                            
                         
                     </div>
                     <div class="publish-info">

@@ -220,13 +220,6 @@
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
@@ -234,80 +227,11 @@
         </div>
 
         
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
-        
     </nav>
 
 </header>
 
     
-<script src="../../../../libs/cryptojs/crypto-js.min.js"></script>
-<script>
-    (function() {
-        let pwd = '';
-        if (pwd && pwd.length > 0) {
-            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
-                alert('密码错误，将返回主页！');
-                location.href = '../../../../index.html';
-            }
-        }
-    })();
-</script>
-
 
 
 
@@ -451,14 +375,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-07
+                    2025-07-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    406
+                    12
                 </div>
                 
 
@@ -488,26 +412,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>   最新摘要：最新计划：对所有以往文章进行适配修改（因为换了主题），目前本站更新主题为Matery</p>
-<p>这几天在更换主题从Next到Matery，出于美观角度（虽然后者已经没有人维护了）。</p>
-<p>本站无商业用途，仅做个人学习、分享、唠嗑用。</p>
-<p>目前屏蔽了国外ip，访问请于国内（因为发现来自国外的不明生物访问太多了</p>
-<p><strong>一些小问题：</strong></p>
-<ul>
-<li><p><strong>关于音乐播放器无法全局播放的问题：由于更换了Matery主题，其刷新跳转时会重新加载音乐插件。比较好的解决方式目前暂未找到。这个问题还是等待学会相关知识再解决。</strong></p>
-</li>
-<li><p><strong>关于评论，目前感觉没有很大必要配置评论区，主要是风险小、好用的目前没有找到。日后再说。</strong></p>
-</li>
-<li><p><strong>关于域名。 目前是买了三年（2023），后面极大可能会更换域名，请注意到时候的文章（更换域名的时候也可能会重新搭建blog，文章到时候应该会全部搬迁，有可能会换用其他主题（比如butterfly等等</strong></p>
-</li>
-<li><p><strong>关于wx二维码，真实有效</strong></p>
-</li>
-<li><p><strong>关于音乐错乱。其为用网yy插件实现，有些vip歌曲实在没办法（有些歌莫名其妙就成了付费的了），而且会出现信息错乱等现象。还有一些是用的网友上传的。</strong></p>
-</li>
-<li><p><strong>联系方式：请通过邮件发送信息，要求来信请详细说清楚，发送到：<a href="mailto:&#x6a;&#x69;&#x61;&#113;&#105;&#106;&#105;&#x6e;&#103;&#x6c;&#x69;&#117;&#x30;&#64;&#x6f;&#117;&#116;&#108;&#x6f;&#111;&#107;&#x2e;&#99;&#111;&#x6d;">jiaqijingliu0@outlook.com</a></strong></p>
-</li>
-</ul>
-
+                <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="813dee216907b10ab4582310201ff5f62433291deeb049490f1c9a0a76f96372">4630436162ade97ba2718b7d0c4b3b630ef8b034c35893a7afa4c54a5752d90eba191a593f89497fdfca691efaf72d5caa0c664d8e7a85bd833fac72ade59ddbf66b4bdec75a2ed1e83f57bcb279b78c8202c7ce8d3eb34051070935a62ccbf9be563b576fcb19a6e4c095e03496f05d0fec5de7a8af18b78d977beffb6874da4670293f572d11dfa81b48ce6cd0448f0a018d399d177f54eb76d77c6c17f9c36f9f255c3de0f225f9e9c6b4f23d83fc3307cf9be8ef0d2bb8d0474ceec45d7300894f4b8f11650b44ad991ba7d43228740120c2abb6f5e3daf01dd2085c089d1af745c032d96d51dd28a18e16d1d71ab4099ded53046f6f5036a7c402785a5eefda96967f4807a089ac58ebd99fb2fd3cbcddd49a85da0a58d9ab4c27239187cede28204223b958e7ccf5456488d26990af19d02d4ea2cda0e918a53331924666e7954440d995407801eba52d40b79053b4ef100c4a8a46b1ec84ce9c56211770849b7e875c13dbe7bf842106ee88123c07a58eb553f400531fd79e95bb2314280e6eb7e97d817087a921df3669b2964943b91967a796fa0198207ff8c4ab7b6ab92b3456aa479d7984ebec9c46138f835c9b1b0d45176e862daeb97bc18302432719b174786887153029d89aa0415b7554f74efa7ccaf4fb797b535ab77afbb36e3ca2763daef6a278fdbd1137181bb705fdd3e61a2c1c4de9fb3aa09f7865e2ee647b2ae32c969c355723083d671ae5391d1d2ee206f2f3801de970beb253da7549f36d1547b871d0a8f15b9e6990b0553db416fd7a19897a12b35ce122c27128423aa261a1442523e3ce56247d3735c968b83d313e14922e11c4348d79fa587adaf3da2740186ddd1d710cc2a2cfb686dba526cea4bc365fbc20a54d7fda48587f33c4f3b91a047f09fd130c6e059fa2694f9fd4b56ab62a7fe5aa69bf17fbbc7411c518f7e57de5176ebb8a7a6ccae02244b47c8cf565eea98b21491b857bff28cef16570331b67dcce0fc7d7ae3b6e7549ae27e7a521f39526ccdd7c329a149a81cc99e75fec04a574d29deebffc9cd9b2532435c4406690dcd0050c2b7e4b5960b4101f8a5fb8350b48faa86d364f8e4dc2ca38f04347fd5c1baf16b8b2831cd06e26f408df266ba492bebf2c67d5415bd7a4100d2953a6aa9b983059eb40b56e52676eabca4d331870eedec3acf5b687803438c0f00045a143ce2226e8e4163611f993b6832b1cba2ec26c8210486ed5b84841394f1d0486444175daaf03243f5447cc0daf436b28069be2eab41007853deb1676b59a4f19f5abee084ad2f0d0770c54bf9fef6036acfc9cf14fc133740621a26538c6e5f7a19cea1d75928df37cfb497a9e01a86aa407d2dcba9cd0a51e149bbf9dc8f70ee84e5376241621e91794551214bc44c3b9ea7bff897e2313d5f037cc0eb57d0f148b989cb3845720b0a69cf0ea8a8f3d7e68455c6843f6d6bdb5d8d7211ffe94fe73ebc5ccf5c40203bf59369beeb8ebe15f71fcf6256f5872b2d54db74e5be15b89e4ed49e16f6a74834641fa587da31d78d5d3fcb2957ca558c524d10792cf80dfb42b9f56191172634d0e05061fe82ddfafc5feb6ee651254a49be5da1b9baa49a455d04e65374c28f305d2dec41ea0a4feed9e7f339a6454156889fa09749d33ab171056eb81a503f043a26e60c561834289d7f0f7430358638a19ec367e02215ae9372e3902e9a964ae5c856b087c531a5f952fad3ef662015ba23daedc58b3d3f85c3d862a77b904091d7dc6949b9f4e4eb1667327fbd74aa91cb6a69eed5aa218ac92b826210ae87cc5d77a9e5f7951610eb74d8456cc7eb14de6bffff67c0ec6ba7869f6526dea494f0e6416486530e2e6bc65bdec4bb4c8ab35a627bdcc4b9e17649f85b4fd1943626bdac6f5d9ab67768b01a14c113f716f1798efcf4631fdb2651775dd3719dcbc0f858468c7352da735cb6875443d4a6e6eefba9d00217d7c6ba9a952ae0d9513acf70b3fc904c02d2ccd5536400d4d8bf3e4bbe7f99991810839909514393eca1d6bc5c11a7dc5062f18e62c302f228c2205f216981b00386a86762f01fc5e42ecb46e59307748c9fcd29550e1283ac9afa632e9f6f135edbd98f5bc378eaf46bd10328bbf4c20fad2e9deb32d85a00c874de6653e49654112d7959fa287fce2efef3138f29a10319139e26231f98404923050d224b50431d948e9f9f05ae4fdc0dd87d135f9e688ddac3b939c4eb4d1a7966e55b7ed1804702d5356c424cff09dd75e428f7c313044880d5f902bd0feb286166ec658c8d514c31f9278775a2f546a77337dea053e1bd495300244b15cb9f7064d0520bf7e04d929f9a5465cb212bc090c025adabea122d45680b8873982c2ec79f0e83410d22040cb81b466b038451b2a33f4ef7f1dbfc40cfe59c00b368efa97fdf334e9b90918d2442c0d8074d0d620d1176acf9345e4ee8885113a7e8dab1f56039b9cfe4361a22c4aa73a756b344e0210db378af525654a5692f8ff60770a3318610de30e76032a5195d1e16eb21331be715036aefd7ddd34c6c072935885052738285275d279b325b1901eb00ad1ea07eefbabf88cfd7465facbc8ac5cf711c4500fc8a0a008fa88d1b90a8c542bab9e8cbdd66327a43f8103e1f327089fdccc4a3530bd24fc505764ae01b71cd54809a35fc2855b7921d1d66086194470b3a4206b31de1ab4334f039e8dac86aa127a8c09b9dd11ee578569b31129b7aed12b87dde8c4888d3ad5ecad8f3c19a1d9bee5d20edc69c73774a09aab9159216eb03be9718645407de481d6b39f1614202b88e248e10f25ebdd9790312f34d6eb44b0a1cf4810a9792eaea3f0c40b91d787a64be5df20f198c3174e503a672aef88106664beb56f96de2b4546a49e84c0396f</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码或者邮件联系.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
                 
             </div>
             <hr/>
@@ -765,7 +681,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            这是一篇加密文章。
                         
                     </div>
                     <div class="publish-info">
@@ -818,7 +734,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            这是一篇加密文章。
                         
                     </div>
                     <div class="publish-info">
@@ -1051,7 +967,7 @@
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
@@ -1065,7 +981,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">55.4k</span>&nbsp;字
+                class="white-color">46.2k</span>&nbsp;字
             
             
             
@@ -1084,6 +1000,50 @@
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2024";
+                    var startMonth = "2";
+                    var startDate = "19";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             

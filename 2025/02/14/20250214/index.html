@@ -392,21 +392,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-07
+                    2025-07-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    5 分
                 </div>
                 
 
@@ -464,7 +464,7 @@ int main() &#123;
 <p>最终要还原显示这些二进制字节编码的时候，就需要用到它。比如通过<code>printf()</code>把前面的<code>str</code>显示到控制台时，这个<code>printf()</code>就会按照解析字符集来解析这些字节编码，找到指定字符显示出来。比如下面的控制台输出编码。</p>
 <p>简而言之，对于执行字符集，Visual Studio默认根据系统的Locale来决定执行字符集，一般大家都是Windows中文系统，Locale是中国，那么就是GBK编码。对于解析字符集，如果没有手动更改的话，Visual Studio的标准输入输出(printf,cout)到命令行也是根据系统Locael决定的，也就是GBK。</p>
 <h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>由此，我们可以知道<code>printf</code>中的汉字，实际上编译的时候用的是GBK方式，所以设定控制台输出为utf-8后 就无法正常显示了。</p>
-<p>解决方法，一是添加下面的命令<code>#pragma execution_character_set(&quot;utf-8&quot;)</code>；二是在前面添加<code>u8</code>前缀</p>
+<p>解决方法，一是添加下面的命令<code>#pragma execution_character_set(&quot;utf-8&quot;)</code>；二是在前面添加<code>u8</code>前缀；三是利用函数 <code>setlocale</code>函数，具体深层原因可自行询问AI。</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;#pragma execution_character_set(&quot;utf-8&quot;)
 
 #include &lt;stdio.h&gt;
@@ -478,6 +478,18 @@ int main() &#123;
 	printf(u8&quot;完整汉字\n&quot;);
 	return 0;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">#include &lt;stdio.h&gt;
+#include &lt;windows.h&gt;
+#include &lt;locale.h&gt;
+int main() &#123;
+	&#x2F;&#x2F; 设置控制台输出编码为 UTF-8
+	SetConsoleOutputCP(65001);&#x2F;&#x2F;意思就是按照utf-8的密码表，解密得到输出。
+	setlocale(LC_ALL, &quot;&quot;); &#x2F;&#x2F;此函数的意思就是设置各种环境为系统环境变量默认。
+	&#x2F;&#x2F; 输出 UTF-8 编码的字符串
+	printf(&quot;完整汉字\n&quot;);
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>&ensp;</p>
 <h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>char是一个字符，用的是ASCII码，那它为何能够储存中文呢？或者说，按道理在gbk的编码格式下，char根本无法正常使用才对啊。</p>
@@ -1067,7 +1079,7 @@ int main() &#123;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">46.2k</span>&nbsp;字
+                class="white-color">44.3k</span>&nbsp;字
             
             
             

@@ -392,21 +392,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-09
+                    2025-07-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    296
+                    762
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -429,15 +429,30 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 摘要：深入探讨了写文章时插入图片的语法。</p>
+                <p> 摘要：深入探讨了写文章时插入图片<span id="more"></span>的语法。</p>
 <p><strong>preface:  上互联网搜寻了很多资料，都发现引用方式<code>！[](*.jpg)</code>总是莫名失败，经过审查界面元素、对Html代码分析，终于找到了问题所在。</strong></p>
-<p>有两种插入图片方式，分别为：</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>有两种插入图片方式，分别为：</p>
 <p><code>&#123;% asset_img *.png 这是一张图片%&#125;</code></p>
 <p><code>！[图片描述](*.jpg)</code></p>
 <p>他们的能否使用，取决于下图中relative_link是否启用。启用了，则使用第二种方可；为false，则是用第一种形式。目前未发现这种东西对其他有任何影响。比如下载文件的语法不会有改变：<code>[描述](/download/*.7z)</code></p>
 <p>目前还未搞懂具体原因，但是两种方法都无法在编辑器中显示图片，就比如我用的typora，要在编辑器中显示（改了就不能在网页中显示）得改成 <code>！[图片描述](./这篇文章的名字/*.jpg)</code>，因为图片是放在同名文件夹下的，推荐第二种方式，可参见下篇关于Matery主题的文章。（解决方式倒是看见过一篇文章，但是感觉太麻烦了）</p>
-<p><img src="/image-20250706215449624.png"></p>
+<p><img src="/2025/07/05/20250705/image-20250706215449624.png"></p>
 <p><a href="/download/1.jpg">测试下载</a></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>现在提供一种解决方案，由于启用<code>relative_link: true</code> 会带来一些意想不到的问题，比如版权声明中文章链接的错误显示。所以，经过检索，有了下面一种完美的解决方案。注意，我这里是结合下面的链接所尝试出来的一种可行的方法，与下面的链接中方法有不同之处！</p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://shmily101.github.io/post/hexo/003-hexo-img">优雅地在 hexo 博客中插入图片 | 小野</a>|<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/696630232">(17 封私信 &#x2F; 80 条消息) hexo 博客插入本地图片时遇到的坑 - 知乎</a>|<a target="_blank" rel="noopener" href="https://moeci.com/posts/hexo-typora/">Hexo + Typora + 开发Hexo插件 解决图片路径不一致 | yiyun’s Blog</a></p>
+<p>首先，在根目录的配置文件下，添加下面代码</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">relative_link<span class="token operator">:</span> false
+#下面是新添加的
+marked<span class="token operator">:</span>
+  prependRoot<span class="token operator">:</span> true
+  postAsset<span class="token operator">:</span> true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这样就能在<code>relative_link: false</code>的情况下使用 <code>![](image.png)</code>来显示图片，但是我们发现，使用md编辑器却无法实时显示，于是我们用到了下面的插件：</p>
+<p>在根目录下输入 <code>npm install hexo-asset-img --save</code> 安装此插件。如果有<code>hexo-asset-image</code>插件，需要在 <code>node_modules</code> 目录下把其删除，或者输入  <code>npm uninstall hexo-asset-image</code>(命令可能是这样)卸载插件。</p>
+<p>这样，使用 <code>![](image.png)</code> 就可以实现md编辑器实时预览图片，而且网页上也能看到，并且通过对Typora的设置，能够实现编写md时直接复制粘贴图片，方便快捷。（当然，似乎 原方式<code>![](image.png)</code>也支持，也就是上面三种方式均可在网页端显示图片</p>
+<p><img src="/2025/07/05/20250705/image-20250721195351088.png" alt="image-20250721195351088"></p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>如果使用的是Typora，采用以下设置方法，这样将图片复制粘贴时，会自动生成一个同名文件夹和图片。这样省事了很多，只需要修改图片路径。详见上一篇文档。</p>
+<p><img src="/2025/07/05/20250705/image-20250721195637379.png" alt="image-20250721195637379"></p>
 
                 
             </div>
@@ -754,7 +769,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                             摘要：第一期。
                         
                     </div>
                     <div class="publish-info">
@@ -1009,7 +1024,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">44.3k</span>&nbsp;字
+                class="white-color">34.6k</span>&nbsp;字
             
             
             

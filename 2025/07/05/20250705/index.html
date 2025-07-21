@@ -399,7 +399,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    762
+                    820
                 </div>
                 
 
@@ -449,10 +449,14 @@ marked<span class="token operator">:</span>
 
 <p>这样就能在<code>relative_link: false</code>的情况下使用 <code>![](image.png)</code>来显示图片，但是我们发现，使用md编辑器却无法实时显示，于是我们用到了下面的插件：</p>
 <p>在根目录下输入 <code>npm install hexo-asset-img --save</code> 安装此插件。如果有<code>hexo-asset-image</code>插件，需要在 <code>node_modules</code> 目录下把其删除，或者输入  <code>npm uninstall hexo-asset-image</code>(命令可能是这样)卸载插件。</p>
-<p>这样，使用 <code>![](image.png)</code> 就可以实现md编辑器实时预览图片，而且网页上也能看到，并且通过对Typora的设置，能够实现编写md时直接复制粘贴图片，方便快捷。（当然，似乎 原方式<code>![](image.png)</code>也支持，也就是上面三种方式均可在网页端显示图片</p>
+<p>这样，使用 <code>![](**/image.png)</code> 就可以实现md编辑器实时预览图片，而且网页上也能看到，并且通过对Typora的设置，能够实现编写md时直接复制粘贴图片，方便快捷。（当然，似乎 原方式<code>![](image.png)</code>也支持，也就是上面三种方式均可在网页端显示图片</p>
+<p>插件bug如下：（注意，前面的为md文件名，这里不得已打了空格以便显示）</p>
+<pre class="line-numbers language-none"><code class="language-none">![](20250705  &#x2F;image.png) 在以代码模式显示时，会显示为![](image.png)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我估计是该插件的实现原理就是网页端会替换上面的东西，所以造成了这种问题</p>
 <p><img src="/2025/07/05/20250705/image-20250721195351088.png" alt="image-20250721195351088"></p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>如果使用的是Typora，采用以下设置方法，这样将图片复制粘贴时，会自动生成一个同名文件夹和图片。这样省事了很多，只需要修改图片路径。详见上一篇文档。</p>
-<p><img src="/2025/07/05/20250705/image-20250721195637379.png" alt="image-20250721195637379"></p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>如果使用的是Typora，采用以下设置方法，这样将图片复制粘贴时，会自动生成一个同名文件夹和图片。</p>
+<p><img src="/2025/07/05/20250705/image-20250721195637379.png"></p>
 
                 
             </div>

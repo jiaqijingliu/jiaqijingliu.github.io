@@ -320,26 +320,60 @@
 <script>
     //下面是每次加载随机图片
       // 每次页面加载时随机切换 banner 图（支持任意数量的图片）
-    (function() {
-        // 图片路径前缀（根据你的主题路径调整）
+    // (function() {
+    //     // 图片路径前缀（根据你的主题路径调整）
+    //     var baseUrl = "/medias/banner/";
+        
+    //     // 假设图片命名为 0.jpg, 1.jpg, 2.jpg...，设置最大数量
+    //     var maxCount = 22; // 例如有 10 张图片（0.jpg ~ 9.jpg）
+        
+
+    //     //下面是每次加载切换
+    //     // 生成随机索引（0 到 maxCount-1）
+    //     var randomIndex = Math.floor(Math.random() * maxCount);
+    //     // 拼接图片路径
+    //     var bannerUrl = baseUrl + randomIndex + '.jpg';
+
+
+    //     // 下面是每天切换
+    //      var today = new Date();
+    //      var seed = today.getFullYear() + today.getMonth() + today.getDate(); // 年月日组合
+    //      var dailyIndex = Math.abs(seed) % maxCount; // 确保在 0 ~ maxCount-1 范围内
+
+    //      // 拼接图片路径
+    //     var bannerUrl = baseUrl + dailyIndex + '.jpg';
+
+        
+    //     // 设置背景图
+    //     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+        
+    //     // 可选：预加载图片，避免切换延迟
+    //     var img = new Image();
+    //     img.src = bannerUrl;
+    // })();
+
+    (function() { //自定义分钟切换
         var baseUrl = "/medias/banner/";
-        
-        // 假设图片命名为 0.jpg, 1.jpg, 2.jpg...，设置最大数量
-        var maxCount = 22; // 例如有 10 张图片（0.jpg ~ 9.jpg）
-        
-        // 生成随机索引（0 到 maxCount-1）
-        var randomIndex = Math.floor(Math.random() * maxCount);
-        
-        // 拼接图片路径
-        var bannerUrl = baseUrl + randomIndex + '.jpg';
-        
+        var maxCount = 22; // 图片总数（0.jpg ~ 21.jpg）
+        var intervalMinutes = 10; // 切换间隔（分钟）
+
+        // 计算当前时间属于哪个时间块（每 intervalMinutes 分钟一个块）
+        var now = new Date();
+        var minutesSinceMidnight = now.getHours() * 60 + now.getMinutes();
+        var timeBlock = Math.floor(minutesSinceMidnight / intervalMinutes);
+
+        // 用时间块计算固定索引（确保同时间段返回相同图片）
+        var currentIndex = timeBlock % maxCount;
+
         // 设置背景图
+        var bannerUrl = baseUrl + currentIndex + '.jpg';
         $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-        
-        // 可选：预加载图片，避免切换延迟
+
+        // 预加载图片
         var img = new Image();
         img.src = bannerUrl;
     })();
+
 
     // 每天切换 banner 图.  Switch banner image every day.
     // var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';

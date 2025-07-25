@@ -395,7 +395,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    371
+                    466
                 </div>
                 
 
@@ -440,13 +440,36 @@ cmd &#x2F;k &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; star
 <ol start="2">
 <li><code>cd /d E:\blog_matery</code> <code>cd</code>简单的跳转目录命令，<code>/d</code>意味着需要跳转盘符，因为似乎默认在C盘启动CMD。否则CMD无动于衷，如下图</li>
 </ol>
-<p><img src="/2024/08/13/20240812/write/image-20250725105823740.png" alt="image-20250725105823740"></p>
+<p><img src="/2025/07/25/con-bolg-write/image-20250725105823740.png" alt="image-20250725105823740"></p>
 <p>也可以先用 <code>e:</code>跳转。这里不过多介绍CMD的东西。反正意思就是将后面的路径改成你以前手动用Git一键三连的路径。</p>
 <ol start="3">
 <li><code>cmd /k &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; start http://localhost:4000/ &amp;&amp; hexo s&quot;</code></li>
 </ol>
 <p><code>/k</code>是执行完不关闭，<del>似乎可以去掉</del>，后面的就是三连的命令了，很容易看懂，中间加了个自动跳转网站的命令。</p>
-<p>也可以自定义，比如去掉clean d，分多种情形使用。</p>
+<p>也可以<strong>自定义</strong>，比如去掉clean d，分多种情形使用。下面是几种自定义：</p>
+<p>新增文章（自动关闭）</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
+cd &#x2F;d E:\blog_matery
+hexo g &amp;&amp; hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>一键三连（调试）</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
+cd &#x2F;d E:\blog_matery
+cmd &#x2F;k &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; start http:&#x2F;&#x2F;localhost:4000&#x2F; &amp;&amp; hexo s&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>一键三连（自动关闭）</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
+cd &#x2F;d E:\blog_matery
+hexo clean &amp;&amp; hexo g &amp;&amp; hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
 
                 
             </div>
@@ -1020,7 +1043,7 @@ cmd &#x2F;k &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; star
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">29.2k</span>&nbsp;字
+                class="white-color">29.3k</span>&nbsp;字
             
             
             

@@ -395,14 +395,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    466
+                    814
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -426,7 +426,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 摘要：介绍hexo中blog撰写<span id="more"></span>的小技巧等等。</p>
-<h2 id="一键三连——基于cmd"><a href="#一键三连——基于cmd" class="headerlink" title="一键三连——基于cmd"></a>一键三连——基于cmd</h2><p>为什么不用powershell呢？因为发现会有——因为在此系统上禁止运行脚本。有关详细信息，请参阅…——的问题，想要解决又怕会有安全隐患，比如病毒执行脚本… 所以还是改成用CMD，甚至不用管理员权限，完成操作。</p>
+<h2 id="一键三连（只需点击-bat）"><a href="#一键三连（只需点击-bat）" class="headerlink" title="一键三连（只需点击.bat）"></a>一键三连（只需点击.bat）</h2><p>为什么不用powershell呢？因为发现会有——因为在此系统上禁止运行脚本。有关详细信息，请参阅…——的问题，想要解决又怕会有安全隐患，比如病毒执行脚本… 所以还是改成用CMD，甚至不用管理员权限，完成操作。</p>
 <p>创建一个.bat文件，右键用记事本编辑。复制下面的代码，注意修改路径</p>
 <pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
 cd &#x2F;d E:\blog_matery
@@ -436,40 +436,102 @@ cmd &#x2F;k &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; star
 <ol>
 <li><code>@echo on</code>就是显示 命令回显 可以设置成off，都一样。圈中的就是回显</li>
 </ol>
-<p><img src="/2025/07/25/con-bolg-write/image-20250725105234788.png" alt="image-20250725105234788"></p>
+<p><img src="/2025/07/25/con-bolg-write/image-20250725105234788.png"></p>
 <ol start="2">
-<li><code>cd /d E:\blog_matery</code> <code>cd</code>简单的跳转目录命令，<code>/d</code>意味着需要跳转盘符，因为似乎默认在C盘启动CMD。否则CMD无动于衷，如下图</li>
+<li><code>cd /d E:\blog_matery</code> <code>cd</code>简单的跳转目录命令，<code>/d</code>意味着需要跳转盘符，因为似乎默认在C盘启动CMD。否则CMD无动于衷，j具体如下图</li>
 </ol>
-<p><img src="/2025/07/25/con-bolg-write/image-20250725105823740.png" alt="image-20250725105823740"></p>
+<p><img src="/2025/07/25/con-bolg-write/image-20250725105823740.png"></p>
 <p>也可以先用 <code>e:</code>跳转。这里不过多介绍CMD的东西。反正意思就是将后面的路径改成你以前手动用Git一键三连的路径。</p>
 <ol start="3">
 <li><code>cmd /k &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; start http://localhost:4000/ &amp;&amp; hexo s&quot;</code></li>
 </ol>
-<p><code>/k</code>是执行完不关闭，<del>似乎可以去掉</del>，后面的就是三连的命令了，很容易看懂，中间加了个自动跳转网站的命令。</p>
-<p>也可以<strong>自定义</strong>，比如去掉clean d，分多种情形使用。下面是几种自定义：</p>
-<p>新增文章（自动关闭）</p>
+<p><code>/k</code>是执行完不关闭，<del>似乎可以去掉</del>，后面的就是三连的命令了，很容易看懂，中间加了个自动跳转网站的命令。后面我发现不用CMD也可以，见下面的自定义：&#x2F;</p>
+<p>新增文章（自动关闭）——一般只新增文章无需clean</p>
 <pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
 cd &#x2F;d E:\blog_matery
 hexo g &amp;&amp; hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>一键三连（调试）</p>
+<p>一键四连（上传完调试）</p>
 <pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
 cd &#x2F;d E:\blog_matery
 cmd &#x2F;k &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d &amp;&amp; start http:&#x2F;&#x2F;localhost:4000&#x2F; &amp;&amp; hexo s&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>一键三连（自动关闭）</p>
+<p>一键三连（自动关闭）——一般涉及到删除文章才clean</p>
 <pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
 cd &#x2F;d E:\blog_matery
 hexo clean &amp;&amp; hexo g &amp;&amp; hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
+<p>一键调式（不上传到GitHub）</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo on
+cd &#x2F;d E:\blog_matery
+hexo g &amp;&amp; start http:&#x2F;&#x2F;localhost:4000&#x2F; &amp;&amp; hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 
 
+<h2 id="文章中引入HTML"><a href="#文章中引入HTML" class="headerlink" title="文章中引入HTML"></a>文章中引入HTML</h2><p>突然发现Markdown也支持HTML语法，如下，注意 要换行请使用Shift + Enter</p>
+<p><img src="/2025/07/25/con-bolg-write/image-20250725161953923.png"></p>
+<p>很可惜，img标签无法正常使用，源于其路径无法正常解析。</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span> <span class="token attr-value"><span class="token punctuation attr-equals">=</span> <span class="token punctuation">"</span>./con-bolg-write/image-20250725161953923.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span> <span class="token attr-value"><span class="token punctuation attr-equals">=</span> <span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 
+<span class="token comment">&lt;!--无法使用！！！--></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>一般来说，直接在Markdown编辑器里面打字就行了，引入HTML主要是为了结合CSS自定义一些文本样式，或者一些特殊的展现形式（当然，更复杂的正在学习中，eg：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>blockquote</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>b</span><span class="token punctuation">></span></span>这是测试<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>b</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>blockquote</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+    <b>这是测试</b>
+</blockquote>
 
 
 
+<h2 id="文章引入CSS自定义样式"><a href="#文章引入CSS自定义样式" class="headerlink" title="文章引入CSS自定义样式"></a>文章引入CSS自定义样式</h2><p>对于一些固有设定的（比如p标签中的字体大小），需要加 !important后缀。当然，我们一般引入选择器（虽然可能与主题的冲突，那就取点奇怪的class）</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token selector">table</span><span class="token punctuation">&#123;</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> table <span class="token important">!important</span><span class="token punctuation">;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> black<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+	<span class="token selector">table td</span><span class="token punctuation">&#123;</span>
+     	    <span class="token property">text-align</span><span class="token punctuation">:</span> -webkit-center <span class="token important">!important</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+    <span class="token selector">table th</span><span class="token punctuation">&#123;</span>
+        <span class="token property">text-align</span><span class="token punctuation">:</span> -webkit-center <span class="token important">!important</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>加入类选择器更加可控。</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+	<span class="token selector">.wokao</span><span class="token punctuation">&#123;</span>
+		<span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+		<span class="token property">font-size</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span> <span class="token attr-value"><span class="token punctuation attr-equals">=</span> <span class="token punctuation">"</span>wokao<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>
+            这是测试文档
+     	 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>  
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<style>
+	.wokao{
+		color: blue;
+		font-size: 30px;
+	}
+</style>
+
+<p>
+    <div class = "wokao">
+          <span>
+            这是测试文档
+     	 </span>  
+	</div>
+</p>
+
+<hr>
+<p>其他 待更新。。。。。</p>
 
                 
             </div>
@@ -784,7 +846,7 @@ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d<span aria-hidden="true" class="li
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             摘要：HTML学习
+                            摘要：HTML学习
                         
                     </div>
                     <div class="publish-info">
@@ -1043,7 +1105,7 @@ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d<span aria-hidden="true" class="li
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">29.3k</span>&nbsp;字
+                class="white-color">30k</span>&nbsp;字
             
             
             

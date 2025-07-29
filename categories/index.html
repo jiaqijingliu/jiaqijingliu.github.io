@@ -45,7 +45,6 @@
 
 
 <body>
-
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
@@ -232,10 +231,6 @@
 
 </header>
 
-
- 
-
-   <main id="main_wrap">
     <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
@@ -396,10 +391,19 @@
                 </a>
                 
                 
+                <a href="/categories/%E8%AF%BB%E4%B9%A6/" title="读书: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #85C1E9;">读书
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/categories/%E5%AD%A6%E4%B9%A0/" title="学习: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #85C1E9;">学习
+                            style="background-color: #F8C471;">学习
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -408,16 +412,7 @@
                 <a href="/categories/%E4%BC%98%E5%8C%96%E6%97%A5%E5%BF%97/" title="优化日志: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8C471;">优化日志
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E8%AF%BB%E4%B9%A6/" title="读书: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">读书
+                            style="background-color: #F9E79F;">优化日志
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -452,86 +447,52 @@
     </div>
 </div>
 
+<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
 <script type="text/javascript">
-    // 封装雷达图初始化函数
-    function initRadarChart() {
-        // 确保echarts加载完成
-        if (typeof echarts === 'undefined') {
-            $.getScript("/libs/echarts/echarts.min.js", function() {
-                loadRadarChart();
-            });
-        } else {
-            loadRadarChart();
-        }
-    }
+    let radarChart = echarts.init(document.getElementById('category-radar'));
 
-    function loadRadarChart() {
-        // 销毁旧实例（如果存在）
-        let radarDom = document.getElementById('category-radar');
-        if (radarDom && echarts.getInstanceByDom(radarDom)) {
-            echarts.dispose(radarDom);
-        }
-        
-        let radarChart = echarts.init(radarDom);
+    
 
-        
-
-        let option = {
-            title: {
-                left: 'center',
-                text: '文章分类雷达图',
+    let option = {
+        title: {
+            left: 'center',
+            text: '文章分类雷达图',
+            textStyle: {
+                fontWeight: 500,
+                fontSize: 22
+            }
+        },
+        tooltip: {},
+        radar: {
+            name: {
                 textStyle: {
-                    fontWeight: 500,
-                    fontSize: 22
+                    color: '#3C4858'
                 }
             },
-            tooltip: {},
-            radar: {
-                name: {
-                    textStyle: {
-                        color: '#3C4858'
-                    }
-                },
-                indicator: [{"name":"知识","max":9},{"name":"杂谈","max":9},{"name":"Life Diary","max":9},{"name":"Chase Cat","max":9},{"name":"C语言学习","max":9},{"name":"游戏","max":9},{"name":"英语学习","max":9},{"name":"博客优化","max":9},{"name":"blog撰写","max":9},{"name":"学习","max":9},{"name":"优化日志","max":9},{"name":"读书","max":9},{"name":"前端学习","max":9}],
-                nameGap: 5,
-                center: ['50%','55%'],
-                radius: '66%'
-            },
-            series: [{
-                type: 'radar',
-                color: ['#3ecf8e'],
-                itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                data : [
-                    {
-                        value : [6,3,8,5,6,1,1,2,1,1,1,1,1],
-                        name : '文章分类数量'
-                    }
-                ]
-            }]
-        };
+            indicator: [{"name":"知识","max":9},{"name":"杂谈","max":9},{"name":"Life Diary","max":9},{"name":"Chase Cat","max":9},{"name":"C语言学习","max":9},{"name":"游戏","max":9},{"name":"英语学习","max":9},{"name":"博客优化","max":9},{"name":"blog撰写","max":9},{"name":"读书","max":9},{"name":"学习","max":9},{"name":"优化日志","max":9},{"name":"前端学习","max":9}],
+            nameGap: 5,
+            center: ['50%','55%'],
+            radius: '66%'
+        },
+        series: [{
+            type: 'radar',
+            color: ['#3ecf8e'],
+            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+            data : [
+                {
+                    value : [6,3,8,5,6,1,1,2,1,1,1,1,1],
+                    name : '文章分类数量'
+                }
+            ]
+        }]
+    };
 
-        radarChart.setOption(option);
-        
-        // 响应式调整
-        window.addEventListener('resize', function() {
-            radarChart.resize();
-        });
-    }
-
-    // 初始加载
-    initRadarChart();
-
-    // Pjax重载处理
-    $(document).on('pjax:complete', function() {
-        initRadarChart();
-    });
+    radarChart.setOption(option);
 </script>
+
     
 
 </main>
-
-   </main>
-
 
 
     <footer class="page-footer bg-color">
@@ -849,34 +810,7 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-  
 
 </body>
 
 </html>
-
- 
-    <script type="text/javascript">
-        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
-        function loadPjax(){
-            var pjax = new Pjax({
-                selectors: [
-                    "head title",
-                    'head meta[name="keywords"]',
-                    'head meta[name="description"]',
-                    "main#main_wrap"
-                ],
-                cache: true,
-                cacheBust: false
-            });
-        }
-
-        // Pjax请求错误时，跳转到404页面
-        document.addEventListener('pjax:error', (err) => {
-            if (err.request.status === 404) {
-                pjax.loadUrl('/404.html')
-            }
-        })
-    </script>
-
-

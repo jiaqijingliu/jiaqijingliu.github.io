@@ -45,7 +45,6 @@
 
 
 <body>
-
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
@@ -232,10 +231,6 @@
 
 </header>
 
-
- 
-
-   <main id="main_wrap">
     
 
 
@@ -496,37 +491,14 @@
     </div>
 
     <script async defer>
-      // ================ 新增代码开始 ================ //
-      // 统一移除所有copy事件监听（安全清理）
-      const oldCopyListeners = [];
-      document.copyEventListeners?.forEach(listener => {
-        document.removeEventListener('copy', listener);
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
       });
-      // ================ 新增代码结束 ================ //
 
-      // 定义命名函数（避免使用匿名函数）
-      function handleCopyEvent(e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</button>';
-        M.toast({html: toastHTML});
-      }
-
-      // 注册全局导航函数
-      window.navToReprintStatement = function() {
+      function navToReprintStatement() {
         $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
       }
-
-      // ================ 新增代码开始 ================ //
-      // 事件监听器状态管理
-      if (!document.copyEventListeners) {
-        document.copyEventListeners = new Set();
-      }
-      
-      // 添加新监听器并记录
-      document.copyEventListeners.add(handleCopyEvent);
-      // ================ 新增代码结束 ================ //
-
-      // 绑定事件（使用命名函数）
-      document.addEventListener("copy", handleCopyEvent);
     </script>
 
 
@@ -981,9 +953,6 @@
 
 
 
-   </main>
-
-
 
     <footer class="page-footer bg-color">
     
@@ -1300,34 +1269,7 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-  
 
 </body>
 
 </html>
-
- 
-    <script type="text/javascript">
-        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
-        function loadPjax(){
-            var pjax = new Pjax({
-                selectors: [
-                    "head title",
-                    'head meta[name="keywords"]',
-                    'head meta[name="description"]',
-                    "main#main_wrap"
-                ],
-                cache: true,
-                cacheBust: false
-            });
-        }
-
-        // Pjax请求错误时，跳转到404页面
-        document.addEventListener('pjax:error', (err) => {
-            if (err.request.status === 404) {
-                pjax.loadUrl('/404.html')
-            }
-        })
-    </script>
-
-

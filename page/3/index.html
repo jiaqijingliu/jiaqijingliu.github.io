@@ -45,7 +45,6 @@
 
 
 <body>
-
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
@@ -232,14 +231,8 @@
 
 </header>
 
-
- 
-
-   <main id="main_wrap">
     
-    <!-- 其他页面封面 -->
-    <div id="dynamic-cover" data-page-type="other">
-        <div class="bg-cover pd-header about-cover">
+    <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -303,97 +296,6 @@
 
     </div>
 </div>
-    </div>
-
-
-<script>
-// ==================== PJAX 封面控制 ====================
-(function() {
-    // 当前封面状态
-    var currentCoverType = 'other';
-    
-    // 加载封面函数
-    function loadCover(type) {
-        // 如果已经是目标封面且存在，则跳过
-        if (type === currentCoverType && $('#dynamic-cover').length > 0) {
-            return;
-        }
-        
-        console.log('Loading cover:', type);
-        currentCoverType = type;
-        
-        // 移除旧封面
-        $('#dynamic-cover').remove();
-        
-        // 创建新封面容器
-        var newCover = $('<div id="dynamic-cover" data-page-type="' + type + '"></div>');
-        $('main.content').before(newCover);
-        
-        // 动态加载封面内容
-        var url = type === 'home' ? '/' : window.location.href;
-        $.get(url, function(data) {
-            var coverHtml = $(data).find('#dynamic-cover').html();
-            newCover.html(coverHtml || ''); // 确保空内容不会报错
-            
-            // 初始化对应封面效果
-            setTimeout(function() {
-                if (type === 'home') {
-                    initHomeCover();
-                } else {
-                    initOtherCover();
-                }
-            }, 100);
-        });
-    }
-    
-    // 首页封面初始化
-    function initHomeCover() {
-        
-        if (typeof Typed !== 'undefined' && $('#subtitle').length) {
-            // 销毁旧实例
-            if (window.subtitleTyped) {
-                try { window.subtitleTyped.destroy(); } catch(e) {}
-            }
-            // 创建新实例
-            window.subtitleTyped = new Typed("#subtitle", {
-                strings: ['徜徉花海昼夜不息，耕耘播种风雨兼程','Wandering in the sea of flowers day and night without rest, tilling and sowing through wind and rain.'],
-                startDelay: 300,
-                typeSpeed: 100,
-                loop: true,
-                backSpeed: 50,
-                showCursor: true
-            });
-        }
-        
-    }
-    
-    // 其他页面封面初始化
-    function initOtherCover() {
-        
-        // 随机banner图片
-        var randomIndex = Math.floor(Math.random() * 22);
-        var bannerUrl = '/medias/banner/' + randomIndex + '.jpg';
-        $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-        
-    }
-    
-    // PJAX事件监听
-    $(document).on('pjax:complete', function() {
-        var isHome = window.location.pathname.replace(/\/$/, '') === '/'.replace(/\/$/, '');
-        loadCover(isHome ? 'home' : 'other');
-    });
-    
-    // 首页链接特殊处理（解决PJAX回首页不刷新的问题）
-    $(document).on('click', 'a[href="/"]', function(e) {
-        if (window.location.pathname.replace(/\/$/, '') === '/'.replace(/\/$/, '')) {
-            loadCover('home');
-        }
-    });
-    
-    // 初始加载
-    loadCover(currentCoverType);
-})();
-</script>
 
 
 <main class="content">
@@ -1042,9 +944,6 @@
 
 
 
-   </main>
-
-
 
     <footer class="page-footer bg-color">
     
@@ -1361,34 +1260,7 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-  
 
 </body>
 
 </html>
-
- 
-    <script type="text/javascript">
-        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
-        function loadPjax(){
-            var pjax = new Pjax({
-                selectors: [
-                    "head title",
-                    'head meta[name="keywords"]',
-                    'head meta[name="description"]',
-                    "main#main_wrap"
-                ],
-                cache: true,
-                cacheBust: false
-            });
-        }
-
-        // Pjax请求错误时，跳转到404页面
-        document.addEventListener('pjax:error', (err) => {
-            if (err.request.status === 404) {
-                pjax.loadUrl('/404.html')
-            }
-        })
-    </script>
-
-

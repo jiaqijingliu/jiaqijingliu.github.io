@@ -233,30 +233,7 @@
 </header>
 
 
-    
-    <script type="text/javascript">
-        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
-        function loadPjax(){
-            var pjax = new Pjax({
-                selectors: [
-                    "head title",
-                    'head meta[name="keywords"]',
-                    'head meta[name="description"]',
-                    "main#main_wrap"
-                ],
-                cache: true,
-                cacheBust: false
-            });
-        }
-
-        // Pjax请求错误时，跳转到404页面
-        document.addEventListener('pjax:error', (err) => {
-            if (err.request.status === 404) {
-                pjax.loadUrl('/404.html')
-            }
-        })
-    </script>
-
+ 
 
    <main id="main_wrap">
     <div class="bg-cover pd-header about-cover">
@@ -419,19 +396,10 @@
                 </a>
                 
                 
-                <a href="/categories/%E8%AF%BB%E4%B9%A6/" title="读书: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">读书
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/%E5%AD%A6%E4%B9%A0/" title="学习: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8C471;">学习
+                            style="background-color: #85C1E9;">学习
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -440,7 +408,16 @@
                 <a href="/categories/%E4%BC%98%E5%8C%96%E6%97%A5%E5%BF%97/" title="优化日志: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F9E79F;">优化日志
+                            style="background-color: #F8C471;">优化日志
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E8%AF%BB%E4%B9%A6/" title="读书: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9E79F;">读书
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -943,5 +920,29 @@ $(function () {
 </body>
 
 </html>
+
+ 
+    <script type="text/javascript">
+        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
+        function loadPjax(){
+            var pjax = new Pjax({
+                selectors: [
+                    "head title",
+                    'head meta[name="keywords"]',
+                    'head meta[name="description"]',
+                    "main#main_wrap"
+                ],
+                cache: true,
+                cacheBust: false
+            });
+        }
+
+        // Pjax请求错误时，跳转到404页面
+        document.addEventListener('pjax:error', (err) => {
+            if (err.request.status === 404) {
+                pjax.loadUrl('/404.html')
+            }
+        })
+    </script>
 
 

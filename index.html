@@ -233,30 +233,7 @@
 </header>
 
 
-    
-    <script type="text/javascript">
-        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
-        function loadPjax(){
-            var pjax = new Pjax({
-                selectors: [
-                    "head title",
-                    'head meta[name="keywords"]',
-                    'head meta[name="description"]',
-                    "main#main_wrap"
-                ],
-                cache: true,
-                cacheBust: false
-            });
-        }
-
-        // Pjax请求错误时，跳转到404页面
-        document.addEventListener('pjax:error', (err) => {
-            if (err.request.status === 404) {
-                pjax.loadUrl('/404.html')
-            }
-        })
-    </script>
-
+ 
 
    <main id="main_wrap">
     
@@ -414,6 +391,30 @@
         
             
             <div class="carousel-item amber white-text carousel-post bg-cover"
+                 style="background-image: url('/medias/featureimages/22.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <div class="title center-align">C语言学习 第1期</div>
+                            <div class="description center-align">
+                                
+                                    char与int之间的关系char就是int。如何理解、分辨字符和整型之间的区别？ASCII码把int和char联系到了一起。char型就是ASCII码的十进制。简单来说，可以用int表示char。
+字符：如 ‘a’, ‘1’ 等，都可以看
+                                
+                            </div>
+                            <div class="cover-btns">
+                                <a href="/2025/07/10/cstudy0/" class="waves-effect waves-light btn"
+                                   target="_blank">
+                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="carousel-item amber white-text carousel-post bg-cover"
                  style="background-image: url('/medias/featureimages/21.jpg');">
                 <div class="container">
                     <div class="row">
@@ -429,30 +430,6 @@
                             </div>
                             <div class="cover-btns">
                                 <a href="/2025/07/08/20250708/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/medias/featureimages/22.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">C语言学习 第1期</div>
-                            <div class="description center-align">
-                                
-                                    char与int之间的关系char就是int。如何理解、分辨字符和整型之间的区别？ASCII码把int和char联系到了一起。char型就是ASCII码的十进制。简单来说，可以用int表示char。
-字符：如 ‘a’, ‘1’ 等，都可以看
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/2025/07/10/cstudy0/" class="waves-effect waves-light btn"
                                    target="_blank">
                                     <i class="icon fa fa-eye fa-fw"></i>阅读更多
                                 </a>
@@ -1706,5 +1683,29 @@ $(function () {
 </body>
 
 </html>
+
+ 
+    <script type="text/javascript">
+        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
+        function loadPjax(){
+            var pjax = new Pjax({
+                selectors: [
+                    "head title",
+                    'head meta[name="keywords"]',
+                    'head meta[name="description"]',
+                    "main#main_wrap"
+                ],
+                cache: true,
+                cacheBust: false
+            });
+        }
+
+        // Pjax请求错误时，跳转到404页面
+        document.addEventListener('pjax:error', (err) => {
+            if (err.request.status === 404) {
+                pjax.loadUrl('/404.html')
+            }
+        })
+    </script>
 
 

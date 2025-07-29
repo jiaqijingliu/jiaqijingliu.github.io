@@ -231,8 +231,6 @@
 
 </header>
 
-
-   <main id="main_wrap">
     
 
 
@@ -433,7 +431,7 @@
 </li>
 <li><p><strong>关于音乐错乱。其为用网yy插件实现，有些vip歌曲实在没办法（有些歌莫名其妙就成了付费的了），而且会出现信息错乱等现象。还有一些是用的网友上传的。</strong></p>
 </li>
-<li><p><strong>联系方式：请通过邮件发送信息，要求来信请详细说清楚，发送到：<a href="mailto:&#x6a;&#x69;&#97;&#113;&#x69;&#x6a;&#x69;&#110;&#x67;&#108;&#105;&#x75;&#48;&#x40;&#111;&#117;&#116;&#x6c;&#111;&#111;&#107;&#46;&#x63;&#111;&#109;">jiaqijingliu0@outlook.com</a></strong></p>
+<li><p><strong>联系方式：请通过邮件发送信息，要求来信请详细说清楚，发送到：<a href="mailto:&#106;&#105;&#97;&#x71;&#105;&#106;&#105;&#110;&#103;&#x6c;&#x69;&#x75;&#48;&#64;&#x6f;&#x75;&#116;&#x6c;&#x6f;&#111;&#107;&#46;&#x63;&#111;&#x6d;">jiaqijingliu0@outlook.com</a></strong></p>
 </li>
 </ul>
 
@@ -940,7 +938,6 @@
 
 
 
-   </main>
 
     <footer class="page-footer bg-color">
     
@@ -1258,32 +1255,6 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-
 </body>
 
 </html>
-
-    
-    <script type="text/javascript">
-        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
-        function loadPjax(){
-            var pjax = new Pjax({
-                selectors: [
-                    "head title",
-                    'head meta[name="keywords"]',
-                    'head meta[name="description"]',
-                    "main#main_wrap"
-                ],
-                cache: true,
-                cacheBust: false
-            });
-        }
-
-        // Pjax请求错误时，跳转到404页面
-        document.addEventListener('pjax:error', (err) => {
-            if (err.request.status === 404) {
-                pjax.loadUrl('/404.html')
-            }
-        })
-    </script>
-

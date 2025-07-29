@@ -231,8 +231,6 @@
 
 </header>
 
-
-   <main id="main_wrap">
     
 
 
@@ -959,7 +957,6 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
 
 
 
-   </main>
 
     <footer class="page-footer bg-color">
     
@@ -1277,32 +1274,6 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-
 </body>
 
 </html>
-
-    
-    <script type="text/javascript">
-        $.getScript("https://cdn.jsdelivr.net/npm/pjax/pjax.min.js",loadPjax)
-        function loadPjax(){
-            var pjax = new Pjax({
-                selectors: [
-                    "head title",
-                    'head meta[name="keywords"]',
-                    'head meta[name="description"]',
-                    "main#main_wrap"
-                ],
-                cache: true,
-                cacheBust: false
-            });
-        }
-
-        // Pjax请求错误时，跳转到404页面
-        document.addEventListener('pjax:error', (err) => {
-            if (err.request.status === 404) {
-                pjax.loadUrl('/404.html')
-            }
-        })
-    </script>
-

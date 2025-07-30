@@ -384,30 +384,6 @@
         
             
             <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('/medias/featureimages/22.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">C语言学习 第1期</div>
-                            <div class="description center-align">
-                                
-                                    char与int之间的关系char就是int。如何理解、分辨字符和整型之间的区别？ASCII码把int和char联系到了一起。char型就是ASCII码的十进制。简单来说，可以用int表示char。
-字符：如 ‘a’, ‘1’ 等，都可以看
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/2025/07/10/cstudy0/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
                  style="background-image: url('/medias/featureimages/21.jpg');">
                 <div class="container">
                     <div class="row">
@@ -423,6 +399,30 @@
                             </div>
                             <div class="cover-btns">
                                 <a href="/2025/07/08/20250708/" class="waves-effect waves-light btn"
+                                   target="_blank">
+                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="carousel-item amber white-text carousel-post bg-cover"
+                 style="background-image: url('/medias/featureimages/22.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <div class="title center-align">C语言学习 第1期</div>
+                            <div class="description center-align">
+                                
+                                    char与int之间的关系char就是int。如何理解、分辨字符和整型之间的区别？ASCII码把int和char联系到了一起。char型就是ASCII码的十进制。简单来说，可以用int表示char。
+字符：如 ‘a’, ‘1’ 等，都可以看
+                                
+                            </div>
+                            <div class="cover-btns">
+                                <a href="/2025/07/10/cstudy0/" class="waves-effect waves-light btn"
                                    target="_blank">
                                     <i class="icon fa fa-eye fa-fw"></i>阅读更多
                                 </a>
@@ -513,8 +513,19 @@
 
         let carouselIntervalId;
         
+        // Loop to call the next cover article picture.
+        let autoCarousel = function () {
+            carouselIntervalId = setInterval(function () {
+                coverSlider.carousel('next');
+            }, 20000);
+        };
+        autoCarousel();
+        
 
         function restartPlay() {
+            
+            clearInterval(carouselIntervalId);
+            autoCarousel();
             
         };
 

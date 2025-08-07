@@ -1,0 +1,21 @@
+/* Here is your custom css styles. */
+
+/* 这里是行号显示*/
+.line-numbers-rows {
+    border-right-width: 0px !important;
+}
+
+.line-numbers {
+    padding: 1.5rem 1.5rem 1.5rem 3.5rem !important;
+    margin: 1rem 0 !important;
+    background: #272822;
+    overflow: auto;
+    border-radius: 0.35rem;
+    tab-size: 4;
+}
+
+
+/*自定义播放器歌词样式； 取消阴影 */
+.aplayer.aplayer-fixed .aplayer-lrc {
+	text-shadow: none !important;
+}

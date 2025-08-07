@@ -1,0 +1,1551 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="C语言学习 第2期, 轻流社">
+    <meta name="description" content="看破刹那，冷眼旁观">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>C语言学习 第2期 | 轻流社</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">轻流社</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/resources" class="waves-effect waves-light">
+      
+      <i class="fas fa-download" style="zoom: 0.6;"></i>
+      
+      <span>资源</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">轻流社</div>
+        <div class="logo-desc">
+            
+            看破刹那，冷眼旁观
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/resources" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-download"></i>
+			
+			资源
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">C语言学习 第2期</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">C语言</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0/">
+                                <span class="chip bg-color">字符函数</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                C语言学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-07-10
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-07-22
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    9 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h2><p>指针表示字符串，一般是无法修改的，所以得声明为如下。或者采用隐式定义等等</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> pt <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> pr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"af"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span> pr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"af"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span> pra<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"af"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h2><h3 id="ctype-h-处理单个字符"><a href="#ctype-h-处理单个字符" class="headerlink" title="ctype.h(处理单个字符)"></a>ctype.h(处理单个字符)</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">有  <span class="token function">isblank</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">//是否为空格、tab。注意，如果为真，则返回一个非0值！！！！，所以如果写if(isblank(a) == TRUE) 是不可取的</span>
+	<span class="token function">isdigit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//数字</span>
+	等等等等。
+	<span class="token function">tolower</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token comment">// 返回小写字母</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="memset-快速初始化"><a href="#memset-快速初始化" class="headerlink" title="memset(快速初始化)"></a>memset(快速初始化)</h3><p><code>void *memset(void *str, int c, size_t n)</code></p>
+<ul>
+<li><p><strong>str</strong> – 指向要填充的内存区域的指针。</p>
+</li>
+<li><p><strong>c</strong> – 要设置的值，通常是一个无符号字符。</p>
+</li>
+<li><p><strong>n</strong> – 要被设置为该值的字节数。</p>
+</li>
+</ul>
+<p>该函数一般仅用于char型的快速初始化</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span> <span class="token comment">// 引入 string.h 头文件以使用 memset</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 将 buffer 数组的前5个字节设置为字符 'A'</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token char">'A'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    buffer<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'\0'</span><span class="token punctuation">;</span> <span class="token comment">// 添加字符串终止符</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Buffer after memset: %s\n"</span><span class="token punctuation">,</span> buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 将 buffer 全部初始化，使用 '\0' 替代 </span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token char">'\0'</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 使用'\0'确保一致性及可读性</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Buffer after memset: %s\n"</span><span class="token punctuation">,</span> buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="perror-显示报错"><a href="#perror-显示报错" class="headerlink" title="perror(显示报错)"></a>perror(显示报错)</h3><p>C 库函数 <code>void perror(const char *str)</code> 把一个描述性错误消息输出到标准错误 stderr。首先输出字符串 <strong>str</strong>，后跟一个冒号，然后是一个空格。</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">int main()
+&#123;
+	FILE* fp;
+	&#x2F;* 首先重命名文件 *&#x2F;
+	rename(&quot;file.txt&quot;, &quot;newfile.txt&quot;);
+	&#x2F;* 现在让我们尝试打开相同的文件 *&#x2F;
+	fp &#x3D; fopen(&quot;file.txt&quot;, &quot;r&quot;);
+	if (fp &#x3D;&#x3D; NULL) &#123;
+		perror(&quot;Error&quot;);
+		return(-1);
+	&#125;
+	fclose(fp);
+	return(0);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="strchr-字符查找"><a href="#strchr-字符查找" class="headerlink" title="strchr(字符查找)"></a>strchr(字符查找)</h3><p>返回该字符在字符串中第一次出现的位置(字符指针)。</p>
+<p>实例如下，通过该函数查找ret_val中的换行符，找到则替换为空，否则说明输入过多需要清除后续输入。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">s_gets</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> st<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span><span class="token operator">*</span> ret_val<span class="token punctuation">;</span>
+	<span class="token keyword">char</span><span class="token operator">*</span> find<span class="token punctuation">;</span>
+	ret_val <span class="token operator">=</span> <span class="token function">fgets</span><span class="token punctuation">(</span>st<span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>ret_val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		find <span class="token operator">=</span> <span class="token function">strchr</span><span class="token punctuation">(</span>st<span class="token punctuation">,</span> <span class="token char">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>find<span class="token punctuation">)</span>
+			<span class="token operator">*</span>find <span class="token operator">=</span> <span class="token char">'\0'</span><span class="token punctuation">;</span>
+		<span class="token keyword">else</span>
+			<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token char">'\n'</span><span class="token punctuation">)</span>
+				<span class="token keyword">continue</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> ret_val<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="strrchr-字符查找"><a href="#strrchr-字符查找" class="headerlink" title="strrchr(字符查找)"></a>strrchr(字符查找)</h3><p>返回字符最后出现的位置</p>
+<h3 id="strspn-字符匹配"><a href="#strspn-字符匹配" class="headerlink" title="strspn(字符匹配)"></a>strspn(字符匹配)</h3><p>检索字符串 <strong>str1</strong> 中第一个不在字符串 <strong>str2</strong> 中出现的字符下标。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+   <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+   <span class="token keyword">const</span> <span class="token keyword">char</span> str1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"ABCDEFG019874"</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> <span class="token keyword">char</span> str2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"ABCD"</span><span class="token punctuation">;</span>
+
+   len <span class="token operator">=</span> <span class="token function">strspn</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"初始段匹配长度 %d\n"</span><span class="token punctuation">,</span> len <span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+   <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="strcspn-字符匹配"><a href="#strcspn-字符匹配" class="headerlink" title="strcspn(字符匹配)"></a>strcspn(字符匹配)</h3><p>检索字符串 <strong>str1</strong> 开头连续有几个字符都不含字符串 <strong>str2</strong> 中的字符。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+   <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+   <span class="token keyword">const</span> <span class="token keyword">char</span> str1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"ABCDEF4960910"</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> <span class="token keyword">char</span> str2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"013"</span><span class="token punctuation">;</span>
+
+   len <span class="token operator">=</span> <span class="token function">strcspn</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"第一个匹配的字符是在 %d\n"</span><span class="token punctuation">,</span> len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+   <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><h3 id="strtol-转换L"><a href="#strtol-转换L" class="headerlink" title="strtol(转换L)"></a>strtol(转换L)</h3><p>定义在<code>stdlib.h</code></p>
+<p><code>long int strtol (const char* str, char** endptr, int base);</code></p>
+<p><code>str</code>为要转化的字符串；<code>base</code>为转化的进制数，为0时默认10进制，0x采用16进制，0采用8进制；<code>endstr</code>为第一个不能转换的字符指针(就是会指向第一个不能转换为long类型的字符)，为NULL时表示不用这个参数。根据这个可以作连续转换 。</p>
+<p><code>strtol()</code> 会扫描参数 str 字符串，<strong>跳过前面的空白字符</strong>（例如空格，tab缩进等，可以通过 isspace() 函数来检测），直到遇上数字或正负符号才开始做转换，再遇到非数字或字符串结束时(’\0’)结束转换，并将结果返回。<strong>如果不能转换或者 <code>str</code> 为空字符串，那么返回 <code>0(0L)</code>；</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    
+    <span class="token keyword">int</span> li<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> nm<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"202 22 2 1 3"</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> p_end<span class="token punctuation">;</span>
+    p_end <span class="token operator">=</span> nm<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        li<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">strtol</span><span class="token punctuation">(</span>p_end<span class="token punctuation">,</span> <span class="token operator">&amp;</span>p_end<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%ld\n"</span><span class="token punctuation">,</span> li<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="strtok-切割字符串"><a href="#strtok-切割字符串" class="headerlink" title="strtok(切割字符串)"></a>strtok(切割字符串)</h3><p>定义在<code>string.h</code>中</p>
+<p><code>char *strtok(char *str, const char *delim);</code></p>
+<p><code>str</code>：要分割的字符串，第一次调用时传入需要分割的字符串，<strong>之后传入 NULL</strong>。NULL表示：函数将在同⼀个字符串中被保存的位置开始，查找下⼀个标记。（如果字符串中不存在更多的标记，则返回 NULL 指针）</p>
+<p><code>delim</code>：分隔符字符串，用于指定分隔字符串的<strong>分隔符集合</strong>。</p>
+<p><code>strtok</code>函数找到<code>str</code>中的下⼀个标记，并将其⽤ \0 结尾，返回⼀个指向这个标记的指针。</p>
+<p>（注：strtok函数会改变被操作的字符串，所以在使⽤strtok函数切分的字符串⼀般都是临时拷贝的内容并且可修改。）</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>   
+    <span class="token keyword">char</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"High-Earphone@qq.com.666@.gaoerji"</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> buffer <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>buffer<span class="token punctuation">)</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> deli<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"-@."</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>output<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    output<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">strtok</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> deli<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>output<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        i<span class="token operator">++</span><span class="token punctuation">;</span>
+        output<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">strtok</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> deli<span class="token punctuation">)</span><span class="token punctuation">;</span>      
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="fgets-字符输入"><a href="#fgets-字符输入" class="headerlink" title="fgets(字符输入)"></a>fgets(字符输入)</h3><p>定义在<code>stdio.h</code>中</p>
+<p><code>char *fgets(char *str, int n, FILE *stream)</code> </p>
+<p>fgets会储存换行符（当然，如果你输入超过n，换行符会没地方储存），最大读取为n-1个字符，达到最大值第n个字符会赋空字符；返回值为指向str的指针，若读取到文件结尾，返回NULL</p>
+<p>第三个参数为<strong>读取</strong>的文件，这里用stdin从键盘读取，后续会在文件操作中介绍</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">fgets</span><span class="token punctuation">(</span>words<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token constant">stdin</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">&amp;&amp;</span> words<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'\n'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span> <span class="token punctuation">(</span>words<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'\n'</span> <span class="token operator">&amp;&amp;</span> words<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'\0'</span><span class="token punctuation">)</span>
+		i<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>words<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token char">'\n'</span><span class="token punctuation">)</span>  <span class="token comment">// 如果先遇到换行符，换成空字符； 先遇到空字符，else便丢弃多的字符</span>
+		words<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'\0'</span><span class="token punctuation">;</span>
+	<span class="token keyword">else</span>
+		<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token char">'\n'</span><span class="token punctuation">)</span>   <span class="token comment">//这个操作就是说，一直getchar，知道传入的是‘\n’</span>
+			<span class="token keyword">continue</span><span class="token punctuation">;</span> <span class="token comment">//清除缓冲区</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span>words<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 上面一番操作使得str一定没有换行符</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="fputs-字符输出"><a href="#fputs-字符输出" class="headerlink" title="fputs(字符输出)"></a>fputs(字符输出)</h3><p><code>int fputs(const char *str, FILE *stream)</code></p>
+<p>fputs不会在输入末尾添加换行符，puts会。第二个为要<strong>写入</strong>数据的文件（把str puts 到 FILE中），在屏幕上用stdout。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">fputs</span><span class="token punctuation">(</span><span class="token string">"nihao"</span><span class="token punctuation">,</span> <span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h3 id="自定义s-gets输入函数"><a href="#自定义s-gets输入函数" class="headerlink" title="自定义s_gets输入函数"></a>自定义s_gets输入函数</h3><p>这个函数读取整行输入并用空字符代替换行符。读取n-1个字符，并丢弃剩下的。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span> <span class="token operator">*</span><span class="token function">s_gets</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span> st<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span> <span class="token operator">*</span> ret_val<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	
+	ret_val <span class="token operator">=</span> <span class="token function">fgets</span><span class="token punctuation">(</span>st<span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>ret_val<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>st<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'\n'</span> <span class="token operator">&amp;&amp;</span> st<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token char">'\0'</span><span class="token punctuation">)</span>
+	i<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>st<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token char">'\n'</span><span class="token punctuation">)</span> 
+	  st<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token char">'\0'</span><span class="token punctuation">;</span>
+	<span class="token keyword">else</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token char">'\n'</span><span class="token punctuation">)</span>  
+     	<span class="token keyword">continue</span><span class="token punctuation">;</span> 
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> ret_val<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="sprintf-字符合成"><a href="#sprintf-字符合成" class="headerlink" title="sprintf(字符合成)"></a>sprintf(字符合成)</h3><p><code>int sprintf(char *str, const char *format, ...)</code></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//用法： sprinf(str, "%s, %d, %c", stri, 2, c);</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span><span class="token operator">*</span> output <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">10</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>output<span class="token punctuation">)</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">sprintf</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span><span class="token string">"%c, %s,%d,%ld, %f"</span><span class="token punctuation">,</span> <span class="token char">'a'</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5L</span><span class="token punctuation">,</span> <span class="token number">1.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//这里的output溢出了，</span>
+    <span class="token comment">//注意，双引号里面的 逗号 空格 均被加入进了output中</span>
+	<span class="token function">fputs</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">free</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 释放内存</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//可以发现这里产生了内存溢出，output[9]='空格';</span>
+
+<span class="token comment">//下面是一种动态计算空间方法：</span>
+    <span class="token comment">// 计算所需空间</span>
+    <span class="token keyword">int</span> needed <span class="token operator">=</span> <span class="token function">snprintf</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"%c, %s,%d,%ld, %f"</span><span class="token punctuation">,</span> str<span class="token punctuation">,</span> stri<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5L</span><span class="token punctuation">,</span> <span class="token number">1.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> output <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>needed <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// +1 为终止符</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>output<span class="token punctuation">)</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">sprintf</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token string">"%c, %s,%d,%ld, %.1f"</span><span class="token punctuation">,</span> str<span class="token punctuation">,</span> stri<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5L</span><span class="token punctuation">,</span> <span class="token number">1.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fputs</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> <span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>snprintf中的第2个参数表示，最多写入size-1个字符。</p>
+<h3 id="sscanf-字符转换"><a href="#sscanf-字符转换" class="headerlink" title="sscanf(字符转换)"></a>sscanf(字符转换)</h3><p>对于sprintf函数它可以将各种数据以各种格式（如%d，%s，%c等等）转换为字符串类型输入到char*类型的str参数中。    </p>
+<p> 对于sscanf函数它可以将字符串类型的str参数的数据以各种格式（如%d，%s，%c等等）输出到各变量中。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">S</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> age<span class="token punctuation">;</span>
+	<span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">float</span> point<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">struct</span> <span class="token class-name">S</span> l <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">15</span><span class="token punctuation">,</span><span class="token string">"lisi"</span><span class="token punctuation">,</span><span class="token number">88.9f</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> arr<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">struct</span> <span class="token class-name">S</span> j <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token comment">//将各类型数据转换为字符串</span>
+	<span class="token function">sprintf</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token string">"%d %s %.1f"</span><span class="token punctuation">,</span> l<span class="token punctuation">.</span>age<span class="token punctuation">,</span> l<span class="token punctuation">.</span>name<span class="token punctuation">,</span> l<span class="token punctuation">.</span>point<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">//将字符串数据转换为各种类型</span>
+	<span class="token function">sscanf</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token string">"%d %s %f"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>j<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">,</span> j<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>j<span class="token punctuation">.</span>point<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d %s %.1f"</span><span class="token punctuation">,</span> j<span class="token punctuation">.</span>age<span class="token punctuation">,</span> j<span class="token punctuation">.</span>name<span class="token punctuation">,</span> j<span class="token punctuation">.</span>point<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="strncat-字符拼接"><a href="#strncat-字符拼接" class="headerlink" title="strncat(字符拼接)"></a>strncat(字符拼接)</h3><p><code>char *strncat(char *dest, const char *src, size_t n)</code></p>
+<ul>
+<li><strong>dest</strong> – 指向目标数组，该数组包含了一个 C 字符串，且足够容纳追加后的字符串，包括额外的空字符。</li>
+<li><strong>src</strong> – 要追加的字符串。</li>
+<li><strong>n</strong> – 要追加的最大字符数。（注意这里并减1）</li>
+</ul>
+<p>简单的形式为strcat，但是可能溢出内存。拼接后的str1为<code>&quot;ab12345\0&quot;</code>，也就是说，会自带空字符在末尾。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">snprintf</span><span class="token punctuation">(</span>str0<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">"123456780"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sprintf</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> <span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">strncat</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str0<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="strncpy-字符复制"><a href="#strncpy-字符复制" class="headerlink" title="strncpy(字符复制)"></a>strncpy(字符复制)</h3><p><code>char *strncpy(char *dest, const char *src, size_t n)</code></p>
+<ul>
+<li><strong>dest</strong> – 指向用于存储复制内容的目标数组。</li>
+<li><strong>src</strong> – 要复制的字符串。</li>
+<li><strong>n</strong> – 要从源中复制的字符数。</li>
+</ul>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">   <span class="token keyword">char</span> src<span class="token punctuation">[</span><span class="token number">40</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token keyword">char</span> dest<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  
+   <span class="token function">memset</span><span class="token punctuation">(</span>dest<span class="token punctuation">,</span> <span class="token char">'\0'</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token function">strcpy</span><span class="token punctuation">(</span>src<span class="token punctuation">,</span> <span class="token string">"This is runoob.com"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token function">strncpy</span><span class="token punctuation">(</span>dest<span class="token punctuation">,</span> src<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//	desk 最终的目标字符串： This is ru </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="strncmp-字符比较"><a href="#strncmp-字符比较" class="headerlink" title="strncmp(字符比较)"></a>strncmp(字符比较)</h3><p><code>int strncmp(const char *str1, const char *str2, size_t n)</code></p>
+<p>比较前n个字符有么有相同的。</p>
+<ul>
+<li>如果返回值 &lt; 0，则表示 str1 小于 str2。</li>
+<li>如果返回值 &gt; 0，则表示 str1 大于 str2。</li>
+<li>如果返回值 &#x3D; 0，则表示 str1 等于 str2。</li>
+</ul>
+<p>原始为<code>strcmp</code></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>a <span class="token operator">=</span> <span class="token string">"ac"</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> b <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
+   <span class="token keyword">int</span> out <span class="token operator">=</span> <span class="token function">strncmp</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token function">fmin</span><span class="token punctuation">(</span><span class="token function">strlen</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+   <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> out<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="strlen-字符长度"><a href="#strlen-字符长度" class="headerlink" title="strlen(字符长度)"></a>strlen(字符长度)</h3><p>返回字符串的长度，但不计算空字符‘\0’ </p>
+<h3 id="strstr-字符串查找"><a href="#strstr-字符串查找" class="headerlink" title="strstr(字符串查找)"></a>strstr(字符串查找)</h3><p>返回字符串第一次出现的位置</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://zywifeliuying.top" rel="external nofollow noreferrer">孑瓜子</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://zywifeliuying.top/2025/07/10/cstudy1/">https://zywifeliuying.top/2025/07/10/cstudy1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://zywifeliuying.top" target="_blank">孑瓜子</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">C语言</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%AD%97%E7%AC%A6%E5%87%BD%E6%95%B0/">
+                                    <span class="chip bg-color">字符函数</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        /* 这里修改了 */
+        display: flex;
+        justify-content: center;
+
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        display: none;  
+        /* 这里因为删掉了支付宝 */
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+
+    /* 下面是为了消除红色细线改的代码,因为那个细线不知道放在哪里了，似乎是用js生成的，其源css在libs/materialize/materialize.min.css 中，懒得找改*/
+    .tabs .indicator {
+        display: none;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h6 class="reward-title">留下万分之一点，采得孤人所笑言</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <!-- <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li> -->
+                        <li class="tab col s6 wechat-tab waves-effect waves-light" style="margin-left: 0;"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <!-- 这里的margin-left修改了 -->
+                    <!-- <div id="alipay">
+                        <img src="/" class="reward-img" alt="支付宝打赏二维码">
+                    </div>这里因为用不到支付宝，所以直接注释了 -->
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/07/10/cstudy2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="C语言学习 第3期">
+                        
+                        <span class="card-title">C语言学习 第3期</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    C语言学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
+                        <span class="chip bg-color">文件操作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/07/10/cstudy0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="C语言学习 第1期">
+                        
+                        <span class="card-title">C语言学习 第1期</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    C语言学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">知识</span>
+                    </a>
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 轻流社<br />'
+            + '文章作者: 孑瓜子<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #ff1493;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="9467901797"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#ff1493'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2024-2025</span>
+            
+            <span id="year">2024</span>
+            <a href="/about" target="_blank">孑瓜子</a>
+
+           <!-- |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a> 这里是尾部的powered by什么的 -->
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">37k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2024";
+                    var startMonth = "2";
+                    var startDate = "19";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

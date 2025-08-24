@@ -611,7 +611,8 @@ code:
 <span class="token property">white-space</span><span class="token punctuation">:</span> inherit
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="文章设置成hide-true-不生效。"><a href="#文章设置成hide-true-不生效。" class="headerlink" title="文章设置成hide: true 不生效。"></a>文章设置成<code>hide: true</code> 不生效。</h2><p>找到<code>E:\blog_matery\themes\matery\layout\index.ejs</code>该配置文件，</p>
+<h2 id="文章设置成hide-true-不生效。"><a href="#文章设置成hide-true-不生效。" class="headerlink" title="文章设置成hide: true 不生效。"></a>文章设置成<code>hide: true</code> 不生效。</h2><h3 id="最新bug"><a href="#最新bug" class="headerlink" title="最新bug"></a>最新bug</h3><p>采用下面的方法会导致网站主页文章排版bug！！！（不严格按照发布时间排列</p>
+<p>找到<code>E:\blog_matery\themes\matery\layout\index.ejs</code>该配置文件，</p>
 <p>将下面这部分</p>
 <pre class="line-numbers language-ejs" data-language="ejs"><code class="language-ejs"><span class="token comment">&lt;!-- 所有文章卡片 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>article</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>articles<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container articles<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -2237,20 +2238,6 @@ $(function () {
     <!-- Baidu Analytics -->
 
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>

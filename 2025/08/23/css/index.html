@@ -389,14 +389,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-07-22
+                    2025-08-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-15
+                    2025-08-24
                 </div>
                 
 
@@ -545,7 +545,7 @@ p[class*&#x3D;&quot;bar&quot;]  选择包含bar子串的元素<span aria-hidden=
 <pre class="line-numbers language-css" data-language="css"><code class="language-css">img[title~=<span class="token string">"img"</span>][title$=<span class="token string">"kl"</span>]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="后代选择器"><a href="#后代选择器" class="headerlink" title="后代选择器"></a>后代选择器</h4><p>让我们先理解一下HTML的数结构，可以发现，每个元素间都存在父子关系，比如：</p>
-<p><img src="/2025/07/22/css/image-20250802115327196.png"></p>
+<p><img src="/2025/08/23/css/image-20250802115327196.png"></p>
 <p>父子关系是相邻两级所有的，后代关系则是高级与低级所有的。例如html与head、body为父子关系。html与后面所有标签为后代关系。由此便可以引出后代选择器，示例：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
     <span class="token selector">div p em</span> <span class="token punctuation">&#123;</span>
@@ -826,7 +826,7 @@ p&#123;
 <p><code>text-shadow</code>；值有：颜色、右偏移量、下偏移量、模糊半径；前三个是必须的，模糊半径定义为模糊颜色显示的范围。例如<code>      text-shadow: green 1px 1px 3px;</code></p>
 <p><strong>处理空格</strong></p>
 <p><code>white-space</code>;一般而言p标签对于多个空白符都是合并、换行符是视作空白符</p>
-<p><img src="/2024/08/13/20240812/-20250808212014237.png"></p>
+<p><img src="/2025/08/23/css/image-20250808212014237.png"></p>
 <p><strong>其他</strong></p>
 <p>还有其他属性，比如 <code>writing-mode</code> 和 <code>text-orientation</code> 实现对联式排列</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">writing-mode</span><span class="token punctuation">:</span> vertical-rl<span class="token punctuation">;</span> <span class="token property">text-orientation</span><span class="token punctuation">:</span> upright<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
@@ -840,7 +840,7 @@ p&#123;
 
 <h2 id="基本视觉格式化"><a href="#基本视觉格式化" class="headerlink" title="基本视觉格式化"></a>基本视觉格式化</h2><p><strong>基本框</strong></p>
 <p> 每个元素都有一个假定的基本框；其中外边框可为负、内边框必须大于零，外边框通常是透明的，内边框会显示背景属性。</p>
-<p><img src="/2024/08/13/20240812/-20250809104139213.png"></p>
+<p><img src="/2025/08/23/css/image-20250809104139213.png"></p>
 <p><strong>包含块</strong></p>
 <p>如下面的例子，包含块是最近的祖先元素，所以p的包含块是div，它的布局依赖于div的布局。 </p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
@@ -861,7 +861,7 @@ p&#123;
 <li><strong>根元素</strong>：文档数顶端的元素。HTML中为html标签，XML中可以是任何元素。</li>
 </ol>
 <h3 id="块级元素格式化"><a href="#块级元素格式化" class="headerlink" title="块级元素格式化"></a>块级元素格式化</h3><p>在此之前，先让我们先看看块级元素的完整的框模型。一个元素的width定义为左内边界道右内边界的部分。</p>
-<p><img src="/2024/08/13/20240812/-20250809144442944.png"></p>
+<p><img src="/2025/08/23/css/image-20250809144442944.png"></p>
 <p>简单来讲，正常流中块级元素框的水平部分总和等于父元素的width。比如一个div中有两个段落，外边距设置为1em。段落内容宽度width加上左右内边距、边框、外边距，它们之和就是div内容区的width。</p>
 <p>水平格式化有7大属性： </p>
 <p><code>margin-left</code> ，<code>border-left</code>， <code>padding-left</code> ，<code>width</code>， <code>padding-left</code> ，<code>border-right</code> ，<code>margin-right</code>。</p>
@@ -884,7 +884,7 @@ p&#123;
 <li>右边 使用 上面</li>
 </ul>
 <p>如图所示：</p>
-<p><img src="/2024/08/13/20240812/-20250810182306549.png"></p>
+<p><img src="/2025/08/23/css/image-20250810182306549.png"></p>
 <p>例子：</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">h1</span><span class="token punctuation">&#123;</span><span class="token property">margin</span><span class="token punctuation">:</span> 0.25em 0 0.5em<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>  
 	<span class="token comment">/* 等效于0.25 0 0.5 0 */</span>
@@ -931,7 +931,7 @@ p&#123;
 
 
 
-<p><img src="/2024/08/13/20240812/-20250810184222734.png"></p>
+<p><img src="/2025/08/23/css/image-20250810184222734.png"></p>
 <p>当外边距应用到行内非替换元素，也就是普通的文本时，上下边距并不会影响行高，也可以理解为没用；只有左右边距会产生效果。当然，应用到图像之类的替换元素，则有效果。</p>
 <h3 id="border"><a href="#border" class="headerlink" title="border"></a>border</h3><p><strong>边框类型</strong></p>
 <p><code>border-style:  top right bottom left</code>； 值有solid（实线）、dotted（点线）、dashed（长点线）、none、hidden（隐藏）、inset等等。</p>
@@ -1177,7 +1177,7 @@ a:hover&#123;
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>效果如下：</p>
-<p><img src="/2024/08/13/20240812/-20250815100113636.png"></p>
+<p><img src="/2025/08/23/css/image-20250815100113636.png"></p>
 <p>对于流体布局，采用百分数。</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">body</span> <span class="token punctuation">&#123;</span>
     <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
@@ -1291,7 +1291,7 @@ a:hover&#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zywifeliuying.top/2025/07/22/css/">https://zywifeliuying.top/2025/07/22/css/</a>
+                    <a href="https://zywifeliuying.top/2025/08/23/css/">https://zywifeliuying.top/2025/08/23/css/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1524,7 +1524,7 @@ a:hover&#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/07/22/js/">
+                <a href="/2025/08/24/js/">
                     <div class="card-image">
                         
                         
@@ -1541,7 +1541,7 @@ a:hover&#123;
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-22
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-08-24
                         </span>
                         <span class="publish-author">
                             
@@ -1581,7 +1581,7 @@ a:hover&#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/07/22/html/">
+                <a href="/2025/08/22/html/">
                     <div class="card-image">
                         
                         
@@ -1598,7 +1598,7 @@ a:hover&#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-08-22
                             </span>
                         <span class="publish-author">
                             

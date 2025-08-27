@@ -396,14 +396,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-24
+                    2025-08-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.4k
+                    6.5k
                 </div>
                 
 
@@ -977,11 +977,14 @@ a:hover&#123;
 <p>使用长度值时，就是根据左上角的偏移定位了！</p>
 <ol start="5">
 <li><code>background-attachment</code> 关联；值有scroll（默认）、fixed；在body中使用后者可以声明图像相对于可视区是固定的，因此不会受滚动的影响。</li>
+<li><code>background-size</code> 尺寸；定义了图片显示大小，有auto（原始）、cover（缩放完全覆盖）、（缩放完整图片）、长度值以及百分比。</li>
 </ol>
 <p><strong>汇总</strong></p>
-<p>通过 <code>background</code> 属性，可以对上面所有的声明进行汇总。无其他要求，只要posion时两个值一起出现，省略值均默认</p>
+<p>通过 <code>background</code> 属性，可以对上面所有的声明进行汇总。无其他要求，如果有位置属性，那么posion时两个值要一起出现，省略值均默认。如果要添加尺寸，其必须在位置后面定义，且必须用 <code>/</code>分离（不能单独添加尺寸而不添加位置，</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">background</span><span class="token punctuation">:</span> white <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span> top left repeat-y fixed<span class="token punctuation">;</span>
-<span class="token property">background</span><span class="token punctuation">:</span> white <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token property">background</span><span class="token punctuation">:</span> white <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>https://picsum.photos/2000/1200?image=723<span class="token punctuation">)</span></span> center center / cover no-repeat fixed<span class="token punctuation">;</span>
+<span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>https://picsum.photos/2000/1200?image=723<span class="token punctuation">)</span></span> / cover no-repeat fixed<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -1861,7 +1864,7 @@ a:hover&#123;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">43.6k</span>&nbsp;字
+                class="white-color">44.8k</span>&nbsp;字
             
             
             

@@ -396,21 +396,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-24
+                    2025-08-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    3.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    14 分
                 </div>
                 
 
@@ -700,7 +700,189 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 
 
-<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>对象的定义有两种方式，声明（文字）形式和构造形式。一般我们采用前者的方式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> my_obj1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">2</span>
+    <span class="token comment">// 这种形式类似C语言中结构的初始化</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> my_obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 这里的Object就相当于函数</span>
+my_obj<span class="token punctuation">.</span>key <span class="token operator">=</span> value<span class="token punctuation">;</span>
+my_obj<span class="token punctuation">[</span><span class="token string">"key"</span><span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>访问对象也有两种方式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> my <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">2</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> idx<span class="token punctuation">;</span>
+idx <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
+
+<span class="token function">alert</span><span class="token punctuation">(</span>my<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>my<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>my<span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>前者为属性访问，后者为键访问。对象中，属性名是字符串，如果采用其他值作为属性名，会被自动转化为字符串（注意，仅仅发生在声明的时候，所以后续引用需要字符串形式、或者变量）；考虑下面的例子，可以发现，虽然我们尝试定义属性名为非string类型的值，但是实际上其会利用字符串转换函数，转换为对应字符串。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> my <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+my<span class="token punctuation">[</span><span class="token boolean">true</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"foo"</span><span class="token punctuation">;</span>
+my<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"bar"</span><span class="token punctuation">;</span>
+my<span class="token punctuation">[</span>my<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"baz"</span><span class="token punctuation">;</span>
+
+<span class="token function">alert</span><span class="token punctuation">(</span>my<span class="token punctuation">[</span><span class="token string">"true"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// foo</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>my<span class="token punctuation">[</span><span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// bar</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>my<span class="token punctuation">[</span><span class="token string">"[object Object]"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// baz 对象经过函数的返回值就是这个</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>利用键访问，我们可以做到可计算属性名</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> prefix <span class="token operator">=</span> <span class="token string">"foo"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> myObject <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">[</span>prefix<span class="token operator">+</span><span class="token string">"bar"</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token string">"hello"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span>prefix<span class="token operator">+</span><span class="token string">"baz"</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token string">"world"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token function">alert</span><span class="token punctuation">(</span>myObject<span class="token punctuation">[</span><span class="token string">"foobar"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>myObject<span class="token punctuation">.</span>foobaz<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="语言类型"><a href="#语言类型" class="headerlink" title="语言类型"></a>语言类型</h3><p>Javascript中有如下数据类型</p>
+<ol>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+<li>object</li>
+<li>symbol</li>
+</ol>
+<p>内置对象</p>
+<ol>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RedExp</li>
+<li>Error</li>
+</ol>
+<p>内置对象可以看作就是一种函数。</p>
+<h3 id="函数与对象"><a href="#函数与对象" class="headerlink" title="函数与对象"></a>函数与对象</h3><p>让我们直接给出下面的例子</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+   <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> someFoo <span class="token operator">=</span> foo<span class="token punctuation">;</span>
+<span class="token keyword">var</span> my<span class="token operator">=</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">someFoo</span><span class="token operator">:</span> foo
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// function foo()&#123;&#125;</span>
+<span class="token function">someFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// function foo()&#123;&#125;</span>
+my<span class="token punctuation">.</span><span class="token function">someFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// function foo()&#123;&#125;</span>
+<span class="token comment">//---------------------------------</span>
+<span class="token keyword">var</span> myObject <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">foo</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> someFoo <span class="token operator">=</span> myObject<span class="token punctuation">.</span>foo<span class="token punctuation">;</span>
+<span class="token function">someFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+myObject<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>定义和赋值如下。一般而言，我们不采用对数组添加属性值的操作，当然这是指添加key和value；添加数组的附加属性描述还是可以的。添加键值要利用到下标赋值操作。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> myArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"foo"</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">,</span> <span class="token string">"bar"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+myArray<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token comment">//3</span>
+myArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// foo</span>
+
+<span class="token comment">//你可以给数组添加属性值，但不推荐！</span>
+myArray<span class="token punctuation">.</span>baz <span class="token operator">=</span> <span class="token string">"baz"</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>myArray<span class="token punctuation">.</span>baz<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>myArray<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 仍然是3，添加属性值不会添加数组索引</span>
+
+<span class="token comment">//如果尝试添加属性名像数字的属性，那么会变成数组下标</span>
+<span class="token comment">//myArray.4="af"; ？？ 属性访问中 属性名不能以数字开头！！</span>
+myArray<span class="token punctuation">[</span><span class="token string">"4"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"af"</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>myArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>myArray<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>myArray<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//一般赋值是</span>
+myArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>myArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="浅复制"><a href="#浅复制" class="headerlink" title="浅复制"></a>浅复制</h3><p>对象的复制分浅复制和深复制两种，而后者很复杂，依据不同JavaScript框架。所以这里仅仅介绍浅复制，利用函数Object.assign。第一个参数为目标对象，后面可以跟多个源对象。其会遍历源对象所有可枚举的自有键；</p>
+<p>浅复制的意思是，其复制的属性如果是对象，那么是引用方法，而不是副本！可以理解为一个快捷方式。考虑下面例子，可以发现，修改新对象中的对象属性值后，老对象中的对象属性也变了！</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> myObject <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"张三"</span><span class="token punctuation">,</span> <span class="token comment">// 基本类型（字符串）</span>
+  <span class="token literal-property property">hobbies</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"读书"</span><span class="token punctuation">,</span> <span class="token string">"音乐"</span><span class="token punctuation">]</span> <span class="token comment">// 引用类型（数组）</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 浅拷贝</span>
+<span class="token keyword">var</span> newObj <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> myObject<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 复制到空对象，然后返回到 newObj</span>
+
+<span class="token comment">// 1. 修改新对象的基本类型属性 -> 安全</span>
+newObj<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"李四"</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>myObject<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: "张三" (原对象未受影响)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newObj<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 输出: "李四"</span>
+
+<span class="token comment">// 2. 修改新对象中的引用类型属性 -> 危险！</span>
+newObj<span class="token punctuation">.</span>hobbies<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"编程"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 通过新对象修改数组</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>myObject<span class="token punctuation">.</span>hobbies<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出: ["读书", "音乐", "编程"] (原对象也被影响了！)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newObj<span class="token punctuation">.</span>hobbies<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 输出: ["读书", "音乐", "编程"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h3><p>如下面代码所示</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> my <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+	<span class="token literal-property property">a</span><span class="token operator">:</span><span class="token number">2</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyDescriptor</span><span class="token punctuation">(</span>my<span class="token punctuation">,</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 其返回一个对象，包含属性描述符信息</span>
+<span class="token comment">// &#123;</span>
+<span class="token comment">//     value: 2,</span>
+<span class="token comment">//     writable: true,  可写为false时，表示无法修改该属性</span>
+<span class="token comment">//     enumerable: true, </span>
+<span class="token comment">//     configurable: true 可配置为false时，表示无法删除该属性、修改属性描述符（除把writable改为flase）</span>
+<span class="token comment">// &#125;</span>
+<span class="token comment">//可以通过下面的函数定义</span>
+Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>my<span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">value</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">writable</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">configurable</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">enumerable</span><span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 
             </div>
             <hr/>
@@ -1298,7 +1480,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">43.6k</span>&nbsp;字
+                class="white-color">44.8k</span>&nbsp;字
             
             
             

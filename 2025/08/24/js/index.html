@@ -396,21 +396,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-27
+                    2025-08-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.8k
+                    4.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    14 分
+                    17 分
                 </div>
                 
 
@@ -435,19 +435,64 @@
             <div id="articleContent">
                 <p> 摘要：html等前端学习合集<span id="more"></span>。</p>
 <h2 id="DOM简介"><a href="#DOM简介" class="headerlink" title="DOM简介"></a>DOM简介</h2><p>什么是DOM？简单地说，DOM是一套对文档的内容进行抽象和概念化的方法。DOM是一种API（应用编程接口）。简单地说，API就是一组已经得到有关各方共同认可的基本约定。在现实世界中，相当于API的例子包括（但不限于）摩尔斯码、国际时区、化学元素周期表。以上这些都是不同学科领域中的标准，它们使得人们能够更方便地交流与合作。如果没有一个统一的标准，事情往往会演变成为一场灾难。别忘了，因混淆英制度量衡与公制度量衡至少导致过一次火星探测任务的失败。</p>
-<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p><strong>JavaScript引入</strong></p>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>javaScript的标准是简称是ES，比如常见的ES6（2016年发布），目前被绝大数浏览器支持。本文章就主要学习ES6和ES5相关。</p>
+<p><strong>运行与简单使用</strong></p>
+<p>如何开始交互式JavaScript会话？可以通过浏览器的解释器，也可以按照Node.js后，打开cmd输入node即可。当代码块更多时，把代码保存为js文件，可以引入Html中，然后通过浏览器打开（或者输入file:URL）；亦或者通过CMD命令 <code>node *.js</code>（注意cd文件目录）</p>
+<p><strong>JavaScript引入</strong></p>
 <p>最好的做法是把<code>&lt;script&gt;</code>标签放到HTML文档的最后，<code>&lt;/body&gt;</code>标签之前，这样可以提高加载页面速度。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
 
-<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a><strong>基本语法</strong></h3><ol>
+<p><strong>基本语法</strong></p>
+<ol>
 <li>建议每条语句用分号隔开。</li>
 <li>注释采用的语法和C语言一致，为 <code>//</code> 、 <code>/* */</code>、HTML中的 <code>&lt;!--</code> 部分；前者和后者均只能用于单行，中者可以跨行。</li>
 <li>声明变量大体同C语言，可以在声明的时候同时赋初始值。还可以一次声明多种 <code>var mood = &quot;happy&quot;, age = 33;</code>；其不在乎变量具体的类型，所以可以随意更改变量的数据类型</li>
-<li></li>
 </ol>
+<h2 id="类型、值和变量"><a href="#类型、值和变量" class="headerlink" title="类型、值和变量"></a>类型、值和变量</h2><h3 id="数值（number"><a href="#数值（number" class="headerlink" title="数值（number)"></a>数值（number)</h3><p>字面量是什么意思？就是指出现在程序中的值，比如在代码中，出现了一个数字，那么它就是数值字面量</p>
+<p>整数字面量，分三种进制，十六进制开头为0x，8进制为0b或者0o（不同于C语言的0x和0）；浮点字面量就是小数，用法和C语言一致，如 <code>3.14</code> <code>.3333</code> <code>6.02e-23</code></p>
+<p>还可以为数字添加下划线以分割为数字段，容易看清。涉及数值计算有Math对象属性函数（我们把这种调用称作”方法“）</p>
+<h3 id="文本（string）"><a href="#文本（string）" class="headerlink" title="文本（string）"></a>文本（string）</h3><p>文本就是字符串，JavaScript没有如同C语言一样定义单个字符。下面是字符串的换行操作</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string">'two\nlines'</span> <span class="token comment">//写在一行，表示两行的字符串;</span>
+
+<span class="token string">"one\
+long\
+line"</span> <span class="token comment">//写在多行但只有一行的字符串</span>
+
+<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">说来可就大发了会计分录
+萨芬ask了解到示例啊萨</span><span class="token template-punctuation string">`</span></span> <span class="token comment">//写在两行，实际也是两行的字符串，注意这是反引号！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>下面是操作字符串的API（可以发现，这就是面向对象的编程，不需要传入参数）比如<code>str.length</code> 返回的是str的长度，还有诸如取字符串某部分、搜索字符、或者修改字符串副本等等。</p>
+<p>下面介绍模板字面量；其由反引号定义，可以包含JavaScript表达式，由下面的形式包裹。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string">"Bill"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> greeting <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Hello </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span> name <span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span> <span class="token comment">// grerting === "Hello Bill."</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="布尔值（bool）、未定义（undefined）、空（null）"><a href="#布尔值（bool）、未定义（undefined）、空（null）" class="headerlink" title="布尔值（bool）、未定义（undefined）、空（null）"></a>布尔值（bool）、未定义（undefined）、空（null）</h3><p>布尔值比较简单，这里就不介绍。其余两个都代表没有值，值不存在，区别很小（实际我们也尽量避免使用）</p>
+<h3 id="符号（symbol）"><a href="#符号（symbol）" class="headerlink" title="符号（symbol）"></a>符号（symbol）</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> symname <span class="token operator">=</span> <span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token string">"md"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> o <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">symname</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>symname<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>symname<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//返回值为 ”Symbol(md)“</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>Symbol</code> 函数永远不会返回相同的值，也就是每一次调用返回值都是不同的，即使传入的参数一样。</p>
+<p>有时候我们想创建共享符号，那么有函数 <code>Symbol.for()</code> 和 <code>Symbol.keyFor()</code>实现</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> s <span class="token operator">=</span> Symbol<span class="token punctuation">.</span><span class="token function">for</span><span class="token punctuation">(</span><span class="token string">"shared"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> t <span class="token operator">=</span> Symbol<span class="token punctuation">.</span><span class="token function">for</span><span class="token punctuation">(</span><span class="token string">"shared"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 这个方法传入的字符串一样，返回值也一样</span>
+
+<span class="token function">alert</span><span class="token punctuation">(</span>s<span class="token operator">===</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => true</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>Symbol<span class="token punctuation">.</span><span class="token function">keyFor</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => "shared"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
 <h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><p>首先让我们先理解<strong>编译原理</strong></p>
 <p>&ensp;</p>
 <p>传统编译语言，对源代码会进行 词法分析、语法分析、代码生成三个步骤；分别是分解字符串、分析代码块的关系、转化为机器能理解的指令。</p>
@@ -1137,52 +1182,54 @@ Object<span class="token punctuation">.</span><span class="token function">defin
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/08/24/js/">
+                <a href="/2025/08/27/htmlwork/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="前端学习 第3期 JavaScript">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="前端练习">
                         
-                        <span class="card-title">前端学习 第3期 JavaScript</span>
+                        <span class="card-title">前端练习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             摘要：html等前端学习合集
+                            关于网页布局的每日练习
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-08-24
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-08-27
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    前端学习
+                            <a href="/categories/%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    知识
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%9F%A5%E8%AF%86/">
-                        <span class="chip bg-color">知识</span>
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
                     </a>
                     
                     <a href="/tags/%E5%89%8D%E7%AB%AF/">
                         <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                    <a href="/tags/HTML/">
+                        <span class="chip bg-color">HTML</span>
                     </a>
                     
                     <a href="/tags/JavaScript/">
@@ -1256,43 +1303,6 @@ Object<span class="token punctuation">.</span><span class="token function">defin
 
 </div>
 
-
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 轻流社<br />'
-            + '文章作者: 孑瓜子<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
 
 
 <!-- 代码块功能依赖 -->
@@ -1480,7 +1490,7 @@ Object<span class="token punctuation">.</span><span class="token function">defin
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">44.8k</span>&nbsp;字
+                class="white-color">48.7k</span>&nbsp;字
             
             
             

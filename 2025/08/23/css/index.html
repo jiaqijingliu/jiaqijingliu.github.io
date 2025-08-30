@@ -396,21 +396,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-27
+                    2025-08-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.5k
+                    8.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    26 分
+                    34 分
                 </div>
                 
 
@@ -443,7 +443,7 @@
 
 
 
-<h2 id="CSS引入"><a href="#CSS引入" class="headerlink" title="CSS引入"></a>CSS引入</h2><h3 id="使用外部CSS"><a href="#使用外部CSS" class="headerlink" title="使用外部CSS"></a>使用外部CSS</h3><p>stylesheet是样式表的意思、rel标识HTML界面与链接文件关系；href表明CSS文件路径；type表面链接文档类型。</p>
+<h2 id="CSS引入"><a href="#CSS引入" class="headerlink" title="CSS引入"></a>CSS引入</h2><h3 id="使用外部CSS"><a href="#使用外部CSS" class="headerlink" title="使用外部CSS"></a>使用外部CSS</h3><p>stylesheet是样式表的意思、rel标识HTML界面与链接文件关系；href表明CSS文件路径；type表面链接文档类型（可省略type）。</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/p.css<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="使用内部CSS"><a href="#使用内部CSS" class="headerlink" title="使用内部CSS"></a>使用内部CSS</h3><p>在 <code>&lt;head&gt; &lt;/head&gt;</code>标签内部引入 <code>&lt;style&gt;</code>以使用内部CSS。</p>
@@ -636,7 +636,18 @@ li+li &#123;
 <span class="token selector">p: first-child</span><span class="token punctuation">&#123;</span>
     <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
     <span class="token comment">/* 指示第一个这种类型的元素 */</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span>
+
+<span class="token property">p</span><span class="token punctuation">:</span><span class="token function">nth-child</span><span class="token punctuation">(</span>1<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+ <span class="token comment">/* 选择父元素的第1个子元素，且该子元素是p */</span>
+<span class="token property">p</span><span class="token punctuation">:</span><span class="token function">nth-of-type</span><span class="token punctuation">(</span>1<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+ <span class="token comment">/* 选择父元素的第1个p标签，注意是先过滤出所有标签，然后选择 */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
 
 <h4 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a>伪元素选择器</h4><p>一般有如下，这样可以设置首字母和首行的样式</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">p:first-letter</span><span class="token punctuation">&#123;</span>
@@ -646,10 +657,27 @@ li+li &#123;
     <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p><code>::after</code>和 <code>::before</code></p>
+<p>你可以把它想象成<strong>用CSS凭空创建了一个新的元素</strong>，并把它添加到了 <code>.type</code> 这个 <code>div</code> 的里面、所有内容的最后面（before是最前面）。</p>
+<p><strong>示例</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">.type::after &#123;
+  content: &quot;&quot;; &#x2F;* 1. 创建内容 *&#x2F;
+  position: absolute; &#x2F;* 2. 绝对定位 *&#x2F;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  &#x2F;* 3. 创建一个从透明到黑色的渐变 *&#x2F;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.8) 100%);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-
-
+<ol>
+<li><strong><code>content: &quot;&quot;;</code></strong>：这是<strong>必须的</strong>，即使内容为空。它告诉浏览器要创建这个伪元素。没有这行，<code>::after</code> 就不会显示。</li>
+<li><strong><code>position: absolute;</code></strong>：将伪元素从正常文档流中取出，使其可以精确地覆盖在 <code>.type</code> 元素之上。</li>
+<li><strong><code>bottom: 0; left: 0;</code></strong>：将伪元素定位到其父容器（<code>.type</code>）的左下角。</li>
+<li><strong><code>width: 100%; height: 80%;</code></strong>：让伪元素的宽度与父容器相同，高度为父容器的80%。</li>
+<li><strong><code>background: linear-gradient(...);</code></strong>：为其设置一个线性渐变背景色，从顶部透明到底部暗色。</li>
+</ol>
 <h2 id="CSS结构与层叠"><a href="#CSS结构与层叠" class="headerlink" title="CSS结构与层叠"></a>CSS结构与层叠</h2><h3 id="特殊性"><a href="#特殊性" class="headerlink" title="特殊性"></a>特殊性</h3><p>同一个元素，可以用多条规则来选择，并赋予样式。比如</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">h1</span> <span class="token punctuation">&#123;</span><span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
 <span class="token selector">body h1</span> <span class="token punctuation">&#123;</span><span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
@@ -1094,7 +1122,150 @@ a:hover&#123;
 
 
 <h3 id="相对定位"><a href="#相对定位" class="headerlink" title="相对定位"></a>相对定位</h3><p>当元素相对定位时，它会从其正常位置移走，不过原来所占的空间并不会消失。</p>
-<h2 id="表布局"><a href="#表布局" class="headerlink" title="表布局"></a>表布局</h2><h2 id="列表与生成内容"><a href="#列表与生成内容" class="headerlink" title="列表与生成内容"></a>列表与生成内容</h2><h2 id="用户界面样式"><a href="#用户界面样式" class="headerlink" title="用户界面样式"></a>用户界面样式</h2><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="固定宽度与流体布局"><a href="#固定宽度与流体布局" class="headerlink" title="固定宽度与流体布局"></a>固定宽度与流体布局</h3><p>下面是固定宽度布局</p>
+<h2 id="display详解"><a href="#display详解" class="headerlink" title="display详解"></a>display详解</h2><table>
+<thead>
+<tr>
+<th><code>block</code></th>
+<th>块级元素，占据父元素的全部宽度</th>
+<th>总是从新行开始，可以设置宽度和高度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>inline</code></td>
+<td>内联元素，只占据必要的宽度</td>
+<td>不从新行开始，不能设置宽度和高度</td>
+</tr>
+<tr>
+<td><code>inline-block</code></td>
+<td>内联块级元素</td>
+<td>像内联元素一样排列，但可以设置宽度和高度</td>
+</tr>
+<tr>
+<td><code>flex</code></td>
+<td>弹性盒子布局</td>
+<td>一维布局模型，提供了更有效的布局方式</td>
+</tr>
+<tr>
+<td><code>grid</code></td>
+<td>网格布局</td>
+<td>二维布局系统，用于更复杂的布局需求</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>元素不显示</td>
+<td>元素从文档流中移除，不占据任何空间</td>
+</tr>
+</tbody></table>
+<h3 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h3><p>参考链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7004622232378966046">彻底理解CSS Flexbox布局，看这一篇就够了！Flexbox布局的概念 Flexbox布局也叫Flex布局，弹性盒 - 掘金</a></p>
+<p>Flexbox布局也叫Flex布局，弹性盒子布局。它的<strong>目标</strong>是提供一个更有效地布局、对齐方式，并且能够使父元素在子元素的大小未知或动态变化情况下仍然能够分配好子元素之间的间隙。<strong>主要思想</strong>是使父元素能够调整子元素的宽度、高度、排列方式，从而更好的适应可用的布局空间。设定为flex布局的元素能够放大子元素使之尽可能填充可用空间，也可以收缩子元素使之不溢出。 </p>
+<p>Flex布局更适合小规模的布局，可以简便、完整、响应式的实现各种页面布局。但是，设为Flex布局以后，其子元素的<code>float</code>、<code>clear</code>和<code>vertical-align</code>属性将失效。</p>
+<p>Flex布局是一个完整的模块，它包括了一套完整的属性。其中采用 Flex 布局的元素，称为 Flex 容器，简称”<strong>容器</strong>“。它的所有子元素就是容器成员，称为 Flex 项目，简称”<strong>项目</strong>“。容器默认存在两个轴：<strong>水平轴</strong>（main axis）和<strong>垂直轴</strong>（cross axis），项目默认沿主轴排列（水平轴）</p>
+<p><img src="/2025/08/23/css/image-20250828171539495.png" alt="容器"></p>
+<p>模型概念：</p>
+<p><strong>main axis</strong>: Flex 父元素的主轴是指子元素布局的主要方向轴，它由属性flex-direction来确定主轴是水平还是垂直的，默认为水平轴。</p>
+<p><strong>main-start &amp; main-end</strong>: 分别表示主轴的开始和结束，子元素在父元素中会沿着主轴从main-start到main-end排布。</p>
+<p><strong>main size</strong>: 单个项目占据主轴的长度大小。</p>
+<p><strong>cross axis</strong>: 交叉轴，与主轴垂直。</p>
+<p><strong>cross-start &amp; cross-end</strong>: 分别表示交叉轴的开始和结束。子元素在交叉轴的排布从cross-start开始到cross-end。</p>
+<p><strong>cross size</strong>: 子元素在交叉轴方向上的大小。</p>
+<h4 id="父元素（容器）"><a href="#父元素（容器）" class="headerlink" title="父元素（容器）"></a><strong>父元素（容器）</strong></h4><p><strong>可以设置以下五个属性：</strong>（省略了一个不常用的）</p>
+<ul>
+<li>flex-direction</li>
+</ul>
+<p>主轴方向的定义；有row、row-reverse、column、column-reverse；分别代表水平从左到右、水平从右到左…</p>
+<ul>
+<li>flex-wrap</li>
+</ul>
+<p>定义子元素（项目）是否会换行；有nowrap、wrap、wap-reverse；分别代表不换行，换行，向上换行。不换行会根据主轴长度调整子元素的宽度</p>
+<ul>
+<li>justify-content</li>
+</ul>
+<p>元素在主轴上的对齐方式；有flex-start、flex-end、center、space-between、space-around；分别代表左对齐、右对齐、居中、两端对齐、均匀分布（这里假设主轴是水平从左到右的，用过word的文本对齐就很容易理解）</p>
+<ul>
+<li>align-items</li>
+</ul>
+<p>元素在交叉轴上的对齐方式；有stretch、flex-start、flex-end、center、baseline；分别代表项目高度充满容器、与交叉轴起点对齐、与终点对齐、与中点对齐、与元素第一行文本基线对齐。（其实就是设置垂直方向的对齐形式，当子元素（项目）的高度不同时就很明显了）</p>
+<ul>
+<li>align-content</li>
+</ul>
+<p>多轴线的对齐方式（换行产生多轴线），简单来说就是一列一列元素在交叉轴上的排列，和元素在主轴上的对齐一样。</p>
+<p>有flex-start、flex-end、center、space-between、space-around。</p>
+<h4 id="子元素（项目）"><a href="#子元素（项目）" class="headerlink" title="子元素（项目）"></a>子元素（项目）</h4><ul>
+<li>order</li>
+</ul>
+<p>默认为0，定义项目排列顺序，越小越靠前（主轴的前面）</p>
+<ul>
+<li>flex</li>
+</ul>
+<p>包含flex-grow、flex-shrink、flex-basis三个。分别代表分配多余空间时放大比例（默认0），空间不足时缩小比例（默认1），未分配多余空间时项目大小。</p>
+<p>常用：有</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">flex</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>       <span class="token comment">/* 1 1 0% 项目宽度等分 */</span>
+<span class="token property">flex</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>    <span class="token comment">/* 1 1 auto 项目宽度由内容决定 */</span>
+<span class="token property">flex</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>       <span class="token comment">/* 项目宽度尽可能小 */</span>
+<span class="token property">flex</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>    <span class="token comment">/* 文本宽度即为项目宽度，不够时也不缩小 */</span>
+<span class="token property">flex</span><span class="token punctuation">:</span> initial<span class="token punctuation">;</span> <span class="token comment">/* 空间足够时保持原本宽度，不够时会缩小 */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>align-self</li>
+</ul>
+<p>对单个项目生效的align-items，属性同它。</p>
+<h3 id="grid布局（待补充"><a href="#grid布局（待补充" class="headerlink" title="grid布局（待补充"></a>grid布局（待补充</h3><h2 id="CSS动画详解"><a href="#CSS动画详解" class="headerlink" title="CSS动画详解"></a>CSS动画详解</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6970883520168198158">CSS3-animation动画详解animation动画详解：css中实现动画有两种方式：<code>transition</code>过渡 - 掘金</a>|<a target="_blank" rel="noopener" href="https://juejin.cn/post/6970885478967050254#heading-0">CSS3-transition过渡动画详解基本了解  css中实现动画有两种方式：transition过渡动画、 an - 掘金</a></p>
+<p>css中实现动画有两种方式：<code>transition</code>过渡动画、 <code>animation</code>自定义动画。</p>
+<h3 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h3><p>其用法为首先通过 <code>@keyframes</code>创建关键帧动画（用过剪辑软件就很容易理解，帧与帧之间应该是平滑形式，如果没定义首尾帧，会用原样式代替）；然后使用 <code>animation</code> 配置。</p>
+<p><code>animation</code> 同大多数一样，是简写属性；（前两个属性是必需的！为了记忆方便，前两个属性位置固定，后面的可以随意排列）</p>
+<ul>
+<li>name	绑定动画（keyframes的名字）</li>
+<li>duration   动画持续时间</li>
+<li>iteration-function  动画执行次数（infinite为无穷）</li>
+<li>timing-function  动画执行速度随时间的函数</li>
+</ul>
+<p><img src="/2025/08/23/css/image-20250829114525321.png" alt="timing-function属性值"></p>
+<ul>
+<li>delay	动画延迟执行时间</li>
+<li>direction  动画执行方向（正向normal就是从0-100%，反向reverse就是100%-0，还有交替alternate、反交替alternate-reverse）</li>
+<li>fill-mode 动画结束后保持的状态（none为原样式，forwards 0%的关键帧，backwards 100%的）</li>
+<li>play-state 播放状态，有running和paused。一般我们通过js动态控制。</li>
+</ul>
+<p>还可以多动画累加</p>
+<ol>
+<li>首先使用<code>animation-name</code>来锁定使用的各个动画</li>
+<li>之后使用其它的<code>animation</code>族属性，分别约束对应动画，且设置顺序与<code>animation-name</code>使用动画的顺序保持一致。比如下面效果</li>
+</ol>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"> 	<span class="token property">animation-name</span><span class="token punctuation">:</span> bgcolor<span class="token punctuation">,</span> bodera<span class="token punctuation">,</span> rotat<span class="token punctuation">;</span>
+    <span class="token property">animation-duration</span><span class="token punctuation">:</span> 2s<span class="token punctuation">,</span> 2s<span class="token punctuation">,</span> 3s<span class="token punctuation">;</span>
+    <span class="token property">animation-iteration-count</span><span class="token punctuation">:</span> 2<span class="token punctuation">,</span> 2<span class="token punctuation">,</span> 1<span class="token punctuation">;</span>
+    <span class="token property">animation-direction</span><span class="token punctuation">:</span> reverse<span class="token punctuation">,</span> normal<span class="token punctuation">,</span> normal<span class="token punctuation">;</span>
+    <span class="token property">animation-fill-mode</span><span class="token punctuation">:</span> forwards<span class="token punctuation">,</span> forwards<span class="token punctuation">,</span> forwards<span class="token punctuation">;</span>
+......
+ <span class="token atrule"><span class="token rule">@keyframes</span> opcity</span> <span class="token punctuation">&#123;</span>
+    <span class="token selector">25%</span> <span class="token punctuation">&#123;</span>
+      <span class="token property">opacity</span><span class="token punctuation">:</span> 0.2<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token selector">50%</span> <span class="token punctuation">&#123;</span>
+      <span class="token property">opacity</span><span class="token punctuation">:</span> 0.6<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token selector">100%</span> <span class="token punctuation">&#123;</span>
+      <span class="token property">opacity</span><span class="token punctuation">:</span> 0.8<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token atrule"><span class="token rule">@keyframes</span> bgcolor</span> <span class="token punctuation">&#123;</span>
+    <span class="token selector">25%</span> <span class="token punctuation">&#123;</span>
+      <span class="token property">background-color</span><span class="token punctuation">:</span> #fbc531<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token selector">50%</span> <span class="token punctuation">&#123;</span>
+      <span class="token property">background-color</span><span class="token punctuation">:</span> #8c7ae6<span class="token punctuation">;</span>
+......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+<h3 id="transition动画"><a href="#transition动画" class="headerlink" title="transition动画"></a>transition动画</h3><h3 id="transform变化详解"><a href="#transform变化详解" class="headerlink" title="transform变化详解"></a>transform变化详解</h3><p>其一般用于两种动画中。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="固定宽度与流体布局"><a href="#固定宽度与流体布局" class="headerlink" title="固定宽度与流体布局"></a>固定宽度与流体布局</h3><p>下面是固定宽度布局</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>zh-CN<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 
@@ -1641,43 +1812,6 @@ a:hover&#123;
 </div>
 
 
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 轻流社<br />'
-            + '文章作者: 孑瓜子<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
-
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
@@ -1864,7 +1998,7 @@ a:hover&#123;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">44.8k</span>&nbsp;字
+                class="white-color">48.7k</span>&nbsp;字
             
             
             

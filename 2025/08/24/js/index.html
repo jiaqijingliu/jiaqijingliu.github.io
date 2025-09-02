@@ -396,21 +396,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-09-01
+                    2025-09-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.4k
+                    6.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    21 分
+                    24 分
                 </div>
                 
 
@@ -434,8 +434,11 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 摘要：html等前端学习合集<span id="more"></span>。</p>
-<h2 id="暂时跳过"><a href="#暂时跳过" class="headerlink" title="暂时跳过"></a><strong>暂时跳过</strong></h2><p>3.9.3 对象到原始值转换</p>
+<h2 id="暂时跳过"><a href="#暂时跳过" class="headerlink" title="暂时跳过"></a><strong>暂时跳过</strong></h2><p>3.3.5 模式匹配</p>
+<p>3.9.3 对象到原始值转换</p>
 <p>3.10.3 解构赋值</p>
+<p>第4章</p>
+<p>167中的for&#x2F;await与异步迭代</p>
 <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>javaScript的标准是简称是ES，比如常见的ES6（2016年发布），目前被绝大数浏览器支持。本文章就主要学习ES6和ES5相关。</p>
 <p><strong>运行与简单使用</strong></p>
 <p>如何开始交互式JavaScript会话？可以通过浏览器的解释器，也可以按照Node.js后，打开cmd输入node即可。当代码块更多时，把代码保存为js文件，可以引入Html中，然后通过浏览器打开（或者输入file:URL）；亦或者通过CMD命令 <code>node *.js</code>（注意cd文件目录）</p>
@@ -645,7 +648,112 @@ n<span class="token punctuation">.</span><span class="token function">toPrecisio
 
 
 
-<h2 id="表达式与操作符"><a href="#表达式与操作符" class="headerlink" title="表达式与操作符"></a>表达式与操作符</h2><h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><p>首先让我们先理解<strong>编译原理</strong></p>
+<h2 id="表达式与操作符（暂时跳过）"><a href="#表达式与操作符（暂时跳过）" class="headerlink" title="表达式与操作符（暂时跳过）"></a>表达式与操作符（暂时跳过）</h2><h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><h3 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a><strong>条件语句</strong></h3><ul>
+<li><strong>if</strong></li>
+</ul>
+<p>用法和C语言一模一样，注意，正如前面所说，JavaScript的严格等号是 <code>===</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">===</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><strong>switch</strong></li>
+</ul>
+<p>语法和C语言也大抵相同，但是其case表达式是在运行时求值的，所以性能比较低；但是JavaScript的case后面可以跟任意表达式（C语言的case只能跟单个字符、枚举、整数）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">convert</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> <span class="token string">"number"</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> x<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">case</span> <span class="token string">"string"</span><span class="token operator">:</span>
+        <span class="token keyword">case</span> <span class="token string">"boolean"</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> <span class="token string">'"'</span> <span class="token operator">+</span> x <span class="token operator">+</span> <span class="token string">'"'</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a><strong>循环语句</strong></h3><ol>
+<li><strong>while</strong> 与 <strong>do-while</strong></li>
+</ol>
+<p>过于简单，用法和C一模一样。这里就不举例了。</p>
+<ol start="2">
+<li><strong>for</strong></li>
+</ol>
+<p>用法与C也一样（但是可以很复杂）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">,</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    sum <span class="token operator">+=</span> i <span class="token operator">*</span> j<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<ol start="3">
+<li><strong>for-of</strong></li>
+</ol>
+<p>for-of循环专门用于可迭代对象（包括数组、字符串、集合、映射）。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">,</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> element <span class="token keyword">of</span> data<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    sum <span class="token operator">+=</span> element<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>数组迭代是“实时”的，所以迭代过程中的变化可能影响迭代的输出，比如我们在循环内改变数组，比如每次执行添加一个元素在最后，那么迭代将无穷循环。；字符串的迭代是按照Unicode码点来的（就是不是按照字符串长度来的，比如有些表情字符占两个char）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> frequecy <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> letter <span class="token keyword">of</span> <span class="token string">"mississippi"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>frequecy<span class="token punctuation">[</span>letter<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        frequecy<span class="token punctuation">[</span>letter<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        frequecy<span class="token punctuation">[</span>letter<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token comment">// 这是字符串的一个示例，实现了统计字符串中单词的出现次数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>对象是无法迭代的，所以用不了for-of，但是可以通过 <code>Object.key()</code> 、 <code>Object.value()</code>、 <code>Object.entries()</code> 函数来使用；它们分别返回对象关键词的数组；值的数组、数组的数组（可以理解为二维数组）；而且这个的迭代不是“实时”的，因为函数只会调用一次。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> o <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">y</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">z</span><span class="token operator">:</span> <span class="token number">3</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> keys <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">,</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> pairs <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">[</span>k<span class="token punctuation">,</span> v<span class="token punctuation">]</span> <span class="token keyword">of</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    pairs <span class="token operator">+=</span> k <span class="token operator">+</span> v<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> Object<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    sum <span class="token operator">+=</span> v<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> k <span class="token keyword">of</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    keys <span class="token operator">+=</span> k<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>集合Set</strong>，其用for-of迭代时，每个元素都会运行一次。下面的输出只有一个文本中的唯一单词，这是因为<code>new Set</code>会去掉重复值，只保留一个。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">et text <span class="token operator">=</span> <span class="token string">"Na na na na na na na Batman!"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> wordSet <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> unique <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> word <span class="token keyword">of</span> wordSet<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    unique<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>映射Map</strong>，其感觉和使用对象的<code>Object.entries()</code> 类似，每次迭代返回的是数组，第一个元素是键，第二个是对应的值</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> m <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"one"</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">[</span>key<span class="token punctuation">,</span> value<span class="token punctuation">]</span> <span class="token keyword">of</span> m<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    key <span class="token comment">// => 1</span>
+    value <span class="token comment">// => "one"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<ol start="4">
+<li><strong>for-in</strong></li>
+</ol>
+<h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><p>首先让我们先理解<strong>编译原理</strong></p>
 <p>注：在ES6后，基本很少再使用var了</p>
 <p>&ensp;</p>
 <p>传统编译语言，对源代码会进行 词法分析、语法分析、代码生成三个步骤；分别是分解字符串、分析代码块的关系、转化为机器能理解的指令。</p>
@@ -1568,12 +1676,16 @@ Object<span class="token punctuation">.</span><span class="token function">defin
 <style>
     .aplayer .aplayer-lrc p {
         
+        display: none;
+        
         font-size: 12px;
         font-weight: 700;
         line-height: 16px !important;
     }
 
     .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
         
         font-size: 15px;
         color: #ff1493;
@@ -1628,7 +1740,7 @@ Object<span class="token punctuation">.</span><span class="token function">defin
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">49.6k</span>&nbsp;字
+                class="white-color">50.3k</span>&nbsp;字
             
             
             

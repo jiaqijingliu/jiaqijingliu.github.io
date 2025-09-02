@@ -388,7 +388,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-24
+                    2025-08-30
                 </div>
                 
 
@@ -431,6 +431,7 @@
 <li>首页文章卡片高度不一致，可以发现，如果文章的标签、标题、分类、摘要预览不一致（比如字数相差过大），会产生卡片高度不一致，无法对齐，十分不美观</li>
 <li>还有很多其他方面不是很友好，相关修改下面会提及。</li>
 <li>文章设置摘要可以通过插入 <code>&lt;!-- more --&gt;</code> 来实现，但是，如果设置了cover: true，即设置了首页轮播，那么就得设置summary。因为此时上面的方法失效。</li>
+<li>插入图片时，图片名字不能含有空格，否则在网页上无法显示</li>
 </ol>
 <h2 id="设置文章密码"><a href="#设置文章密码" class="headerlink" title="设置文章密码"></a>设置文章密码</h2><p>主题自带的密码保护并不好用，有泄漏文章摘要、可以跳过密码看到部分文章内容等问题。所以这里采用hexo-blog-encrypt插件。先把主题配置文件（_config.yml）的这个功能改为false。然后通过npm安装插件（具体可自行搜索，一大堆教程）</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">verifyPassword</span><span class="token punctuation">:</span>
@@ -1994,7 +1995,7 @@ code:
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">48.7k</span>&nbsp;字
+                class="white-color">49.6k</span>&nbsp;字
             
             
             

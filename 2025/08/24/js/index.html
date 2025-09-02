@@ -396,21 +396,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-30
+                    2025-09-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.5k
+                    5.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    17 分
+                    21 分
                 </div>
                 
 
@@ -434,7 +434,8 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p> 摘要：html等前端学习合集<span id="more"></span>。</p>
-<h2 id="DOM简介"><a href="#DOM简介" class="headerlink" title="DOM简介"></a>DOM简介</h2><p>什么是DOM？简单地说，DOM是一套对文档的内容进行抽象和概念化的方法。DOM是一种API（应用编程接口）。简单地说，API就是一组已经得到有关各方共同认可的基本约定。在现实世界中，相当于API的例子包括（但不限于）摩尔斯码、国际时区、化学元素周期表。以上这些都是不同学科领域中的标准，它们使得人们能够更方便地交流与合作。如果没有一个统一的标准，事情往往会演变成为一场灾难。别忘了，因混淆英制度量衡与公制度量衡至少导致过一次火星探测任务的失败。</p>
+<h2 id="暂时跳过"><a href="#暂时跳过" class="headerlink" title="暂时跳过"></a><strong>暂时跳过</strong></h2><p>3.9.3 对象到原始值转换</p>
+<p>3.10.3 解构赋值</p>
 <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>javaScript的标准是简称是ES，比如常见的ES6（2016年发布），目前被绝大数浏览器支持。本文章就主要学习ES6和ES5相关。</p>
 <p><strong>运行与简单使用</strong></p>
 <p>如何开始交互式JavaScript会话？可以通过浏览器的解释器，也可以按照Node.js后，打开cmd输入node即可。当代码块更多时，把代码保存为js文件，可以引入Html中，然后通过浏览器打开（或者输入file:URL）；亦或者通过CMD命令 <code>node *.js</code>（注意cd文件目录）</p>
@@ -491,9 +492,161 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 
 
+<h3 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h3><p>在Node中可以通过global来引用全局对象，在windows中可以通过window属性来引用。通用的引用形式为<code>globalThis</code></p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>JavaScript中的原始值（undefined、null、bool、number、string）都是不可修改的。比如：（这很好理解，C语言中函数传入参数，也并不会修改参数的值，除非是指针类型的）；并且，它们有相等的概念</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> s<span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+s<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 实际上只返回"HELLO"，s并未改变！！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>对于对象（函数和数组也属于对象），它是可修改的，对象是按引用比较的，而非值，因为对象是引用类型。比如：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> o <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> p <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+o <span class="token operator">===</span> p<span class="token punctuation">;</span> <span class="token comment">// false!!</span>
+
+<span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+b<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 它也是1！，可以发现二者是相等的，而非两个对象，相当于C语言中指针的理解</span>
+a <span class="token operator">===</span> b<span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从上面代码可以看出，把对象（或数组）赋值给一个变量，其实是在赋值引用，并不会创建对象的新副本。要比较两个不同的对象或数组，必须比较它们的属性或元素。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> a<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    b<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> c <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 此函数能够直接复制数组</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> a<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"C的第"</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">"个值为："</span> <span class="token operator">+</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"B的第"</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">"个值为："</span> <span class="token operator">+</span> b<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><p>首先让我们先理解<strong>编译原理</strong></p>
+
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>Javascript对于所需要的类型很灵活，如果想要字符串，则会把提供的值转换为字符串，想要数值则会把给的值转化为数值（如果无法有意义的转化则转换为NaN)。比如</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>转换为字符串</th>
+<th>转换为数值</th>
+<th>转换为bool值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>undefined</td>
+<td>“undefined”</td>
+<td>NaN</td>
+<td>false</td>
+</tr>
+<tr>
+<td>null</td>
+<td>“null”</td>
+<td>0</td>
+<td>false</td>
+</tr>
+<tr>
+<td>true</td>
+<td>“true”</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>false</td>
+<td>“false”</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>“”(空字符串)</td>
+<td></td>
+<td>0</td>
+<td>false</td>
+</tr>
+<tr>
+<td>“1.2”（非空，数值）</td>
+<td></td>
+<td>1.2s</td>
+<td>true</td>
+</tr>
+<tr>
+<td>“one”（非空，非数值）</td>
+<td></td>
+<td>NaN</td>
+<td>true</td>
+</tr>
+<tr>
+<td>0</td>
+<td>“0”</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>-0</td>
+<td>“0”</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>1（有限，非零）</td>
+<td>“1”</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>Infinity</td>
+<td>“Infinity”</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>-Infinity</td>
+<td>“-Infinity”</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>NaN</td>
+<td>“NaN”</td>
+<td></td>
+<td><strong>false</strong></td>
+</tr>
+<tr>
+<td>[]（空数组）</td>
+<td>“”</td>
+<td>0</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<p>当然，这是Javascript带来的隐式转换，可能不太清晰（而且很容易别忽视），所以便有了<strong>显示转换</strong>。（这里的隐式转换和C语言的并不同，C语言的转换是按照ASCII码来的，JavaScript的相当于自动调用了转换函数）</p>
+<p>最简单的是采用 <code>Boolean()</code> <code>String()</code> <code>Number()</code> 函数，；<code>toString()</code> 方法通常结果与String一致（null与undefined不能用），它还能接收一个参数用于定义基数（即进制，默认10）。</p>
+<p>数字转换为字符串，还有其他三种方法，分别为 <code>toFixed()</code>、 <code>toExponential</code> 、 <code>toPrecision</code>，传入参数分别表示正常形式下的小数点位数；指数形式下的小数点位数；有效数字总数</p>
+<p>字符串转换为数字，用Number函数的话，只能10进制，且必须全为整数或浮点数字面量。由此有下面的函数 <code>parseInt</code> 、<code>parseFloat</code> ，它们会跳过开头所有的空格，成功读取到第一个数字后，会跳过后面的非数字（也就是说第一个没解析到数字则直接返回NaN）；另外第一个函数还能接收第二个参数用于指定转换进制。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> n <span class="token operator">=</span><span class="token number">17</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> out <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 这是函数</span>
+<span class="token keyword">let</span> binary <span class="token operator">=</span> <span class="token string">"0b"</span> <span class="token operator">+</span> n<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 这是方法</span>
+
+n <span class="token operator">=</span> <span class="token number">123456.789</span><span class="token punctuation">;</span>
+n<span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => "123456.79"</span>
+n<span class="token punctuation">.</span><span class="token function">toExponential</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => "1.2e+5"</span>
+n<span class="token punctuation">.</span><span class="token function">toPrecision</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => "123456.7890"</span>
+
+<span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">"3 blind mice"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => 3</span>
+<span class="token function">parseFloat</span><span class="token punctuation">(</span><span class="token string">" 3.14meters"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => 3.14</span>
+<span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">"-12.34"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => -12</span>
+<span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">"0xFF"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// =>255</span>
+<span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token number">.1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => NaN</span>
+<span class="token function">parseFloat</span><span class="token punctuation">(</span><span class="token number">.1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// => 0.1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+<h2 id="表达式与操作符"><a href="#表达式与操作符" class="headerlink" title="表达式与操作符"></a>表达式与操作符</h2><h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><p>首先让我们先理解<strong>编译原理</strong></p>
+<p>注：在ES6后，基本很少再使用var了</p>
 <p>&ensp;</p>
 <p>传统编译语言，对源代码会进行 词法分析、语法分析、代码生成三个步骤；分别是分解字符串、分析代码块的关系、转化为机器能理解的指令。</p>
 <p>在JavaScript中，编译和执行可以看作是一起的。一般编程语言，都是可以预先编译成exe可执行文件，然后运行；JS编译是发生在执行的前一瞬。例如</p>
@@ -911,22 +1064,7 @@ Object<span class="token punctuation">.</span><span class="token function">defin
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h2 id="DOM简介"><a href="#DOM简介" class="headerlink" title="DOM简介"></a>DOM简介</h2><p>什么是DOM？简单地说，DOM是一套对文档的内容进行抽象和概念化的方法。DOM是一种API（应用编程接口）。简单地说，API就是一组已经得到有关各方共同认可的基本约定。在现实世界中，相当于API的例子包括（但不限于）摩尔斯码、国际时区、化学元素周期表。以上这些都是不同学科领域中的标准，它们使得人们能够更方便地交流与合作。如果没有一个统一的标准，事情往往会演变成为一场灾难。别忘了，因混淆英制度量衡与公制度量衡至少导致过一次火星探测任务的失败。</p>
 
                 
             </div>
@@ -1490,7 +1628,7 @@ Object<span class="token punctuation">.</span><span class="token function">defin
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">48.7k</span>&nbsp;字
+                class="white-color">49.6k</span>&nbsp;字
             
             
             

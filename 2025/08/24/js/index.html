@@ -235,7 +235,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/25.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.webp')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -396,21 +396,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-09-02
+                    2025-09-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.1k
+                    6.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    24 分
+                    25 分
                 </div>
                 
 
@@ -439,6 +439,8 @@
 <p>3.10.3 解构赋值</p>
 <p>第4章</p>
 <p>167中的for&#x2F;await与异步迭代</p>
+<p>5.5.5 yield（以及之后的异常</p>
+<p>5.6 其他语句</p>
 <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>javaScript的标准是简称是ES，比如常见的ES6（2016年发布），目前被绝大数浏览器支持。本文章就主要学习ES6和ES5相关。</p>
 <p><strong>运行与简单使用</strong></p>
 <p>如何开始交互式JavaScript会话？可以通过浏览器的解释器，也可以按照Node.js后，打开cmd输入node即可。当代码块更多时，把代码保存为js文件，可以引入Html中，然后通过浏览器打开（或者输入file:URL）；亦或者通过CMD命令 <code>node *.js</code>（注意cd文件目录）</p>
@@ -455,7 +457,7 @@
 <li>注释采用的语法和C语言一致，为 <code>//</code> 、 <code>/* */</code>、HTML中的 <code>&lt;!--</code> 部分；前者和后者均只能用于单行，中者可以跨行。</li>
 <li>声明变量大体同C语言，可以在声明的时候同时赋初始值。还可以一次声明多种 <code>var mood = &quot;happy&quot;, age = 33;</code>；其不在乎变量具体的类型，所以可以随意更改变量的数据类型</li>
 </ol>
-<h2 id="类型、值和变量"><a href="#类型、值和变量" class="headerlink" title="类型、值和变量"></a>类型、值和变量</h2><h3 id="数值（number"><a href="#数值（number" class="headerlink" title="数值（number)"></a>数值（number)</h3><p>字面量是什么意思？就是指出现在程序中的值，比如在代码中，出现了一个数字，那么它就是数值字面量</p>
+<h2 id="第一章-类型、值和变量"><a href="#第一章-类型、值和变量" class="headerlink" title="第一章 类型、值和变量"></a>第一章 类型、值和变量</h2><h3 id="数值（number"><a href="#数值（number" class="headerlink" title="数值（number)"></a>数值（number)</h3><p>字面量是什么意思？就是指出现在程序中的值，比如在代码中，出现了一个数字，那么它就是数值字面量</p>
 <p>整数字面量，分三种进制，十六进制开头为0x，8进制为0b或者0o（不同于C语言的0x和0）；浮点字面量就是小数，用法和C语言一致，如 <code>3.14</code> <code>.3333</code> <code>6.02e-23</code></p>
 <p>还可以为数字添加下划线以分割为数字段，容易看清。涉及数值计算有Math对象属性函数（我们把这种调用称作”方法“）</p>
 <h3 id="文本（string）"><a href="#文本（string）" class="headerlink" title="文本（string）"></a>文本（string）</h3><p>文本就是字符串，JavaScript没有如同C语言一样定义单个字符。下面是字符串的换行操作</p>
@@ -648,7 +650,7 @@ n<span class="token punctuation">.</span><span class="token function">toPrecisio
 
 
 
-<h2 id="表达式与操作符（暂时跳过）"><a href="#表达式与操作符（暂时跳过）" class="headerlink" title="表达式与操作符（暂时跳过）"></a>表达式与操作符（暂时跳过）</h2><h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><h3 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a><strong>条件语句</strong></h3><ul>
+<h2 id="第二章-表达式与操作符（暂时跳过）"><a href="#第二章-表达式与操作符（暂时跳过）" class="headerlink" title="第二章 表达式与操作符（暂时跳过）"></a>第二章 表达式与操作符（暂时跳过）</h2><h2 id="第三章-语句"><a href="#第三章-语句" class="headerlink" title="第三章 语句"></a>第三章 语句</h2><h3 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a><strong>条件语句</strong></h3><ul>
 <li><strong>if</strong></li>
 </ul>
 <p>用法和C语言一模一样，注意，正如前面所说，JavaScript的严格等号是 <code>===</code></p>
@@ -753,8 +755,43 @@ n<span class="token punctuation">.</span><span class="token function">toPrecisio
 <ol start="4">
 <li><strong>for-in</strong></li>
 </ol>
+<p>这个方法使用于对象属性，但是因为会有继承的可枚举属性等问题，所以大部分程序员都基于 <code>Object.keys()</code>使用for-of循环。</p>
+<h3 id="跳转语句"><a href="#跳转语句" class="headerlink" title="跳转语句"></a>跳转语句</h3><p>这里引入了一个语句标签的概念，它一般用于循环语句和条件语句，相当于给这个语句起了一个名字，便于配套continue和break使用。</p>
+<p>break搭配语句标签，可以使得其跳转到语句末尾（原本是只能跳出单层循环的）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> success <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token literal-property property">computeSum</span><span class="token operator">:</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// martix是一个二维数组</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> matrix<span class="token punctuation">.</span>length<span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> row <span class="token operator">=</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>row<span class="token punctuation">)</span> <span class="token keyword">break</span> computeSum<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> row<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">let</span> cell <span class="token operator">=</span> row<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNaN</span><span class="token punctuation">(</span>cell<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">break</span> computeSum<span class="token punctuation">;</span>
+            sum <span class="token operator">+=</span> cell<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//break语句会跳转到这里，相当于直接跳过整个语句，而非C语言中的逐嵌套跳出</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>continue语句的形式和break一样。return也很简单，其不带内容时返回值为undefined。</p>
+<h2 id="第四章-对象"><a href="#第四章-对象" class="headerlink" title="第四章 对象"></a>第四章 对象</h2><h3 id="对象的创造"><a href="#对象的创造" class="headerlink" title="对象的创造"></a>对象的创造</h3><p>有对象字面量、new关键字和 <code>Object.create()</code>函数三种方法来创建；</p>
+<p><strong>对象字面量</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> empty <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> point <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">x</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">y</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> p2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">x</span><span class="token operator">:</span> point<span class="token punctuation">.</span>x<span class="token punctuation">,</span> <span class="token literal-property property">y</span><span class="token operator">:</span> point<span class="token punctuation">.</span>y <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> book <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"main title"</span><span class="token operator">:</span> <span class="token string">"java"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"sun-title"</span><span class="token operator">:</span> <span class="token string">"the guide"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
 <h2 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h2><p>首先让我们先理解<strong>编译原理</strong></p>
-<p>注：在ES6后，基本很少再使用var了</p>
+<p>注：在ES6后，基本不再使用var了</p>
 <p>&ensp;</p>
 <p>传统编译语言，对源代码会进行 词法分析、语法分析、代码生成三个步骤；分别是分解字符串、分析代码块的关系、转化为机器能理解的指令。</p>
 <p>在JavaScript中，编译和执行可以看作是一起的。一般编程语言，都是可以预先编译成exe可执行文件，然后运行；JS编译是发生在执行的前一瞬。例如</p>
@@ -1053,28 +1090,8 @@ my<span class="token punctuation">[</span>my<span class="token punctuation">]</s
 
 
 
-<h3 id="语言类型"><a href="#语言类型" class="headerlink" title="语言类型"></a>语言类型</h3><p>Javascript中有如下数据类型</p>
-<ol>
-<li>string</li>
-<li>number</li>
-<li>boolean</li>
-<li>null</li>
-<li>undefined</li>
-<li>object</li>
-<li>symbol</li>
-</ol>
-<p>内置对象</p>
-<ol>
-<li>String</li>
-<li>Number</li>
-<li>Boolean</li>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RedExp</li>
-<li>Error</li>
-</ol>
-<p>内置对象可以看作就是一种函数。</p>
+
+
 <h3 id="函数与对象"><a href="#函数与对象" class="headerlink" title="函数与对象"></a>函数与对象</h3><p>让我们直接给出下面的例子</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1436,7 +1453,7 @@ Object<span class="token punctuation">.</span><span class="token function">defin
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="前端练习">
+                        <img src="/medias/featureimages/9.webp" class="responsive-img" alt="前端练习">
                         
                         <span class="card-title">前端练习</span>
                     </div>
@@ -1497,7 +1514,7 @@ Object<span class="token punctuation">.</span><span class="token function">defin
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="前端学习 第2期 CSS">
+                        <img src="/medias/featureimages/12.webp" class="responsive-img" alt="前端学习 第2期 CSS">
                         
                         <span class="card-title">前端学习 第2期 CSS</span>
                     </div>
@@ -1740,7 +1757,7 @@ Object<span class="token punctuation">.</span><span class="token function">defin
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">50.3k</span>&nbsp;字
+                class="white-color">50.6k</span>&nbsp;字
             
             
             

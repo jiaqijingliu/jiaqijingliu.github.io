@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="C语言中的路径问题, 轻流社">
+    <meta name="keywords" content="轻流社的优化日志, 轻流社">
     <meta name="description" content="看破刹那，冷眼旁观">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C语言中的路径问题 | 轻流社</title>
+    <title>轻流社的优化日志 | 轻流社</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -235,12 +235,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.webp')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">C语言中的路径问题</h1>
+                    <h1 class="description center-align post-title">轻流社的优化日志</h1>
                 </div>
             </div>
         </div>
@@ -356,8 +356,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">C语言</span>
+                            <a href="/tags/%E6%97%A5%E5%BF%97/">
+                                <span class="chip bg-color">日志</span>
                             </a>
                         
                     </div>
@@ -368,8 +368,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                C语言学习
+                            <a href="/categories/%E4%BC%98%E5%8C%96%E6%97%A5%E5%BF%97/" class="post-category">
+                                优化日志
                             </a>
                         
                     </div>
@@ -381,21 +381,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-03-13
+                    2025-07-09
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-30
+                    2025-09-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    415
+                    380
                 </div>
                 
 
@@ -425,26 +425,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 摘要：简单介绍了路径问题<span id="more"></span>，当然适用于很多地方。</p>
-<p><strong>preface:参考链接： <a target="_blank" rel="noopener" href="https://blog.csdn.net/csdndg/article/details/89708048">关于文件路径中&#x2F; \ &#x2F;&#x2F; \的使用以及绝对相对路径的问题_路径哪里加转义字符-CSDN博客</a>  |</strong></p>
-<p>综下所述，文件路径中直接用正斜杠 <code>/</code>能兼容更多地方。反斜杠的特性是windows带来的。</p>
-<p>&emsp;<strong>路径分为两种：绝对路径、相对路径</strong></p>
-<p>绝对路径：就是E:\test\file\data。&#96;&#96;</p>
-<p>在C语言中，<code>\\</code>代表<code>\</code> 故有</p>
-<pre class="line-numbers language-none"><code class="language-none"> FILE *fp;
- fp &#x3D; fopen(&quot;C:\\Users\\Administrator.USER0160\\Desktop\\data.txt&quot;,&quot;r&quot;);  &#x2F;&#x2F; 路径名称要正确
- 
-FILE * fp;
-fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>相对路径<br>电脑硬盘E盘下，建文件夹“test”，”test”下建立子文件夹“file”，”file”下建子文件夹“data”, 电脑资源管理器显示目录 E:\test\file\data 当前路径 E:\test\file</p>
-<p>相对路径 ，用正斜杠 &#x2F;</p>
-<p>向上一级目录指向<br>，&#x2F; 表示当前路径，相当于E:\test\file<br>，， 表示当前路径的上一级路径，相当于E:\test<br>，，&#x2F;，，&#x2F; 表示当前路径上上一级路径，相当于E:</p>
-<p>向下一级目录指向<br>.&#x2F;data 表示当前路径下一级路径，相当于E:\test\file\data<br>.&#x2F;data&#x2F;xxx 表示当前路径的下下一级路径，相当于 E:\test\file\data\xxx</p>
-<p>，，&#x2F; 代表上一级目录</p>
-<p>，，&#x2F;，，&#x2F; 代表上两级目录</p>
-<p>&#x2F;，， 代表下级目录</p>
-<p>&#x2F;，，&#x2F;，，代表下两级目录<br>（其实后面两个有点抽象了，毕竟我怎么知道下两级目录是哪个文件夹的打开？？）</p>
+                <h1 id="优化日志（更新于20250926"><a href="#优化日志（更新于20250926" class="headerlink" title="优化日志（更新于20250926"></a>优化日志（更新于20250926</h1><h2 id="2025-29-26"><a href="#2025-29-26" class="headerlink" title="2025-29-26"></a>2025-29-26</h2><p>下架大部分和学习技术无关的文章</p>
+<h2 id="2025-09-05"><a href="#2025-09-05" class="headerlink" title="2025-09-05"></a>2025-09-05</h2><p>PS修改banner图片jpg为webp格式。</p>
+<h2 id="2025-08-26"><a href="#2025-08-26" class="headerlink" title="2025-08-26"></a>2025-08-26</h2><p>优化了首页横幅（banner）和卡片图片（featureimages）的大小，其实就是压缩到了1-2百kb，可能看起来有点糊但是无疑极大优化了加载速度</p>
+<p>bing成功收录网站，可以通过bing检索到本站的某些页面。（因为目前不知道如何优化SEO，毕竟博客的标题、描述是不可控的）</p>
+<h2 id="2025-07-09"><a href="#2025-07-09" class="headerlink" title="2025-07-09"></a>2025-07-09</h2><p>将主题由Next7.8.0更换为Matery。重新修改所有文章的内容等等。删除部分过时文章，待重新优化部分长篇文章。删除新增的vip音乐（以前加的音乐好多都成vip了），添加新音乐（全是星铁的）</p>
+<h2 id="2025-06-16"><a href="#2025-06-16" class="headerlink" title="2025-06-16"></a>2025-06-16</h2><p>添加规则，增强了网站安全性。删除部分过时无用文章。修改所有文章显示布局，使其布局显示更好。</p>
+<h2 id="2024-10-09"><a href="#2024-10-09" class="headerlink" title="2024-10-09"></a>2024-10-09</h2><p>删除部分文章，优化了部分文章的图片大小（文件大小）。</p>
+<h2 id="2024-08-28"><a href="#2024-08-28" class="headerlink" title="2024-08-28"></a>2024-08-28</h2><p>抽空把所有的文字加粗了一下，便于看的更清楚。</p>
+<h2 id="2024-08-16"><a href="#2024-08-16" class="headerlink" title="2024-08-16"></a>2024-08-16</h2><p>删除了部分错乱歌曲和大部分纯音乐。</p>
+<p>删除了半数以上的文章</p>
+<h2 id="2024-08-14"><a href="#2024-08-14" class="headerlink" title="2024-08-14"></a>2024-08-14</h2><p>将DNS解析从阿里云换成了Cloudflare，使得网站更加流畅，加载不那么卡顿。</p>
+<h2 id="2024-08-13"><a href="#2024-08-13" class="headerlink" title="2024-08-13"></a>2024-08-13</h2><p>删除了音乐插件中部分只能试听和错乱的歌曲</p>
 
                 
             </div>
@@ -471,7 +463,7 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zywifeliuying.top/2025/03/13/20250313/">https://zywifeliuying.top/2025/03/13/20250313/</a>
+                    <a href="https://zywifeliuying.top/2025/07/09/diary/">https://zywifeliuying.top/2025/07/09/diary/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -509,8 +501,8 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">C语言</span>
+                                <a href="/tags/%E6%97%A5%E5%BF%97/">
+                                    <span class="chip bg-color">日志</span>
                                 </a>
                             
                         </div>
@@ -696,74 +688,25 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/05/28/20250528/">
+                <a href="/2025/07/10/cstudy0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.webp" class="responsive-img" alt="高级搜索指令">
+                        <img src="/medias/featureimages/9.webp" class="responsive-img" alt="C语言学习 第1期">
                         
-                        <span class="card-title">高级搜索指令</span>
+                        <span class="card-title">C语言学习 第1期</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             摘要：高级搜索选项
+                            C语言简单知识
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-28
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-10
                         </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%9F%A5%E8%AF%86/" class="post-category">
-                                    知识
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%90%9C%E7%B4%A2/">
-                        <span class="chip bg-color">浏览器搜索</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/02/14/20250214/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.webp" class="responsive-img" alt="VS下的编码问题">
-                        
-                        <span class="card-title">VS下的编码问题</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                             摘要：本文主要介绍编码问题。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-14
-                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -783,8 +726,57 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
                         <span class="chip bg-color">C语言</span>
                     </a>
                     
-                    <a href="/tags/%E7%BC%96%E7%A0%81/">
-                        <span class="chip bg-color">编码</span>
+                    <a href="/tags/%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">知识</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/07/08/20250708/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.webp" class="responsive-img" alt="关于Matery主题的一些设置（持续更新">
+                        
+                        <span class="card-title">关于Matery主题的一些设置（持续更新</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Matery主题设置
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96/" class="post-category">
+                                    博客优化
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Matery/">
+                        <span class="chip bg-color">Matery</span>
                     </a>
                     
                 </div>

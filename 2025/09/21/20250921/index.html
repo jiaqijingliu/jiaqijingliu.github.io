@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="C语言中的路径问题, 轻流社">
+    <meta name="keywords" content="不为人知的——大学社团招新, 轻流社">
     <meta name="description" content="看破刹那，冷眼旁观">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C语言中的路径问题 | 轻流社</title>
+    <title>不为人知的——大学社团招新 | 轻流社</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -235,12 +235,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.webp')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">C语言中的路径问题</h1>
+                    <h1 class="description center-align post-title">不为人知的——大学社团招新</h1>
                 </div>
             </div>
         </div>
@@ -356,8 +356,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">C语言</span>
+                            <a href="/tags/%E5%A4%A7%E5%AD%A6/">
+                                <span class="chip bg-color">大学</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%90%9E%E7%AC%91/">
+                                <span class="chip bg-color">搞笑</span>
                             </a>
                         
                     </div>
@@ -368,8 +372,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                C语言学习
+                            <a href="/categories/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" class="post-category">
+                                胡言乱语
                             </a>
                         
                     </div>
@@ -381,28 +385,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-03-13
+                    2025-09-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-30
+                    2025-09-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    415
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -425,26 +429,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p> 摘要：简单介绍了路径问题<span id="more"></span>，当然适用于很多地方。</p>
-<p><strong>preface:参考链接： <a target="_blank" rel="noopener" href="https://blog.csdn.net/csdndg/article/details/89708048">关于文件路径中&#x2F; \ &#x2F;&#x2F; \的使用以及绝对相对路径的问题_路径哪里加转义字符-CSDN博客</a>  |</strong></p>
-<p>综下所述，文件路径中直接用正斜杠 <code>/</code>能兼容更多地方。反斜杠的特性是windows带来的。</p>
-<p>&emsp;<strong>路径分为两种：绝对路径、相对路径</strong></p>
-<p>绝对路径：就是E:\test\file\data。&#96;&#96;</p>
-<p>在C语言中，<code>\\</code>代表<code>\</code> 故有</p>
-<pre class="line-numbers language-none"><code class="language-none"> FILE *fp;
- fp &#x3D; fopen(&quot;C:\\Users\\Administrator.USER0160\\Desktop\\data.txt&quot;,&quot;r&quot;);  &#x2F;&#x2F; 路径名称要正确
- 
-FILE * fp;
-fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>相对路径<br>电脑硬盘E盘下，建文件夹“test”，”test”下建立子文件夹“file”，”file”下建子文件夹“data”, 电脑资源管理器显示目录 E:\test\file\data 当前路径 E:\test\file</p>
-<p>相对路径 ，用正斜杠 &#x2F;</p>
-<p>向上一级目录指向<br>，&#x2F; 表示当前路径，相当于E:\test\file<br>，， 表示当前路径的上一级路径，相当于E:\test<br>，，&#x2F;，，&#x2F; 表示当前路径上上一级路径，相当于E:</p>
-<p>向下一级目录指向<br>.&#x2F;data 表示当前路径下一级路径，相当于E:\test\file\data<br>.&#x2F;data&#x2F;xxx 表示当前路径的下下一级路径，相当于 E:\test\file\data\xxx</p>
-<p>，，&#x2F; 代表上一级目录</p>
-<p>，，&#x2F;，，&#x2F; 代表上两级目录</p>
-<p>&#x2F;，， 代表下级目录</p>
-<p>&#x2F;，，&#x2F;，，代表下两级目录<br>（其实后面两个有点抽象了，毕竟我怎么知道下两级目录是哪个文件夹的打开？？）</p>
+                <p> 摘要： 揭秘了一些关于大学中各种招新的背后<span id="more"></span>。</p>
+<p><strong>preface:  大部分人刚步入大学，还是懵懂的囚徒。往往在军训期间，就会蹦出一堆社团招新，比如院系中的新闻中心、学生会等等，又或者一些竞赛团队，亦或是一些名存实亡的各种乱七八糟的社团。那么，你有没有想过，这些初见很高大上的社团的背后，隐藏着什么呢？</strong></p>
+<h2 id="不为人知的——大学社团招新"><a href="#不为人知的——大学社团招新" class="headerlink" title="不为人知的——大学社团招新"></a>不为人知的——大学社团招新</h2><p>在正式论述前，请容许我先介绍本文适用范围。本文的论述均佐证来源于室友的闲聊，也许只是听错导致的误会，仅仅适用于本酒八五中特定年份特定学院中的某些社团，想必其他大学肯定不是如下面所讲的。</p>
+<p>下面，我们来分点介绍一些道听途说。</p>
+<h3 id="吹的天花乱坠的背后"><a href="#吹的天花乱坠的背后" class="headerlink" title="吹的天花乱坠的背后"></a>吹的天花乱坠的背后</h3><p>大一军训期间，那时我还怀揣着痴心妄想，一堆社团招新讲的是天花乱坠，讲了各种各种进社团的好处——目的很明显，为了<strong>骗</strong>到足够多的人进社团。当然，基本上大部分人都被骗到了。结果才发现，还要面试！于是报了4、5个社团的我，在填写申请表时以自以为足够真诚的字样填满了。面试时，面对一大堆各种技能、亦或者是经验的要求，笑了。最终，我一个社团也没有被接纳。这里的社团是院系、校级的学生组织（就是有工时的那种）。当然，还有百团大战，现在想来更是可笑，所谓百团大战，就是扫码加个群，然后如你所预料的那样，总是那几个人谈东说西，对于有抱负的新生，也是无视你。总而言之就是个笑话。我当初也进了两个群，结果到最后也不知道到底是什么东西。当然，有技术含量的还有一些科创团队，但是但凡看过的都知道，他们的要求简直不是人能想出来的，对于基本什么都不知道的新生，他们的招新目标显然是有资源基础的，但是在招新时仍然吹的天花乱坠，害人不浅。</p>
+<h3 id="为什么你一个社团也进不了？"><a href="#为什么你一个社团也进不了？" class="headerlink" title="为什么你一个社团也进不了？"></a>为什么你一个社团也进不了？</h3><p>你可能同我一样，报社团怀揣着的不是功利心，而是真诚，结果大败而归。那么下面我要探讨一些社团招新的规则。</p>
+<p>女生优先原则。在我这个班级男女比能来到恐怖的10倍以上的学校，女生优先很容易理解。负责招新工作的人一般是男生。而其中不乏有人压抑幻想了。于是，在一个漂亮的学妹和一个普通的学弟中选择，很显然会选前者。不光是社团，就连科创团队的招新也是如此。比如，我的一个室友就是负责一个机器人大赛社团的招新，很显然，能进这个团队就意味着必保研定能加分，他闲聊时就明显表示了自己对女生的偏袒和对男生的压力——因为他希望招进学妹（当然，前提是有颜值）。我不知道屏幕前的你是怎样想的，但这无疑是确凿的规则。</p>
+<p>熟人优先原则。很明显的一种原则，只要你和负责招新的人熟，比如校友，或者他接受了你的送礼。那么你就基本保送了，当然面试流程大抵还是要走一下的。很容易理解，因为很多社团其实根本没有很大技术上的含金量，是个人就能做（譬如大学里面的班干部），无非就搞个面试，来随便做个筛选。如果你傻乎乎的期盼其中有任何哪怕一丁点的公正公平性的话，那我就要狠狠地嘲笑了。所以，仅从目的性角度出发，想要被高概率录取，就不能真诚。</p>
+<p>“经历优先原则”。面试的时候，一般都有个自我介绍，那么很显然，那些社团的人是更偏爱发言流利、有相关技能或者经历之类的人。于是结结巴巴的你，虽然极力表示自己的负责或者其他品质，也难以被接受。是不是很讽刺？这究竟是进社团，还是工作面试？当然，上面的这些都能编，也就是说你也只要骗过面试官，给他留下好印象的。</p>
+<h3 id="社团内部的等级"><a href="#社团内部的等级" class="headerlink" title="社团内部的等级"></a>社团内部的等级</h3><p>还记得在社团招新的时候，就有人澄清说什么社团内没有官僚主义、没有小团体。然而，现实的运作看起来却并非如此。部长其实正如同大学里的班长，掌握着很多不为认知的东西，与他搞好关系（目的性角度），很大概率能得到下一任部长的位置（倘若你指望努力干活能升到部长，那我劝你死心吧）。显然，在学生组织中当点小官是有好处的。比如志愿时——我评价为可笑的东西，可以随随便便给自己录入上百个，只要你是负责这方面的，因为部长大概率会和这方面的职工打交道。再比如负责面试、给别人派活等等。当然，如果你是凭着自己的运气进入社团的，那么你大概率干一会就会选择跑路了，因为你只是作为一个底层的干活的人。</p>
+<h3 id="尾言"><a href="#尾言" class="headerlink" title="尾言"></a>尾言</h3><p>总而言之，在这个场景中，我所接触感受到的大学社团就是如此。这也很容易理解，毕竟绝大多数人都是奔着利益来的，很多大二就会跑路，于是乎只能想尽方法来骗新生了。</p>
 
                 
             </div>
@@ -471,7 +466,7 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zywifeliuying.top/2025/03/13/20250313/">https://zywifeliuying.top/2025/03/13/20250313/</a>
+                    <a href="https://zywifeliuying.top/2025/09/21/20250921/">https://zywifeliuying.top/2025/09/21/20250921/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -509,8 +504,12 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">C语言</span>
+                                <a href="/tags/%E5%A4%A7%E5%AD%A6/">
+                                    <span class="chip bg-color">大学</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%90%9E%E7%AC%91/">
+                                    <span class="chip bg-color">搞笑</span>
                                 </a>
                             
                         </div>
@@ -692,29 +691,84 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/05/28/20250528/">
+                <a href="/2025/09/21/20250921/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.webp" class="responsive-img" alt="高级搜索指令">
+                        <img src="/medias/featureimages/10.webp" class="responsive-img" alt="不为人知的——大学社团招新">
                         
-                        <span class="card-title">高级搜索指令</span>
+                        <span class="card-title">不为人知的——大学社团招新</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             摘要：高级搜索选项
+                             摘要： 揭秘了一些关于大学中各种招新的背后
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-28
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-09-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" class="post-category">
+                                    胡言乱语
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%A7%E5%AD%A6/">
+                        <span class="chip bg-color">大学</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%90%9E%E7%AC%91/">
+                        <span class="chip bg-color">搞笑</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/08/27/htmlwork/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.webp" class="responsive-img" alt="前端练习">
+                        
+                        <span class="card-title">前端练习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            关于网页布局的每日练习
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-08-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -730,61 +784,20 @@ fp &#x3D; fopen(&quot;E:&#x2F;test&#x2F;file&#x2F;data&#x2F;d.txt&quot;,&quot;r&
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%90%9C%E7%B4%A2/">
-                        <span class="chip bg-color">浏览器搜索</span>
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/02/14/20250214/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.webp" class="responsive-img" alt="VS下的编码问题">
-                        
-                        <span class="card-title">VS下的编码问题</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                             摘要：本文主要介绍编码问题。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-14
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    C语言学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">C语言</span>
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
                     </a>
                     
-                    <a href="/tags/%E7%BC%96%E7%A0%81/">
-                        <span class="chip bg-color">编码</span>
+                    <a href="/tags/HTML/">
+                        <span class="chip bg-color">HTML</span>
+                    </a>
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>

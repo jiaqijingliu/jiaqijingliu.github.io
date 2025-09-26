@@ -396,21 +396,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-29
+                    2025-09-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.4k
+                    8.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    34 分
+                    36 分
                 </div>
                 
 
@@ -1209,7 +1209,7 @@ a:hover&#123;
 <li>align-self</li>
 </ul>
 <p>对单个项目生效的align-items，属性同它。</p>
-<h3 id="grid布局（待补充"><a href="#grid布局（待补充" class="headerlink" title="grid布局（待补充"></a>grid布局（待补充</h3><h2 id="CSS动画详解"><a href="#CSS动画详解" class="headerlink" title="CSS动画详解"></a>CSS动画详解</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6970883520168198158">CSS3-animation动画详解animation动画详解：css中实现动画有两种方式：<code>transition</code>过渡 - 掘金</a>|<a target="_blank" rel="noopener" href="https://juejin.cn/post/6970885478967050254#heading-0">CSS3-transition过渡动画详解基本了解  css中实现动画有两种方式：transition过渡动画、 an - 掘金</a></p>
+<h3 id="grid布局（待补充"><a href="#grid布局（待补充" class="headerlink" title="grid布局（待补充"></a>grid布局（待补充</h3><h2 id="CSS动画详解"><a href="#CSS动画详解" class="headerlink" title="CSS动画详解"></a>CSS动画详解</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6970883520168198158">CSS3-animation动画详解 - 掘金</a> |<a target="_blank" rel="noopener" href="https://juejin.cn/post/6970885478967050254#heading-0">CSS3-transition过渡动画详解基本了解 - 掘金</a> |<a target="_blank" rel="noopener" href="https://juejin.cn/post/6999557378169372680?searchId=20250906104408F241BC3A4FA4828C3620">3分钟看懂变换【transform】- 掘金</a></p>
 <p>css中实现动画有两种方式：<code>transition</code>过渡动画、 <code>animation</code>自定义动画。</p>
 <h3 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h3><p>其用法为首先通过 <code>@keyframes</code>创建关键帧动画（用过剪辑软件就很容易理解，帧与帧之间应该是平滑形式，如果没定义首尾帧，会用原样式代替）；然后使用 <code>animation</code> 配置。</p>
 <p><code>animation</code> 同大多数一样，是简写属性；（前两个属性是必需的！为了记忆方便，前两个属性位置固定，后面的可以随意排列）</p>
@@ -1258,13 +1258,56 @@ a:hover&#123;
 
 
 
+<h3 id="transition动画"><a href="#transition动画" class="headerlink" title="transition动画"></a>transition动画</h3><p>这个相较于animation比较简单，直接给出实例吧</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+    <span class="token property">transition-property</span><span class="token punctuation">:</span> all<span class="token punctuation">;</span>  <span class="token comment">/* 指定使用过度效果的属性; */</span>
+    <span class="token property">transition-duration</span><span class="token punctuation">:</span> 0.8s<span class="token punctuation">;</span> <span class="token comment">/* 持续时间; */</span>
+    <span class="token property">transition-timing-function</span><span class="token punctuation">:</span> <span class="token function">cubic-bezier</span><span class="token punctuation">(</span>0.49<span class="token punctuation">,</span> 1.59<span class="token punctuation">,</span> 0.46<span class="token punctuation">,</span> -0.21<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* transition-delay: 1s; */</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.box:hover</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>1turn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> skyblue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>当然，一般我们都会使用transition综合属性（更方便，而且能够进行叠加）。比如</p>
+<p>定义顺序为： 对象、持续时间、速度曲线、延迟时间。（缺省为默认值）</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">transition</span><span class="token punctuation">:</span> width 1s ease<span class="token punctuation">,</span> height 1.5s linear 1s<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
 
 
 
-<h3 id="transition动画"><a href="#transition动画" class="headerlink" title="transition动画"></a>transition动画</h3><h3 id="transform变化详解"><a href="#transform变化详解" class="headerlink" title="transform变化详解"></a>transform变化详解</h3><p>其一般用于两种动画中。</p>
+
+<h3 id="transform变化详解"><a href="#transform变化详解" class="headerlink" title="transform变化详解"></a>transform变化详解</h3><p>下面的图片是transform的坐标系观念。</p>
+<p><img src="/2025/08/23/css/image-20250906152219003.png" alt="transform的建系"></p>
+<p>它有多种属性，值得注意的是，它类似简写属性，一个选择器中只能定义一个，否则总会被最后一个覆盖。</p>
+<p><strong>旋转属性</strong></p>
+<p>旋转是以原矩形的中心点进行建系，然后进行旋转的，而且没有记忆性（就是用动画帧时会完全重新开始）。</p>
+<p><code>rotate(n deg)</code> 以Z轴为旋转中心，正数为顺时针旋转，其和 <code>rotateZ(n deg)</code>一样</p>
+<p><code>rotateX(n deg)</code>，以X轴为旋转中心</p>
+<p><code>rotateY(n deg)</code>，以Y轴为旋转中心</p>
+<p><code>rotate3d(x,y,z,n deg)</code>，3d旋转，其实就是根据向量确定旋转轴。（反正有点诡异</p>
+<p><strong>移动属性</strong></p>
+<p><code>translate(x,y)</code>移动。很容易理解，这里不多解释。可以是具体值，或者百分数（这是相对于容器自身定义的）。分开来就是<code>translateX(x)</code>、<code>translateY(y)</code></p>
+<p>所以可以利用该属性，实现元素居中。原因在于相对定位它是距离形式的定位，会把左上角定位到中心点</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+<span class="token property">top</span><span class="token punctuation">:</span>50%<span class="token punctuation">;</span>
+<span class="token property">left</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translate</span><span class="token punctuation">(</span>-50%<span class="token punctuation">,</span>-50%<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>缩放属性</strong></p>
+<p>其在缩放过程中，中心点保持不变；缩放基数为1，最终大小就是乘以这个系数。（比如0.5就是一半）。比较简单。</p>
+<p><code>scale(n)</code>、 <code>scaleX(n)</code>、<code>scaleY(n)</code>；其中第一个可以写一个参数，或者同时两个参数</p>
+<p><strong>其他</strong></p>
+<p>还有一些比较抽象的，这里就不举例了（感觉太麻烦，目前用不上</p>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="固定宽度与流体布局"><a href="#固定宽度与流体布局" class="headerlink" title="固定宽度与流体布局"></a>固定宽度与流体布局</h3><p>下面是固定宽度布局</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>zh-CN<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -2002,7 +2045,7 @@ a:hover&#123;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">50.6k</span>&nbsp;字
+                class="white-color">39.5k</span>&nbsp;字
             
             
             

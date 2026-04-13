@@ -1,42 +1,78 @@
-body {
-  display: grid;
-  grid-template: "nav nav nav" 10vh ". header ." 10vh ". content ." 1fr ". footer ." 10vh/15vw 1fr 15vw;
-  gap: 2em;
-  grid-auto-flow: row;
-  justify-items: center;
-  align-items: center;
+@media (min-width: 768px) {
+  body {
+    display: grid;
+    grid-template: "nav nav nav" 10vh ". header ." 10vh ". content ." 1fr ". footer ." 10vh/15vw 1fr 15vw;
+    gap: 2em;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: center;
+  }
+  body nav {
+    grid-area: nav;
+  }
+  body header {
+    grid-area: header;
+  }
+  body main {
+    grid-area: content;
+  }
+  body footer {
+    grid-area: footer;
+  }
+  #static-item li {
+    padding: 0.1em;
+    background-color: wheat;
+    list-style-type: none;
+  }
+  #static-item a {
+    color: black;
+  }
+  #static-item a:link {
+    text-decoration: none;
+  }
+  #static-item a:hover {
+    color: red;
+  }
+  #static-item figure figcaption {
+    margin-bottom: 1em;
+  }
+  #static-item figure img {
+    width: 50%;
+    height: auto;
+  }
 }
-body nav {
-  grid-area: nav;
-}
-body header {
-  grid-area: header;
-}
-body main {
-  grid-area: content;
-}
-body footer {
-  grid-area: footer;
-}
-
-#static-item li {
-  padding: 0.1em;
-  background-color: wheat;
-  list-style-type: none;
-}
-#static-item a {
-  color: black;
-}
-#static-item a:link {
-  text-decoration: none;
-}
-#static-item a:hover {
-  color: red;
-}
-#static-item figure figcaption {
-  margin-bottom: 1em;
-}
-#static-item figure img {
-  width: 50%;
-  height: auto;
+@media (max-width: 767px) {
+  body {
+    font-size: 0.8em;
+    display: grid;
+    grid-template-columns: 80vw;
+    grid-template-rows: repeat(5vh, 1fr, 5vh);
+    gap: 2em 0;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+  #static-item ol {
+    padding: 0;
+  }
+  #static-item li {
+    padding: 0.1em;
+    background-color: wheat;
+    list-style-type: none;
+  }
+  #static-item a {
+    color: black;
+  }
+  #static-item a:hover {
+    color: red;
+  }
+  #static-item figure figcaption {
+    margin-bottom: 1em;
+  }
+  #static-item figure img {
+    width: 80%;
+    height: auto;
+  }
 }/*# sourceMappingURL=style.css.map */

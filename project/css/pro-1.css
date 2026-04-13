@@ -122,4 +122,41 @@ header {
 }
 .main--item3 {
   grid-area: 3/1/span 3/span 1;
+}
+
+@media (max-width: 767px) {
+  header {
+    gap: 0;
+  }
+  .header__home {
+    height: 40%;
+  }
+  .header__search {
+    width: 80%;
+  }
+  .header__avatar {
+    height: 40%;
+  }
+  .footer--ol {
+    width: 80%;
+  }
+  .main {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1em;
+  }
+  .main--item0 {
+    grid-area: auto;
+    grid-area: 1/1/span 2/span 4;
+  }
+  .main--item1 {
+    grid-area: auto;
+    grid-area: 3/1/span 2/span 2;
+  }
+  .main--item2 {
+    grid-area: auto;
+  }
+  .main--item3 {
+    grid-area: auto;
+  }
 }/*# sourceMappingURL=pro-1.css.map */

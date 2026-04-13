@@ -46,13 +46,26 @@
     font-size: 0.8em;
     display: grid;
     grid-template-columns: 80vw;
-    grid-template-rows: repeat(5vh, 1fr, 5vh);
+    grid-template-rows: 5vh 15vh 1fr 5vh;
     gap: 2em 0;
     grid-auto-flow: row;
     justify-items: center;
     align-items: center;
     justify-content: center;
     align-content: center;
+    grid-template-areas: "nav" "header" "content" "footer";
+  }
+  body nav {
+    grid-area: nav;
+  }
+  body header {
+    grid-area: header;
+  }
+  body main {
+    grid-area: content;
+  }
+  body footer {
+    grid-area: footer;
   }
   #static-item ol {
     padding: 0;
@@ -72,7 +85,7 @@
     margin-bottom: 1em;
   }
   #static-item figure img {
-    width: 80%;
+    width: 50%;
     height: auto;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,58 @@
+body {
+  //gird 布局
+  display: grid;
+  grid-template:
+    "nav nav nav" 10vh
+    ". header ." 10vh
+    ". content ." 1fr
+    ". footer ." 10vh
+    / 15vw 1fr 15vw;
+  gap: 2em;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: center;
+  // justify-content:
+  // align-content:
+
+  //分配
+  nav {
+    grid-area: nav;
+  }
+  header {
+    grid-area: header;
+  }
+  main {
+    grid-area: content;
+  }
+  footer {
+    grid-area: footer;
+  }
+}
+
+#static-item {
+  li {
+    padding: 0.1em;
+    background-color: wheat;
+    list-style-type: none;
+  }
+  a {
+   
+    color: black;
+    &:link {
+      text-decoration: none;
+    }
+    &:hover {
+      color: red;
+    }
+  }
+
+  figure {
+    figcaption {
+      margin-bottom: 1em;
+    }
+    img {
+      width: 50%;
+      height: auto;
+    }
+  }
+}

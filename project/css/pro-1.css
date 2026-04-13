@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: white url("../pic/background.jpg") no-repeat fixed 0 0/cover;
+}
+
+header {
+  padding: 1em;
+  height: 20vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20vw;
+}
+
+.header__home {
+  align-self: flex-start;
+  background-color: rgba(0, 0, 0, 0.2509803922);
+  border-radius: 25%;
+  padding: 0.5em;
+  height: 30%;
+}
+.header__home img {
+  height: 100%;
+}
+.header__search {
+  align-self: flex-end;
+  width: 35%;
+  border: thin solid black;
+  border-radius: 2em;
+  background-color: rgba(0, 0, 0, 0.2509803922);
+  height: 40%;
+  padding-left: 1em;
+  padding-right: 1em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
+.header__search img {
+  height: 1.5em;
+}
+.header__search #bing-search {
+  color: white;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  caret-color: white;
+  font-size: large;
+}
+.header__avatar {
+  align-self: flex-start;
+  background-color: rgba(0, 0, 0, 0.2509803922);
+  height: 60%;
+  width: auto;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  text-align: center;
+}
+.header__avatar img {
+  height: 90%;
+}
+
+.footer {
+  padding: 3em 2em 1em;
+  height: 20vh;
+}
+.footer--ol {
+  padding: 0;
+  margin: 0 auto;
+  height: 80%;
+  width: 30%;
+  background-color: rgba(0, 0, 0, 0.2509803922);
+  border-radius: 1em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0em;
+}
+.footer--ol li {
+  height: 50%;
+  display: inline;
+}
+.footer--ol img {
+  height: 100%;
+}
+
+.main {
+  margin: 0 auto;
+  padding: 1em;
+  width: 80vw;
+  height: 60vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 1em 1.5em;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: center;
+}
+.main [class^=main--item] {
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2509803922);
+  border-radius: 0.5em;
+}
+.main--item0 {
+  grid-area: 1/1/span 2/span 4;
+}
+.main--item1 {
+  grid-area: 1/5/span 2/span 2;
+}
+.main--item2 {
+  grid-area: 1/9/span 2/span 4;
+}
+.main--item3 {
+  grid-area: 3/1/span 3/span 1;
+}/*# sourceMappingURL=pro-1.css.map */

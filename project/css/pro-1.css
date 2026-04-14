@@ -2,13 +2,19 @@
   box-sizing: border-box;
 }
 
+#back-img {
+  width: 100%;
+  height: 100%;
+  background: white url("../pic/background.webp") no-repeat scroll center center/cover;
+}
+
 body {
-  background: white url("../pic/background.webp") no-repeat fixed 0 0/cover;
+  min-height: 100svh;
 }
 
 header {
   padding: 1em;
-  height: 20vh;
+  height: 20svh;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -68,7 +74,7 @@ header {
 
 .footer {
   padding: 3em 2em 1em;
-  height: 20vh;
+  height: 20svh;
 }
 .footer--ol {
   padding: 0;
@@ -95,7 +101,7 @@ header {
   margin: 0 auto;
   padding: 1em;
   width: 80vw;
-  height: 60vh;
+  height: 60svh;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(6, 1fr);

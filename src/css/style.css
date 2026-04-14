@@ -1,5 +1,6 @@
 @media (min-width: 768px) {
   body {
+    background: white url("../../project/pic/background.webp") no-repeat fixed center center/cover;
     display: grid;
     grid-template: "nav nav nav" 10vh ". header ." 10vh ". content ." 1fr "footer1 footer1 footer1" 10vh/15vw 1fr 15vw;
     gap: 2em;
@@ -48,57 +49,5 @@
     justify-self: stretch;
     align-self: stretch;
     background-color: rgba(0, 0, 0, 0.0862745098);
-  }
-}
-@media (max-width: 767px) {
-  body {
-    font-size: 0.8em;
-    display: grid;
-    grid-template-columns: 80vw;
-    grid-template-rows: 5lvh 15lvh 1fr 5lvh;
-    grid-auto-flow: row;
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    grid-template-areas: "nav" "header" "content" "footer1";
-  }
-  body nav {
-    grid-area: nav;
-  }
-  body header {
-    grid-area: header;
-  }
-  body main {
-    grid-area: content;
-  }
-  body footer {
-    grid-area: footer1;
-  }
-  #static-item ol {
-    padding: 0;
-  }
-  #static-item li {
-    padding: 0.1em;
-    background-color: wheat;
-    list-style-type: none;
-  }
-  #static-item a {
-    color: black;
-  }
-  #static-item a:hover {
-    color: red;
-  }
-  #static-item figure figcaption {
-    margin-bottom: 1em;
-  }
-  #static-item figure img {
-    width: 100%;
-    height: auto;
-  }
-  footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }/*# sourceMappingURL=style.css.map */

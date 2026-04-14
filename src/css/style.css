@@ -55,7 +55,7 @@
     font-size: 0.8em;
     display: grid;
     grid-template-columns: 80vw;
-    grid-template-rows: 5svh 15svh 1fr 5svh;
+    grid-template-rows: 5lvh 15lvh 1fr 5lvh;
     grid-auto-flow: row;
     justify-items: center;
     align-items: center;

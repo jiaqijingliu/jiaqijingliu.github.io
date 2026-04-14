@@ -6,7 +6,7 @@
       "nav nav nav" 10vh
       ". header ." 10vh
       ". content ." 1fr
-      ". footer ." 10vh
+      "footer1 footer1 footer1" 10vh
       / 15vw 1fr 15vw;
     gap: 2em;
     grid-auto-flow: row;
@@ -26,7 +26,7 @@
       grid-area: content;
     }
     footer {
-      grid-area: footer;
+      grid-area: footer1;
     }
   }
 
@@ -56,6 +56,18 @@
       }
     }
   }
+  footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  margin-top: 5vh;
+  // height: 10vh;
+  justify-self: stretch;
+  align-self: stretch;
+  // grid-area:
+  background-color: #00000016;
+}
 }
 
 @media (max-width: 767px) {
@@ -75,7 +87,7 @@
       "nav"
       "header"
       "content"
-      "footer";
+      "footer1";
     nav {
       grid-area: nav;
     }
@@ -86,7 +98,7 @@
       grid-area: content;
     }
     footer {
-      grid-area: footer;
+      grid-area: footer1;
     }
   }
   #static-item {
@@ -113,9 +125,24 @@
         margin-bottom: 1em;
       }
       img {
-        width: 50%;
+        width: 100%;
         height: auto;
       }
     }
   }
+
+  footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  // margin-top: 5vh;
+  // height: 10vh;
+  justify-self: stretch;
+  align-self: end;
+  // grid-area:
+  background-color: #00000016;
 }
+}
+
+

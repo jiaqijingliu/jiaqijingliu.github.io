@@ -1,7 +1,7 @@
 @media (min-width: 768px) {
   body {
     display: grid;
-    grid-template: "nav nav nav" 10vh ". header ." 10vh ". content ." 1fr ". footer ." 10vh/15vw 1fr 15vw;
+    grid-template: "nav nav nav" 10vh ". header ." 10vh ". content ." 1fr "footer1 footer1 footer1" 10vh/15vw 1fr 15vw;
     gap: 2em;
     grid-auto-flow: row;
     justify-items: center;
@@ -17,7 +17,7 @@
     grid-area: content;
   }
   body footer {
-    grid-area: footer;
+    grid-area: footer1;
   }
   #static-item li {
     padding: 0.1em;
@@ -40,6 +40,15 @@
     width: 50%;
     height: auto;
   }
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+    justify-self: stretch;
+    align-self: stretch;
+    background-color: rgba(0, 0, 0, 0.0862745098);
+  }
 }
 @media (max-width: 767px) {
   body {
@@ -53,7 +62,7 @@
     align-items: center;
     justify-content: center;
     align-content: center;
-    grid-template-areas: "nav" "header" "content" "footer";
+    grid-template-areas: "nav" "header" "content" "footer1";
   }
   body nav {
     grid-area: nav;
@@ -65,7 +74,7 @@
     grid-area: content;
   }
   body footer {
-    grid-area: footer;
+    grid-area: footer1;
   }
   #static-item ol {
     padding: 0;
@@ -85,7 +94,15 @@
     margin-bottom: 1em;
   }
   #static-item figure img {
-    width: 50%;
+    width: 100%;
     height: auto;
+  }
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: stretch;
+    align-self: end;
+    background-color: rgba(0, 0, 0, 0.0862745098);
   }
 }/*# sourceMappingURL=style.css.map */

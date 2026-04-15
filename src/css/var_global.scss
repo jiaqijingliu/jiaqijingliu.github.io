@@ -1,0 +1,19 @@
+//主题颜色配置
+$theme-color: rgb(46, 123, 224);
+// $theme-color--font: black;
+
+$light-on: false; // 白天模式
+$theme-color--back: NULL;
+$theme-color--font: NULL; //注意，需要预定义！
+@if $light-on {
+  $theme-color--back: black;
+  $theme-color--font: white;
+} @else {
+  $theme-color--back: white;
+  $theme-color--font: black;
+}
+
+@mixin box-shadow--mixin($hoffset:0,$voffset:0.1rem,$blur:0.5rem,$spread:0) { //盒子阴影预设
+
+  box-shadow: $hoffset $voffset $blur $spread rgba(128, 128, 128, 0.418);
+}

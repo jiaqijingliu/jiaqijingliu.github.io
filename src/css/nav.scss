@@ -1,0 +1,77 @@
+@use "config.scss" as c;
+@use "sass:color";
+
+nav {
+  //导航栏+
+  background-color: c.$theme-color--back;
+  color: c.$theme-color--font;
+  //   position: sticky;
+  //   top: 0;
+  //   left: 0;
+  ol {
+    margin: 0 auto;
+    padding: 0.5rem 3rem;
+    list-style-type: none;
+    @include c.box-shadow--mixin;
+    // flex 布局
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    // gap: 3rem;
+    li {
+      display: inline-block;
+      span {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        // @include c.box-shadow--mixin;
+        box-shadow: 0 0.15rem 0.6rem -0.5rem rgba(128, 128, 128, 0.592);
+      }
+      &:hover span {
+        //添加一些动态效果，嵌套实现，解决抖动问题
+        animation: UpAndDown 0.15s linear 0.05s 1 forwards;
+      }
+
+      &:first-child {
+        //特殊化网站的logo
+        flex: auto;
+        color: c.$theme-color;
+        font: normal normal bold 1.5rem sans-serif;
+      }
+      &:first-child:hover {
+        flex: auto;
+        background-color: transparent;
+        transform: none;
+        animation: none;
+      }
+      a {
+        color: c.$theme-color--font;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@keyframes UpAndDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.7rem);
+    background-color: color.mix(
+      c.$theme-color--font,
+      c.$theme-color--back,
+      10%
+    );
+  }
+  100% {
+    transform: translateY(0);
+    background-color: color.mix(
+      c.$theme-color--font,
+      c.$theme-color--back,
+      20%
+    );
+  }
+}

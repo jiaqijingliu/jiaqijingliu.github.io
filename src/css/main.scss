@@ -1,0 +1,72 @@
+@use "config.scss" as c;
+
+main {
+  max-width: 70vw;
+  margin: 4rem auto;
+
+  #static-item {
+    text-align: center;
+    // position: relative; //给a标签定位用。
+    .under-line {
+      //下划线装饰
+      height: 0;
+      width: 3rem;
+      margin: -0.5rem auto 0;
+      border: 0.1rem solid c.$theme-color;
+      border-radius: 1rem;
+    }
+  }
+  .static-item--container {
+    //盒子主体
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    // grid-template-rows:
+    // grid-template-area:
+    gap: 2rem;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: center;
+    // justify-content: center;
+    // align-content: center;
+    position: relative;
+  }
+
+  .static-item--box {
+    &:hover {
+      transform: translateY(-0.3rem);
+      transition: transform 0.1s ease-in;
+    }
+    // max-width: 90%;
+    // height: 100%;
+    // border: thin solid red;
+    @include c.box-shadow--mixin(
+      $hoffset: 0.2rem,
+      $voffset: 0.3rem,
+      $blur: 0.5rem,
+      $spread: 0.1rem
+    );
+    border-radius: 1rem;
+    overflow: hidden;
+    figure {
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+      color: c.$theme-color--font;
+      &:hover {
+        color: c.$theme-color;
+      }
+    }
+    figcaption {
+      text-align: left;
+      padding: 1.5rem;
+      line-height: 1.5;
+    }
+    img {
+      width: 100%;
+    }
+  }
+}

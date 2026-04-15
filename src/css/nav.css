@@ -53,4 +53,13 @@ nav ol li a {
     transform: translateY(0);
     background-color: #cccccc;
   }
+}
+@media (max-width: 700px) {
+  nav ol {
+    padding: 0.5rem 1rem;
+    gap: 0.1rem;
+  }
+  nav ol li span {
+    padding: 0.2rem 0.4rem;
+  }
 }/*# sourceMappingURL=nav.css.map */

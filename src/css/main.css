@@ -22,7 +22,6 @@ main .static-item--container {
   grid-auto-flow: row;
   justify-items: center;
   align-items: center;
-  position: relative;
 }
 main .static-item--box:hover {
   transform: translateY(-0.3rem);
@@ -50,4 +49,16 @@ main .static-item--box figcaption {
 }
 main .static-item--box img {
   width: 100%;
+}
+
+@media (max-width: 700px) {
+  main .static-item--container {
+    grid-template-columns: 1fr !important;
+    width: 100%;
+  }
+  figcaption {
+    font-size: small;
+    padding: 0;
+    line-height: 1.2;
+  }
 }/*# sourceMappingURL=main.css.map */

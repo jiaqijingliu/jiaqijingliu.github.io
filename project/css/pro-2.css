@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.321) 20%, transparent 50%), url(../pic/project2_back.avif) no-repeat scroll 50% 50%/cover;
+  font: normal normal normal 1rem/1.2 Simsun, sans-serif;
+  position: relative;
+}
+
+.nav-header {
+  width: 100%;
+  padding: 0.5rem 2rem;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+}
+.nav-header form {
+  flex: 0 1 27%;
+  border: thin solid transparent;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.nav-header form input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: large;
+}
+.nav-header form .nav-search-btn {
+  padding-right: 1rem;
+  padding-top: 0.2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.nav-header ul {
+  flex: 1 1 auto;
+  padding: 0;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+}
+.nav-header ul li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-header ul:nth-child(3) li {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+}
+.nav-header--denglu {
+  aspect-ratio: 1;
+  padding: 2px;
+  background-color: rgb(56, 220, 214);
+  border-radius: 50%;
+}
+
+#nav-header--tougao {
+  flex-direction: row;
+  background-color: #fb7299;
+  padding: 0.3rem 1rem;
+  border: thin solid transparent;
+  border-radius: 2rem;
+}
+
+.logo-img {
+  margin: 1rem 5rem 0;
+}/*# sourceMappingURL=pro-2.css.map */

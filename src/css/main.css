@@ -21,7 +21,7 @@ main .static-item--container {
   gap: 2rem;
   grid-auto-flow: row;
   justify-items: center;
-  align-items: center;
+  align-items: stretch;
 }
 main .static-item--box:hover {
   transform: translateY(-0.3rem);

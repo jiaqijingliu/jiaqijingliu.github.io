@@ -62,20 +62,69 @@ nav ol li a {
   nav ol li span {
     padding: 0.2rem 0.4rem;
   }
-  nav ol li:first-child {
-    flex: auto;
-    color: rgb(46, 123, 224);
-    font: normal normal bold 1rem sans-serif;
+}
+main {
+  max-width: 70vw;
+  margin: 4rem auto;
+}
+main #static-item {
+  text-align: center;
+}
+main #static-item .under-line {
+  height: 0;
+  width: 3rem;
+  margin: -0.5rem auto 0;
+  border: 0.1rem solid rgb(46, 123, 224);
+  border-radius: 1rem;
+}
+main .static-item--container {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 2rem;
+  grid-auto-flow: row;
+  justify-items: center;
+  align-items: stretch;
+}
+main .static-item--box:hover {
+  transform: translateY(-0.3rem);
+  transition: transform 0.1s ease-in;
+}
+main .static-item--box {
+  box-shadow: 0.2rem 0.3rem 0.5rem 0.1rem rgba(128, 128, 128, 0.418);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+main .static-item--box figure {
+  margin: 0;
+}
+main .static-item--box a {
+  text-decoration: none;
+  color: black;
+}
+main .static-item--box a:hover {
+  color: rgb(46, 123, 224);
+}
+main .static-item--box figcaption {
+  text-align: left;
+  padding: 1.5rem;
+  line-height: 1.5;
+}
+main .static-item--box img {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  main .static-item--container {
+    grid-template-columns: 1fr !important;
+    width: 100%;
   }
-  nav ol li:first-child:hover {
-    flex: auto;
-    background-color: transparent;
-    transform: none;
-    animation: none;
-  }
-  nav ol li a {
-    color: black;
-    text-decoration: none;
+  figcaption {
+    font-size: small;
+    padding: 0;
+    line-height: 1.2;
   }
 }
 html,

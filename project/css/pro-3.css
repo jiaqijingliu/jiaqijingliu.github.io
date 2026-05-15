@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+/* 顶部 header */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+}
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 40px;
+}
+.header .nav ul {
+  display: flex;
+  list-style: none;
+}
+.header .nav ul li {
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.header .search {
+  margin-left: auto;
+  display: flex;
+}
+.header .search input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px 0 0 2px;
+  outline: none;
+}
+.header .search button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 2px 2px 0;
+  background-color: #00a1d6;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* 分类按钮 */
+.categories {
+  margin: 15px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.categories button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background-color: #fff;
+  cursor: pointer;
+}
+.categories button.active {
+  background-color: #00a1d6;
+  color: #fff;
+  border-color: #00a1d6;
+}
+
+/* 视频推荐网格 */
+.video-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 15px;
+  padding: 20px;
+}
+.video-grid .video-item {
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.video-grid .video-item img {
+  width: 100%;
+  display: block;
+}
+.video-grid .video-item .video-title {
+  padding: 8px 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.video-grid .video-item.big {
+  grid-column: span 2;
+  height: 300px;
+}
+.video-grid .video-item.big .video-title {
+  font-size: 16px;
+  font-weight: bold;
+}/*# sourceMappingURL=pro-3.css.map */

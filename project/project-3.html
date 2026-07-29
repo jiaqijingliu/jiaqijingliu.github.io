@@ -1,110 +1,65 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B站静态首页示例</title>
-  <link rel="stylesheet" href="./css/pro-3.css">
-</head>
-<body>
-  <!-- 顶部搜索和导航 -->
-  <header class="header">
-    <div class="logo">bilibili</div>
-    <nav class="nav">
-      <ul>
-        <li>首页</li>
-        <li>番剧</li>
-        <li>直播</li>
-        <li>游戏中心</li>
-        <li>会员购</li>
-        <li>漫画</li>
-        <li>赛事</li>
-        <li>下载客户端</li>
-      </ul>
-    </nav>
-    <div class="search">
-      <input type="text" placeholder="吉罗很快乐">
-      <button>搜索</button>
-    </div>
-  </header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目3 图片轮播页面</title>
+    <link rel="icon" href="https://bilibili.com/favicon.ico" />
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/pro-3.css" />
+  </head>
+  <body>
+    <ul class="slides">
+      <input type="radio" name="radio-btn" id="img-1" checked />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=1" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-4" class="prev">&#x2039;</label>
+          <label for="img-2" class="next">&#x203a;</label>
+        </div>
+      </li>
 
-  <!-- 分类标签 -->
-  <div class="categories">
-    <button>动态</button>
-    <button class="active">热门</button>
-    <button>番剧</button>
-    <button>国创</button>
-    <button>综艺</button>
-    <button>动画</button>
-    <button>鬼畜</button>
-    <button>舞蹈</button>
-    <button>娱乐</button>
-    <button>科技数码</button>
-    <button>美食</button>
-    <button>汽车</button>
-    <button>体育运动</button>
-    <button>更多</button>
-  </div>
+      <input type="radio" name="radio-btn" id="img-2"  />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=2" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-1" class="prev">&#x2039;</label>
+          <label for="img-3" class="next">&#x203a;</label>
+        </div>
+      </li>
 
-  <!-- 视频推荐区域 -->
-  <main class="video-grid">
-    <!-- 第一大图 -->
-    <div class="video-item big">
-      <img src="https://via.placeholder.com/600x300?text=高考压轴题" alt="高考压轴题">
-      <div class="video-title">葛军老师教你手把手拆解高考数学压轴题&gt;&gt;&gt;</div>
-    </div>
+      <input type="radio" name="radio-btn" id="img-3" />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=3" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-2" class="prev">&#x2039;</label>
+          <label for="img-4" class="next">&#x203a;</label>
+        </div>
+      </li>
 
-    <!-- 右侧小图视频 -->
-    <div class="video-item">
-      <img src="https://via.placeholder.com/300x180?text=精卫" alt="精卫">
-      <div class="video-title">广广大网友要求，《精卫》完整版来了～</div>
-    </div>
+      <input type="radio" name="radio-btn" id="img-4"  />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=4" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-3" class="prev">&#x2039;</label>
+          <label for="img-1" class="next">&#x203a;</label>
+        </div>
+      </li>
 
-    <div class="video-item">
-      <img src="https://via.placeholder.com/300x180?text=喜灰游戏" alt="喜灰游戏">
-      <div class="video-title">喜灰同人又一力作！喜澈被困地牢反目成仇！</div>
-    </div>
-
-    <div class="video-item">
-      <img src="https://via.placeholder.com/300x180?text=龙虎争斗" alt="龙虎争斗">
-      <div class="video-title">陈浩南脚踩黑白两道！O记亮对东星实施定点清除！</div>
-    </div>
-
-    <div class="video-item">
-      <img src="https://via.placeholder.com/300x180?text=MacBook" alt="MacBook">
-      <div class="video-title">“无头骑士”MacBook该怎么玩？我找到了它的最佳搭档…</div>
-    </div>
-
-    <div class="video-item">
-      <img src="https://via.placeholder.com/300x180?text=化学物理" alt="化学物理">
-      <div class="video-title">华强买瓜 但过度的化学物理数学生物术语</div>
-    </div>
-  </main>
-   <script>
-        document.writeln("<pre>");
-        document.writeln("characterset:"+document.characterSet);
-        document.writeln("charset:"+document.charset);
-        document.writeln("compatMODE:"+document.compatMode);
-
-        document.writeln("cookie:"+document.cookie);
-        // document.writeln("defalutCharset"+document.defaultCharset);
-        document.writeln("dir:"+document.dir);
-
-        document.writeln("domian:"+document.domain);
-        document.writeln("implementation:"+document.implementation);
-        document.writeln("lastModified:"+document.lastModified);
-        document.writeln("referrer:"+document.referrer);
-        document.writeln("title:"+document.title);
-
-        document.writeln("protocol:"+document.location.protocol);
-        document.writeln("host:"+document.location.host);
-        document.writeln("href:"+document.location0.href);
-        document.writeln("hostname:"+document.location.hostname);
-        document.writeln("port:"+document.location.port);
-        document.writeln("pathname:"+document.location.pathname);
-        document.writeln("hash:"+document.location.hash);
-        // document.location.reload();
-        document.writeln("</pre>");
-    </script>
-</body>
+      <li class="nav-dots">
+        <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+        <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+        <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+        <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+      </li>
+    </ul>
+  </body>
 </html>

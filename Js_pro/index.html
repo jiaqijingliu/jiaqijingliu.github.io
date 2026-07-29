@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试Document方法</title>
+  </head>
+  <body>
+    <button id="changeBtn">点击修改地址栏</button>
+    <p id="bananas" contenteditable accesskey="a">
+      这是一段用于排版预览的占位文字，用来展示字体、行距和布局效果。
+      在设计界面、网页或文档时，可以先用这段文字填充，等内容确定后再替换。
+      天玄地黄，宇宙洪荒，日月盈昃，辰宿列张，寒来暑往，秋收冬藏。
+    </p>
+    <p id="apples" onmouseover="this.style.background='black';this.style.color='white'"
+    onmouseout="this.style.removeProperty('color');this.style.removeProperty('background')">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
+      consequatur magni, nemo sed deserunt vel illo, minus facilis doloremque in
+      mollitia quod id reiciendis quae, dicta corporis. Ratione, dolorem
+      impedit!
+    </p>
+    <button accesskey="s">点击我</button>
+    
+
+    <script>
+
+    </script>
+
+
+
+
+
+
+
+    <!-- #region 获取元数据-->
+    <!-- <script>
+      document.writeln("<pre>");
+      document.writeln("characterset:" + document.characterSet);//只读字符编码
+      document.writeln("charset:" + document.charset);//获取或设置编码
+      document.writeln("compatMODE:" + document.compatMode);
+      document.writeln("cookie:" + document.cookie);//获取或设置文档cookie
+      document.writeln("dir:" + document.dir);//获取或设置文档的文本方向
+      document.writeln("domian:" + document.domain);//获取或设置域名
+      document.writeln("implementation:" + document.implementation);
+      document.writeln("lastModified:" + document.lastModified);
+      document.writeln("referrer:" + document.referrer);//就是文件的URL
+      document.writeln("title:" + document.title);
+
+      document.writeln("protocol:" + document.location.protocol);//协议部分，http: 或https:
+      document.writeln("host:" + document.location.host);// 主机+端口
+      document.writeln("href:" + document.location.href);//文档的URL
+      document.writeln("hostname:" + document.location.hostname);
+      document.writeln("port:" + document.location.port);
+      document.writeln("pathname:" + document.location.pathname);//文档的路径
+      document.writeln("search:" + document.location.search);//路径中的？部分
+      document.writeln("hash:" + document.location.hash);//路径中的#部分
+      document.writeln("</pre>");
+
+      // 获取按钮
+      const btn = document.getElementById("changeBtn");
+
+      // 点击时才执行
+      btn.addEventListener("click", function () {
+        // document.location.search = "f";
+        // document.location.hash = "#apples";
+        // document.location.reload();//重新加载页面
+        document.location.href="https://www.bilibili.com";//导航到URL
+        // document.location.assign("https://www.bilibili.com");//导航到URL
+        // document.location.replace("http://apress.com");//这个会移除历史记录，点击后退就没用了
+        // alert("地址栏已修改");
+      });
+    </script> -->
+
+    <!-- #endregion -->
+  
+</body>
+</html>

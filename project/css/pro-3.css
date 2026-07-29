@@ -1,107 +1,107 @@
-@charset "UTF-8";
-/* 全局重置 */
-* {
-  margin: 0;
+.slides {
   padding: 0;
-  box-sizing: border-box;
+  width: 500px;
+  height: 500px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+.slides * {
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.slides input {
+  display: none;
 }
 
-body {
-  font-family: "Microsoft YaHei", sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
-}
-
-/* 顶部 header */
-.header {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #e5e5e5;
-}
-.header .logo {
-  font-size: 24px;
-  font-weight: bold;
-  margin-right: 40px;
-}
-.header .nav ul {
-  display: flex;
-  list-style: none;
-}
-.header .nav ul li {
-  margin-right: 20px;
-  cursor: pointer;
-  font-size: 14px;
-}
-.header .search {
-  margin-left: auto;
-  display: flex;
-}
-.header .search input {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 2px 0 0 2px;
-  outline: none;
-}
-.header .search button {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-left: none;
-  border-radius: 0 2px 2px 0;
-  background-color: #00a1d6;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* 分类按钮 */
-.categories {
-  margin: 15px 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.categories button {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  background-color: #fff;
-  cursor: pointer;
-}
-.categories button.active {
-  background-color: #00a1d6;
-  color: #fff;
-  border-color: #00a1d6;
-}
-
-/* 视频推荐网格 */
-.video-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 15px;
-  padding: 20px;
-}
-.video-grid .video-item {
-  background-color: #fff;
-  border-radius: 4px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.video-grid .video-item img {
-  width: 100%;
+.photo-container {
   display: block;
 }
-.video-grid .video-item .video-title {
-  padding: 8px 10px;
-  font-size: 14px;
-  line-height: 1.4;
+.photo-container .photo-container__photo {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  width: 500px;
+  height: 500px;
+  display: block;
+  transform: scale(0);
+  transition: all 0.7s ease-in-out;
 }
-.video-grid .video-item.big {
-  grid-column: span 2;
-  height: 300px;
+.photo-container .photo-container__photo img {
+  width: 100%;
+  height: 100%;
 }
-.video-grid .video-item.big .video-title {
-  font-size: 16px;
-  font-weight: bold;
+.photo-container .photo-container__nav label {
+  width: 166.6666666667px;
+  height: 100%;
+  display: none;
+  position: absolute;
+  opacity: 0;
+  z-index: 9;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  color: white;
+  font-size: 156pt;
+  text-align: center;
+  line-height: 380px;
+  background-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 0px 0px 15px rgb(119, 119, 119);
+}
+
+.photo-container__photo:hover + .photo-container__nav label {
+  opacity: 0.5;
+}
+
+.photo-container__nav label:hover {
+  opacity: 1;
+}
+.photo-container__nav .next {
+  right: 0;
+}
+
+input:checked + .photo-container .photo-container__photo {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out;
+}
+
+input:checked + .photo-container .photo-container__nav label {
+  display: block;
+}
+
+.nav-dots {
+  width: 100%;
+  bottom: 9px;
+  height: 11px;
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+
+.nav-dots .nav-dot {
+  top: -5px;
+  width: 11px;
+  height: 11px;
+  margin: 0 4px;
+  position: relative;
+  border-radius: 100%;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.nav-dots .nav-dot:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+input#img-1:checked ~ .nav-dots label#img-dot-1,
+input#img-2:checked ~ .nav-dots label#img-dot-2,
+input#img-3:checked ~ .nav-dots label#img-dot-3,
+input#img-4:checked ~ .nav-dots label#img-dot-4,
+input#img-5:checked ~ .nav-dots label#img-dot-5,
+input#img-6:checked ~ .nav-dots label#img-dot-6 {
+  background: rgba(0, 0, 0, 0.8);
 }/*# sourceMappingURL=pro-3.css.map */

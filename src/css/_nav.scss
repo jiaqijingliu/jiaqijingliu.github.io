@@ -5,9 +5,7 @@ nav {
   //导航栏+
   background-color: c.$theme-color--back;
   color: c.$theme-color--font;
-  //   position: sticky;
-  //   top: 0;
-  //   left: 0;
+
   ol {
     margin: 0 auto;
     padding: 0.5rem 3rem;
@@ -19,7 +17,6 @@ nav {
     flex-wrap: nowrap;
     justify-content: flex-end;
     align-items: center;
-    // gap: 3rem;
     li {
       display: inline-block;
       span {

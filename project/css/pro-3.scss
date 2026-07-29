@@ -1,116 +1,115 @@
-/* 全局重置 */
-* {
-  margin: 0;
+
+
+$pic-width:500px;
+$pic-height:500px;
+
+
+.slides {
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Microsoft YaHei", sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
-}
-
-/* 顶部 header */
-.header {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #e5e5e5;
-
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 40px;
+  width: $pic-width;
+  height: $pic-height;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+   * {
+    // 禁止鼠标等选中后代。
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
   }
-
-  .nav ul {
-    display: flex;
-    list-style: none;
-
-    li {
-      margin-right: 20px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-  }
-
-  .search {
-    margin-left: auto;
-    display: flex;
-    input {
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      border-radius: 2px 0 0 2px;
-      outline: none;
-    }
-    button {
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      border-left: none;
-      border-radius: 0 2px 2px 0;
-      background-color: #00a1d6;
-      color: #fff;
-      cursor: pointer;
-    }
+  input{
+    display: none;
   }
 }
-
-/* 分类按钮 */
-.categories {
-  margin: 15px 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  button {
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    background-color: #fff;
-    cursor: pointer;
-    &.active {
-      background-color: #00a1d6;
-      color: #fff;
-      border-color: #00a1d6;
-    }
-  }
-}
-
-/* 视频推荐网格 */
-.video-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 15px;
-  padding: 20px;
-
-  .video-item {
-    background-color: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-
+.photo-container {
+  display: block;
+  .photo-container__photo {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    width: $pic-width;
+    height: $pic-height;
+    display: block;
+    //初始所有图片容器大小为0
+    transform: scale(0);
+    transition: all 0.7s ease-in-out;
     img {
       width: 100%;
-      display: block;
-    }
-
-    .video-title {
-      padding: 8px 10px;
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    &.big {
-      grid-column: span 2;
-      height: 300px;
-
-      .video-title {
-        font-size: 16px;
-        font-weight: bold;
-      }
+      height: 100%;
     }
   }
+  .photo-container__nav label {
+    //左右点击按钮。
+    width: $pic-width/3;
+    height: 100%;
+    display: none;
+    position: absolute;
+    opacity: 0;
+    z-index: 9;
+    cursor: pointer;
+
+    transition: opacity 0.2s;
+    //样式配置。
+    color: white;
+    font-size: 156pt;
+    text-align: center;
+    line-height: 380px;
+    background-color: rgba(255, 255, 255, 0.3);
+    text-shadow: 0px 0px 15px rgb(119, 119, 119);
+  }
+}
+
+//配置两种情况时的左右点击按钮显示。
+.photo-container__photo:hover + .photo-container__nav label{
+    opacity: 0.5;
+}
+.photo-container__nav {
+  label:hover {
+    opacity: 1;
+  }
+  .next {
+    right: 0;
+  }
+}
+input:checked + .photo-container .photo-container__photo {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out;
+}
+input:checked + .photo-container .photo-container__nav label {
+  display: block;
+}
+
+.nav-dots {
+  width: 100%;
+  bottom: 9px;
+  height: 11px;
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+.nav-dots .nav-dot {
+  top: -5px;
+  width: 11px;
+  height: 11px;
+  margin: 0 4px;
+  position: relative;
+  border-radius: 100%;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.6);
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+input#img-1:checked ~ .nav-dots label#img-dot-1,
+input#img-2:checked ~ .nav-dots label#img-dot-2,
+input#img-3:checked ~ .nav-dots label#img-dot-3,
+input#img-4:checked ~ .nav-dots label#img-dot-4,
+input#img-5:checked ~ .nav-dots label#img-dot-5,
+input#img-6:checked ~ .nav-dots label#img-dot-6 {
+	background: rgba(0, 0, 0, 0.8);
 }

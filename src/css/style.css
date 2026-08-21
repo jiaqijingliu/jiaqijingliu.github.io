@@ -114,6 +114,7 @@ main .static-item--box figcaption {
 }
 main .static-item--box img {
   width: 100%;
+  aspect-ratio: 6/3;
 }
 
 @media (max-width: 700px) {

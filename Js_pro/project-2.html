@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>使用Windows对象</title>
+  </head>
+  <body>
+    <header>
+      <h1>使用Windows对象</h1>
+    </header>
+
+    <section>
+      <h2>获取窗口信息</h2>
+      <p id="result_1"></p>
+    </section>
+    <script type="text/javascript">
+      const result_1 = document.querySelectorAll("p#result_1");
+      result_1[0].innerHTML += window.outerWidth + "\n";
+      result_1[0].innerHTML += window.outerHeight + "\n";
+      result_1[0].innerHTML += window.innerWidth + "\n";
+      result_1[0].innerHTML += window.innerHeight + "\n";
+      result_1[0].innerHTML += window.screen.width + "\n";
+      result_1[0].innerHTML += window.screen.height + "\n";
+      //1397*1.25*1.1 = 1920; 873*1.25*1.1 = 1200; 1.25是设置的缩放；1.1是设置的文本大小缩放
+    </script>
+
+    <section>
+      <h2>与窗口进行交互</h2>
+      <p>略。</p>
+    </section>
+
+    <section>
+      <h2>对用户进行提示</h2>
+      <p>
+        <button>alert</button>
+        <button>confirm</button>
+        <button>prompt</button>
+      </p>
+    </section>
+    <script>
+      let buttons = document.getElementsByTagName("button");
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = function () {
+          switch (i) {
+            case 0:
+              window.alert("你好");
+              break;
+            case 1:
+              window.confirm("我好");
+              break;
+            case 2:
+              window.prompt("请输入", "hello");
+              break;
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

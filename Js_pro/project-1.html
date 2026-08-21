@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="STAYIN.TOP" />
+    <meta name="description" content="DOM Study" />
+    <title>Document对象学习</title>
+  </head>
+  <body>
+    <header>
+      <h1>Document对象学习</h1>
+    </header>
+
+    <section>
+      <h2>获取元数据</h2>
+    </section>
+
+    <script>
+      document.writeln("<pre>");
+      document.writeln("<h2>获取文档信息</h2>");
+      document.writeln("characterSet: " + document.characterSet);
+      document.writeln("charSet: " + document.charset);
+      document.writeln("compatMode:" + document.compatMode);
+      document.writeln("dir: " + document.dir);
+      document.writeln("domain: " + document.domain);
+      document.writeln("lastModified: " + document.lastModified);
+      document.writeln("referrer: " + document.referrer);
+      document.writeln("title: " + document.title);
+      document.writeln("</pre>");
+
+      document.writeln("<pre>");
+      document.writeln("<h2>使用Location对象</h2>");
+      document.writeln("protocol:" + document.location.protocol); //协议部分，http:
+      document.writeln("host:" + document.location.host); // 主机+端口
+      document.writeln("href:" + document.location.href); //文档的URL
+      document.writeln("hostname:" + document.location.hostname);
+      document.writeln("port:" + document.location.port);
+      document.writeln("pathname:" + document.location.pathname); //文档的路径
+      document.writeln("search:" + document.location.search); //路径中的？部分
+      document.writeln("hash:" + document.location.hash); //路径中的#部分
+      document.writeln("</pre>");
+
+      document.writeln("<pre>");
+      document.writeln("cookie:" + document.cookie); //获取或设置文档cookie
+      document.writeln("</pre>");
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.getElementById("btn");
+        btn.addEventListener("click", ToBilibili);
+      }); //DOMContentLoaded事件：浏览器解析完 HTML、构建完整 DOM 树后立即触发
+
+      function ToBilibili() {
+        document.location.href = "https://www.bilibili.com";
+      }
+    </script>
+
+    <p>
+      <button id="btn">点击跳转bilibili</button>
+    </p>
+
+    <section>
+      <h2>获取HTML对象</h2>
+      <p id="p1" name="p1" class="p_1">
+        这是一段用于排版预览的占位文字，用来展示字体、行距和布局效果。
+        在设计界面、网页或文档时，可以先用这段文字填充，等内容确定后再替换。
+        天玄地黄，宇宙洪荒，日月盈昃，辰宿列张，寒来暑往，秋收冬藏。
+      </p>
+      <img id="bilibili" src="https://bilibili.com/favicon.ico" alt="图片" />
+      <p id="p2" name="p1" class="p_1 p_2">
+        这是一段用于排版预览的占位文字，用来展示字体、行距和布局效果。
+        在设计界面、网页或文档时，可以先用这段文字填充，等内容确定后再替换。
+        天玄地黄，宇宙洪荒，日月盈昃，辰宿列张，寒来暑往，秋收冬藏。
+      </p>
+      <img id="baidu" src="https://baidu.com/favicon.ico" alt="图片" />
+      <p id="p3" class="p_2">
+        这是一段用于排版预览的占位文字，用来展示字体、行距和布局效果。
+        在设计界面、网页或文档时，可以先用这段文字填充，等内容确定后再替换。
+        天玄地黄，宇宙洪荒，日月盈昃，辰宿列张，寒来暑往，秋收冬藏。
+      </p>
+      <pre id="result"></pre>
+    </section>
+
+    <script>
+      const result = document.getElementById("result");
+      let elems = document.images; //获取img标签对象
+      for (let i = 0; i < elems.length; i++) {
+        result.innerHTML += "Image Element: " + elems[i].id + "\n";
+      }
+      let elem_bilibili_src = elems.namedItem("bilibili").src;
+      result.innerHTML +=
+        "Src for bilibili element is: " + elem_bilibili_src + "\n";
+
+      let name_elems = document.getElementsByClassName("p1");
+      let class_elem1 = document.querySelectorAll("p.p_1.p_2");
+      let class_elem2 = document.querySelectorAll("p.p_2");
+      out_elems(name_elems);
+      out_elems(class_elem1);
+      out_elems(class_elem2);
+      function out_elems(elems_in) {
+        if (elems_in) {
+          let html = "";
+          for (let i = 0; i < elems_in.length; i++) {
+            html += "Matched " + elems_in.length + " elements<br>";
+          }
+          result.innerHTML += html;
+        }
+      }
+    </script>
+
+    <section>
+      <h2>在DOM树里导航</h2>
+      <p>
+        略
+      </p>
+    </section>
+
+
+
+  </body>
+</html>

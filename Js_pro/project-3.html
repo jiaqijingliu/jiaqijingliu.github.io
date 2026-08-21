@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>使用DOM元素</title>
+    <style>
+      #pclass0 {
+        border: medium double black;
+      }
+      #pclass1 {
+        border: medium double red;
+      }
+      .p1 {
+        color: black;
+      }
+      .p2 {
+        color: red;
+        text-indent: 2em;
+      }
+      .p3 {
+        color: blue;
+      }
+      .p4 {
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>使用DOM元素</h1>
+    </header>
+
+    <section>
+      <h2>使用元素对象</h2>
+      <p id="pclass0" dir="ltr" lang="en-US" class="p1 p2">
+        There are lots of different kinds of fruit - there are over 500
+        varieties of <span id="banana">banana</span> alone. By the time we add
+        the countless types of <span id="apple">apples</span>,
+        <span id="orange">oranges</span>, and other well-known fruit, we are
+        faced with thousands of choices.
+      </p>
+      <!-- <p> -->
+      <button>点击隐藏</button>
+      <button>点击切换ID</button>
+      <button>添加类p3（使用className）</button>
+      <button>翻转类p4(使用classList)</button>
+      <!-- </p> -->
+      <pre id="results"></pre>
+    </section>
+    <script>
+      let results = document.querySelector("#results");
+      let elem = document.querySelector("#pclass0");
+      function updateDisplay() {
+        results.innerHTML = "";
+        results.innerHTML += "className：" + elem.className + "\n";
+        results.innerHTML += "classList：" + elem.classList + "\n";
+        results.innerHTML += "checked：" + elem.checked + "\n";
+        results.innerHTML += "dir：" + elem.dir + "\n";
+        results.innerHTML += "disabled：" + elem.disabled + "\n";
+        results.innerHTML += "hidden：" + elem.hidden + "\n";
+        results.innerHTML += "id：" + elem.id + "\n";
+        results.innerHTML += "tagName：" + elem.tagName + "\n";
+        results.innerHTML += "title：" + elem.title + "\n";
+      }
+      updateDisplay();
+      let buttons = document.getElementsByTagName("button");
+      buttons[0].onclick = () => {
+        elem.hidden = !elem.hidden;
+        updateDisplay();
+      };
+      buttons[1].addEventListener("click", () => {
+        elem.id = elem.id === "pclass0" ? "pclass1" : "pclass0";
+        updateDisplay();
+      });
+      buttons[2].addEventListener("click", function () {
+        if (!elem.classList.contains("p3")) {
+          elem.className += " p3";
+        } else {
+          elem.classList.remove("p3");
+        }
+        updateDisplay();
+      });
+      let elem_class = elem.classList;
+      buttons[3].onclick = function () {
+        elem_class.toggle("p4");
+        updateDisplay();
+      };
+    </script>
+    <h3>使用属性方法</h3>
+    <pre id="test"></pre>
+    <script>
+      {
+        let results = document.getElementById("test");
+        let elem = document.getElementById("pclass0");
+
+        results.innerHTML +=
+          "该p元素是否含有id属性：" +
+          elem.hasAttribute("id") +
+          "\n" +
+          "其值为：" +
+          elem.attributes["id"].value +
+          "\n";
+        updateList();
+        function updateList() {
+          results.innerHTML += "该元素目前属性列表:\n";
+          for (let i = 0; i < elem.attributes.length; i++) {
+            results.innerHTML +=
+              "name: " +
+              elem.attributes[i].name +
+              " value: " +
+              elem.attributes[i].value +
+              "\n";
+          }
+        }
+        elem.setAttribute("name", "段落标签");
+        updateList();
+        elem.removeAttribute("dir");
+        updateList();
+      }
+    </script>
+
+    <section>
+      <h2>处理Text对象</h2>
+      <p>略。其应用价值过少。</p>
+    </section>
+
+    <section>
+      <h2>修改模型</h2>
+      <p class="section2_p1"></p>
+      <p class="section2_p2"></p>
+    </section>
+    <script>
+      {
+        let elems = document.querySelectorAll("[class^='section2_p']");
+        elems[0].innerHTML +=
+          "这里用innerHTML添加的段落。这是一段用于排版预\
+        览的占位文字，用来展示字体、行距和布局效果在设计界面、网页或文\
+        档时，可以先用这段文字填充，等内容确定后再替换。天玄地黄，宇宙洪荒\
+        ，日月盈昃，辰宿列张，寒来暑往，秋收冬藏。";
+
+        elems[1].outerHTML =
+          "<a href='https://www.bilibili.com' target='_blank'>点击跳转bilibili</a>";
+        elems[0].insertAdjacentHTML("beforeend", "<sup>额外插入的内容</sup>");
+      }
+    </script>
+  </body>
+</html>

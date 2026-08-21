@@ -1,0 +1,61 @@
+$background-color: rgb(187, 255, 164);
+$If-border-radius: true;
+
+body {
+  counter-reset: count1 -1 count2 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
+  * {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+ul {
+  background-color: $background-color;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5em;
+  width: 100%;
+  height: 100%;
+  margin: 3em 0;
+
+  border: thin solid black;
+  border-radius: if($If-border-radius, 1em, null);
+}
+.list1 > li {
+  list-style-type: none;
+  span {
+    white-space: pre;
+    text-decoration: underline;
+  }
+  &::before {
+    content: counter(count1) ".";
+    counter-increment: count1 2;
+    display: inline-block;
+    width: 2em;
+    text-align: left;
+  }
+}
+.list2 > li {
+  list-style-type: none;
+  span {
+    white-space: pre;
+    text-decoration: underline;
+  }
+  &::before {
+    content: counter(count2) ".";
+    counter-increment: count2 2;
+    display: inline-block; //inline无法设置width。
+    width: 2em;
+    text-align: left;
+  }
+}

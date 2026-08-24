@@ -60,7 +60,8 @@ main {
     }
     img {
       width: 100%;
-      aspect-ratio: 6/3;
+      height: 200px;
+      object-fit: cover;
     }
   }
 }
@@ -69,11 +70,16 @@ main {
   main .static-item--container {
     grid-template-columns: 1fr !important; //注意优先级等问题！！！！！
     width: 100%;
+    gap: 1.2rem;
   }
 
-  figcaption {
-    font-size: small;
-    padding: 0;
-    line-height: 1.2;
+  main .static-item--box img {
+    height: 160px;
+  }
+
+  main .static-item--box figcaption {
+    font-size: 0.9rem;
+    padding: 0.9rem 1rem;
+    line-height: 1.4;
   }
 }

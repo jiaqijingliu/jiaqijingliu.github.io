@@ -149,6 +149,9 @@ body {
   color: var(--text);
   transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
 }
+.search-input::-moz-placeholder {
+  color: var(--text-muted);
+}
 .search-input::placeholder {
   color: var(--text-muted);
 }
@@ -174,6 +177,9 @@ body {
   background: var(--bg);
   color: var(--text);
   transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.input-row__field::-moz-placeholder {
+  color: var(--text-muted);
 }
 .input-row__field::placeholder {
   color: var(--text-muted);
@@ -469,7 +475,9 @@ body {
   cursor: grab;
   opacity: 0;
   transition: opacity var(--transition);
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .todo__toggle {
   flex-shrink: 0;
@@ -699,4 +707,4 @@ body {
   .edit__meta {
     min-width: 60px;
   }
-}
+}/*# sourceMappingURL=main.css.map */

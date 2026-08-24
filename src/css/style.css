@@ -2,6 +2,10 @@ nav {
   background-color: white;
   color: black;
 }
+nav .nav-toggle,
+nav .nav-toggle-label {
+  display: none;
+}
 nav ol {
   margin: 0 auto;
   padding: 0.5rem 3rem;
@@ -55,12 +59,73 @@ nav ol li a {
   }
 }
 @media (max-width: 700px) {
+  nav {
+    position: relative;
+  }
+  nav .nav-toggle {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  nav .nav-toggle:focus-visible ~ .nav-toggle-label {
+    outline: 2px solid rgb(46, 123, 224);
+    outline-offset: 3px;
+  }
+  nav .nav-toggle-label {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+    padding: 0.35rem;
+    cursor: pointer;
+    z-index: 20;
+  }
+  nav .nav-toggle-label span {
+    width: 1.4rem;
+    height: 0.15rem;
+    background-color: #333;
+    border-radius: 0.1rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  nav .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(0.43rem) rotate(45deg);
+  }
+  nav .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  nav .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-0.43rem) rotate(-45deg);
+  }
   nav ol {
-    padding: 0.5rem 1rem;
-    gap: 0.1rem;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0.6rem 1rem;
+    gap: 0.25rem;
+  }
+  nav ol li:first-child {
+    flex: none;
+    font-size: 1.2rem;
+    padding-right: 3rem;
+  }
+  nav ol li:not(:first-child) {
+    display: none;
+    text-align: center;
   }
   nav ol li span {
-    padding: 0.2rem 0.4rem;
+    display: block;
+    padding: 0.55rem 0.6rem;
+  }
+  nav ol li a {
+    font-size: 0.95rem;
+  }
+  nav .nav-toggle:checked ~ ol li:not(:first-child) {
+    display: block;
   }
 }
 main {
@@ -114,18 +179,24 @@ main .static-item--box figcaption {
 }
 main .static-item--box img {
   width: 100%;
-  aspect-ratio: 6/3;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media (max-width: 700px) {
   main .static-item--container {
     grid-template-columns: 1fr !important;
     width: 100%;
+    gap: 1.2rem;
   }
-  figcaption {
-    font-size: small;
-    padding: 0;
-    line-height: 1.2;
+  main .static-item--box img {
+    height: 160px;
+  }
+  main .static-item--box figcaption {
+    font-size: 0.9rem;
+    padding: 0.9rem 1rem;
+    line-height: 1.4;
   }
 }
 html,

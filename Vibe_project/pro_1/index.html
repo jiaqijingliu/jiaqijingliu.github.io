@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>待办事项</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <div>
+        <h1 class="app__title"><span class="app__icon">🌸</span>待办事项</h1>
+        <p class="app__subtitle">记录并完成你的每一项任务</p>
+      </div>
+      <select id="theme-select" class="theme-select" aria-label="切换主题">
+        <option value="default">☀️ 默认</option>
+        <option value="pink">🌸 粉色</option>
+        <option value="dark">🌙 深色</option>
+      </select>
+    </header>
+
+    <div class="search-row">
+      <input
+        id="search-input"
+        class="search-input"
+        type="search"
+        placeholder="🔍 搜索任务或标签…"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="input-row">
+      <select id="priority-select" class="priority-select" data-priority="medium" aria-label="任务优先级">
+        <option value="high">高</option>
+        <option value="medium" selected>中</option>
+        <option value="low">低</option>
+      </select>
+      <input
+        id="task-input"
+        class="input-row__field"
+        type="text"
+        placeholder="输入新的待办任务…"
+        maxlength="200"
+        autocomplete="off"
+      />
+      <button id="add-btn" class="btn btn--add" type="button">
+        <span class="btn__plus">+</span>添加
+      </button>
+    </div>
+
+    <div class="meta-row">
+      <input
+        id="tag-input"
+        class="input-row__field input-row__tag"
+        type="text"
+        list="tag-list"
+        placeholder="🏷 标签（可选）"
+        maxlength="20"
+        autocomplete="off"
+      />
+      <input id="date-input" class="input-row__field input-row__date" type="date" aria-label="截止日期" title="截止日期" />
+    </div>
+    <datalist id="tag-list">
+      <option value="工作"></option>
+      <option value="学习"></option>
+      <option value="生活"></option>
+      <option value="个人"></option>
+      <option value="健康"></option>
+      <option value="购物"></option>
+    </datalist>
+
+    <div class="stats-row">
+      <span class="stats">未完成 <b id="undone-count">0</b> 项 · 已完成 <b id="done-count">0</b> 项</span>
+      <div class="stats-row__controls">
+        <select id="sort-select" class="filter" aria-label="排序方式">
+          <option value="default" selected>排序：默认</option>
+          <option value="priority">排序：优先级</option>
+          <option value="due">排序：截止日期</option>
+        </select>
+        <select id="filter" class="filter" aria-label="筛选任务">
+          <option value="all">全部</option>
+          <option value="active">未完成</option>
+          <option value="done">已完成</option>
+        </select>
+      </div>
+    </div>
+
+    <ul id="todo-list" class="list"></ul>
+
+    <div id="toolbar" class="toolbar">
+      <button id="clear-done" class="btn btn--ghost" type="button">清空已完成</button>
+      <button id="clear-all" class="btn btn--ghost btn--danger" type="button">全部清空</button>
+      <button id="clear-all-cancel" class="btn btn--ghost" type="button" hidden>取消</button>
+    </div>
+
+    <div class="hint">
+      <kbd>Enter</kbd> 添加 · <kbd>Esc</kbd> 清空输入 · <kbd>/</kbd> 聚焦搜索 · 拖动任务可排序
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

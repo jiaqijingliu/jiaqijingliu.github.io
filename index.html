@@ -8,6 +8,22 @@
 
     <link rel="stylesheet" href="./src/css/normalize.css" />
     <link rel="stylesheet" href="./src/css/style.css?v=3" />
+    <style>
+      .pagination {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 24px;
+      }
+      .page-btn {
+        padding: 4px 12px;
+        cursor: pointer;
+      }
+      .page-btn.active {
+        background: #222;
+        color: white;
+      }
+    </style>
   </head>
 
   <body>
@@ -46,7 +62,7 @@
       </section>
 
       <section id="static-item">
-        <h2>静态网页项目</h2>
+        <h2>静态网页</h2>
         <div class="under-line"></div>
         <div class="static-item--container">
           <div class="static-item--box">
@@ -128,20 +144,72 @@
               >
                 <figcaption>
                   <strong>项目4 CSS计数器 | 示例图</strong>
-                  <p>
-                    利用counter-reset实现li标签按单、偶数排列显示
-                    
-                  </p>
+                  <p>利用counter-reset实现li标签按单、偶数排列显示</p>
                 </figcaption>
               </a>
             </figure>
           </div>
         </div>
+        <div class="pagination" id="static-item--page"></div>
         <!-- <a href="#nav" class="go-to-top">
           <img src="./source/pic/go-to-top.png" alt="回到顶部" />
         </a> -->
       </section>
+
+      <section>
+        <h2>
+          JavaScript小练习
+        </h2>
+      </section>
+
+      <section>
+        <h2>
+          Vibe Coding
+        </h2>
+      </section>
     </main>
     <footer>&copy;2026 StayInTop All rights reserved</footer>
+
+    <script defer>
+      let cards = document.querySelectorAll(".static-item--box");
+      let pages = document.getElementById("static-item--page");
+      const page_count = 2; // 每页展示卡片数量
+      let total_page = Math.ceil(cards.length / page_count); // 计算总页数
+      let current_page = 1; //当前页数
+
+      // 渲染分页按钮
+      function createPage() {
+        pages.innerHTML = "";
+        for (let i = 1; i <= total_page; i++) {
+          const btn = document.createElement("button");
+          btn.innerText = i;
+          // 当前页增加active类用于高亮
+          btn.className = i === current_page ? "page-btn active" : "page-btn";
+          btn.addEventListener("click", () => {
+            current_page = i;
+            showCards();
+            createPage();
+          });
+          pages.appendChild(btn);
+        }
+      }
+
+      // 根据当前页显示/隐藏卡片
+      function showCards() {
+        const start = (current_page - 1) * page_count;
+        const end = start + page_count;
+        cards.forEach((card, index) => {
+          if (index >= start && index < end) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      // 页面初始化执行
+      createPage();
+      showCards();
+    </script>
   </body>
 </html>

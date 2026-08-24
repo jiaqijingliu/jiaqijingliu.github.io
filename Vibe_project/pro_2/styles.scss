@@ -1,0 +1,282 @@
+// ============================================================
+//  个人名片样式（SCSS 源码）
+//  编译：sass styles.scss styles.css
+// ============================================================
+
+// ---------- 主题变量 ----------
+$bg-deep:   #0b1020;   // 页面背景 · 深
+$bg-card:   #121a30;   // 卡片底色
+$bg-card-2: #1a2440;   // 卡片渐变 · 浅
+$gold:      #e6c47a;   // 金色点缀
+$gold-soft: #c9a961;
+$text:      #eef2f8;   // 主文字
+$muted:     #8f9bb5;   // 次要文字
+$line:      rgba(255, 255, 255, 0.08);
+
+// ---------- 圆角 / 尺寸 ----------
+$card-width: 640px;
+$radius:     20px;
+
+// ---------- 混入 ----------
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ============================================================
+//  基础
+// ============================================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  @include flex-center;
+  font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: $text;
+  background:
+    radial-gradient(900px 600px at 15% 10%, rgba(230, 196, 122, 0.08), transparent 60%),
+    radial-gradient(1000px 700px at 90% 90%, rgba(70, 110, 200, 0.16), transparent 60%),
+    $bg-deep;
+  padding: 24px;
+}
+
+// ============================================================
+//  舞台（让卡片居中，并带一点透视感）
+// ============================================================
+.stage {
+  perspective: 1200px;
+}
+
+// ============================================================
+//  名片卡片
+// ============================================================
+.card {
+  position: relative;
+  width: $card-width;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  overflow: hidden;
+  border-radius: $radius;
+  background: linear-gradient(135deg, $bg-card 0%, $bg-card-2 100%);
+  border: 1px solid $line;
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease-out, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow:
+      0 40px 80px -24px rgba(0, 0, 0, 0.7),
+      0 0 42px -6px rgba(230, 196, 122, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  }
+
+  // 顶部金色光晕
+  &__glow {
+    position: absolute;
+    top: -40%;
+    left: 30%;
+    width: 60%;
+    height: 90%;
+    background: radial-gradient(closest-side, rgba(230, 196, 122, 0.16), transparent);
+    filter: blur(6px);
+    pointer-events: none;
+  }
+}
+
+// ============================================================
+//  左侧 · 头像区
+// ============================================================
+.card__media {
+  flex: 0 0 42%;
+  @include flex-center;
+  position: relative;
+  background: linear-gradient(160deg, rgba(230, 196, 122, 0.06), transparent 60%);
+  border-right: 1px solid $line;
+}
+
+.avatar {
+  position: relative;
+  width: 60%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 5px;
+  background: conic-gradient(from 180deg, $gold, transparent 60%, $gold);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    filter: saturate(0.92) contrast(1.02);
+  }
+
+  &__ring {
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+  }
+}
+
+// ============================================================
+//  右侧 · 信息区
+// ============================================================
+.card__body {
+  flex: 1;
+  padding: 34px 36px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.role {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: $gold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.name {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #ffffff, #dfe6f3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: $muted;
+  margin-bottom: 20px;
+  max-width: 32ch;
+}
+
+// ---------- 联系方式 ----------
+.contacts {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 7px 10px;
+  margin-left: -10px;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(3px);
+
+    .contact__icon {
+      color: $gold;
+    }
+  }
+
+  &__icon {
+    @include flex-center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    color: $muted;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $line;
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  &__text {
+    font-size: 13px;
+    color: $text;
+    opacity: 0.92;
+    user-select: none;
+  }
+}
+
+.hint {
+  font-size: 11px;
+  color: $muted;
+  opacity: 0.6;
+  letter-spacing: 0.04em;
+}
+
+// ============================================================
+//  复制提示 Toast
+// ============================================================
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translate(-50%, 20px);
+  padding: 10px 18px;
+  font-size: 13px;
+  color: #141a2e;
+  background: $gold;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 12px 30px -8px rgba(230, 196, 122, 0.5);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+// ============================================================
+//  响应式
+// ============================================================
+@media (max-width: 700px) {
+  .card {
+    flex-direction: column;
+    aspect-ratio: auto;
+    width: min(380px, 100%);
+  }
+
+  .card__media {
+    flex: none;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid $line;
+  }
+
+  .avatar {
+    width: 128px;
+  }
+
+  .card__body {
+    padding: 24px 26px 26px;
+  }
+
+  .name {
+    font-size: 28px;
+  }
+}

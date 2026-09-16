@@ -1,13 +1,13 @@
 @use "config.scss" as c;
 @use "nav.scss";
 @use "main.scss";
+@use "theme.scss";
 
 html,
 body {
-  background-color: c.$theme-color--back;
-  color: c.$theme-color--font;
+  background-color: var(--bg);
+  color: var(--fg);
   box-sizing: border-box;
-  // position: relative;
 }
 
 header {
@@ -20,17 +20,5 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00000016;
+  background-color: var(--footer-bg);
 }
-//建议日后和JS一起使用
-// .go-to-top {
-//   // position: absolute;
-//   position: sticky;
-//   display: flex;
-//   justify-content: flex-end;
-
-//   top: calc(100vh - 4rem);
-//   img {
-//     max-width: 4rem;
-//   }
-// }

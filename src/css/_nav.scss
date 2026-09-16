@@ -1,10 +1,9 @@
 @use "config.scss" as c;
-@use "sass:color";
 
 nav {
   //导航栏+
-  background-color: c.$theme-color--back;
-  color: c.$theme-color--font;
+  background-color: var(--bg);
+  color: var(--fg);
 
   .nav-toggle,
   .nav-toggle-label {
@@ -28,8 +27,7 @@ nav {
         display: inline-block;
         padding: 1rem 2rem;
         border-radius: 1rem;
-        // @include c.box-shadow--mixin;
-        box-shadow: 0 0.15rem 0.6rem -0.5rem rgba(128, 128, 128, 0.592);
+        box-shadow: 0 0.15rem 0.6rem -0.5rem var(--shadow);
       }
       &:hover span {
         //添加一些动态效果，嵌套实现，解决抖动问题
@@ -39,7 +37,7 @@ nav {
       &:first-child {
         //特殊化网站的logo
         flex: auto;
-        color: c.$theme-color;
+        color: var(--primary);
         font: normal normal bold 1.5rem sans-serif;
       }
       &:first-child:hover {
@@ -49,8 +47,12 @@ nav {
         animation: none;
       }
       a {
-        color: c.$theme-color--font;
+        color: var(--fg);
         text-decoration: none;
+        &.active {
+          color: var(--primary);
+          font-weight: bold;
+        }
       }
     }
   }
@@ -62,19 +64,11 @@ nav {
   }
   50% {
     transform: translateY(-0.7rem);
-    background-color: color.mix(
-      c.$theme-color--font,
-      c.$theme-color--back,
-      10%
-    );
+    background-color: var(--nav-hover);
   }
   100% {
     transform: translateY(0);
-    background-color: color.mix(
-      c.$theme-color--font,
-      c.$theme-color--back,
-      20%
-    );
+    background-color: var(--nav-hover);
   }
 }
 
@@ -91,7 +85,7 @@ nav {
       pointer-events: none;
     }
     .nav-toggle:focus-visible ~ .nav-toggle-label {
-      outline: 2px solid c.$theme-color;
+      outline: 2px solid var(--primary);
       outline-offset: 3px;
     }
     .nav-toggle-label {
@@ -108,7 +102,7 @@ nav {
       span {
         width: 1.4rem;
         height: 0.15rem;
-        background-color: #333;
+        background-color: var(--fg);
         border-radius: 0.1rem;
         transition: transform 0.2s ease, opacity 0.2s ease;
       }

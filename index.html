@@ -6,24 +6,25 @@
     <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
     <title>StayInTop | 前端开发作品集</title>
 
+    <script>
+      // 在渲染前设置主题，避免暗色/主题色闪白
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t) {
+            t = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+          var c = localStorage.getItem("theme-color");
+          if (c) document.documentElement.style.setProperty("--primary", c);
+        } catch (e) {}
+      })();
+    </script>
+
     <link rel="stylesheet" href="./src/css/normalize.css" />
-    <link rel="stylesheet" href="./src/css/style.css?v=3" />
-    <style>
-      .pagination {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        margin-top: 24px;
-      }
-      .page-btn {
-        padding: 4px 12px;
-        cursor: pointer;
-      }
-      .page-btn.active {
-        background: #222;
-        color: white;
-      }
-    </style>
+    <link rel="stylesheet" href="./src/css/style.css?v=4" />
   </head>
 
   <body>
@@ -37,13 +38,13 @@
       <ol>
         <li>StayInTop</li>
         <li>
-          <span><a href="">首页</a></span>
+          <span><a href="#/home" data-route="home">首页</a></span>
         </li>
         <li>
-          <span><a href="">博客</a></span>
+          <span><a href="#/blog" data-route="blog">博客</a></span>
         </li>
         <li>
-          <span><a href="">关于</a></span>
+          <span><a href="#/about" data-route="about">关于</a></span>
         </li>
       </ol>
     </nav>
@@ -51,205 +52,38 @@
     <header>
       <h1>StayInTop · 前端学习作品集</h1>
     </header>
-    <main>
-      <section>
-        <h2>关于本站</h2>
-        <p>
-          这里记录我学习前端开发的过程：从静态网页复刻，到 JavaScript 小练习，
-          再到 AI 辅助的 Vibe Coding 尝试。每一个项目都是一次从零到一的实践。
-        </p>
-        <p>
-          本站由原生 HTML、CSS（Sass）和少量 JavaScript 编写，托管在 GitHub Pages。
-          如果发现 Bug 或有建议，欢迎交流。
-        </p>
-      </section>
 
-      <section id="static-item">
-        <h2>静态网页</h2>
-        <div class="under-line"></div>
-        <div class="static-item--container">
-          <div class="static-item--box">
-            <figure>
-              <img
-                src="./source/pic/static-item--pic1.webp"
-                alt="项目1设计图参考图"
-                title="项目1设计图参考图"
-                loading="lazy"
-                decoding="async"
-              />
-              <a
-                href="./project/project-1.html"
-                target="_self"
-                title="点击跳转"
-              >
-                <figcaption>
-                  <strong>项目1 UiTab新标签页复刻 | 示例图</strong>
-                  <p>
-                    使用 Grid 与 Flex 布局实现，并针对移动端做了简单的响应式适配。
-                  </p>
-                </figcaption>
-              </a>
-            </figure>
-          </div>
-          <div class="static-item--box">
-            <figure>
-              <img
-                src="./source/pic/static-item--pic2.webp"
-                alt="项目2设计图参考图"
-                title="项目2设计图参考图"
-                loading="lazy"
-                decoding="async"
-              />
-              <a
-                href="./project/project-2.html"
-                target="_self"
-                title="点击跳转"
-              >
-                <figcaption>
-                  <strong>项目2 bilibili主页复刻 | 示例图</strong>
-                  <p>
-                    未做移动端适配，因为原网页移动端与 PC 端差异较大。要点包括顶部导航栏、中部分类栏、内容区以及响应式列数。
-                  </p>
-                </figcaption>
-              </a>
-            </figure>
-          </div>
-          <div class="static-item--box">
-            <figure>
-              <img
-                src="./source/pic/static-item--pic3.webp"
-                alt="项目3设计图参考图"
-                title="项目3设计图参考图"
-                loading="lazy"
-                decoding="async"
-              />
-              <a
-                href="./project/project-3.html"
-                target="_self"
-                title="点击跳转"
-              >
-                <figcaption>
-                  <strong>项目3 图片轮播页面学习 | 示例图</strong>
-                  <p>
-                    项目源自 CodePen（AMKohn/pen/DZYKEV）。核心原理是利用
-                    :checked 伪类选择器和单选按钮实现纯 CSS 轮播。
-                  </p>
-                </figcaption>
-              </a>
-            </figure>
-          </div>
-          <div class="static-item--box">
-            <figure>
-              <img
-                src="./source/pic/static-item--pic4.webp"
-                alt="项目4设计图参考图"
-                title="项目4设计图参考图"
-                loading="lazy"
-                decoding="async"
-              />
-              <a
-                href="./project/project-4.html"
-                target="_self"
-                title="点击跳转"
-              >
-                <figcaption>
-                  <strong>项目4 CSS计数器 | 示例图</strong>
-                  <p>利用 counter-reset 计数器，让 li 标签按奇、偶数交替排列显示。</p>
-                </figcaption>
-              </a>
-            </figure>
-          </div>
-        </div>
-        <div class="pagination" id="static-item--page"></div>
-        <!-- <a href="#nav" class="go-to-top">
-          <img src="./source/pic/go-to-top.png" alt="回到顶部" />
-        </a> -->
-      </section>
+    <main id="view"></main>
 
-      <section>
-        <h2>
-          JavaScript小练习
-        </h2>
-        <p>内容整理中，敬请期待。</p>
-      </section>
+    <footer>
+      &copy;<span id="year">2026</span>&nbsp;StayInTop All rights reserved
+    </footer>
 
-      <section>
-        <h2>
-          Vibe Coding
-        </h2>
-        <p>内容整理中，敬请期待。</p>
-      </section>
-    </main>
-    <footer>&copy;<span id="year">2026</span>&nbsp;StayInTop All rights reserved</footer>
+    <button
+      id="theme-toggle-btn"
+      class="theme-toggle"
+      aria-label="主题设置"
+      title="主题设置"
+    >
+      ⚙️
+    </button>
+    <div id="theme-panel" class="theme-panel" hidden>
+      <div class="theme-panel__row">
+        <span class="theme-panel__label">亮暗模式</span>
+        <button id="dark-toggle" class="theme-panel__dark-btn" type="button">
+          🌙 深色
+        </button>
+      </div>
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">主题色</span>
+        <div id="theme-swatches" class="theme-swatches"></div>
+      </div>
+      <div class="theme-panel__row">
+        <span class="theme-panel__label">自定义</span>
+        <input type="color" id="theme-color-picker" value="#2e7be0" />
+      </div>
+    </div>
 
-    <script defer>
-      let cards = document.querySelectorAll(".static-item--box");
-      let pages = document.getElementById("static-item--page");
-      const container = document.querySelector(".static-item--container");
-      const page_count = 2; // 每页展示卡片数量
-      let total_page = Math.ceil(cards.length / page_count); // 计算总页数
-      let current_page = 1; //当前页数
-
-      // 渲染分页按钮
-      function createPage() {
-        pages.innerHTML = "";
-        for (let i = 1; i <= total_page; i++) {
-          const btn = document.createElement("button");
-          btn.innerText = i;
-          // 当前页增加active类用于高亮
-          btn.className = i === current_page ? "page-btn active" : "page-btn";
-          btn.addEventListener("click", () => {
-            current_page = i;
-            showCards();
-            createPage();
-          });
-          pages.appendChild(btn);
-        }
-      }
-
-      // 根据当前页显示/隐藏卡片
-      function showCards() {
-        const start = (current_page - 1) * page_count;
-        const end = start + page_count;
-        cards.forEach((card, index) => {
-          if (index >= start && index < end) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      }
-
-      // 锁定容器最小高度，避免切页时各页卡片总高度不同导致页面跳动
-      function lockContainerHeight() {
-        const savedPage = current_page;
-        let maxHeight = 0;
-        for (let p = 1; p <= total_page; p++) {
-          current_page = p;
-          showCards();
-          maxHeight = Math.max(maxHeight, container.offsetHeight);
-        }
-        // offsetHeight 含 padding，而 min-height 作用于内容区，需减去上下 padding
-        const style = getComputedStyle(container);
-        const padY =
-          parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
-        container.style.minHeight = Math.max(0, maxHeight - padY) + "px";
-        current_page = savedPage;
-        showCards();
-      }
-
-      // 页面初始化执行
-      createPage();
-      lockContainerHeight();
-      // 页脚年份自动更新
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      // 窗口尺寸变化时重新计算，避免缓存的最小高度失效
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(lockContainerHeight, 150);
-      });
-    </script>
+    <script src="./src/js/main.js" defer></script>
   </body>
 </html>

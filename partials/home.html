@@ -1,0 +1,141 @@
+<section class="home-intro">
+  <h2>你好，我是 StayInTop 👋</h2>
+  <p>
+    欢迎来到我的前端学习作品集。这里整理了我学习前端过程中的实践：
+    从静态网页复刻，到 JavaScript 小练习，再到 AI 辅助的 Vibe Coding 尝试。
+  </p>
+</section>
+
+<section class="cards-section" id="static-item">
+  <h2>静态网页</h2>
+  <div class="under-line"></div>
+  <div class="static-item--container">
+    <div class="static-item--box">
+      <figure>
+        <img
+          src="./source/pic/static-item--pic1.webp"
+          alt="项目1设计图参考图"
+          title="项目1设计图参考图"
+          loading="lazy"
+          decoding="async"
+        />
+        <a href="./project/project-1.html" target="_self" title="点击跳转">
+          <figcaption>
+            <strong>项目1 UiTab新标签页复刻 | 示例图</strong>
+            <p>
+              使用 Grid 与 Flex 布局实现，并针对移动端做了简单的响应式适配。
+            </p>
+          </figcaption>
+        </a>
+      </figure>
+    </div>
+    <div class="static-item--box">
+      <figure>
+        <img
+          src="./source/pic/static-item--pic2.webp"
+          alt="项目2设计图参考图"
+          title="项目2设计图参考图"
+          loading="lazy"
+          decoding="async"
+        />
+        <a href="./project/project-2.html" target="_self" title="点击跳转">
+          <figcaption>
+            <strong>项目2 bilibili主页复刻 | 示例图</strong>
+            <p>
+              未做移动端适配，因为原网页移动端与 PC 端差异较大。要点包括顶部导航栏、中部分类栏、内容区以及响应式列数。
+            </p>
+          </figcaption>
+        </a>
+      </figure>
+    </div>
+    <div class="static-item--box">
+      <figure>
+        <img
+          src="./source/pic/static-item--pic3.webp"
+          alt="项目3设计图参考图"
+          title="项目3设计图参考图"
+          loading="lazy"
+          decoding="async"
+        />
+        <a href="./project/project-3.html" target="_self" title="点击跳转">
+          <figcaption>
+            <strong>项目3 图片轮播页面学习 | 示例图</strong>
+            <p>
+              项目源自 CodePen（AMKohn/pen/DZYKEV）。核心原理是利用
+              :checked 伪类选择器和单选按钮实现纯 CSS 轮播。
+            </p>
+          </figcaption>
+        </a>
+      </figure>
+    </div>
+    <div class="static-item--box">
+      <figure>
+        <img
+          src="./source/pic/static-item--pic4.webp"
+          alt="项目4设计图参考图"
+          title="项目4设计图参考图"
+          loading="lazy"
+          decoding="async"
+        />
+        <a href="./project/project-4.html" target="_self" title="点击跳转">
+          <figcaption>
+            <strong>项目4 CSS计数器 | 示例图</strong>
+            <p>利用 counter-reset 计数器，让 li 标签按奇、偶数交替排列显示。</p>
+          </figcaption>
+        </a>
+      </figure>
+    </div>
+  </div>
+  <div class="pagination" id="static-item--page"></div>
+</section>
+
+<section class="cards-section" id="js-item">
+  <h2>JavaScript小练习</h2>
+  <div class="under-line"></div>
+  <div class="mini-card--container">
+    <a class="mini-card" href="Js_pro/project-1.html" title="点击打开">
+      <h3>Document 对象学习</h3>
+      <p>认识 Document 对象，练习操作页面文档的基础方法。</p>
+    </a>
+    <a class="mini-card" href="Js_pro/project-2.html" title="点击打开">
+      <h3>使用 Window 对象</h3>
+      <p>学习 Window 对象及其常用属性与方法。</p>
+    </a>
+    <a class="mini-card" href="Js_pro/project-3.html" title="点击打开">
+      <h3>使用 DOM 元素</h3>
+      <p>练习通过 DOM 获取、创建与修改页面元素。</p>
+    </a>
+    <a class="mini-card" href="Js_pro/project-4.html" title="点击打开">
+      <h3>为 DOM 元素设置样式</h3>
+      <p>练习用 JS 动态修改 DOM 元素的样式。</p>
+    </a>
+    <a class="mini-card" href="Js_pro/project-5.html" title="点击打开">
+      <h3>使用事件</h3>
+      <p>练习事件绑定与处理，掌握事件对象。</p>
+    </a>
+    <a class="mini-card" href="Js_pro/project-6.html" title="点击打开">
+      <h3>使用 Ajax</h3>
+      <p>学习用 Ajax 异步请求数据，含多界面切换示例。</p>
+    </a>
+  </div>
+  <div class="pagination" id="js-item--page"></div>
+</section>
+
+<section class="cards-section" id="vibe-item">
+  <h2>Vibe Coding</h2>
+  <div class="under-line"></div>
+  <div class="mini-card--container">
+    <a class="mini-card" href="Vibe_project/pro_1/index.html" title="点击打开">
+      <h3>待办事项 Todo List</h3>
+      <p>支持添加/完成/删除任务，含优先级、分类、搜索、拖拽排序、深色模式与本地存储。</p>
+    </a>
+    <a class="mini-card" href="Vibe_project/pro_2/index.html" title="点击打开">
+      <h3>个人名片</h3>
+      <p>名片式个人介绍页，鼠标悬停有 3D 倾斜效果，点击可复制联系方式。</p>
+    </a>
+    <a class="mini-card" href="Vibe_project/pro_3/index.html" title="点击打开">
+      <h3>倒计时</h3>
+      <p>设置目标日期，实时显示剩余天/时/分/秒，并按目标智能给出鼓励词。</p>
+    </a>
+  </div>
+</section>

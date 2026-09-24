@@ -1,0 +1,35 @@
+// 站点 logo 的可选字体：全部自托管在 src/font/ 下，只取了 latin 子集
+// （logo 是纯 ASCII，中文字符走系统字体即可）。
+// 不自托管的话国内访问 Google Fonts 基本拿不到字，本地预览也会失败。
+// 授权均为 SIL OFL 1.1，来源与版权见 src/font/LICENSES.md。
+//
+// 路径是相对本 CSS 文件的，文章页加载 ../src/css/style.css 时同样能定位到。
+// 字体仅在真正用到时才下载，所以选一个只会拉一个文件。
+
+@font-face {
+  font-family: "Dancing Script"; // 手写连笔
+  src: url("../font/dancing-script-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kaushan Script"; // 毛笔刷感
+  src: url("../font/kaushan-script-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Great Vibes"; // 花体，笔画最细最飘逸
+  src: url("../font/great-vibes-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pacifico"; // 圆润复古
+  src: url("../font/pacifico-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}

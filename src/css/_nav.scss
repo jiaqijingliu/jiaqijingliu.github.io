@@ -1,9 +1,17 @@
 @use "config.scss" as c;
 
 nav {
-  //导航栏+
+  // 固定顶端：向下滚动时导航一直可见
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: var(--bg);
-  color: var(--fg);
+  transition: box-shadow 0.2s ease;
+
+  // 只有滚动离开顶部才加分隔阴影，停在顶部时保持干净（见 site.js）
+  &.is-scrolled {
+    box-shadow: 0 0.1rem 0.9rem -0.25rem var(--shadow);
+  }
 
   .nav-toggle,
   .nav-toggle-label {
@@ -11,71 +19,70 @@ nav {
   }
 
   ol {
+    max-width: 92rem;
     margin: 0 auto;
-    padding: 0.5rem 3rem;
+    padding: 0 1.5rem;
+    height: 4.1rem;
     list-style-type: none;
-    @include c.box-shadow--mixin;
-    // flex 布局
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
     align-items: center;
+    gap: 0.25rem;
+
     li {
-      display: inline-block;
-      span {
-        display: inline-block;
-        padding: 1rem 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 0.15rem 0.6rem -0.5rem var(--shadow);
-      }
-      &:hover span {
-        //添加一些动态效果，嵌套实现，解决抖动问题
-        animation: UpAndDown 0.15s linear 0.05s 1 forwards;
-      }
+      display: flex;
 
       &:first-child {
-        //特殊化网站的logo
+        // 网站 logo 占满左侧，把其余导航项推到右边
         flex: auto;
-        color: var(--primary);
-        font: normal normal bold 1.5rem sans-serif;
       }
-      &:first-child:hover {
-        flex: auto;
-        background-color: transparent;
-        transform: none;
-        animation: none;
-      }
+
+      // 内边距加在 a 上而不是外层容器上，
+      // 这样整个矩形包围框都是可点区域
       a {
+        display: flex;
+        align-items: center;
+        padding: 0.65rem 1.15rem;
+        border-radius: 0.55rem;
         color: var(--fg);
         text-decoration: none;
+        font-size: 1rem;
+        white-space: nowrap;
+        transition: color 0.15s ease, background-color 0.15s ease;
+
+        &:hover {
+          color: var(--primary);
+          background-color: var(--nav-hover);
+        }
         &.active {
           color: var(--primary);
-          font-weight: bold;
+          font-weight: 700;
+          background-color: var(--nav-active);
+        }
+      }
+
+      // logo：主题色大字，字体可在设置面板里换，hover 时不加底色
+      &:first-child a {
+        padding-left: 0;
+        color: var(--primary);
+        // 花体字的 x-height 比无衬线小得多，同字号看起来会明显偏小，所以给得大
+        font-family: var(--logo-font);
+        font-size: 1.9rem;
+        font-weight: var(--logo-weight);
+        line-height: 1.2;
+        &:hover {
+          background-color: transparent;
         }
       }
     }
   }
 }
 
-@keyframes UpAndDown {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-0.7rem);
-    background-color: var(--nav-hover);
-  }
-  100% {
-    transform: translateY(0);
-    background-color: var(--nav-hover);
-  }
-}
-
 @media (max-width: 700px) {
   nav {
-    position: relative;
-
+    // sticky 会为绝对定位子元素建立包含块，汉堡按钮照常贴右上角
     .nav-toggle {
       display: block;
       position: absolute;
@@ -90,7 +97,7 @@ nav {
     }
     .nav-toggle-label {
       position: absolute;
-      top: 0.55rem;
+      top: 1rem;
       right: 0.9rem;
       display: flex;
       flex-direction: column;
@@ -121,30 +128,34 @@ nav {
       flex-direction: column;
       align-items: stretch;
       justify-content: flex-start;
-      padding: 0.6rem 1rem;
-      gap: 0.25rem;
+      height: auto;
+      padding: 0.5rem 1rem;
+      gap: 0.15rem;
 
       li {
         &:first-child {
           flex: none;
-          font-size: 1.2rem;
-          padding-right: 3rem;
+          a {
+            padding: 0.6rem 3rem 0.6rem 0; // 右侧留给汉堡按钮
+            font-size: 1.6rem;
+          }
         }
         &:not(:first-child) {
           display: none;
-          text-align: center;
-        }
-        span {
-          display: block;
-          padding: 0.55rem 0.6rem;
         }
         a {
+          justify-content: center;
+          padding: 0.6rem;
           font-size: 0.95rem;
         }
       }
     }
+    // 展开时底部补一点留白，垫在下方内容之上
+    .nav-toggle:checked ~ ol {
+      padding-bottom: 0.8rem;
+    }
     .nav-toggle:checked ~ ol li:not(:first-child) {
-      display: block;
+      display: flex;
     }
   }
 }

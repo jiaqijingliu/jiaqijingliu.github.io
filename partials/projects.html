@@ -1,0 +1,109 @@
+<section class="cards-section" id="projects">
+  <h2>项目</h2>
+  <div class="under-line"></div>
+
+  <div class="proj-blocks">
+    <article class="proj-block">
+      <div class="proj-block__head">
+        <h3>待办事项 Todo List</h3>
+        <a
+          class="proj-block__open"
+          href="Vibe_project/pro_1/index.html"
+          target="_blank"
+          rel="noopener"
+          >打开 →</a
+        >
+      </div>
+      <dl class="proj-block__facts">
+        <dt>功能</dt>
+        <dd>
+          增删改查 · 三档优先级 · 标签（datalist 联想）· 截止日期与过期标记 ·
+          实时搜索 · 全部/未完成/已完成筛选 · 三种排序 · 拖拽排序 · 已完成自动沉底并折叠 ·
+          三套主题 · 清空已完成 · 二次确认清空全部 · 四种空状态
+        </dd>
+        <dt>技术</dt>
+        <dd>
+          CSS 自定义属性做三套可持久化主题 · localStorage 脏数据回填（旧记录自动补缺失字段）·
+          HTML5 拖放 API · 用 <code>textContent</code> 构建 DOM，无 XSS 面 ·
+          二次确认替代 <code>window.confirm()</code>
+        </dd>
+        <dt>规模</dt>
+        <dd>约 2200 行（JS 584 / SCSS 803，另有编译产物）</dd>
+        <dt>已知不足</dt>
+        <dd>
+          每次改动都整体重渲染（<code>innerHTML = ""</code>），副作用是列表滚动位置归零、
+          每行的入场动画会重放；拖拽只在「默认排序 + 未筛选」时可用
+        </dd>
+      </dl>
+    </article>
+
+    <article class="proj-block">
+      <div class="proj-block__head">
+        <h3>个人名片</h3>
+        <a
+          class="proj-block__open"
+          href="Vibe_project/pro_2/index.html"
+          target="_blank"
+          rel="noopener"
+          >打开 →</a
+        >
+      </div>
+      <dl class="proj-block__facts">
+        <dt>功能</dt>
+        <dd>
+          鼠标跟随的 3D 卡片倾斜 · 点击任意联系方式复制到剪贴板 · 复制结果 toast 提示
+        </dd>
+        <dt>技术</dt>
+        <dd>
+          <code>matchMedia("(hover: hover)")</code> 在触屏设备上关掉倾斜 ·
+          <code>navigator.clipboard</code> 不可用时回退到 <code>execCommand("copy")</code> ·
+          名片用 <code>aspect-ratio: 16/9</code> 固定比例 ·
+          <code>conic-gradient</code> 画头像环 · 渐变文字
+        </dd>
+        <dt>规模</dt>
+        <dd>约 660 行（JS 81 / SCSS 282）</dd>
+        <dt>已知不足</dt>
+        <dd>
+          联系方式那几行是 <code>&lt;li&gt;</code> 只绑了 click，没有 <code>tabindex</code>，
+          键盘用户用不了复制功能；页面上的姓名与邮箱是占位示例，不是真实信息
+        </dd>
+      </dl>
+    </article>
+
+    <article class="proj-block">
+      <div class="proj-block__head">
+        <h3>倒计时</h3>
+        <a
+          class="proj-block__open"
+          href="Vibe_project/pro_3/index.html"
+          target="_blank"
+          rel="noopener"
+          >打开 →</a
+        >
+      </div>
+      <dl class="proj-block__facts">
+        <dt>功能</dt>
+        <dd>
+          设定目标名称与日期 · 每秒刷新剩余天/时/分/秒 · 4 档显示精度切换 ·
+          按目标关键词匹配鼓励语 · 区分「已过去 / 就是今天 / 临近 7 天 / 普通」 ·
+          目标与精度设置持久化 · 日期选择器屏蔽过去的日期
+        </dd>
+        <dt>技术</dt>
+        <dd>
+          SCSS map + <code>@each</code> 一次生成 4 档显隐规则，JS 只改
+          <code>data-detail</code>，显示逻辑全在 CSS ·
+          <code>backdrop-filter</code> 毛玻璃 + 三个 <code>blur(90px)</code> 渐变光斑动画 ·
+          <code>font-variant-numeric: tabular-nums</code> 防止数字跳动 ·
+          哈希函数从鼓励语池确定性取样，避免每秒换一句
+        </dd>
+        <dt>规模</dt>
+        <dd>约 1100 行（JS 262 / SCSS 397）</dd>
+        <dt>已知不足</dt>
+        <dd>
+          <code>new Date("YYYY-MM-DD")</code> 按 UTC 解析，在负时区会整体差一天；
+          鼓励语的缓存键取错，页面一直开着时不会在跨过 7 天或当天时更新文案
+        </dd>
+      </dl>
+    </article>
+  </div>
+</section>

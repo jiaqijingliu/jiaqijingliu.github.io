@@ -1,6 +1,9 @@
 @use "config.scss" as c;
+@use "font.scss";
 @use "nav.scss";
 @use "main.scss";
+@use "project.scss";
+@use "post.scss";
 @use "theme.scss";
 
 html,
@@ -10,9 +13,16 @@ body {
   box-sizing: border-box;
 }
 
-header {
-  max-width: 70vw;
-  margin: 5em auto 2em;
+// 正文字体由设置面板决定。logo 和代码块各自声明了 font-family，不受这里影响。
+body {
+  font-family: var(--text-font);
+}
+
+// 导航是 sticky 的，锚点跳转要预留它的高度，否则标题会被压在导航下面。
+// 这里不加 scroll-behavior: smooth —— 它会让路由切换时的 window.scrollTo(0,0)
+// 也变成动画滚动，看起来像页面在往上飘。
+html {
+  scroll-padding-top: 5.2rem;
 }
 
 footer {

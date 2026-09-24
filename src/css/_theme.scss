@@ -1,8 +1,9 @@
-//主题设置：浮动齿轮按钮 + 弹出面板
+//主题设置：悬浮齿轮按钮 + 弹出面板
+//按钮可拖动，松手吸附到左/右边缘并半藏起来，鼠标移上去或面板打开时才滑出来。
+//当前吸附在哪一侧写在 <html data-dock>，纵向位置写在 --dock-y（见 site.js）
 .theme-toggle {
   position: fixed;
-  right: 1.2rem;
-  bottom: 1.2rem;
+  z-index: 120; // 要盖过 sticky 导航的 100
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -12,26 +13,65 @@
   font-size: 1.3rem;
   line-height: 1;
   cursor: pointer;
+  touch-action: none; // 拖动时不要让浏览器把手势当成页面滚动
   box-shadow: 0 0.2rem 0.6rem var(--shadow);
-  z-index: 30;
-  transition: transform 0.15s ease;
-  &:hover {
-    transform: scale(1.08);
-  }
+  transition: transform 0.25s ease;
+}
+
+// 吸附在边缘时默认只露出 1rem 宽的一条，避免挡住正文
+html[data-dock="right"] .theme-toggle {
+  right: var(--dock-gap);
+  left: auto;
+  top: var(--dock-y);
+  transform: translateX(var(--dock-hide));
+}
+html[data-dock="left"] .theme-toggle {
+  left: var(--dock-gap);
+  right: auto;
+  top: var(--dock-y);
+  transform: translateX(calc(-1 * var(--dock-hide)));
+}
+
+// 悬停 / 键盘聚焦 / 面板已打开 —— 三种情况都完全滑出
+// （面板打开时必须保持滑出，否则鼠标一移进面板按钮就缩回去了）
+html[data-dock="right"] .theme-toggle:hover,
+html[data-dock="right"] .theme-toggle:focus-visible,
+html[data-dock="right"] .theme-toggle.is-open,
+html[data-dock="left"] .theme-toggle:hover,
+html[data-dock="left"] .theme-toggle:focus-visible,
+html[data-dock="left"] .theme-toggle.is-open {
+  transform: translateX(0);
+}
+
+// 拖动中：改用内联的 left/top 定位，上面那套都要让位。
+// 内联样式优先级高于任何选择器，所以 left/top 能生效，只需把 right/bottom 清掉。
+html[data-dock] .theme-toggle.is-dragging {
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  transform: none;
+  transition: none;
+  cursor: grabbing;
 }
 
 .theme-panel {
   position: fixed;
-  right: 1.2rem;
-  bottom: 4.6rem;
-  width: 15rem;
+  z-index: 120;
+  width: 17.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
   background: var(--surface);
   color: var(--fg);
   border: 1px solid var(--border);
   border-radius: 0.8rem;
   padding: 1rem;
   box-shadow: 0 0.4rem 1.2rem var(--shadow);
-  z-index: 30;
+  // top 由 JS 在打开时算好写进内联样式（详见 site.js 的 placePanel）
+
+  &[hidden] {
+    display: none;
+  }
 
   &__row {
     display: flex;
@@ -39,18 +79,30 @@
     justify-content: space-between;
     gap: 0.8rem;
     margin-bottom: 0.9rem;
-    &:last-child {
+    &:last-of-type {
       margin-bottom: 0;
     }
     &--col {
       flex-direction: column;
       align-items: stretch;
+      gap: 0.5rem;
     }
   }
 
   &__label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
     font-size: 0.9rem;
     color: var(--muted);
+  }
+
+  // 滑块旁边的实时数值
+  &__value {
+    color: var(--primary);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
   }
 
   &__dark-btn {
@@ -63,6 +115,60 @@
     &:hover {
       border-color: var(--primary);
       color: var(--primary);
+    }
+  }
+
+  &__reset {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    &:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+  }
+}
+
+// 面板贴在按钮滑出后那一侧，纵向位置由 JS 对齐按钮
+html[data-dock="right"] .theme-panel {
+  right: 4rem;
+}
+html[data-dock="left"] .theme-panel {
+  left: 4rem;
+}
+
+// 多选一的小按钮组（Logo 字体 / 正文字体 / 内容宽度 / 文本可选）
+.theme-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  .theme-opt {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 0.45rem;
+    background: var(--surface);
+    color: var(--fg);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease,
+      background-color 0.15s ease;
+    &:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    &.is-on {
+      border-color: var(--primary);
+      background: var(--nav-active);
+      color: var(--primary);
+      font-weight: 600;
     }
   }
 }
@@ -82,6 +188,11 @@
     &:hover {
       transform: scale(1.15);
     }
+    // 当前主题色：外圈套一层页面底色再套主题色，深浅背景下都看得清
+    &.is-on {
+      border-color: var(--bg);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
   }
 }
 
@@ -93,4 +204,17 @@
   padding: 0.1rem;
   background: var(--surface);
   cursor: pointer;
+}
+
+#font-size-range {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--primary); // 原生滑块的轨道/圆点跟着主题色走
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .theme-panel {
+    width: min(17.5rem, calc(100vw - 2.4rem));
+  }
 }

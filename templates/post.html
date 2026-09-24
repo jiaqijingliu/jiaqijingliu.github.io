@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
-    <title>StayInTop</title>
-    <meta name="description" content="StayInTop 的个人站点：技术栈、学习笔记与项目展示。" />
+    <title>{{title}} | StayInTop</title>
+    <meta name="description" content="{{summary}}" />
 
     <script>
       // 首次绘制前套用本地保存的外观设置，避免闪一下默认样式再跳回用户的选择。
@@ -37,8 +37,8 @@
       })();
     </script>
 
-    <link rel="stylesheet" href="./src/css/normalize.css" />
-    <link rel="stylesheet" href="./src/css/style.css?v=12" />
+    <link rel="stylesheet" href="../src/css/normalize.css" />
+    <link rel="stylesheet" href="../src/css/style.css?v=12" />
   </head>
 
   <body>
@@ -50,17 +50,26 @@
         <span></span>
       </label>
       <ol>
-        <li><a href="#/home" title="返回首页">StayInTop</a></li>
-        <li><a href="#/home" data-route="home">首页</a></li>
-        <li><a href="#/projects" data-route="projects">项目</a></li>
-        <li><a href="#/blog" data-route="blog">博客</a></li>
-        <li><a href="#/about" data-route="about">关于</a></li>
+        <li><a href="../#/home" title="返回首页">StayInTop</a></li>
+        <li><a href="../#/home">首页</a></li>
+        <li><a href="../#/projects">项目</a></li>
+        <li><a href="../#/blog">博客</a></li>
+        <li><a href="../#/about">关于</a></li>
       </ol>
     </nav>
 
-
-
-    <main id="view"></main>
+    <main>
+      <article class="post">
+        <a class="post__back" href="../#/blog">← 返回博客</a>
+        <h1 class="post__title">{{title}}</h1>
+        <div class="post__meta">
+          <time datetime="{{date}}">{{date}}</time>
+          <span class="post__read">{{readTime}}</span>
+          <div class="post__tags">{{tags}}</div>
+        </div>
+        <div class="post__content">{{content}}</div>
+      </article>
+    </main>
 
     <footer>
       &copy;<span id="year">2026</span>&nbsp;StayInTop All rights reserved
@@ -129,7 +138,6 @@
       </button>
     </div>
 
-    <script src="./src/js/site.js" defer></script>
-    <script src="./src/js/main.js" defer></script>
+    <script src="../src/js/site.js" defer></script>
   </body>
 </html>

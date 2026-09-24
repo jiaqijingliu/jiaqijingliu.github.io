@@ -1,4 +1,4 @@
-//主题变量：CSS 自定义属性，运行时由 JS 切换（亮/暗 + 主题色）
+//主题变量：CSS 自定义属性，运行时由 JS 切换（亮/暗 + 主题色 + 各种偏好）
 :root {
   --bg: #ffffff; // 页面/导航背景
   --surface: #ffffff; // 卡片背景
@@ -8,8 +8,29 @@
   --on-primary: #ffffff; // 主题色上的文字
   --border: rgba(128, 128, 128, 0.28);
   --shadow: rgba(128, 128, 128, 0.418);
-  --nav-hover: #e8e8e8;
-  --footer-bg: rgba(0, 0, 0, 0.086);
+  // 下面三个都从 --primary 混出来，改主题色时会跟着变
+  --nav-hover: color-mix(in srgb, var(--primary) 10%, var(--bg));
+  --nav-active: color-mix(in srgb, var(--primary) 18%, var(--bg));
+  --footer-bg: color-mix(in srgb, var(--primary) 8%, var(--bg));
+
+  // 内容宽度（「内容宽度」选项会覆盖这两个）
+  --content-max: 70vw;
+  --reading-max: 46rem;
+
+  // 站点 logo 字体（「Logo 字体」选项会覆盖这两个）
+  --logo-font: "Dancing Script", "Segoe Script", cursive;
+  --logo-weight: 700;
+
+  // 正文字体（「正文字体」选项会覆盖）
+  --text-font: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+
+  // 悬浮按钮吸附到边缘后只露出的那一小条
+  --dock-gap: 0.6rem;
+  // 3rem 宽的按钮推出去 1.6rem，露出 1.4rem 当把手。
+  // 圆形被推出后露出的是月牙形，实际可点宽度比这个数还窄，所以别调太小。
+  --dock-hide: 2.2rem;
+  --dock-y: 45%;
 }
 
 [data-theme="dark"] {
@@ -19,8 +40,90 @@
   --muted: #9aa3af;
   --border: rgba(255, 255, 255, 0.12);
   --shadow: rgba(0, 0, 0, 0.5);
-  --nav-hover: #2b3038;
-  --footer-bg: rgba(255, 255, 255, 0.06);
+  // 深色底上同样的比例会显得很淡，所以调高
+  --nav-hover: color-mix(in srgb, var(--primary) 20%, var(--bg));
+  --nav-active: color-mix(in srgb, var(--primary) 34%, var(--bg));
+  --footer-bg: color-mix(in srgb, var(--primary) 15%, var(--bg));
+}
+
+/* ===== 用户偏好 =====
+   值写在 CSS、开关写在 data-* 属性上。
+   这样 <head> 里的内联脚本只需要 setAttribute 一行就能在首次绘制前生效，
+   不必把整个对照表在 JS 里再抄一份。*/
+
+// ---- Logo 字体 ----
+html[data-logo-font="script"] {
+  --logo-font: "Dancing Script", "Segoe Script", cursive;
+  --logo-weight: 700;
+}
+html[data-logo-font="brush"] {
+  --logo-font: "Kaushan Script", "Segoe Script", cursive;
+  --logo-weight: 400;
+}
+html[data-logo-font="elegant"] {
+  --logo-font: "Great Vibes", "Snell Roundhand", cursive;
+  --logo-weight: 400;
+}
+html[data-logo-font="round"] {
+  --logo-font: "Pacifico", "Comic Sans MS", cursive;
+  --logo-weight: 400;
+}
+
+// ---- 正文字体 ----
+// 中文正文不适合塞网字体（一个中文字库动辄几 MB），所以全部用系统字体栈，
+// 靠汉字字形本身的风格差异（黑 / 宋 / 楷 / 仿宋 / 圆）拉开观感。
+// 每个栈都写了 macOS 和 Windows 两边的字体名，谁生效由系统决定。
+// 注意：实测等宽字体（Consolas 等）对中文完全无效 —— CJK 会回落到默认衬线字体，
+// 渲染结果和「宋体」逐像素相同，只有英文会变，所以没做成选项。
+html[data-font="sans"] {
+  --text-font: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+}
+html[data-font="serif"] {
+  --text-font: "Songti SC", "SimSun", "STSong", Georgia, serif;
+}
+html[data-font="kai"] {
+  --text-font: "Kaiti SC", "KaiTi", "STKaiti", "楷体", cursive;
+}
+html[data-font="fangsong"] {
+  // FangSong 排前面：它是 Windows 自带的 simfang.ttf，而 STFangsong 一般随 Office
+  // 安装，不一定有。macOS 上没有 FangSong，会落到 STFangsong。
+  --text-font: "FangSong", "STFangsong", "仿宋", "Songti SC", serif;
+}
+html[data-font="rounded"] {
+  // 这里原来只写了 ui-rounded 和 Hiragino Maru Gothic ProN，两者都是 macOS 专有，
+  // 在 Windows 上一路落空、最后落到 Microsoft YaHei —— 和「无衬线」渲染逐像素相同，
+  // 是个不起作用的选项。补上 Windows 的幼圆和 macOS 的圆体-简。
+  --text-font: "Yuanti SC", "YouYuan", "幼圆", ui-rounded,
+    "Hiragino Maru Gothic ProN", sans-serif;
+}
+
+// ---- 文本能否被鼠标选中 ----
+html[data-select="off"] {
+  user-select: none;
+}
+html[data-select="on"] {
+  user-select: auto;
+}
+// 表单控件要单独开回来。注意必须写 text 而不是 auto ——
+// auto 的规则是「父元素为 none 时自己也 none」，等于没写。
+input,
+textarea {
+  user-select: text;
+}
+
+// ---- 内容宽度 ----
+html[data-width="sm"] {
+  --content-max: 60vw;
+  --reading-max: 40rem;
+}
+html[data-width="md"] {
+  --content-max: 70vw;
+  --reading-max: 46rem;
+}
+html[data-width="lg"] {
+  --content-max: 86vw;
+  --reading-max: 58rem;
 }
 
 @mixin box-shadow--mixin($hoffset:0, $voffset:0.1rem, $blur:0.5rem, $spread:0) { //盒子阴影预设

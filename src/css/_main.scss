@@ -1,20 +1,11 @@
 @use "config.scss" as c;
 
 main {
-  max-width: 70vw;
+  max-width: var(--content-max);
   margin: 4rem auto;
 
   section {
-    margin-bottom: 3rem;
-  }
-
-  // 文字类区块（首页介绍 / 关于）
-  .home-intro {
-    max-width: 65ch;
-    p {
-      color: var(--muted);
-      line-height: 1.7;
-    }
+    margin-bottom: 4rem;
   }
 
   // 卡片类区块：居中标题 + 下划线
@@ -29,179 +20,89 @@ main {
     border-radius: 1rem;
   }
 
-  .static-item--container {
-    //盒子主体
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-
-    gap: 2rem;
-    grid-auto-flow: row;
-    justify-items: center;
-    align-items: stretch;
-  }
-
-  .static-item--box {
-    background: var(--surface);
-    &:hover {
-      transform: translateY(-0.3rem);
-      transition: transform 0.1s ease-in;
-    }
-    @include c.box-shadow--mixin(
-      $hoffset: 0.2rem,
-      $voffset: 0.3rem,
-      $blur: 0.5rem,
-      $spread: 0.1rem
-    );
-    border-radius: 1rem;
-    overflow: hidden;
-    figure {
-      margin: 0;
-    }
-    a {
-      text-decoration: none;
-      color: var(--fg);
-      &:hover {
-        color: var(--primary);
-      }
-    }
-    figcaption {
-      text-align: left;
-      padding: 1.5rem;
-      line-height: 1.5;
-    }
-    img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-  }
-
-  // 迷你卡片（JavaScript小练习 / Vibe Coding）
-  .mini-card--container {
-    width: 80%;
-    margin: 2rem auto 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1.5rem;
-    justify-items: center;
-  }
-  .mini-card {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: left;
-    padding: 1.4rem 1.5rem;
-    border-radius: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: var(--fg);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    &:hover {
-      transform: translateY(-0.3rem);
-      box-shadow: 0 0.3rem 0.8rem var(--shadow);
-      h3 {
-        color: var(--primary);
-      }
-    }
-    h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
-      color: var(--primary);
-    }
-    p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-  }
-
-  // 博客列表
-  .blog-note {
+  // 首页 / 关于页的文字介绍
+  .hero,
+  .about-intro {
     text-align: center;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  .blog-list {
-    text-align: left;
-    max-width: 50rem;
-    margin: 2rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-  .blog-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 0.8rem;
-    padding: 1.2rem 1.5rem;
-    h3 {
-      margin: 0 0 0.3rem;
-      color: var(--primary);
-    }
-    time {
-      display: inline-block;
-      margin-bottom: 0.5rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
+    max-width: 46rem;
+    margin: 0 auto;
     p {
-      margin: 0;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.8;
     }
   }
 
-  // 分页
-  .pagination {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 24px;
-  }
-  .page-btn {
-    padding: 4px 12px;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--fg);
-    border-radius: 0.4rem;
-    &:hover {
-      border-color: var(--primary);
+  // “查看全部”链接
+  .more-link {
+    margin-top: 2rem;
+    a {
       color: var(--primary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      &:hover {
+        text-decoration: underline;
+      }
     }
-  }
-  .page-btn.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: var(--on-primary);
   }
 }
 
+// 博客列表
+main .blog-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+main .blog-list {
+  text-align: left;
+  max-width: 50rem;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+main .blog-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  padding: 1.2rem 1.5rem;
+  transition: border-color 0.15s ease;
+  &:hover {
+    border-color: var(--primary);
+  }
+  h3 {
+    margin: 0 0 0.4rem;
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+}
+main .blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+  time,
+  .blog-read {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+}
+main .blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
 @media (max-width: 700px) {
-  main .static-item--container {
-    grid-template-columns: 1fr !important; //注意优先级等问题！！！！！
-    width: 100%;
-    gap: 1.2rem;
-  }
-
-  main .static-item--box img {
-    height: 160px;
-  }
-
-  main .static-item--box figcaption {
-    font-size: 0.9rem;
-    padding: 0.9rem 1rem;
-    line-height: 1.4;
-  }
-
-  main .mini-card--container {
-    width: 100%;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  main {
+    margin: 2.5rem auto;
   }
 }

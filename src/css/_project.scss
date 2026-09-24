@@ -1,0 +1,289 @@
+@use "config.scss" as c;
+
+main {
+  // 行内代码（技术名词 / API 名）
+  code {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 0.88em;
+    padding: 0.08em 0.35em;
+    border-radius: 0.25rem;
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+    color: var(--primary);
+  }
+
+  // ---------- 首页：关键数字 ----------
+  .stat-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 3.5rem;
+    margin-top: 2.5rem;
+  }
+  .stat {
+    text-align: center;
+    &__num {
+      display: block;
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 1.2;
+      color: var(--primary);
+    }
+    &__label {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  }
+
+  // ---------- 首页：项目 / 笔记的简述列表 ----------
+  .brief-list {
+    list-style: none;
+    max-width: 50rem;
+    margin: 2rem auto 0;
+    padding: 0;
+    text-align: left;
+    border-top: 1px solid var(--border);
+  }
+  .brief-list__item {
+    border-bottom: 1px solid var(--border);
+  }
+  .brief-list__link {
+    display: block;
+    padding: 0.9rem 0.6rem;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    color: var(--fg);
+    transition: background-color 0.15s ease;
+    &:hover {
+      background-color: color-mix(in srgb, var(--primary) 8%, transparent);
+      .brief-list__name {
+        color: var(--primary);
+      }
+    }
+  }
+  .brief-list__name {
+    display: block;
+    font-weight: bold;
+    transition: color 0.15s ease;
+  }
+  .brief-list__meta {
+    display: block;
+    margin-top: 0.28rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  // ---------- 项目页：项目详情块 ----------
+  .proj-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 52rem;
+    margin: 2rem auto 0;
+    text-align: left;
+  }
+  .proj-block {
+    padding: 1.5rem 1.6rem;
+    border-radius: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.15s ease;
+    &:hover {
+      border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+    }
+  }
+  .proj-block__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 1.1rem;
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+  }
+  .proj-block__open {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  // 功能 / 技术 / 规模 / 已知不足
+  .proj-block__facts {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 0.55rem 1rem;
+    margin: 0;
+    dt {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    dd {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    padding: 0 0.55rem;
+    border-radius: 1rem;
+    color: var(--primary);
+    border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+  }
+
+  // ---------- 关于页：能力清单 ----------
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.2rem;
+    width: 85%;
+    margin: 2rem auto 0;
+  }
+  .stack-card {
+    text-align: left;
+    padding: 1.4rem;
+    border-radius: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    h3 {
+      margin: 0 0 0.7rem;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+    ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+  }
+
+  // ---------- 关于页：学习路径 ----------
+  .stage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.2rem;
+    width: 85%;
+    margin: 2rem auto 0;
+  }
+  .stage {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 1.4rem;
+    border-radius: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    &__step {
+      align-self: flex-start;
+      margin-bottom: 0.6rem;
+      padding: 0.1rem 0.6rem;
+      border-radius: 1rem;
+      background: color-mix(in srgb, var(--primary) 14%, transparent);
+      color: var(--primary);
+      font-size: 0.78rem;
+    }
+    h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.05rem;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    // 优先级要压过上面的 .stage p
+    p.stage__state {
+      margin: 0.9rem 0 0;
+      padding-top: 0.7rem;
+      border-top: 1px dashed var(--border);
+      font-size: 0.82rem;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+  }
+
+  // ---------- 关于页：联系方式 ----------
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 32rem;
+    margin: 2rem auto 0;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 0.8rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 0.15s ease;
+    &:hover {
+      border-color: var(--primary);
+    }
+    &__icon {
+      font-size: 1.2rem;
+    }
+    &__text {
+      font-weight: bold;
+    }
+    &__value {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  main {
+    .stack-grid,
+    .stage-grid {
+      width: 100%;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .brief-list__link {
+      padding: 0.8rem 0.4rem;
+    }
+
+    .proj-block {
+      padding: 1.2rem 1.1rem;
+    }
+    // 窄屏下把「标签 + 内容」的左右两栏改成上下堆叠
+    .proj-block__facts {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+      dt {
+        margin-top: 0.6rem;
+      }
+      dt:first-of-type {
+        margin-top: 0;
+      }
+    }
+
+    .contact-item {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      &__value {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  }
+}

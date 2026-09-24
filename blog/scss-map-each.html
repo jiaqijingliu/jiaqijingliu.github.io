@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
-    <title>StayInTop</title>
-    <meta name="description" content="StayInTop 的个人站点：技术栈、学习笔记与项目展示。" />
+    <title>用 SCSS map + @each 生成状态类，让 JS 不碰显示逻辑 | StayInTop</title>
+    <meta name="description" content="倒计时有 4 档显示精度（天 / 天时 / 天时分 / 天时分秒），每档要隐藏的单位都不一样。原本打算在 JS 里判断，最后放进 CSS 解决了。" />
 
     <script>
       // 首次绘制前套用本地保存的外观设置，避免闪一下默认样式再跳回用户的选择。
@@ -37,8 +37,8 @@
       })();
     </script>
 
-    <link rel="stylesheet" href="./src/css/normalize.css" />
-    <link rel="stylesheet" href="./src/css/style.css?v=12" />
+    <link rel="stylesheet" href="../src/css/normalize.css" />
+    <link rel="stylesheet" href="../src/css/style.css?v=12" />
   </head>
 
   <body>
@@ -50,17 +50,69 @@
         <span></span>
       </label>
       <ol>
-        <li><a href="#/home" title="返回首页">StayInTop</a></li>
-        <li><a href="#/home" data-route="home">首页</a></li>
-        <li><a href="#/projects" data-route="projects">项目</a></li>
-        <li><a href="#/blog" data-route="blog">博客</a></li>
-        <li><a href="#/about" data-route="about">关于</a></li>
+        <li><a href="../#/home" title="返回首页">StayInTop</a></li>
+        <li><a href="../#/home">首页</a></li>
+        <li><a href="../#/projects">项目</a></li>
+        <li><a href="../#/blog">博客</a></li>
+        <li><a href="../#/about">关于</a></li>
       </ol>
     </nav>
 
+    <main>
+      <article class="post">
+        <a class="post__back" href="../#/blog">← 返回博客</a>
+        <h1 class="post__title">用 SCSS map + @each 生成状态类，让 JS 不碰显示逻辑</h1>
+        <div class="post__meta">
+          <time datetime="2026-08-19">2026-08-19</time>
+          <span class="post__read">约 4 分钟</span>
+          <div class="post__tags"><span class="tag">CSS</span><span class="tag">Sass</span></div>
+        </div>
+        <div class="post__content"><p>倒计时有 4 档显示精度（天 / 天时 / 天时分 / 天时分秒），每档要隐藏的单位都不一样。原本打算在 JS 里判断，最后放进 CSS 解决了。</p>
+<ul>
+<li>把 4 档规则写成一个 SCSS map：每档列出需要隐藏的单位，一次 <code>@each</code> 就生成全部选择器，不用手写十几条规则。</li>
+<li>JS 只负责把 <code>data-detail=&quot;dhms&quot;</code> 写到卡片上，显示逻辑一行都不碰。以后加一档精度只需要改 map，不用动 JS。</li>
+<li>好处是状态和样式始终同步：不会出现 JS 里加了新档位、CSS 忘了补规则，导致那一档什么都不显示的情况。</li>
+</ul>
+<h2>map 的形状</h2>
+<p>「要隐藏的单位」比「要显示的单位」短，所以存前者：</p>
+<pre><code class="language-scss">// 精度档位 → 该档需要隐藏的时间单位
+$detail-hide: (
+  &quot;d&quot;:    (&quot;hour&quot;, &quot;minute&quot;, &quot;second&quot;),
+  &quot;dh&quot;:   (&quot;minute&quot;, &quot;second&quot;),
+  &quot;dhm&quot;:  (&quot;second&quot;),
+  &quot;dhms&quot;: (),
+);
+</code></pre>
+<h2>一次 @each 出全部规则</h2>
+<pre><code class="language-scss">.countdown {
+  .unit { display: flex; }
 
-
-    <main id="view"></main>
+  @each $level, $units in $detail-hide {
+    &amp;[data-detail=&quot;#{$level}&quot;] {
+      @each $u in $units {
+        .unit--#{$u} { display: none; }
+      }
+    }
+  }
+}
+</code></pre>
+<p>编译出来就是 <code>[data-detail=&quot;d&quot;] .unit--hour { display: none }</code> 这一整套，四档共 6 条规则，全是自动生成的。</p>
+<p>JS 侧只剩一行：</p>
+<pre><code class="language-js">card.dataset.detail = settings.detail; // &quot;d&quot; | &quot;dh&quot; | &quot;dhm&quot; | &quot;dhms&quot;
+</code></pre>
+<h2>为什么值得这么绕</h2>
+<p>如果放在 JS 里，得写四组 <code>querySelectorAll</code> 再逐个改 <code>style.display</code>，而且<strong>每次切换档位都要重新执行一遍</strong>。放在 CSS 里，切换只是改一个属性值，浏览器自己做样式重算。</p>
+<p>更实际的好处是维护性：新增一档精度 = 往 map 里加一行。忘了补规则这件事从根上不可能发生 —— 因为规则就是 map 生成的。</p>
+<h2>迁移到原生 CSS 的话</h2>
+<p>这个模式在原生 CSS 里没有直接对应物（<code>@each</code> 是 Sass 的编译期循环）。如果不想依赖 Sass，可以退回手写：</p>
+<pre><code class="language-css">[data-detail=&quot;d&quot;] .unit--hour,
+[data-detail=&quot;d&quot;] .unit--minute,
+[data-detail=&quot;d&quot;] .unit--second { display: none; }
+</code></pre>
+<p>规则数量不多时完全可接受，只是失去了「单一数据源」这个性质。</p>
+</div>
+      </article>
+    </main>
 
     <footer>
       &copy;<span id="year">2026</span>&nbsp;StayInTop All rights reserved
@@ -129,7 +181,6 @@
       </button>
     </div>
 
-    <script src="./src/js/site.js" defer></script>
-    <script src="./src/js/main.js" defer></script>
+    <script src="../src/js/site.js" defer></script>
   </body>
 </html>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
-    <title>StayInTop</title>
-    <meta name="description" content="StayInTop 的个人站点：技术栈、学习笔记与项目展示。" />
+    <title>navigator.clipboard 只在安全上下文可用 | StayInTop</title>
+    <meta name="description" content="名片页的「点击复制联系方式」，在 https 下正常，直接双击打开 html 文件就失效了。" />
 
     <script>
       // 首次绘制前套用本地保存的外观设置，避免闪一下默认样式再跳回用户的选择。
@@ -37,8 +37,8 @@
       })();
     </script>
 
-    <link rel="stylesheet" href="./src/css/normalize.css" />
-    <link rel="stylesheet" href="./src/css/style.css?v=12" />
+    <link rel="stylesheet" href="../src/css/normalize.css" />
+    <link rel="stylesheet" href="../src/css/style.css?v=12" />
   </head>
 
   <body>
@@ -50,17 +50,72 @@
         <span></span>
       </label>
       <ol>
-        <li><a href="#/home" title="返回首页">StayInTop</a></li>
-        <li><a href="#/home" data-route="home">首页</a></li>
-        <li><a href="#/projects" data-route="projects">项目</a></li>
-        <li><a href="#/blog" data-route="blog">博客</a></li>
-        <li><a href="#/about" data-route="about">关于</a></li>
+        <li><a href="../#/home" title="返回首页">StayInTop</a></li>
+        <li><a href="../#/home">首页</a></li>
+        <li><a href="../#/projects">项目</a></li>
+        <li><a href="../#/blog">博客</a></li>
+        <li><a href="../#/about">关于</a></li>
       </ol>
     </nav>
 
+    <main>
+      <article class="post">
+        <a class="post__back" href="../#/blog">← 返回博客</a>
+        <h1 class="post__title">navigator.clipboard 只在安全上下文可用</h1>
+        <div class="post__meta">
+          <time datetime="2026-08-28">2026-08-28</time>
+          <span class="post__read">约 4 分钟</span>
+          <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">浏览器 API</span></div>
+        </div>
+        <div class="post__content"><p>名片页的「点击复制联系方式」，在 https 下正常，直接双击打开 html 文件就失效了。</p>
+<ul>
+<li><code>navigator.clipboard</code> 只在<strong>安全上下文</strong>（https 或 localhost）下存在。用 <code>file://</code> 或普通 http 打开时它是 <code>undefined</code>，直接调用会报错。</li>
+<li>回退方案是经典的三步：建一个隐藏 <code>&lt;textarea&gt;</code> → <code>select()</code> 选中 → <code>document.execCommand(&quot;copy&quot;)</code> → 移除节点。这个 API 已经废弃，但兼容性最广。</li>
+<li>把两条路径封装进一个 async 函数并返回布尔值，调用方只管按真假提示「已复制」或「复制失败，请手动选择」，不用自己判断该走哪条分支。</li>
+</ul>
+<h2>封装成返回布尔值的函数</h2>
+<pre><code class="language-js">async function copyText(text) {
+  // 路线一：安全上下文下的标准 API
+  if (navigator.clipboard &amp;&amp; window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (e) {
+      // 用户拒绝授权、页面失焦等情况会走到这里，继续往下试
+    }
+  }
 
-
-    <main id="view"></main>
+  // 路线二：execCommand 回退
+  const ta = document.createElement(&quot;textarea&quot;);
+  ta.value = text;
+  ta.setAttribute(&quot;readonly&quot;, &quot;&quot;);
+  ta.style.cssText = &quot;position:fixed;top:-9999px;opacity:0&quot;;
+  document.body.appendChild(ta);
+  ta.select();
+  let ok = false;
+  try {
+    ok = document.execCommand(&quot;copy&quot;);
+  } catch (e) {
+    ok = false;
+  }
+  document.body.removeChild(ta);
+  return ok;
+}
+</code></pre>
+<p>调用方就干净了：</p>
+<pre><code class="language-js">const ok = await copyText(text);
+toast(ok ? &quot;已复制&quot; : &quot;复制失败，请手动选择&quot;);
+</code></pre>
+<h2>两个容易忽略的点</h2>
+<ul>
+<li><strong>不要用 <code>display: none</code> 隐藏 textarea。</strong> 隐藏的元素没法 <code>select()</code>，复制必然失败。用 <code>position: fixed</code> 挪到视口外是常规做法。</li>
+<li><strong><code>window.isSecureContext</code> 比判断 <code>location.protocol</code> 准。</strong> 它把 localhost、<code>127.0.0.1</code>、以及通过 https 加载的 iframe 都算进去，和浏览器自己的判断标准一致。</li>
+</ul>
+<h2>为什么还是保留废弃 API</h2>
+<p><code>execCommand(&quot;copy&quot;)</code> 已被标记废弃，但没有替代品能覆盖非安全上下文 —— 而「本地双击打开 html 预览」这种场景恰恰就是非安全上下文。所以两条路都得留着。</p>
+</div>
+      </article>
+    </main>
 
     <footer>
       &copy;<span id="year">2026</span>&nbsp;StayInTop All rights reserved
@@ -129,7 +184,6 @@
       </button>
     </div>
 
-    <script src="./src/js/site.js" defer></script>
-    <script src="./src/js/main.js" defer></script>
+    <script src="../src/js/site.js" defer></script>
   </body>
 </html>

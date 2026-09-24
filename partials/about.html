@@ -1,11 +1,107 @@
-<section class="home-intro" id="about">
-  <h2>关于本站</h2>
-  <p>
-    这里记录我学习前端开发的过程：从静态网页复刻，到 JavaScript 小练习，
-    再到 AI 辅助的 Vibe Coding 尝试。每一个项目都是一次从零到一的实践。
-  </p>
-  <p>
-    本站由原生 HTML、CSS（Sass）和少量 JavaScript 编写，托管在 GitHub Pages。
-    如果发现 Bug 或有建议，欢迎交流。
-  </p>
+<section class="cards-section" id="about">
+  <h2>关于</h2>
+  <div class="under-line"></div>
+  <div class="about-intro">
+    <p>
+      我是 StayInTop，在学前端。学习方式是先把东西做出来，再回头补原理 ——
+      下面的能力清单里每一条，都能在站内那三个项目里找到实际用到的地方。
+    </p>
+  </div>
+</section>
+
+<section class="cards-section" id="skills">
+  <h2>能力清单</h2>
+  <div class="under-line"></div>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <h3>HTML</h3>
+      <ul>
+        <li>语义化标签</li>
+        <li>表单与 datalist 联想</li>
+        <li>原生控件：date / select / checkbox</li>
+        <li>无障碍属性：role / aria-live / aria-label</li>
+      </ul>
+    </div>
+    <div class="stack-card">
+      <h3>CSS / Sass</h3>
+      <ul>
+        <li>Flexbox 与 Grid 布局、响应式断点</li>
+        <li>CSS 自定义属性做主题：可切换、可持久化</li>
+        <li>SCSS 嵌套、BEM 命名、@mixin</li>
+        <li>map + @each 批量生成规则</li>
+        <li>@keyframes 动画、backdrop-filter 毛玻璃</li>
+        <li>clamp() 流体尺寸、tabular-nums 对齐数字</li>
+      </ul>
+    </div>
+    <div class="stack-card">
+      <h3>JavaScript</h3>
+      <ul>
+        <li>DOM 增删改查</li>
+        <li>事件绑定与「逐个绑定 vs 事件委托」的取舍</li>
+        <li>localStorage 读写与脏数据容错</li>
+        <li>Date 运算与时区处理</li>
+        <li>HTML5 拖放 API</li>
+        <li>async / await 与错误处理</li>
+        <li>IIFE 隔离作用域</li>
+      </ul>
+    </div>
+    <div class="stack-card">
+      <h3>工具</h3>
+      <ul>
+        <li>Git / GitHub</li>
+        <li>VS Code</li>
+        <li>GitHub Pages 部署与自定义域名</li>
+        <li>Sass 编译</li>
+        <li>AI 辅助开发（Vibe Coding）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cards-section" id="path">
+  <h2>学习路径</h2>
+  <div class="under-line"></div>
+  <div class="stage-grid">
+    <div class="stage">
+      <span class="stage__step">阶段一</span>
+      <h3>静态页面复刻</h3>
+      <p>新标签页、bilibili 主页、纯 CSS 轮播、CSS 计数器。</p>
+      <p class="stage__state">已归档至 archive/project/</p>
+    </div>
+    <div class="stage">
+      <span class="stage__step">阶段二</span>
+      <h3>JavaScript 基础</h3>
+      <p>Document / Window 对象、DOM 操作、事件处理、Ajax 请求。</p>
+      <p class="stage__state">已归档至 archive/Js_pro/</p>
+    </div>
+    <div class="stage">
+      <span class="stage__step">阶段三</span>
+      <h3>完整应用</h3>
+      <p>从需求描述到完整实现，独立做出可交互的应用。</p>
+      <p class="stage__state">正在进行 · 见「项目」页</p>
+    </div>
+  </div>
+</section>
+
+<section class="cards-section" id="contact">
+  <h2>联系方式</h2>
+  <div class="under-line"></div>
+  <div class="contact-list">
+    <a
+      class="contact-item"
+      href="https://github.com/jiaqijingliu"
+      target="_blank"
+      rel="noopener"
+    >
+      <span class="contact-item__icon">🐙</span>
+      <span class="contact-item__text">GitHub</span>
+      <span class="contact-item__value">github.com/jiaqijingliu</span>
+    </a>
+    <a class="contact-item" href="mailto:your-email@example.com">
+      <span class="contact-item__icon">✉️</span>
+      <span class="contact-item__text">邮箱</span>
+      <!-- 请替换成你的真实邮箱（同时改上面的 mailto 链接） -->
+      <span class="contact-item__value">your-email@example.com（待替换）</span>
+    </a>
+  </div>
 </section>

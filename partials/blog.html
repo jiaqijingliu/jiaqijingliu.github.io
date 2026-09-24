@@ -1,27 +1,54 @@
 <section class="cards-section" id="blog">
-  <h2>博客 · 学习笔记</h2>
+  <h2>博客</h2>
   <div class="under-line"></div>
-  <p class="blog-note">以下为示例笔记，替换成你自己的内容即可。</p>
+  <p class="blog-note">
+    写项目时踩到的坑和当时的解法。列表由 <code>posts/</code> 下的 Markdown 生成，
+    本地跑一次 <code>npm run build:blog</code> 就会更新。
+  </p>
+
+  <!-- ↓↓↓ 由 build.js 从 posts/*.md 生成，请勿手改 ↓↓↓ -->
   <div class="blog-list">
+    <!-- posts:start -->
     <article class="blog-item">
-      <h3>用 CSS Grid 复刻 bilibili 主页</h3>
-      <time datetime="2026-08-21">2026-08-21</time>
-      <p>梳理复刻 bilibili 主页时的布局要点：顶部导航、分类栏、内容区网格与响应式列数。</p>
+      <h3><a href="blog/js-date-utc-trap.html">new Date(&quot;YYYY-MM-DD&quot;) 被当成 UTC</a></h3>
+      <div class="blog-meta">
+        <time datetime="2026-09-14">2026-09-14</time>
+        <span class="blog-read">约 3 分钟</span>
+        <div class="blog-tags"><span class="tag">JavaScript</span><span class="tag">Date</span></div>
+      </div>
+      <p>倒计时项目里，用户选定目标日期后，不同时区算出来的剩余天数会差一天。问题出在日期字符串的解析上。</p>
     </article>
+
     <article class="blog-item">
-      <h3>CSS 计数器 counter-reset 入门</h3>
-      <time datetime="2026-08-15">2026-08-15</time>
-      <p>利用 counter-reset 与 counter-increment 让列表按奇偶交替排列，记录计数器的基础用法。</p>
+      <h3><a href="blog/full-rerender-cost.html">全量重渲染的代价：滚动位置归零、动画重放</a></h3>
+      <div class="blog-meta">
+        <time datetime="2026-09-06">2026-09-06</time>
+        <span class="blog-read">约 3 分钟</span>
+        <div class="blog-tags"><span class="tag">JavaScript</span><span class="tag">DOM</span></div>
+      </div>
+      <p>待办应用每次改动都重建整个列表。写起来最简单，但有两个不容易第一时间注意到的副作用。</p>
     </article>
+
     <article class="blog-item">
-      <h3>纯 CSS 轮播：:checked 伪类选择器</h3>
-      <time datetime="2026-08-08">2026-08-08</time>
-      <p>借助单选按钮与 :checked 伪类实现无 JS 轮播，记录其原理与实现细节。</p>
+      <h3><a href="blog/clipboard-secure-context.html">navigator.clipboard 只在安全上下文可用</a></h3>
+      <div class="blog-meta">
+        <time datetime="2026-08-28">2026-08-28</time>
+        <span class="blog-read">约 4 分钟</span>
+        <div class="blog-tags"><span class="tag">JavaScript</span><span class="tag">浏览器 API</span></div>
+      </div>
+      <p>名片页的「点击复制联系方式」，在 https 下正常，直接双击打开 html 文件就失效了。</p>
     </article>
+
     <article class="blog-item">
-      <h3>UiTab 新标签页复刻</h3>
-      <time datetime="2026-07-30">2026-07-30</time>
-      <p>使用 Grid 与 Flex 布局复刻新标签页，并针对移动端做响应式适配。</p>
+      <h3><a href="blog/scss-map-each.html">用 SCSS map + @each 生成状态类，让 JS 不碰显示逻辑</a></h3>
+      <div class="blog-meta">
+        <time datetime="2026-08-19">2026-08-19</time>
+        <span class="blog-read">约 4 分钟</span>
+        <div class="blog-tags"><span class="tag">CSS</span><span class="tag">Sass</span></div>
+      </div>
+      <p>倒计时有 4 档显示精度（天 / 天时 / 天时分 / 天时分秒），每档要隐藏的单位都不一样。原本打算在 JS 里判断，最后放进 CSS 解决了。</p>
     </article>
+<!-- posts:end -->
   </div>
+  <!-- ↑↑↑ 生成区结束 ↑↑↑ -->
 </section>

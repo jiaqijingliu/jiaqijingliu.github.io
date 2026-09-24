@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
-    <title>StayInTop</title>
-    <meta name="description" content="StayInTop 的个人站点：技术栈、学习笔记与项目展示。" />
+    <title>new Date(&quot;YYYY-MM-DD&quot;) 被当成 UTC | StayInTop</title>
+    <meta name="description" content="倒计时项目里，用户选定目标日期后，不同时区算出来的剩余天数会差一天。问题出在日期字符串的解析上。" />
 
     <script>
       // 首次绘制前套用本地保存的外观设置，避免闪一下默认样式再跳回用户的选择。
@@ -37,8 +37,8 @@
       })();
     </script>
 
-    <link rel="stylesheet" href="./src/css/normalize.css" />
-    <link rel="stylesheet" href="./src/css/style.css?v=12" />
+    <link rel="stylesheet" href="../src/css/normalize.css" />
+    <link rel="stylesheet" href="../src/css/style.css?v=12" />
   </head>
 
   <body>
@@ -50,17 +50,52 @@
         <span></span>
       </label>
       <ol>
-        <li><a href="#/home" title="返回首页">StayInTop</a></li>
-        <li><a href="#/home" data-route="home">首页</a></li>
-        <li><a href="#/projects" data-route="projects">项目</a></li>
-        <li><a href="#/blog" data-route="blog">博客</a></li>
-        <li><a href="#/about" data-route="about">关于</a></li>
+        <li><a href="../#/home" title="返回首页">StayInTop</a></li>
+        <li><a href="../#/home">首页</a></li>
+        <li><a href="../#/projects">项目</a></li>
+        <li><a href="../#/blog">博客</a></li>
+        <li><a href="../#/about">关于</a></li>
       </ol>
     </nav>
 
+    <main>
+      <article class="post">
+        <a class="post__back" href="../#/blog">← 返回博客</a>
+        <h1 class="post__title">new Date(&quot;YYYY-MM-DD&quot;) 被当成 UTC</h1>
+        <div class="post__meta">
+          <time datetime="2026-09-14">2026-09-14</time>
+          <span class="post__read">约 3 分钟</span>
+          <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">Date</span></div>
+        </div>
+        <div class="post__content"><p>倒计时项目里，用户选定目标日期后，不同时区算出来的剩余天数会差一天。问题出在日期字符串的解析上。</p>
+<ul>
+<li><code>new Date(&quot;2026-01-01&quot;)</code> 这种纯日期字符串，按规范是以 <strong>UTC 午夜</strong>解析的；而 <code>new Date(2026, 0, 1)</code> 用的是本地时间。两者看起来一样，差 8 小时。</li>
+<li>代码本意是把截止时间设到当天 23:59:59，用的是本地时间的 <code>setHours(23, 59, 59, 999)</code>。在 UTC+8 下，UTC 午夜正好是当天早上 8 点，所以一直没暴露问题；换成负时区，UTC 午夜其实是<em>前一天</em>，截止时间就整体提前了一天。</li>
+<li>要拿「今天的本地日期字符串」，手写 <code>YYYY-MM-DD</code> 比 <code>toISOString().slice(0, 10)</code> 稳 —— 后者同样是 UTC，晚上打开会拿到明天的日期。</li>
+</ul>
+<h2>手写一个本地的 todayStr()</h2>
+<pre><code class="language-js">function todayStr() {
+  const d = new Date();
+  const pad = (n) =&gt; String(n).padStart(2, &quot;0&quot;);
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+</code></pre>
+<p>关键在于三个方法都取的<strong>本地时间</strong>：<code>getFullYear</code> / <code>getMonth</code> / <code>getDate</code>。对应的 <code>getUTCFullYear</code> 系列才是 UTC。</p>
+<h2>从字符串还原日期时也要当心</h2>
+<p>如果表单 <code>&lt;input type=&quot;date&quot;&gt;</code> 给的是 <code>&quot;2026-01-01&quot;</code>，想拿它构造一个<strong>本地</strong>零点的 Date，别直接 <code>new Date(value)</code>：</p>
+<pre><code class="language-js">// ✗ 按 UTC 解析，UTC+8 下变成 1 月 1 日早上 8 点
+const d1 = new Date(value);
 
-
-    <main id="view"></main>
+// ✓ 按本地时间解析
+const [y, m, day] = value.split(&quot;-&quot;).map(Number);
+const d2 = new Date(y, m - 1, day);
+</code></pre>
+<p>用 <code>d.getDate()</code> 取回来验证一下，能直观看出差别：<code>d1</code> 在东八区是 1 号，在西半球就变成 31 号了。</p>
+<h2>结论</h2>
+<p>日期只有「时刻」的概念，没有「日期」的概念。<strong>凡是只关心年月日的地方，就只用手写字符串或本地时间构造函数，不要经过 <code>toISOString</code>。</strong></p>
+</div>
+      </article>
+    </main>
 
     <footer>
       &copy;<span id="year">2026</span>&nbsp;StayInTop All rights reserved
@@ -129,7 +164,6 @@
       </button>
     </div>
 
-    <script src="./src/js/site.js" defer></script>
-    <script src="./src/js/main.js" defer></script>
+    <script src="../src/js/site.js" defer></script>
   </body>
 </html>

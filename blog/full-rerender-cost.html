@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
-    <title>StayInTop</title>
-    <meta name="description" content="StayInTop 的个人站点：技术栈、学习笔记与项目展示。" />
+    <title>全量重渲染的代价：滚动位置归零、动画重放 | StayInTop</title>
+    <meta name="description" content="待办应用每次改动都重建整个列表。写起来最简单，但有两个不容易第一时间注意到的副作用。" />
 
     <script>
       // 首次绘制前套用本地保存的外观设置，避免闪一下默认样式再跳回用户的选择。
@@ -37,8 +37,8 @@
       })();
     </script>
 
-    <link rel="stylesheet" href="./src/css/normalize.css" />
-    <link rel="stylesheet" href="./src/css/style.css?v=12" />
+    <link rel="stylesheet" href="../src/css/normalize.css" />
+    <link rel="stylesheet" href="../src/css/style.css?v=12" />
   </head>
 
   <body>
@@ -50,17 +50,58 @@
         <span></span>
       </label>
       <ol>
-        <li><a href="#/home" title="返回首页">StayInTop</a></li>
-        <li><a href="#/home" data-route="home">首页</a></li>
-        <li><a href="#/projects" data-route="projects">项目</a></li>
-        <li><a href="#/blog" data-route="blog">博客</a></li>
-        <li><a href="#/about" data-route="about">关于</a></li>
+        <li><a href="../#/home" title="返回首页">StayInTop</a></li>
+        <li><a href="../#/home">首页</a></li>
+        <li><a href="../#/projects">项目</a></li>
+        <li><a href="../#/blog">博客</a></li>
+        <li><a href="../#/about">关于</a></li>
       </ol>
     </nav>
 
-
-
-    <main id="view"></main>
+    <main>
+      <article class="post">
+        <a class="post__back" href="../#/blog">← 返回博客</a>
+        <h1 class="post__title">全量重渲染的代价：滚动位置归零、动画重放</h1>
+        <div class="post__meta">
+          <time datetime="2026-09-06">2026-09-06</time>
+          <span class="post__read">约 3 分钟</span>
+          <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">DOM</span></div>
+        </div>
+        <div class="post__content"><p>待办应用每次改动都重建整个列表。写起来最简单，但有两个不容易第一时间注意到的副作用。</p>
+<ul>
+<li><code>listEl.innerHTML = &quot;&quot;</code> 之后重建所有行，滚动容器 <code>.list</code> 的 <code>scrollTop</code> 会一起归零 —— 滚到列表下面再在搜索框敲一个字，视图会跳回顶部。</li>
+<li>CSS 动画是按元素挂载触发的。重建出来的行都是新元素，<code>@keyframes slideIn</code> 于是一次全部重放 —— 在搜索框里每敲一个字，整个列表就集体滑入一遍。</li>
+<li>不必推翻架构也能修：重建前存下 <code>scrollTop</code> 再还原，或者改成事件委托 + 只更新变化的行。在重建模式下，给每一行单独 <code>addEventListener</code> 也是白付的开销。</li>
+</ul>
+<h2>最小代价的修法</h2>
+<pre><code class="language-js">function render(list) {
+  const scroller = document.querySelector(&quot;.list&quot;);
+  const keep = scroller.scrollTop;   // 先把位置存下来
+  scroller.innerHTML = &quot;&quot;;
+  list.forEach((item) =&gt; scroller.appendChild(createRow(item)));
+  scroller.scrollTop = keep;         // 重建完再还原
+}
+</code></pre>
+<p><code>scrollTop</code> 在元素内容清空时会归零，但容器本身还在，所以赋值回去是有效的。</p>
+<h2>动画问题不适合用同一招</h2>
+<p>滚动位置能还原，动画重放却不能 —— 它是「新元素挂载」这个事实本身触发的，没有状态可以恢复。三个可选方向：</p>
+<ol>
+<li>只在<strong>首次</strong>渲染时挂动画类，后续更新不加；</li>
+<li>把入场动画挪到 <code>@starting-style</code> / View Transitions，让浏览器区分「新增」和「已存在」；</li>
+<li>干脆改成事件委托 + 精准更新，从根上避免元素重建。</li>
+</ol>
+<h2>顺带一提：事件委托</h2>
+<p>全量重建时如果给每一行都绑了监听，那些监听会随着旧元素一起被丢弃，白白付了绑定开销。改成在容器上委托一次：</p>
+<pre><code class="language-js">scroller.addEventListener(&quot;click&quot;, (e) =&gt; {
+  const row = e.target.closest(&quot;.item&quot;);
+  if (!row) return;
+  // 从 row.dataset 里拿 id，再决定删 / 改
+});
+</code></pre>
+<p>这样重建多少次，监听始终只有一个。</p>
+</div>
+      </article>
+    </main>
 
     <footer>
       &copy;<span id="year">2026</span>&nbsp;StayInTop All rights reserved
@@ -129,7 +170,6 @@
       </button>
     </div>
 
-    <script src="./src/js/site.js" defer></script>
-    <script src="./src/js/main.js" defer></script>
+    <script src="../src/js/site.js" defer></script>
   </body>
 </html>

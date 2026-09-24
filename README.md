@@ -15,6 +15,7 @@ posts/                博客源文件（Markdown + front-matter），写笔记�
 templates/post.html   文章页模板，build.js 用它套出 blog/<slug>.html
 blog/                 构建产物，已提交（GitHub Pages 没有构建步骤）
 build.js              Markdown → HTML 的构建脚本
+bump.js               把所有 ?v=N 加一（缓存穿透，见「缓存」一节）
 src/
   ├─ css/             SCSS 源码 + 编译出的 style.css
   ├─ font/            Logo 可选字体（woff2，自托管）
@@ -68,7 +69,13 @@ npm run serve      # http://localhost:8080
 npm run build:css        # 或 npm run build（CSS + 博客一起）
 ```
 
-改完记得把 `index.html` 和 `templates/post.html` 里的 `style.css?v=N` 升一位，避免浏览器缓存。
+**改完必须升版本号，用 `npm run bump`：**
+
+```bash
+npm run bump     # 所有 ?v=N 统一加一，并重新生成 blog/
+```
+
+它会改 `index.html` 和 `templates/post.html` 里的所有 `?v=N`（CSS **和 JS**），再跑一次 `build.js` 让 `blog/` 跟上。别手动改 —— 见下面「缓存」一节，漏掉一个文件的代价很大。
 
 ## 外观设置
 
@@ -132,6 +139,25 @@ npm run build:css        # 或 npm run build（CSS + 博客一起）
 验证办法：同一个字符串在不同字体栈下各截图一张，比对 PNG 的 md5。**哈希相同就是同一个字体**，这个判据比肉眼看截图可靠 —— 我一度以为幼圆渲染错了，是哈希证明它确实生效且有别于其余七个。
 
 宽度测量在这里没用（CJK 汉字在任何字体里都是全角 1em，宽度必然一样），`document.fonts.check()` 也没用（它对 `Songti SC`、`ui-rounded` 这些本机根本没装的字体照样返回 `true`）。
+
+## 缓存（踩过大坑）
+
+站点走 Cloudflare，线上静态资源的响应头是：
+
+```
+Cache-Control: max-age=14400        # 4 小时
+cf-cache-status: HIT
+```
+
+**URL 不变的话，浏览器 4 小时内不会回来问服务器**，改了也看不到。所以 CSS 和 JS 的引用都必须带 `?v=N`，改完用 `npm run bump` 统一升。
+
+真实事故：某次重构把主题逻辑从 `main.js` 搬到 `site.js`，但 `<script src=".../main.js">` 当时没有版本号，浏览器一直用缓存的旧 `main.js`。结果新旧两份代码**同时**给设置按钮绑了 click —— 一个开一个关，点击互相抵消，表现成「按钮点了没反应」；而拖拽只有新代码里有，所以拖完反而能打开面板。整个现象看着像 UI bug，实际是缓存问题。
+
+排查这类问题的手法：**同一个 URL 用 curl 拉下来和本地文件 diff**。当时 `main.js`、`partials/*.html` 全部逐字节一致，只有 `index.html` 多出 938 字节 —— 那多出来的是 Cloudflare 注入的机器人检测脚本，从而定位到链路上多了 Cloudflare 这一层。如果只盯着代码看，是查不出来的。
+
+另外 `main.js` 里 `fetch` partials 用了 `{ cache: "no-cache" }`。这不是「不缓存」，是「每次先拿 ETag 核对，没变返回 304」，否则 `partials/*.html` 会跟着一起吃 4 小时缓存。
+
+副作用：`src/css/_*.scss` 这类下划线开头的文件，GitHub Pages 的 Jekyll 不会发布（线上 404）。这些是 SCSS 分片，运行时本来就不加载，所以无害，但别把**运行时**要用的资源命名成下划线开头。
 
 ## 两个注意点
 

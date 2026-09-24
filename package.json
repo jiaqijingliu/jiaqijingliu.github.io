@@ -5,6 +5,7 @@
   "description": "StayInTop 个人站点",
   "scripts": {
     "build": "npm run build:css && npm run build:blog",
+    "bump": "node bump.js",
     "build:css": "sass --no-source-map src/css/style.scss src/css/style.css",
     "build:blog": "node build.js",
     "serve": "http-server -p 8080 -c-1"

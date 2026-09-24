@@ -28,7 +28,10 @@ async function render() {
   const { route, sub } = parseHash();
   const view = document.getElementById("view");
   try {
-    const res = await fetch(ROUTES[route]);
+    // cache:"no-cache" 不是「不缓存」，是「每次先拿 ETag 跟服务器核对，没变就 304」。
+    // 不能省：线上经过 Cloudflare，静态资源的 Cache-Control 是 max-age=14400，
+    // 只写相对路径的话浏览器 4 小时内根本不回来问，改了 partials 也看不到。
+    const res = await fetch(ROUTES[route], { cache: "no-cache" });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
     if (token !== renderToken) return; // 已有更新的渲染，丢弃本次

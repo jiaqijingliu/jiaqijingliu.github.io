@@ -95,11 +95,7 @@
         <span></span>
         <span></span>
       </label>
-      <!-- 图标是内联 SVG（惯例见 README「图标」一节）。都是装饰性的：
-           aria-hidden 让读屏跳过，链接的可访问名仍来自文字。
-           logo 那个链接不加 —— 它是花体字标，摆个小图标会跟书法字打架。
-           这段和 index.html / templates/post.html 各有一份，只有 href 前缀不同。
-           注意：本页正文里还有两组自己的 <ol>（版权条款的编号列表），别改到那儿去。 -->
+
       <ol>
         <li><a href="./#/home" title="返回首页">StayInTop</a></li>
         <li>
@@ -128,8 +124,7 @@
         </li>
         <li>
           <a href="./#/game">
-            <!-- 手柄：机身 + 左边十字键 + 右边两个按键。和齿轮一样用了
-                 <rect>/<circle> 而不只是一条 <path>（理由见 README「图标」一节） -->
+
             <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="2" y="7" width="20" height="11" rx="4" />
               <path d="M6.5 10.5v4M4.5 12.5h4" />
@@ -151,18 +146,15 @@
     </nav>
 
     <main>
-      <!-- fragment:start / fragment:end 之间的内容会被 build.js 抽出来写成
-           partials/copyright.html，供 SPA 路由（#/copyright）注入 #view ——
-           这样页脚的「版权声明」链接不再触发整页跳转。外面这层完整 HTML
-           保留给直接访问和分享链接。 -->
-      <!-- fragment:start -->
+
+
       <article class="post">
         <a class="post__back" href="./#/about">← 返回关于</a>
 
-        <!-- ==================== 中文版 ==================== -->
+
         <h1 class="post__title">版权声明</h1>
         <div class="post__meta">
-          <!-- 改这份声明的时候，把这里和下面英文版的日期一起改掉 -->
+
           <span>最后更新 2026-09-25</span>
         </div>
 
@@ -240,12 +232,12 @@
           </p>
         </div>
 
-        <!-- 中英两版并列，不是正文的续写，所以做一条带标签的分界线 -->
+
         <div class="post__lang-split" role="separator">
           <span>English Version</span>
         </div>
 
-        <!-- ==================== English ==================== -->
+
         <h1 class="post__title">Copyright Notice</h1>
         <div class="post__meta">
           <span>Last updated: 2026-09-25</span>
@@ -345,28 +337,23 @@
           </p>
         </div>
       </article>
-      <!-- fragment:end -->
+
     </main>
 
     <footer>
       <div class="footer__inner">
         <a class="footer__brand" href="./#/home">StayInTop</a>
 
-        <!-- 右半边一行：版权 + 版权声明 + GitHub。
-             这里故意不复述顶部导航（首页/项目/博客/关于）—— 那条导航是 sticky 的，
-             翻到页脚时还在视口里挂着，抄一份就是同一批链接同屏出现两次。
-             版权声明不在顶部导航里，这一行是它仅有的入口之一，别顺手也删了。 -->
+
         <p class="footer__meta">
           <span class="footer__copy"
             >&copy; <span id="year">2026</span> StayInTop &middot; All rights
             reserved</span
           >
-          <!-- 两个链接包一层：窄屏放不下时整组挪到下一行，不会只把 GitHub
-               一个甩下去（那样看着像多打了一个词）。这一层必须留着 ——
-               拆开的话两个链接各自是 flex 项，会分开换行。 -->
+
           <span class="footer__links">
             <a href="./copyright.html">版权声明</a>
-            <!-- 站外的挂在最后，CSS 靠 .footer__ext 在它前面画一道细竖线 -->
+
             <a
               class="footer__ext"
               href="https://github.com/jiaqijingliu"
@@ -385,8 +372,7 @@
       aria-label="主题设置"
       title="主题设置"
     >
-      <!-- 齿轮。用 <circle> + <path> 两根齿形短横，不是一条路径描轮廓 ——
-           手写带齿的单路径极易走形，圆的半径是显式数字、不会写错 -->
+
       <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <circle cx="12" cy="12" r="4.2" />
         <path d="M16.2 12H19.4M14.1 15.6 15.7 18.4M9.9 15.6 8.3 18.4M7.8 12H4.6M9.9 8.4 8.3 5.6M14.1 8.4 15.7 5.6" />
@@ -395,8 +381,7 @@
     <div id="theme-panel" class="theme-panel" hidden>
       <div class="theme-panel__row">
         <span class="theme-panel__label">亮暗模式</span>
-        <!-- 两个图标都在，显示哪个由 CSS 看 <html data-theme> 决定（见 _theme.scss）。
-             亮色显示月亮 =「切到深色」，跟原来的 emoji 一个意思。 -->
+
         <button id="dark-toggle" class="theme-panel__dark-btn" type="button">
           <svg class="nav-icon nav-icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M20.5 14.8A8.7 8.7 0 1 1 9.2 3.5a7 7 0 0 0 11.3 11.3z" />
@@ -447,8 +432,7 @@
     </div>
 
     <script src="./src/js/site.js?v=140" defer></script>
-    <!-- 版权页也加载播放器，理由同 templates/post.html：站内跳到这里是走
-         index.html 的 #/copyright 路由，只有直接访问才会真的落到这个文件。 -->
+
     <script src="./src/js/player.js?v=140" defer></script>
   </body>
 </html>

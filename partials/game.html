@@ -1,12 +1,4 @@
-<!-- 娱乐页：站上游戏的总入口。目前一款，做成卡片网格是为了后面加游戏时
-     只往下面添一张卡片，不动这一页以外的任何东西（路由表 GAMES 另加一行）。
 
-     卡片整张是一个 <a>：点哪儿都能进，键盘 Tab 也停得住。里面的三块文字
-     都成为这个链接的可访问名，所以描述写短一点 —— 读屏念出来是一整句。
-
-     这里 href 写 #/game/plane 而不是相对路径：本片段被 fetch 进来插到
-     index.html 里，相对路径按 index.html 的位置解析（见 about.html 顶部
-     那条注释），纯 hash 就没这个问题。 -->
 
 <section class="cards-section" id="game">
   <h2>娱乐</h2>
@@ -18,7 +10,7 @@
 
   <div class="game-grid">
     <a class="game-card" href="#/game/plane">
-      <!-- 缩略图就是游戏里自机的形状（同一套几何），所以它不只是装饰 -->
+
       <span class="game-card__thumb" aria-hidden="true">
         <svg viewBox="0 0 24 24" focusable="false">
           <path

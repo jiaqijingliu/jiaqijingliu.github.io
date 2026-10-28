@@ -4,12 +4,13 @@
   "private": true,
   "description": "StayInTop 个人站点",
   "scripts": {
-    "build": "npm run build:assets && npm run build:blog",
+    "build": "npm run build:assets && npm run build:html",
     "build:assets": "npm run build:css && npm run build:js",
     "bump": "node bump.js",
     "font:subset": "node subset-font.js",
     "build:css": "sass --no-source-map --style=compressed dev/css/style.scss src/css/style.css",
     "build:js": "esbuild dev/js/main.js dev/js/site.js dev/js/bg.js dev/js/player.js dev/js/game.js --minify --outdir=src/js --log-level=warning",
+    "build:html": "node build.js",
     "build:blog": "node build.js",
     "serve": "http-server -p 8080 -c-1"
   },

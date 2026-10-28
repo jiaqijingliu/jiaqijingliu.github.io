@@ -1,49 +1,11 @@
-<!-- 首页：通栏大图 + 格言 + 门户式两栏（左窄栏放头像 / 统计卡 / 标签云，
-     右宽栏放笔记卡片）。
 
-     参考的是 lcrworld.xyz / daily.yybb.us 那种骨架：顶部一张大图压站名，
-     下面是「左 widget 栏 + 右内容」。本站仍然没有文章封面图（front-matter
-     里没有封面字段），所以大图只有首屏这一张，图源在 source/pic/ 下。
-
-     三处生成区由 build.js 从 posts/ 现算，标记之间的内容**别手改**：
-       home-stats  侧栏统计卡的三个数
-       home-tags   标签云
-       home-notes  笔记卡片（第一条大卡 + 后面的网格）
-
-     DOM 顺序是「主内容在前、侧栏在后」—— 窄屏和屏幕阅读器都该先拿到正文。
-     桌面上靠 _home.scss 里的 grid-template-areas 把侧栏换到左边，
-     不是靠 order，所以这里怎么看都是对的顺序。
-
-     大图和格言在 .home-cols 之外、是 main 的直接子元素：它们要贴视口两边
-     （通栏出血），宽度约束在 main 那一层就放开了，见 _home.scss 里
-     main[data-route="home"] 那段。 -->
 
 <div class="home-banner">
-  <!-- 图在 CSS 里（.home-banner 的 background），不写成 <img>：它是纯装饰，
-       <img> 的话得再叠一层绝对定位的蒙版和文字，而 background 交给
-       ::before 画点阵更省一层 DOM。背景图是 1920×1200 的夜空插画，月亮和
-       星星在上半，最亮的一片云在下半 —— 站名压在中蓝的夜空和云上，白字
-       读得出来。那层点阵（_home.scss 的 .home-banner::before）是照参考站
-       daily.yybb.us 首屏抄的，只做质感，不负责压暗。
 
-       这张图占满整屏（min-height: 100svh），顶部导航是透明的、浮在图上，
-       滑下去才变实心 —— 见 README「首页 → 大图占满整屏」。 -->
   <div class="home-banner__inner">
-    <!-- data-text 是给 hover 那套 glitch 用的：两个 ::before / ::after 副本用
-         content: attr(data-text) 复制同一串字，改站名要连它一起改（_home.scss
-         里的 .home-banner__name::before）。
 
-         大小写是写法的原样（StayInTop），和顶部导航栏的 logo 一致 ——
-         副本和正文都用这一串字，改大小写要两边一起改。 -->
     <h1 class="home-banner__name" data-text="StayInTop">StayInTop</h1>
-    <!-- 打字机。敲满一句 → 停两秒 → 一个字一个字擦掉 → 换下一句，一直循环。
-         参考 lcrworld.xyz 首屏副标题。
 
-         **文案只有这一份，不在 JS 里再存一遍。** 要轮播多句就都写在 data-text
-         上、用 `|` 分隔；标签之间的正文是第一句，没有 JS 时显示的就是它。
-
-         句子必须写在 data-text 而不是让 JS 读 textContent —— 读 textContent
-         的话，同一个元素每敲一个字都在变，第二次渲染就再也拿不回原句了。 -->
     <p class="home-banner__tagline">
       <span
         class="home-banner__typed"
@@ -54,13 +16,10 @@
   </div>
 </div>
 
-<!-- 格言。**这是占位文本，改这一行即可** —— 不接 build.js，不是生成区。
-     位置在大图下方、两栏上方：从大图的视觉重心过渡到正文，中间需要一句话
-     垫一下，否则站名下面直接就是卡片网格。 -->
+
 <blockquote class="home-quote">
   <p class="home-quote__text">拥有自己的时间胜过拥有一切</p>
-  <!-- 破折号写在标签里而不是 CSS 的 ::before：改格言的人打开这个文件就能
-       连着署名一起改，不用再去翻样式表。 -->
+
   <cite class="home-quote__by">—— StayInTop</cite>
 </blockquote>
 
@@ -71,9 +30,9 @@
         <h2>笔记</h2>
         <a class="home-section__more" href="#/blog">全部 &rarr;</a>
       </div>
-      <!-- ↓↓↓ 由 build.js 从 posts/*.md 生成，请勿手改 ↓↓↓ -->
+
       <div class="home-notes__list">
-        <!-- home-notes:start -->
+
   <article class="note-card note-card--lead" data-date="2026-09-14">
     <div class="note-card__top">
       <time class="note-card__date" datetime="2026-09-14">2026-09-14</time>
@@ -108,33 +67,14 @@
     <p class="note-card__summary">倒计时有 4 档显示精度（天 / 天时 / 天时分 / 天时分秒），每档要隐藏的单位都不一样。原本打算在 JS 里判断，最后放进 CSS 解决了。</p>
   </article>
   </div>
-<!-- home-notes:end -->
+
       </div>
-      <!-- ↑↑↑ 生成区结束 ↑↑↑ -->
+
     </section>
   </div>
 
   <aside class="home-side">
-    <!-- 头像卡。src 不带 ../ —— partial 是注入到根目录的 index.html 里的，
-         相对路径按文档 URL 解析；main.js 的 ROUTES（home: "partials/home.html"）
-         也是同一个约定。
 
-         srcset 而不是单张源图，见 README「首页 → 头像」：显示尺寸只有
-         6rem（96px），把整张原图交给浏览器实时缩，一趟插值滤波盖不到那么多
-         源像素，脸会糊。这两个文件是预先裁到脸、再用逐级减半（等效 mipmap）
-         降采样出来的成品。
-
-         **这里用 `w` 描述符而不是 `x`**：源图只有 171×151（第三版头像），
-         裁完 151×151 就到顶了 —— 3x 屏要 288px 是编不出来的，硬编只能放大、
-         只会更糊。`w` 让浏览器按「够用就行」自己挑：1x 屏要 96px → 取 96w；
-         2x/3x 屏要 192/288px → 取 151w（现有最大的那个）。换成 `x` 描述符
-         就必须声明一个不存在的 288 档，等于骗浏览器。
-
-         sizes 写 96px 要和 CSS 里 .me-avatar 的 6rem 对上，改一处得改两处。
-
-         width/height 写 96 是 `sizes` 算出来的固有尺寸（不是文件本身 151，
-        带 w 描述符时浏览器按 sizes 折算），为了图下载完之前先留好位置，
-         否则图片落地时下面两张卡会整体跳一下。 -->
     <section class="side-card side-card--me">
       <img
         class="me-avatar"
@@ -148,35 +88,33 @@
         width="96"
         height="96"
       />
-      <!-- 名字固定用「飘逸」那款花体（Great Vibes，见 _font.scss），不跟
-           设置面板里「Logo 字体」那一项走。原来下面还有一句「在做前端。」，
-           2026-10-06 删了 —— 侧栏第一张卡只放头像和名字更干净。 -->
+
       <p class="me-name">StayInTop</p>
     </section>
 
     <section class="side-card">
       <h2 class="side-card__title">站点</h2>
       <dl class="stat-list">
-        <!-- home-stats:start -->
+
     <div class="stat-list__row"><dt>笔记</dt><dd>4 篇</dd></div>
     <div class="stat-list__row"><dt>字数</dt><dd>约 5000 字</dd></div>
     <div class="stat-list__row"><dt>最后更新</dt><dd>2026-09-14</dd></div>
-<!-- home-stats:end -->
+
       </dl>
     </section>
 
     <section class="side-card">
       <h2 class="side-card__title">标签</h2>
-      <!-- 每个标签指向 #/blog/<tag>，由 main.js 填进博客页的搜索框 -->
+
       <div class="tag-cloud">
-        <!-- home-tags:start -->
+
     <a class="tag-cloud__item tag-cloud__item--lg" href="#/blog/JavaScript">JavaScript</a>
     <a class="tag-cloud__item tag-cloud__item--sm" href="#/blog/%E6%B5%8F%E8%A7%88%E5%99%A8%20API">浏览器 API</a>
     <a class="tag-cloud__item tag-cloud__item--sm" href="#/blog/CSS">CSS</a>
     <a class="tag-cloud__item tag-cloud__item--sm" href="#/blog/Date">Date</a>
     <a class="tag-cloud__item tag-cloud__item--sm" href="#/blog/DOM">DOM</a>
     <a class="tag-cloud__item tag-cloud__item--sm" href="#/blog/Sass">Sass</a>
-<!-- home-tags:end -->
+
       </div>
     </section>
   </aside>

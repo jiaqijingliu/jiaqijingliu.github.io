@@ -2,9 +2,7 @@
   <h2>项目</h2>
   <div class="under-line"></div>
 
-  <!-- 分类筛选。点击逻辑在 src/js/main.js —— partial 是 innerHTML 注入的，
-       内联 <script> 不会执行，所以这里只放结构。
-       分类目前只有一类，但仍然做成筛选项：再加一类时不用动这里以外的任何东西。 -->
+
   <div class="proj-filter" role="group" aria-label="按分类筛选项目">
     <button
       type="button"
@@ -24,10 +22,7 @@
     </button>
   </div>
 
-  <!-- 分类说明。每个分类一段，跟着上面的筛选切换，兼作整页的开场白 ——
-       在筛选条上面再放一段固定不动的引导语会和它重复，两段灰字叠在一起
-       读起来像话没说完。写成「一段一个分类」而不是给按钮挂 data-note 让 JS
-       填文本：默认选中「全部」，首屏不依赖 JS 就是对的。 -->
+
   <div class="proj-cat-note" aria-live="polite">
     <p class="proj-cat-note__item" data-note-for="all">
       记录我曾经做出过的垃圾
@@ -37,16 +32,7 @@
     </p>
   </div>
 
-  <!-- 卡片网格。整张卡就是一条 <a>（不再像以前那样在卡片右上角放一个「打开」，
-       再用拉伸链接把点击区铺满）—— 目标只有一个，铺满之后那个文字就成了
-       重复的说明。屏幕阅读器那边用 aria-label 给一句短的可访问名，否则
-       可访问名会变成「待办事项 Todo List 纯前端任务管理器…JavaScript SCSS」
-       整张卡的文字。<a> 里套 <h3> 和 <ul> 是合法的（transparent content
-       model），只要里面没有别的可交互元素。
 
-       卡片正文只有「标题 + 一句说明 + 标签行」三样。2026-10-06 删掉了原来
-       那串「功能介绍」的 <ul>：五个项目符号压在封面下面，把卡片撑得又高又
-       密，扫起来像在读文档而不是在挑项目。要点进项目页看。 -->
   <div class="proj-grid">
     <a
       class="proj-card"
@@ -56,10 +42,7 @@
       data-category="vibe"
       aria-label="打开 待办事项 Todo List（新标签页）"
     >
-      <!-- 封面。真截图（source/pic/project-*.webp，2026-10-06 用无头 Edge
-           截的，见 README「项目页 → 三张封面」）。整块纯装饰：外层的
-           aria-hidden + 图片 alt="" 让读屏直接跳过，否则可访问名里会多出
-           一串文件名。右上角那个外链角标是 hover / focus 才浮出来的。 -->
+
       <span class="proj-card__cover" aria-hidden="true">
         <img
           class="proj-card__shot"
@@ -154,9 +137,7 @@
       </span>
     </a>
 
-    <!-- 筛到空分类时的兜底。现在只有一类，永远筛不空；
-         但加上第二类之后，点到一个没有项目的分类会只剩上面那条筛选条，
-         看起来像页面坏了。 -->
+
     <p class="proj-empty" hidden>这个分类下还没有项目。</p>
   </div>
 

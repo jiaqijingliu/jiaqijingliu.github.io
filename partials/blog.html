@@ -1,37 +1,22 @@
 <section class="cards-section" id="blog">
   <h2>博客</h2>
   <div class="under-line"></div>
-  <!-- 这里原来放的是给维护者看的构建说明（「列表由 posts/ 下的 Markdown 生成，
-       跑一次 npm run build:blog」）。那套流程 README 的「写一篇笔记」一节写得更全，
-       而这是标题下方读者第一眼看到的位置，不该用来讲构建。 -->
+
   <p class="blog-note">
     记录学习、知识、与想法
-    <!-- post-count:start --><span class="blog-count" data-total="4" aria-live="polite">共 4 篇</span><!-- post-count:end -->
+    <span class="blog-count" data-total="4" aria-live="polite">共 4 篇</span>
   </p>
 
-  <!-- 分类筛选。这一排是 build.js 从 posts/*.md 的 category 字段生成的
-       （分类名和每个分类有几篇都得跟着文章走，写死会慢慢对不上）——
-       标记之间的内容别手改。
 
-       它和下面的 .blog-filter 分开两个容器：分类是一颗芯片一组互斥的
-       「选一个」，日期区间和关键字是另外两个可以叠加的条件，混在一个
-       flex 条里读者分不出哪几个会互相排斥。
-
-       注意这套 chips 对「分类」成立、对「标签」不成立：分类一篇一个、
-       总数有天然上限，标签一篇多个、只增不减。_main.scss 里记着标签
-       chips 被删掉的那段历史，别把它当成「标签也能这么干」的先例。 -->
   <div class="blog-cats" role="group" aria-label="按分类筛选笔记">
-    <!-- blog-cats:start -->    <button type="button" class="blog-cat-chip is-active" data-category="" aria-pressed="true">全部<span class="blog-cat-chip__count">4</span></button>
+        <button type="button" class="blog-cat-chip is-active" data-category="" aria-pressed="true">全部<span class="blog-cat-chip__count">4</span></button>
     <button type="button" class="blog-cat-chip" data-category="踩坑记录" aria-pressed="false">踩坑记录<span class="blog-cat-chip__count">3</span></button>
-    <button type="button" class="blog-cat-chip" data-category="工程实践" aria-pressed="false">工程实践<span class="blog-cat-chip__count">1</span></button><!-- blog-cats:end -->
+    <button type="button" class="blog-cat-chip" data-category="工程实践" aria-pressed="false">工程实践<span class="blog-cat-chip__count">1</span></button>
   </div>
 
-  <!-- 日期区间 + 关键字检索，两个条件是 AND，逻辑在 src/js/main.js 的
-       applyBlogFilter() —— partial 是 innerHTML 注入的，写在这儿的 <script>
-       不会执行。控件全部手写，没有需要 build.js 生成的标记。 -->
+
   <div class="blog-filter">
-    <!-- 日期是闭区间。任一端留空 = 那一端不设限，所以平时两个都空着就是
-         「不按时间筛」，不需要额外的开关。 -->
+
     <div class="blog-date">
       <label class="blog-date__label" for="blog-date-from">从</label>
       <input
@@ -48,8 +33,7 @@
       />
     </div>
 
-    <!-- 除了标题和摘要，标签也参与匹配：输 javascript 却搜不到挂着
-         JavaScript 标签的文章，会让人觉得搜索是坏的。 -->
+
     <input
       class="blog-search__input"
       type="search"
@@ -57,13 +41,13 @@
       aria-label="搜索文章"
     />
 
-    <!-- 两个维度逐个清太麻烦。无筛选时隐藏，由 applyBlogFilter() 管。 -->
+
     <button type="button" class="blog-filter__reset" hidden>清除筛选</button>
   </div>
 
-  <!-- ↓↓↓ 由 build.js 从 posts/*.md 生成，请勿手改 ↓↓↓ -->
+
   <div class="blog-list">
-    <!-- posts:start -->
+
     <article class="blog-row" data-date="2026-09-14" data-tags="JavaScript,Date" data-category="踩坑记录">
       <time class="blog-row__date" datetime="2026-09-14"><span class="blog-row__year">2026</span><span class="blog-row__md">09-14</span></time>
       <div class="blog-row__body">
@@ -107,12 +91,10 @@
         </div>
       </div>
     </article>
-<!-- posts:end -->
-    <!-- ↑↑↑ 生成区结束 ↑↑↑ -->
 
-    <!-- 筛完没剩下。跟上面那句「还没有文章」（一篇都没有，由 build.js 生成）
-         说的不是一回事，两句文案不能串：站上一篇都没有时该说的是「还没有」，
-         而不是「没有符合条件的」。由 applyBlogFilter() 管。 -->
+
+
+
     <p class="blog-no-match" hidden>没有符合条件的文章。把日期范围或关键字放宽试试。</p>
   </div>
 </section>

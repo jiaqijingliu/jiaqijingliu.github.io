@@ -1,7 +1,8 @@
 /* 先把 dev/ 里的可读源码压成 src/ 下的产物，再把所有 ?v=N 统一加一，然后重编 blog/。
  *
  * dev/ 是可读源码（带注释）的唯一副本，在 .gitignore 里，公开仓库只提交 src/ 下的
- * 压缩产物。所以改完 dev/js 或 dev/css 之后必须经过这一步，src/ 才会跟上。
+ * 压缩产物和剥掉注释的 HTML。所以改完 dev/js、dev/css 或 dev/html 之后必须经过
+ * 这一步，产物才会跟上。
  *
 
  * 为什么必要：线上站点走 Cloudflare，静态资源的响应头是
@@ -22,10 +23,16 @@ const { execSync } = require("child_process");
 console.log("压缩源码 → src/ …");
 execSync("npm run build:assets", { stdio: "inherit" });
 
-// 所有带版本号的 HTML。blog/ 下的文章页由 build.js 从模板重新生成，不用手列。
-// copyright.html 是手写的独立页，不在 SPA 内、也不经过 build.js，所以要手列在这里，
-// 否则升版本号时它会被漏掉 —— 漏一个的代价见文件开头那段事故记录。
-const FILES = ["index.html", "templates/post.html", "copyright.html"];
+// 所有带版本号的 HTML —— 注意是 dev/html/ 下的**源文件**，根目录的产物由
+// build.js 统一生成，直接改产物的话下一次构建就被覆盖回去了。
+// blog/ 下的文章页由 build.js 从模板重新生成，不用手列。
+// copyright.html 是手写的独立页，不在 SPA 内，但它同样从 dev/html/ 出发，
+// 所以要手列在这里，否则升版本号时它会被漏掉 —— 漏一个的代价见开头那段事故记录。
+const FILES = [
+  "dev/html/index.html",
+  "dev/html/templates/post.html",
+  "dev/html/copyright.html",
+];
 
 const sources = FILES.map((f) => ({ file: f, text: fs.readFileSync(f, "utf8") }));
 
@@ -52,7 +59,8 @@ for (const { file, text } of sources) {
   console.log(`  ✓ ${file}  ${count} 处 → ?v=${next}`);
 }
 
-// blog/<slug>.html 由 templates/post.html 套出来，重新生成才能跟上新版本号
-console.log("  重新生成 blog/ …");
+// blog/<slug>.html 由模板套出来，重新生成才能跟上新版本号；
+// 根目录的 HTML 产物也在这里从 dev/html/ 重新生成并剥掉注释
+console.log("  重新生成 HTML 产物 …");
 execSync("node build.js", { stdio: "inherit" });
-console.log(`\n版本号已升到 ?v=${next}，记得连同 blog/ 一起提交。`);
+console.log(`\n版本号已升到 ?v=${next}，记得连同 blog/ 和根目录的 HTML 产物一起提交。`);

@@ -3,8 +3,7 @@
         <h1 class="post__title">用 SCSS map + @each 生成状态类，让 JS 不碰显示逻辑</h1>
         <div class="post__meta">
           <time datetime="2026-08-19">2026-08-19</time>
-          <!-- 分类。没写 category 的文章这里是个「—」，不是空串（build.js 的
-               renderPost 给的），否则日期和「约 N 分钟」之间会多一段空隙。 -->
+
           <span class="blog-cat">工程实践</span>
           <span class="post__read">约 4 分钟</span>
           <div class="post__tags"><span class="tag">CSS</span><span class="tag">Sass</span></div>
@@ -54,12 +53,7 @@ $detail-hide: (
 <p>规则数量不多时完全可接受，只是失去了「单一数据源」这个性质。</p>
 </div>
 
-        <!-- 每篇末尾的版权条。写在模板里而不是逐篇写进 blog/*.html：
-             那些文件是 build.js 的产物，手改的部分下次构建就没了。
-             文案和样式跟 partials/about.html「关于本站」末尾那条保持一致，
-             改这里记得把那边一起改。
-             href 前面带 ../ 是因为产物在 blog/ 下；抽出的 SPA 片段里
-             build.js 会把这个前缀去掉（见文件顶部那段注释）。 -->
+
         <p class="post__license">
           本站所有内容版权归作者所有，保留所有权利（All rights
           reserved）。未经许可，不得以任何形式转载、摘编或用于商业用途；引用请注明出处并附上原文链接。完整条款见

@@ -12,7 +12,12 @@
  * 直接访问、分享链接和禁用 JS 的情况，片段给 SPA 的 #/post/<slug> 路由 ——
  * 整页跳转必然重建 <audio>，只有走路由才能连续播放。
  *
- * 用法：npm run build:blog
+ * 同时负责 HTML 的「源码 → 产物」转换：dev/html/ 下是带注释、带构建标记的
+ * 源文件，根目录的 index.html / copyright.html / templates/post.html /
+ * partials/*.html 全部由这里生成，并且**剥掉 HTML 注释**再写出。
+ * 所以改页面结构要改 dev/html/ 里的那份，改完跑 npm run bump。
+ *
+ * 用法：npm run build:html（build:blog 是同一个脚本的旧名字）
  * 以 _ 或 . 开头的 md 文件会被跳过（可用作模板）。
  */
 
@@ -24,13 +29,30 @@ const { marked } = require("marked");
 const ROOT = path.dirname(__filename);
 const POSTS_DIR = path.join(ROOT, "posts");
 const OUT_DIR = path.join(ROOT, "blog");
-const TEMPLATE_PATH = path.join(ROOT, "templates", "post.html");
+// 手写 HTML 的唯一可读副本。目录在 .gitignore 里，公开仓库只有下面这些产物。
+const SRC_DIR = path.join(ROOT, "dev", "html");
+const TEMPLATE_PATH = path.join(SRC_DIR, "templates", "post.html");
+const BLOG_PARTIAL_SRC = path.join(SRC_DIR, "partials", "blog.html");
+const HOME_PARTIAL_SRC = path.join(SRC_DIR, "partials", "home.html");
+const COPYRIGHT_PATH = path.join(SRC_DIR, "copyright.html");
+// 对应的产物路径
+const TEMPLATE_OUT = path.join(ROOT, "templates", "post.html");
 const BLOG_PARTIAL = path.join(ROOT, "partials", "blog.html");
 const HOME_PARTIAL = path.join(ROOT, "partials", "home.html");
+const COPYRIGHT_OUT = path.join(ROOT, "copyright.html");
 // SPA 片段：文章一篇一个，版权页只有一个
 const FRAG_DIR = path.join(ROOT, "partials", "posts");
-const COPYRIGHT_PATH = path.join(ROOT, "copyright.html");
 const COPYRIGHT_FRAG = path.join(ROOT, "partials", "copyright.html");
+
+// 没有生成逻辑、只是原样发布的页面。blog.html / home.html 要注入内容，
+// copyright.html 要抽片段，模板要套文章，都不在这里。
+const STATIC_HTML = [
+  "index.html",
+  "partials/about.html",
+  "partials/game.html",
+  "partials/games/plane.html",
+  "partials/projects.html",
+];
 
 const HOME_LATEST = 5; // 首页放几篇笔记（第一条是大卡，其余进网格）
 const CHARS_PER_MIN = 300; // 中文技术文阅读速度（字/分钟），仅用于估算
@@ -346,23 +368,46 @@ function homeNotesHtml(posts) {
   return noteCardHtml(lead, true) + grid;
 }
 
-// inline=true 时把值紧贴在标记之间（用于行内的数字），否则单独成行
-function inject(file, key, inner, inline) {
+/* 剥掉 HTML 注释再写出。
+
+   公开仓库里的 HTML 就是浏览器直接拿到的文件，写在里面的注释（维护理由、
+   备忘、踩坑记录）等于一并公开。可读带注释的那份留在 dev/html/，只有剥过
+   的产物提交。
+
+   必须在注入和抽片段**之后**做：MARKERS / FRAG 本身就是注释，先剥就找不到
+   标记了。反过来也安全 —— 每次构建都从 dev/html/ 重新读源，产物里没有标记
+   不影响下一次构建。 */
+function stripComments(html) {
+  return (
+    html
+      .replace(/<!--[\s\S]*?-->/g, "")
+      // 整行注释删掉后只剩缩进，一并清掉
+      .replace(/^[ \t]+$/gm, "")
+  );
+}
+
+// 源码路径 → 同名产物路径，内容剥注释
+function emit(rel) {
+  const dest = path.join(ROOT, rel);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, stripComments(fs.readFileSync(path.join(SRC_DIR, rel), "utf8")));
+  console.log(`  ✓ ${rel}`);
+}
+
+// inline=true 时把值紧贴在标记之间（用于行内的数字），否则单独成行。
+// 只改内存里的字符串，由调用方决定写到哪个文件。
+function injectText(html, key, inner, inline, label) {
   const [start, end] = MARKERS[key];
   const re = new RegExp(`${escapeRe(start)}[\\s\\S]*?${escapeRe(end)}`);
-  const src = fs.readFileSync(file, "utf8");
-  if (!re.test(src)) {
-    console.warn(
-      `  ! ${path.relative(ROOT, file)} 缺少标记 ${start} / ${end}，未写入`
-    );
-    return false;
+  if (!re.test(html)) {
+    console.warn(`  ! ${label} 缺少标记 ${start} / ${end}，未写入`);
+    return html;
   }
   const replacement = inline ? `${start}${inner}${end}` : `${start}\n${inner}\n${end}`;
   // 替换值必须包成函数。当成字符串传的话，inner 里的 $& / $` / $' / $1
   // 会被 String.replace 当成替换模式解释 —— 文章标题或摘要里出现这几个
   // 字符就会被换掉。包一层函数走的是「原样插入」，没有这个解释步骤。
-  fs.writeFileSync(file, src.replace(re, () => replacement));
-  return true;
+  return html.replace(re, () => replacement);
 }
 
 /* 抽出 FRAG 标记之间的内容，做成可以注入 SPA #view 的片段。
@@ -385,7 +430,7 @@ function writeFragment(dest, html, strips, label) {
     console.warn(`  ! ${label} 缺少 fragment:start / fragment:end 标记，未生成 SPA 片段`);
     return false;
   }
-  fs.writeFileSync(dest, frag);
+  fs.writeFileSync(dest, stripComments(frag));
   return true;
 }
 
@@ -411,7 +456,7 @@ function main() {
 
   for (const p of posts) {
     const html = renderPost(p, tpl);
-    fs.writeFileSync(path.join(OUT_DIR, `${p.slug}.html`), html);
+    fs.writeFileSync(path.join(OUT_DIR, `${p.slug}.html`), stripComments(html));
     writeFragment(
       path.join(FRAG_DIR, `${p.slug}.html`),
       html,
@@ -435,16 +480,30 @@ function main() {
     console.log("  ✓ partials/copyright.html");
   }
 
-  inject(BLOG_PARTIAL, "blog", blogListHtml(posts));
+  // 首页 / 博客页：从 dev/html/ 读源 → 内存里注入生成区 → 剥注释写出。
+  // 不能像以前那样就地改写产物：产物里的标记被剥掉了，第二次构建就找不到。
+  let blogHtml = fs.readFileSync(BLOG_PARTIAL_SRC, "utf8");
+  blogHtml = injectText(blogHtml, "blog", blogListHtml(posts), false, "dev/html/partials/blog.html");
   // 篇数。筛选取数时 main.js 会把它改写成「找到 N 篇」（见 blogCountHtml）
-  inject(BLOG_PARTIAL, "count", blogCountHtml(posts.length), true);
+  blogHtml = injectText(blogHtml, "count", blogCountHtml(posts.length), true, "dev/html/partials/blog.html");
   // 分类 chips。inline 写入：内容要么是一排 <button>，要么是空串，
   // 两边都不需要外层缩进。
-  inject(BLOG_PARTIAL, "blogCats", blogCatsHtml(posts), true);
-  inject(HOME_PARTIAL, "homeStats", homeStatsHtml(posts));
-  inject(HOME_PARTIAL, "homeTags", homeTagsHtml(posts));
-  inject(HOME_PARTIAL, "homeNotes", homeNotesHtml(posts));
+  blogHtml = injectText(blogHtml, "blogCats", blogCatsHtml(posts), true, "dev/html/partials/blog.html");
+  fs.writeFileSync(BLOG_PARTIAL, stripComments(blogHtml));
+
+  let homeHtml = fs.readFileSync(HOME_PARTIAL_SRC, "utf8");
+  homeHtml = injectText(homeHtml, "homeStats", homeStatsHtml(posts), false, "dev/html/partials/home.html");
+  homeHtml = injectText(homeHtml, "homeTags", homeTagsHtml(posts), false, "dev/html/partials/home.html");
+  homeHtml = injectText(homeHtml, "homeNotes", homeNotesHtml(posts), false, "dev/html/partials/home.html");
+  fs.writeFileSync(HOME_PARTIAL, stripComments(homeHtml));
   console.log("已更新 partials/blog.html 与 partials/home.html");
+
+  // 模板和版权页本身也是公开文件（可被直接访问），同样剥注释后写出
+  fs.writeFileSync(TEMPLATE_OUT, stripComments(tpl));
+  emit("copyright.html");
+
+  // 剩下几个没有生成逻辑的页面，原样复制（只剥注释）
+  for (const rel of STATIC_HTML) emit(rel);
 }
 
 main();

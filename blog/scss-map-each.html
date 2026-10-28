@@ -92,10 +92,7 @@
         <span></span>
         <span></span>
       </label>
-      <!-- 图标是内联 SVG（惯例见 README「图标」一节）。都是装饰性的：
-           aria-hidden 让读屏跳过，链接的可访问名仍来自文字。
-           logo 那个链接不加 —— 它是花体字标，摆个小图标会跟书法字打架。
-           这段和 index.html / copyright.html 各有一份，只有 href 前缀不同。 -->
+
       <ol>
         <li><a href="../#/home" title="返回首页">StayInTop</a></li>
         <li>
@@ -124,8 +121,7 @@
         </li>
         <li>
           <a href="../#/game">
-            <!-- 手柄：机身 + 左边十字键 + 右边两个按键。和齿轮一样用了
-                 <rect>/<circle> 而不只是一条 <path>（理由见 README「图标」一节） -->
+
             <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <rect x="2" y="7" width="20" height="11" rx="4" />
               <path d="M6.5 10.5v4M4.5 12.5h4" />
@@ -147,17 +143,14 @@
     </nav>
 
     <main>
-      <!-- fragment:start / fragment:end 之间的内容会被 build.js 抽出来，
-           写成 partials/posts/<slug>.html，供 SPA 路由（#/post/<slug>）注入 #view。
-           保留外面这层完整的 HTML 是给直接访问和分享链接用的 —— 两条路径并存。 -->
-      <!-- fragment:start -->
+
+
       <article class="post">
         <a class="post__back" href="../#/blog">← 返回博客</a>
         <h1 class="post__title">用 SCSS map + @each 生成状态类，让 JS 不碰显示逻辑</h1>
         <div class="post__meta">
           <time datetime="2026-08-19">2026-08-19</time>
-          <!-- 分类。没写 category 的文章这里是个「—」，不是空串（build.js 的
-               renderPost 给的），否则日期和「约 N 分钟」之间会多一段空隙。 -->
+
           <span class="blog-cat">工程实践</span>
           <span class="post__read">约 4 分钟</span>
           <div class="post__tags"><span class="tag">CSS</span><span class="tag">Sass</span></div>
@@ -207,40 +200,30 @@ $detail-hide: (
 <p>规则数量不多时完全可接受，只是失去了「单一数据源」这个性质。</p>
 </div>
 
-        <!-- 每篇末尾的版权条。写在模板里而不是逐篇写进 blog/*.html：
-             那些文件是 build.js 的产物，手改的部分下次构建就没了。
-             文案和样式跟 partials/about.html「关于本站」末尾那条保持一致，
-             改这里记得把那边一起改。
-             href 前面带 ../ 是因为产物在 blog/ 下；抽出的 SPA 片段里
-             build.js 会把这个前缀去掉（见文件顶部那段注释）。 -->
+
         <p class="post__license">
           本站所有内容版权归作者所有，保留所有权利（All rights
           reserved）。未经许可，不得以任何形式转载、摘编或用于商业用途；引用请注明出处并附上原文链接。完整条款见
           <a href="../copyright.html">版权声明</a>。
         </p>
       </article>
-      <!-- fragment:end -->
+
     </main>
 
     <footer>
       <div class="footer__inner">
         <a class="footer__brand" href="../#/home">StayInTop</a>
 
-        <!-- 右半边一行：版权 + 版权声明 + GitHub。
-             这里故意不复述顶部导航（首页/项目/博客/关于）—— 那条导航是 sticky 的，
-             翻到页脚时还在视口里挂着，抄一份就是同一批链接同屏出现两次。
-             版权声明不在顶部导航里，这一行是它仅有的入口之一，别顺手也删了。 -->
+
         <p class="footer__meta">
           <span class="footer__copy"
             >&copy; <span id="year">2026</span> StayInTop &middot; All rights
             reserved</span
           >
-          <!-- 两个链接包一层：窄屏放不下时整组挪到下一行，不会只把 GitHub
-               一个甩下去（那样看着像多打了一个词）。这一层必须留着 ——
-               拆开的话两个链接各自是 flex 项，会分开换行。 -->
+
           <span class="footer__links">
             <a href="../copyright.html">版权声明</a>
-            <!-- 站外的挂在最后，CSS 靠 .footer__ext 在它前面画一道细竖线 -->
+
             <a
               class="footer__ext"
               href="https://github.com/jiaqijingliu"
@@ -259,8 +242,7 @@ $detail-hide: (
       aria-label="主题设置"
       title="主题设置"
     >
-      <!-- 齿轮。用 <circle> + <path> 两根齿形短横，不是一条路径描轮廓 ——
-           手写带齿的单路径极易走形，圆的半径是显式数字、不会写错 -->
+
       <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <circle cx="12" cy="12" r="4.2" />
         <path d="M16.2 12H19.4M14.1 15.6 15.7 18.4M9.9 15.6 8.3 18.4M7.8 12H4.6M9.9 8.4 8.3 5.6M14.1 8.4 15.7 5.6" />
@@ -269,8 +251,7 @@ $detail-hide: (
     <div id="theme-panel" class="theme-panel" hidden>
       <div class="theme-panel__row">
         <span class="theme-panel__label">亮暗模式</span>
-        <!-- 两个图标都在，显示哪个由 CSS 看 <html data-theme> 决定（见 _theme.scss）。
-             亮色显示月亮 =「切到深色」，跟原来的 emoji 一个意思。 -->
+
         <button id="dark-toggle" class="theme-panel__dark-btn" type="button">
           <svg class="nav-icon nav-icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M20.5 14.8A8.7 8.7 0 1 1 9.2 3.5a7 7 0 0 0 11.3 11.3z" />
@@ -321,9 +302,7 @@ $detail-hide: (
     </div>
 
     <script src="../src/js/site.js?v=140" defer></script>
-    <!-- 文章页也加载播放器：直接访问/分享链接落到这里时，播放器照常出现
-         （以暂停状态恢复上次的位置）。站内跳转时根本不会走到这个文件 ——
-         那走的是 index.html 里那条 #/post/<slug> 路由。 -->
+
     <script src="../src/js/player.js?v=140" defer></script>
   </body>
 </html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>倒计时 · Countdown</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 背景装饰 -->
+  <div class="bg" aria-hidden="true">
+    <span class="bg__blob bg__blob--1"></span>
+    <span class="bg__blob bg__blob--2"></span>
+    <span class="bg__blob bg__blob--3"></span>
+    <span class="bg__grid"></span>
+  </div>
+
+  <main class="app">
+    <!-- 设置面板 -->
+    <section class="settings" aria-label="设置目标">
+      <div class="settings__field">
+        <label for="target-name" class="settings__label">目标名称</label>
+        <input
+          id="target-name"
+          class="settings__input"
+          type="text"
+          placeholder="例如：高考、生日、旅行…"
+          maxlength="24"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="settings__field">
+        <label for="target-date" class="settings__label">目标日期</label>
+        <input id="target-date" class="settings__input" type="date" />
+      </div>
+
+      <button id="set-target" class="btn btn--primary" type="button">设为目标</button>
+    </section>
+
+    <!-- 倒计时卡片 -->
+    <section class="card" data-detail="dhms">
+      <p class="card__label">
+        距离 <span id="target-label" class="card__target">我的目标</span> 还剩
+      </p>
+
+      <div class="countdown">
+        <div class="unit" data-unit="days">
+          <span id="v-days" class="unit__value">0</span>
+          <span class="unit__name">天</span>
+        </div>
+        <span class="unit__colon" data-unit="hours">:</span>
+
+        <div class="unit" data-unit="hours">
+          <span id="v-hours" class="unit__value">00</span>
+          <span class="unit__name">小时</span>
+        </div>
+        <span class="unit__colon" data-unit="minutes">:</span>
+
+        <div class="unit" data-unit="minutes">
+          <span id="v-minutes" class="unit__value">00</span>
+          <span class="unit__name">分钟</span>
+        </div>
+        <span class="unit__colon" data-unit="seconds">:</span>
+
+        <div class="unit" data-unit="seconds">
+          <span id="v-seconds" class="unit__value">00</span>
+          <span class="unit__name">秒</span>
+        </div>
+      </div>
+
+      <p id="encouragement" class="card__encouragement">每一秒都在靠近，加油！</p>
+
+      <!-- 显示详细度切换 -->
+      <div class="switch" role="group" aria-label="显示详细度">
+        <button class="switch__btn" data-level="days" type="button">天</button>
+        <button class="switch__btn" data-level="dh" type="button">天 · 时</button>
+        <button class="switch__btn" data-level="dhm" type="button">天 · 时 · 分</button>
+        <button class="switch__btn is-active" data-level="dhms" type="button">天 · 时 · 分 · 秒</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

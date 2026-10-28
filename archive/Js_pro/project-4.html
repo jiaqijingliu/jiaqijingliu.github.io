@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>为DOM元素设置样式</title>
+
+    <style title="core styles">
+      p {
+        border: medium double black;
+        background-color: lightgray;
+      }
+      #block1 {
+        color: white;
+      }
+      table {
+        border: thin solid black;
+        border-collapse: collapse;
+        margin: 5px;
+        float: left;
+      }
+      td {
+        padding: 2px;
+      }
+    </style>
+    <style media="screen AND (min-width:500px)" type="text/css">
+      #block2 {
+        color: yellow;
+        font-style: italic;
+      }
+    </style>
+
+    <style>
+      .test2 {
+        color: red;
+        margin: 0 auto;
+        width: 30em;
+        border: thin solid black;
+        border-radius: 1rem;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>为DOM元素设置样式</h1>
+    </header>
+
+    <section>
+      <h2>使用样式表</h2>
+      <p id="block1" class="block1_class">
+        啊手动阀打发是大发都是法撒旦飞洒发撒旦
+      </p>
+      <p id="block2" class="block2_class">
+        啊手动阀打发是大发都是法撒旦飞洒发撒旦
+      </p>
+
+      <pre id="elem_result"></pre>
+      <button>添加/删除一条CSS规则</button>
+      <button>修改一条样式(修改样式的选择器)</button>
+    </section>
+    <script>
+      let sheets = document.styleSheets;
+      let elem_result = document.getElementById("elem_result");
+      for (let i = 0; i < sheets.length; i++) {
+        elem_result.innerHTML +=
+          "href: " +
+          sheets[i].href +
+          "\n" +
+          "media: " +
+          sheets[i].media +
+          "\n" +
+          "title: " +
+          sheets[i].title +
+          "\n" +
+          "type: " +
+          sheets[i].type +
+          "\n" +
+          "ownerNode: " +
+          sheets[i].ownerNode.tagName +
+          "\n";
+      }
+
+      let buttons = document.getElementsByTagName("button");
+      let isAdded = false;
+      buttons[0].onclick = () => {
+        AddCSSStyle();
+      };
+      buttons[1].onclick = () => {
+        ChangeCssStyle();
+      };
+      function AddCSSStyle() {
+        if (!isAdded) {
+          sheets[1].insertRule(
+            `.block2_class{
+            font-family:Simsun;}`,
+            sheets[1].cssRules.length,
+          );
+          isAdded = true;
+        } else {
+          sheets[1].deleteRule(sheets[1].cssRules.length - 1);
+          isAdded = false;
+        }
+      }
+      function ChangeCssStyle() {
+        if (sheets[1].cssRules.length === 2) {
+          //   sheets[1].cssRules.item(1).selectorText=".block1_class";
+          sheets[1].cssRules[1].selectorText = ".block1_class";
+        }
+      }
+    </script>
+
+    <section>
+      <h2>使用元素样式</h2>
+      <p class="test2">
+        这是一段用于排版预览的占位文字，用来展示字体、行距和布局效果。
+        在设计界面、网页或文档时，可以先用这段文字填充，等内容确定后再替换。
+        天玄地黄，宇宙洪荒，日月盈昃，辰宿列张，寒来暑往，秋收冬藏。
+      </p>
+      <button class="button1">点击添加样式(padding)</button>
+    </section>
+
+    <script>
+      {
+        let sheet = document.styleSheets[2];
+        let test2 = sheet.cssRules.item(0).style;
+        let buttons = document.querySelectorAll("[class^='button']");
+        let SetStyle = false;
+        buttons[0].onclick = () => {
+          if (SetStyle == false) {
+            // test2.setProperty("padding", "1em");
+            document
+              .querySelector(".test2")
+              .style.setProperty("padding", "1em");
+            SetStyle = true;
+          } else {
+            // test2.removeProperty("padding");
+            document
+              .querySelector(".test2")
+              .style.removeProperty("padding", "1em");
+            SetStyle = false;
+          }
+        };
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
+    <title>navigator.clipboard 只在安全上下文可用 | StayInTop</title>
+    <meta name="description" content="名片页的「点击复制联系方式」，在 https 下正常，直接双击打开 html 文件就失效了。" />
+
+    <script>
+      // 首次绘制前套用本地保存的外观设置，避免闪一下默认样式再跳回用户的选择。
+      // 枚举型的只写 data-* 属性，具体数值由 CSS 里的 html[data-*] 规则决定；
+      // 主题色和字号是连续值，只能直接写内联自定义属性。
+      (function () {
+        try {
+          var d = document.documentElement;
+          var s = window.localStorage;
+          // 出厂默认是深色，不跟随系统偏好 —— 默认主题色是白色，它在浅色底上
+          // 读不出来（见下面 darkenForLight）
+          var t = s.getItem("theme") || "dark";
+          d.setAttribute("data-theme", t);
+          /* 主题色的三个小函数。和 site.js 里的 lum / darkenForLight / onPrimary
+             是同一份逻辑 —— 它们得赶在首帧之前，等不到 defer 的那个文件，只能
+             在这儿再写一份。改一处记得改另一处。
+
+             lum：感知亮度 0~1，认不出来的值返回 0（当"深色"处理，于是下面两个
+             函数各自退回默认行为，不会算出 NaN）。
+             darkenForLight：亮色模式下把过浅的主题色压深（三通道等比缩小、保住
+             色相，缩到亮度 0.38）。白色主题色压在白色页面上，导航高亮、链接
+             hover 这些「拿主题色当文字色」的地方会整个消失，所以这里自动换一个
+             压深版；原色照旧存着，切回深色模式就变回来。
+             onPrimary：主题色上该压什么颜色。齿轮、播放键都是实心主题色底 + 它。 */
+          function lum(c) {
+            if (!/^#[0-9a-f]{6}$/i.test(String(c))) return 0;
+            var n = parseInt(c.slice(1), 16);
+            return (
+              (0.2126 * ((n >> 16) & 255) +
+                0.7152 * ((n >> 8) & 255) +
+                0.0722 * (n & 255)) /
+              255
+            );
+          }
+          function darkenForLight(c) {
+            var L = lum(c);
+            if (L <= 0.6) return c;
+            var n = parseInt(c.slice(1), 16);
+            var k = 0.38 / L;
+            var f = function (v) {
+              return Math.round(v * k);
+            };
+            return (
+              "#" +
+              (
+                (1 << 24) +
+                (f((n >> 16) & 255) << 16) +
+                (f((n >> 8) & 255) << 8) +
+                f(n & 255)
+              )
+                .toString(16)
+                .slice(1)
+            );
+          }
+          function onPrimary(c) {
+            return lum(c) > 0.6 ? "#1a1a1a" : "#ffffff";
+          }
+          // 主题色永远写一遍（不只是存过才写）：实际用哪个还得看亮暗模式
+          var c = s.getItem("theme-color") || "#ffffff";
+          if (t === "light") c = darkenForLight(c);
+          d.style.setProperty("--primary", c);
+          d.style.setProperty("--on-primary", onPrimary(c));
+          d.setAttribute("data-width", s.getItem("content-width") || "md");
+          d.setAttribute("data-select", s.getItem("text-select") || "off");
+          d.setAttribute("data-dock", s.getItem("toggle-dock") || "right");
+          var dy = parseFloat(s.getItem("toggle-y"));
+          if (dy) d.style.setProperty("--dock-y", dy + "%");
+          // 字号是连续值，没法做成 data-* 枚举，只能直接写内联
+          var fs = parseFloat(s.getItem("font-size"));
+          if (fs) d.style.fontSize = fs + "px";
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="stylesheet" href="../src/css/normalize.css" />
+    <link rel="stylesheet" href="../src/css/style.css?v=140" />
+  </head>
+
+  <body>
+    <nav id="nav">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="切换导航菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <!-- 图标是内联 SVG（惯例见 README「图标」一节）。都是装饰性的：
+           aria-hidden 让读屏跳过，链接的可访问名仍来自文字。
+           logo 那个链接不加 —— 它是花体字标，摆个小图标会跟书法字打架。
+           这段和 index.html / copyright.html 各有一份，只有 href 前缀不同。 -->
+      <ol>
+        <li><a href="../#/home" title="返回首页">StayInTop</a></li>
+        <li>
+          <a href="../#/home">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M3.4 10.8 12 4l8.6 6.8M5.8 9.5v9.7a1.2 1.2 0 0 0 1.2 1.2h10a1.2 1.2 0 0 0 1.2-1.2V9.5" />
+            </svg>
+            首页
+          </a>
+        </li>
+        <li>
+          <a href="../#/projects">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M3.5 7.4a1.6 1.6 0 0 1 1.6-1.6h3.4l1.9 2.2h8.5a1.6 1.6 0 0 1 1.6 1.6v8.6a1.6 1.6 0 0 1-1.6 1.6H5.1a1.6 1.6 0 0 1-1.6-1.6z" />
+            </svg>
+            项目
+          </a>
+        </li>
+        <li>
+          <a href="../#/blog">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M6.3 3.6h7l4.4 4.4v12.4H6.3zM13.3 3.6v4.4h4.4M9.3 12.5h5.4M9.3 16.1h5.4" />
+            </svg>
+            博客
+          </a>
+        </li>
+        <li>
+          <a href="../#/game">
+            <!-- 手柄：机身 + 左边十字键 + 右边两个按键。和齿轮一样用了
+                 <rect>/<circle> 而不只是一条 <path>（理由见 README「图标」一节） -->
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="2" y="7" width="20" height="11" rx="4" />
+              <path d="M6.5 10.5v4M4.5 12.5h4" />
+              <circle cx="15.6" cy="11.4" r="1" />
+              <circle cx="18.1" cy="13.9" r="1" />
+            </svg>
+            娱乐
+          </a>
+        </li>
+        <li>
+          <a href="../#/about">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 11.7a3.85 3.85 0 1 0 0-7.7 3.85 3.85 0 0 0 0 7.7zM4.6 20.4a7.4 7.4 0 0 1 14.8 0" />
+            </svg>
+            关于
+          </a>
+        </li>
+      </ol>
+    </nav>
+
+    <main>
+      <!-- fragment:start / fragment:end 之间的内容会被 build.js 抽出来，
+           写成 partials/posts/<slug>.html，供 SPA 路由（#/post/<slug>）注入 #view。
+           保留外面这层完整的 HTML 是给直接访问和分享链接用的 —— 两条路径并存。 -->
+      <!-- fragment:start -->
+      <article class="post">
+        <a class="post__back" href="../#/blog">← 返回博客</a>
+        <h1 class="post__title">navigator.clipboard 只在安全上下文可用</h1>
+        <div class="post__meta">
+          <time datetime="2026-08-28">2026-08-28</time>
+          <!-- 分类。没写 category 的文章这里是个「—」，不是空串（build.js 的
+               renderPost 给的），否则日期和「约 N 分钟」之间会多一段空隙。 -->
+          <span class="blog-cat">踩坑记录</span>
+          <span class="post__read">约 4 分钟</span>
+          <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">浏览器 API</span></div>
+        </div>
+        <div class="post__content"><p>名片页的「点击复制联系方式」，在 https 下正常，直接双击打开 html 文件就失效了。</p>
+<ul>
+<li><code>navigator.clipboard</code> 只在<strong>安全上下文</strong>（https 或 localhost）下存在。用 <code>file://</code> 或普通 http 打开时它是 <code>undefined</code>，直接调用会报错。</li>
+<li>回退方案是经典的三步：建一个隐藏 <code>&lt;textarea&gt;</code> → <code>select()</code> 选中 → <code>document.execCommand(&quot;copy&quot;)</code> → 移除节点。这个 API 已经废弃，但兼容性最广。</li>
+<li>把两条路径封装进一个 async 函数并返回布尔值，调用方只管按真假提示「已复制」或「复制失败，请手动选择」，不用自己判断该走哪条分支。</li>
+</ul>
+<h2>封装成返回布尔值的函数</h2>
+<pre><code class="language-js">async function copyText(text) {
+  // 路线一：安全上下文下的标准 API
+  if (navigator.clipboard &amp;&amp; window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (e) {
+      // 用户拒绝授权、页面失焦等情况会走到这里，继续往下试
+    }
+  }
+
+  // 路线二：execCommand 回退
+  const ta = document.createElement(&quot;textarea&quot;);
+  ta.value = text;
+  ta.setAttribute(&quot;readonly&quot;, &quot;&quot;);
+  ta.style.cssText = &quot;position:fixed;top:-9999px;opacity:0&quot;;
+  document.body.appendChild(ta);
+  ta.select();
+  let ok = false;
+  try {
+    ok = document.execCommand(&quot;copy&quot;);
+  } catch (e) {
+    ok = false;
+  }
+  document.body.removeChild(ta);
+  return ok;
+}
+</code></pre>
+<p>调用方就干净了：</p>
+<pre><code class="language-js">const ok = await copyText(text);
+toast(ok ? &quot;已复制&quot; : &quot;复制失败，请手动选择&quot;);
+</code></pre>
+<h2>两个容易忽略的点</h2>
+<ul>
+<li><strong>不要用 <code>display: none</code> 隐藏 textarea。</strong> 隐藏的元素没法 <code>select()</code>，复制必然失败。用 <code>position: fixed</code> 挪到视口外是常规做法。</li>
+<li><strong><code>window.isSecureContext</code> 比判断 <code>location.protocol</code> 准。</strong> 它把 localhost、<code>127.0.0.1</code>、以及通过 https 加载的 iframe 都算进去，和浏览器自己的判断标准一致。</li>
+</ul>
+<h2>为什么还是保留废弃 API</h2>
+<p><code>execCommand(&quot;copy&quot;)</code> 已被标记废弃，但没有替代品能覆盖非安全上下文 —— 而「本地双击打开 html 预览」这种场景恰恰就是非安全上下文。所以两条路都得留着。</p>
+</div>
+
+        <!-- 每篇末尾的版权条。写在模板里而不是逐篇写进 blog/*.html：
+             那些文件是 build.js 的产物，手改的部分下次构建就没了。
+             文案和样式跟 partials/about.html「关于本站」末尾那条保持一致，
+             改这里记得把那边一起改。
+             href 前面带 ../ 是因为产物在 blog/ 下；抽出的 SPA 片段里
+             build.js 会把这个前缀去掉（见文件顶部那段注释）。 -->
+        <p class="post__license">
+          本站所有内容版权归作者所有，保留所有权利（All rights
+          reserved）。未经许可，不得以任何形式转载、摘编或用于商业用途；引用请注明出处并附上原文链接。完整条款见
+          <a href="../copyright.html">版权声明</a>。
+        </p>
+      </article>
+      <!-- fragment:end -->
+    </main>
+
+    <footer>
+      <div class="footer__inner">
+        <a class="footer__brand" href="../#/home">StayInTop</a>
+
+        <!-- 右半边一行：版权 + 版权声明 + GitHub。
+             这里故意不复述顶部导航（首页/项目/博客/关于）—— 那条导航是 sticky 的，
+             翻到页脚时还在视口里挂着，抄一份就是同一批链接同屏出现两次。
+             版权声明不在顶部导航里，这一行是它仅有的入口之一，别顺手也删了。 -->
+        <p class="footer__meta">
+          <span class="footer__copy"
+            >&copy; <span id="year">2026</span> StayInTop &middot; All rights
+            reserved</span
+          >
+          <!-- 两个链接包一层：窄屏放不下时整组挪到下一行，不会只把 GitHub
+               一个甩下去（那样看着像多打了一个词）。这一层必须留着 ——
+               拆开的话两个链接各自是 flex 项，会分开换行。 -->
+          <span class="footer__links">
+            <a href="../copyright.html">版权声明</a>
+            <!-- 站外的挂在最后，CSS 靠 .footer__ext 在它前面画一道细竖线 -->
+            <a
+              class="footer__ext"
+              href="https://github.com/jiaqijingliu"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </span>
+        </p>
+      </div>
+    </footer>
+
+    <button
+      id="theme-toggle-btn"
+      class="theme-toggle"
+      aria-label="主题设置"
+      title="主题设置"
+    >
+      <!-- 齿轮。用 <circle> + <path> 两根齿形短横，不是一条路径描轮廓 ——
+           手写带齿的单路径极易走形，圆的半径是显式数字、不会写错 -->
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4.2" />
+        <path d="M16.2 12H19.4M14.1 15.6 15.7 18.4M9.9 15.6 8.3 18.4M7.8 12H4.6M9.9 8.4 8.3 5.6M14.1 8.4 15.7 5.6" />
+      </svg>
+    </button>
+    <div id="theme-panel" class="theme-panel" hidden>
+      <div class="theme-panel__row">
+        <span class="theme-panel__label">亮暗模式</span>
+        <!-- 两个图标都在，显示哪个由 CSS 看 <html data-theme> 决定（见 _theme.scss）。
+             亮色显示月亮 =「切到深色」，跟原来的 emoji 一个意思。 -->
+        <button id="dark-toggle" class="theme-panel__dark-btn" type="button">
+          <svg class="nav-icon nav-icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20.5 14.8A8.7 8.7 0 1 1 9.2 3.5a7 7 0 0 0 11.3 11.3z" />
+          </svg>
+          <svg class="nav-icon nav-icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="2.8" />
+            <path d="M17.2 12h4M15.7 15.7 18.5 18.5M12 17.2v4M8.3 15.7 5.5 18.5M6.8 12h-4M8.3 8.3 5.5 5.5M12 6.8v-4M15.7 8.3 18.5 5.5" />
+          </svg>
+          <span id="dark-toggle-label">深色</span>
+        </button>
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">主题色</span>
+        <div id="theme-swatches" class="theme-swatches"></div>
+        <input type="color" id="theme-color-picker" value="#ffffff" />
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">
+          字号
+          <b id="font-size-value" class="theme-panel__value">16px</b>
+        </span>
+        <input
+          type="range"
+          id="font-size-range"
+          min="13"
+          max="20"
+          step="0.5"
+          value="16"
+          aria-label="正文字号"
+        />
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">内容宽度</span>
+        <div id="width-opts" class="theme-opts"></div>
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">文本选中</span>
+        <div id="select-opts" class="theme-opts"></div>
+      </div>
+
+      <button id="theme-reset" class="theme-panel__reset" type="button">
+        恢复默认设置
+      </button>
+    </div>
+
+    <script src="../src/js/site.js?v=140" defer></script>
+    <!-- 文章页也加载播放器：直接访问/分享链接落到这里时，播放器照常出现
+         （以暂停状态恢复上次的位置）。站内跳转时根本不会走到这个文件 ——
+         那走的是 index.html 里那条 #/post/<slug> 路由。 -->
+    <script src="../src/js/player.js?v=140" defer></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>使用Ajax</title>
+  </head>
+  <body>
+    <header><h1>使用Ajax</h1></header>
+    <div>
+      <button data-num="1">显示界面1</button>
+      <!-- data-*是HTML自定义数据属性，可以供JS使用dataset来访问！ -->
+      <button data-num="2">显示界面2</button>
+      <button data-num="3">显示界面3</button>
+    </div>
+    <div id="target">
+      Press a button. 使用Ajax方法，可以实现无刷新情况下，切换界面。
+    </div>
+
+    <script>
+      var buttons = document.getElementsByTagName("button");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = handleButtonPress;
+      }
+      function handleButtonPress(e) {
+        var num =e.target.dataset.num;
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = handleResponse;
+        httpRequest.open("GET", "project-6-" + num + ".html");
+        httpRequest.send();
+      }
+      function handleResponse(e) {
+        if (
+          e.target.readyState == XMLHttpRequest.DONE &&
+          e.target.status == 200
+        ) {
+          document.getElementById("target").innerHTML = e.target.responseText;
+        }
+      }
+    </script>
+  </body>
+</html>

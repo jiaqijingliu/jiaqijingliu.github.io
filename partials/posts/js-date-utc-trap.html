@@ -1,0 +1,51 @@
+<article class="post">
+        <a class="post__back" href="#/blog">← 返回博客</a>
+        <h1 class="post__title">new Date(&quot;YYYY-MM-DD&quot;) 被当成 UTC</h1>
+        <div class="post__meta">
+          <time datetime="2026-09-14">2026-09-14</time>
+          <!-- 分类。没写 category 的文章这里是个「—」，不是空串（build.js 的
+               renderPost 给的），否则日期和「约 N 分钟」之间会多一段空隙。 -->
+          <span class="blog-cat">踩坑记录</span>
+          <span class="post__read">约 3 分钟</span>
+          <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">Date</span></div>
+        </div>
+        <div class="post__content"><p>倒计时项目里，用户选定目标日期后，不同时区算出来的剩余天数会差一天。问题出在日期字符串的解析上。</p>
+<ul>
+<li><code>new Date(&quot;2026-01-01&quot;)</code> 这种纯日期字符串，按规范是以 <strong>UTC 午夜</strong>解析的；而 <code>new Date(2026, 0, 1)</code> 用的是本地时间。两者看起来一样，差 8 小时。</li>
+<li>代码本意是把截止时间设到当天 23:59:59，用的是本地时间的 <code>setHours(23, 59, 59, 999)</code>。在 UTC+8 下，UTC 午夜正好是当天早上 8 点，所以一直没暴露问题；换成负时区，UTC 午夜其实是<em>前一天</em>，截止时间就整体提前了一天。</li>
+<li>要拿「今天的本地日期字符串」，手写 <code>YYYY-MM-DD</code> 比 <code>toISOString().slice(0, 10)</code> 稳 —— 后者同样是 UTC，晚上打开会拿到明天的日期。</li>
+</ul>
+<h2>手写一个本地的 todayStr()</h2>
+<pre><code class="language-js">function todayStr() {
+  const d = new Date();
+  const pad = (n) =&gt; String(n).padStart(2, &quot;0&quot;);
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+</code></pre>
+<p>关键在于三个方法都取的<strong>本地时间</strong>：<code>getFullYear</code> / <code>getMonth</code> / <code>getDate</code>。对应的 <code>getUTCFullYear</code> 系列才是 UTC。</p>
+<h2>从字符串还原日期时也要当心</h2>
+<p>如果表单 <code>&lt;input type=&quot;date&quot;&gt;</code> 给的是 <code>&quot;2026-01-01&quot;</code>，想拿它构造一个<strong>本地</strong>零点的 Date，别直接 <code>new Date(value)</code>：</p>
+<pre><code class="language-js">// ✗ 按 UTC 解析，UTC+8 下变成 1 月 1 日早上 8 点
+const d1 = new Date(value);
+
+// ✓ 按本地时间解析
+const [y, m, day] = value.split(&quot;-&quot;).map(Number);
+const d2 = new Date(y, m - 1, day);
+</code></pre>
+<p>用 <code>d.getDate()</code> 取回来验证一下，能直观看出差别：<code>d1</code> 在东八区是 1 号，在西半球就变成 31 号了。</p>
+<h2>结论</h2>
+<p>日期只有「时刻」的概念，没有「日期」的概念。<strong>凡是只关心年月日的地方，就只用手写字符串或本地时间构造函数，不要经过 <code>toISOString</code>。</strong></p>
+</div>
+
+        <!-- 每篇末尾的版权条。写在模板里而不是逐篇写进 blog/*.html：
+             那些文件是 build.js 的产物，手改的部分下次构建就没了。
+             文案和样式跟 partials/about.html「关于本站」末尾那条保持一致，
+             改这里记得把那边一起改。
+             href 前面带 ../ 是因为产物在 blog/ 下；抽出的 SPA 片段里
+             build.js 会把这个前缀去掉（见文件顶部那段注释）。 -->
+        <p class="post__license">
+          本站所有内容版权归作者所有，保留所有权利（All rights
+          reserved）。未经许可，不得以任何形式转载、摘编或用于商业用途；引用请注明出处并附上原文链接。完整条款见
+          <a href="copyright.html">版权声明</a>。
+        </p>
+      </article>

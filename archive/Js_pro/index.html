@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <div>
+      <button>Apples</button>
+      <button>Cherries</button>
+      <button>Bananas</button>
+    </div>
+    <div id="target">Press a button</div>
+    <script>
+      // 定义阶乘函数
+      function factorial(num) {
+        // 校验：必须是正整数
+        if (!Number.isInteger(num) || num < 0) {
+          throw new Error("请输入非负整数");
+        }
+        if (num === 0 || num === 1) return 1;
+        let res = 1;
+        for (let i = 2; i <= num; i++) {
+          res *= i;
+        }
+        return res;
+      }
+      try {
+        let n = Number(prompt("请输入一个正整数", ""));
+        let f = factorial(n);
+        alert(n + "! = " + f);
+      } catch (ex) {
+        alert(ex);
+      }
+    </script>
+  </body>
+</html>

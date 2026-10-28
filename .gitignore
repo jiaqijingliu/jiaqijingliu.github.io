@@ -1,0 +1,16 @@
+node_modules/
+
+# npm
+npm-debug.log*
+.npm-cache/
+
+# 可读源码只留在本地，公开仓库只放压缩产物。
+# 注意：git clean -fdx 会把 dev/ 一起删掉 —— 那是唯一一份源码，先备份。
+dev/
+
+# Sass 的 source map 会把压缩前的结构带出去，且 build:css 已经用 --no-source-map
+src/css/style.css.map
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db

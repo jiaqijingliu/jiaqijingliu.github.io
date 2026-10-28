@@ -1,0 +1,112 @@
+<!-- 关于页分两块，本站在前、本人在后：
+       「关于本站」这个站是怎么来的、怎么搭的   ← id="site"
+       「关于本人」自述 + 联系方式              ← id="me"
+
+     顺序是特意定的：本站在前。参考的几个个人站（jvns.ca、simonwillison.net、
+     akarin.dev）里有前有后，但「展示技术栈」是这个站的建站目的之一，
+     访客第一眼该看到的是「这站是他搭的」，而不是个人八卦。
+
+     两个被否掉的结构，别再提议：
+       · 三段式加一个「这里是？」开场段 —— 参考站那段是风格化开场白，信息量接近零，
+         这里没有对应的个人调性可写，照搬会退化成「你好欢迎来到我的站点」。
+       · 不分块的一整篇 —— 两个板块各有实质内容，混在一起会互相稀释。
+
+     注意 relative URL 的基准：这个片段是被 fetch 进来插到 index.html 里的，
+     所以下面的 href="copyright.html" 按 index.html 的位置解析，指向站点根目录，
+     不是 partials/ 目录。别顺手改成 ../copyright.html。
+
+     「关于本人」开头那三句是平行的自述，全都归 .about-voice，没有提要句 ——
+     别再把第一句单拎出来放大，理由写在下面那段注释里。
+
+     底下这段文案是从作者的速记扩写来的，几处刻意不按原样：
+       · JS → JavaScript，缩写一律写全称（标点、大小写也顺手统一了）
+       · 工具名统一成官方写法：VScode → VS Code、GIT → Git、sourceTree → SourceTree
+       · 「本科就业：」这种电报式标签拆成完整句子，和上面那条并列
+     看见有人把它们改回缩写，是因为他不知道这条规则，不是因为缩写更好。 -->
+
+<section class="cards-section" id="site">
+  <h2>关于本站</h2>
+  <div class="under-line"></div>
+
+  <div class="about-card">
+    <p class="about-lead">本站通过 AI Agent 搭建优化(基于初始手搓的网页布局)。</p>
+
+    <p>
+      为何不采用常见的 Hexo
+      框架或者其他方法？采用 Hexo 提供的主题，存在着占用大、杂乱、千篇一律等问题。前面几次搭建的个人网站也均采用的是
+      Hexo
+      框架，但总是达不到自己想要的效果。好在随 AI Agent 技术发展，AI
+      写代码能力十分强，我们作为普通人已经完全没有必要深入地了解具体代码的原理与编写。
+    </p>
+
+    <p>
+      为什么要搭建这个网站？初始是源于兴趣学习。然而由于自身能力精力，没有学到深层的东西（比如自己编写主题等等）。目前用途：记录一些学习知识之类、展示些垃圾项目等等。
+    </p>
+
+    <p>
+      站点优化未来：比如常见的添加评论、音乐播放等想法。等待日后 AI
+      的发展再看，说不定过几年我们只需要随口一说便能实现复杂功能，而无需像目前一样，给出一大堆提示词、所谓的
+      skills 等。
+    </p>
+
+    <p class="about-license">
+      本站所有内容版权归作者所有，保留所有权利（All rights
+      reserved）。未经许可，不得以任何形式转载、摘编或用于商业用途；引用请注明出处并附上原文链接。完整条款见
+      <a href="copyright.html">版权声明</a>。
+    </p>
+  </div>
+</section>
+
+<section class="cards-section" id="me">
+  <h2>关于本人</h2>
+  <div class="under-line"></div>
+
+  <div class="about-card">
+    <!-- 三句自述，并排。曾经把第一句提成 .about-lead（跟「关于本站」开头一样），
+         试完发现不对：「热爱…」跟下面两句是并列的三件事，不是它们的提要 ——
+         提要样式一上，读者会以为后两句是对第一句的展开，读完才发现不相干。
+         现在三句同字号、同颜色、同缩进，靠左侧一条竖线拢成一组。 -->
+    <div class="about-voice">
+      <p>热爱互联网、热爱学习新技术、热爱玩单机游戏。</p>
+      <p>讨厌做无意义的事。向往自由，开放。</p>
+    </div>
+
+    <!-- 三行「标签 — 内容」的键值行。左栏宽度在 CSS 里定（5rem）——
+         标签是中文，「编程语言」四个字需要的位置比英文标签多。 -->
+    <dl class="about-facts">
+      <dt>工具</dt>
+      <dd>
+        <span class="about-tags">
+          <span class="tag">VS Code</span>
+          <span class="tag">Git</span>
+          <span class="tag">Scoop</span>
+          <span class="tag">SourceTree</span>
+        </span>
+      </dd>
+
+      <dt>编程语言</dt>
+      <dd>
+        <span class="about-tags">
+          <span class="tag">C</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">SCSS</span>
+          <span class="tag">JavaScript</span>
+        </span>
+        <!-- 这句是吐槽不是语言名，所以从上面那排标签里拆出来单独一行 -->
+        <span class="about-note">当然，现在基本都是 Vibe Coding 了。</span>
+      </dd>
+
+      <dt>联系我</dt>
+      <dd>
+        <a
+          class="about-link"
+          href="https://github.com/jiaqijingliu"
+          target="_blank"
+          rel="noopener"
+          >github.com/jiaqijingliu</a
+        >
+      </dd>
+    </dl>
+  </div>
+</section>

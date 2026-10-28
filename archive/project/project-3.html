@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目3 图片轮播页面</title>
+    <link rel="icon" href="https://bilibili.com/favicon.ico" />
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/pro-3.css" />
+  </head>
+  <body>
+    <ul class="slides">
+      <input type="radio" name="radio-btn" id="img-1" checked />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=1" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-4" class="prev">&#x2039;</label>
+          <label for="img-2" class="next">&#x203a;</label>
+        </div>
+      </li>
+
+      <input type="radio" name="radio-btn" id="img-2"  />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=2" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-1" class="prev">&#x2039;</label>
+          <label for="img-3" class="next">&#x203a;</label>
+        </div>
+      </li>
+
+      <input type="radio" name="radio-btn" id="img-3" />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=3" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-2" class="prev">&#x2039;</label>
+          <label for="img-4" class="next">&#x203a;</label>
+        </div>
+      </li>
+
+      <input type="radio" name="radio-btn" id="img-4"  />
+      <li class="photo-container">
+        <div class="photo-container__photo">
+          <img src="https://picsum.photos/500?random=4" alt="这是一张图片" />
+        </div>
+        <div class="photo-container__nav">
+          <label for="img-3" class="prev">&#x2039;</label>
+          <label for="img-1" class="next">&#x203a;</label>
+        </div>
+      </li>
+
+      <li class="nav-dots">
+        <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+        <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+        <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+        <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+      </li>
+    </ul>
+  </body>
+</html>

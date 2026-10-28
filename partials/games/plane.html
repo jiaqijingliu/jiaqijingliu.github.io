@@ -1,0 +1,99 @@
+<!-- 飞机大战。这里只有标记，一行逻辑都没有 —— 片段是 innerHTML 注入的，
+     内联 <script> 不会执行（见 main.js 顶部那条注释）。玩游戏的全部代码在
+     src/js/game.js，它自己盯着 #view 认领这一页。
+
+     画布外面的三块（覆盖层文案、操作说明、键位按钮）都留空，由 game.js 填：
+     它们的内容里要插当前的键名，而键名是用户可改的，写死在标记里就得再同步
+     一份。这一页的标记因此几乎只有骨架。
+
+     **唯一的例外是「按键设置」下面那一栏手柄**（2026-10-03 加）—— 手柄的键位
+     是标准映射定死的、不随玩家改，没有「要同步一份」的问题；反过来它还必须
+     常驻（原因写在那一块自己的注释里）。**这一页里唯一写死的文案就是它。**
+
+     .game-title 是给 main.js 的 setTitle 读的（标签页标题），别改名。 -->
+
+<section class="cards-section game-page" id="game-plane">
+  <h2 class="game-title">飞机大战</h2>
+  <div class="under-line"></div>
+
+  <!-- .game-field 是「这一页留给游戏的那块地方」：不进游戏时高度由 CSS 说了算
+       （见 _game.scss 里那段），game.js 的 fit() 只负责往里塞最大的 4:3 矩形。
+       这一层不能省 —— 少了它 fit() 就得自己去减一个写死的常量。
+       开始游戏之后它还兼任全屏容器：game.js 往 <html> 加上 is-game-full，
+       这个 div 变成 fixed 铺满视口，真的 requestFullscreen 也请求在它身上。 -->
+  <div class="game-field">
+    <!-- 画布与覆盖层同格叠放：覆盖层绝对定位盖在画布上，开始/暂停/结束三态
+         共用它，窄屏的「请用电脑打开」也走这里。
+
+         .game-pick 是换图时的三选一（2026-10-02），同一格、同一套配色，
+         内容同样整个由 game.js 填（renderPick）。它和 .game-overlay
+         不会同时出现：选卡时状态是 playing，覆盖层那时候是藏着的。 -->
+    <div class="game-stage">
+      <canvas class="game-canvas"></canvas>
+      <div class="game-overlay"></div>
+      <div class="game-pick" hidden></div>
+    </div>
+  </div>
+
+  <p class="game-help"></p>
+
+  <!-- 按键设置**排在两块图鉴前面**（2026-10-03 用户要求）：它是要动手的那一块，
+       图鉴是查资料的那一块 —— 先能改键，再往下翻资料。 -->
+  <div class="game-keys">
+    <h3 class="game-keys__title">按键设置</h3>
+    <div class="game-keys__grid"></div>
+    <p class="game-keys__note">
+      点一下某个键位，再按你想用的键。按 Esc 取消。改动会存下来，刷新后还在。
+    </p>
+
+    <!-- 手柄那一栏**是写死的标记，不是按钮**，三件事：
+
+         ① 手柄的键位由浏览器的标准映射定死，没有「换个键」这回事，所以它不归
+            上面那套改键 UI 管 —— 做成按钮只会让人点了没反应。用同一个
+            .game-key 骨架 + 一个不能点的 __btn--static，两栏并排看过去是一套。
+         ② **必须常驻。** 早先这行是 game.js 里「认出过手柄再补一句」的，但浏览器
+            要等到用户在手柄上按过键才肯把设备交出来，于是没插手柄、刚插上还没按过
+            的人一个字都看不到 —— 用户 2026-10-03 就是这么发现「按键说明里没有手柄」
+            的。现在它和键盘那一栏一样，永远在这儿。
+         ③ 文案**不套 <kbd>**：那是给键盘键帽的样式，而「左摇杆」「RT」不是键帽。 -->
+    <h3 class="game-keys__title game-keys__title--sub">手柄</h3>
+    <div class="game-keys__grid">
+      <div class="game-key">
+        <span class="game-key__label">移动</span>
+        <span class="game-key__btn game-key__btn--static">左摇杆</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">射击</span>
+        <span class="game-key__btn game-key__btn--static">RT</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">技能</span>
+        <span class="game-key__btn game-key__btn--static">LT</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">道具</span>
+        <span class="game-key__btn game-key__btn--static">A</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">暂停</span>
+        <span class="game-key__btn game-key__btn--static">Start</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">选卡</span>
+        <span class="game-key__btn game-key__btn--static">左摇杆 + A</span>
+      </div>
+    </div>
+    <p class="game-keys__note">
+      插上就能用，按标准映射走 —— 手柄的键位是固定的，不在这张表里改。
+    </p>
+  </div>
+
+  <!-- 两块图鉴（掉落 + 敌军）。和 .game-help / .game-keys 一样只留骨架，内容全由
+       game.js 填 —— 每一条图标都是拿画布上那一套绘制代码现画的（见 game.js 的
+       drawCodexIcon / drawEnemyIcon），写死在标记里就得再抄一份几何。
+
+       **两块必须带不同的修饰类**：game.js 那边是 `querySelector(".game-codex--drop")`
+       / `(".game-codex--enemy")` 分别认领的，裸选择器只会抓到文档里第一个。 -->
+  <div class="game-codex game-codex--drop"></div>
+  <div class="game-codex game-codex--enemy"></div>
+</section>

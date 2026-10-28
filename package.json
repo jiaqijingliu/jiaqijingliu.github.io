@@ -1,0 +1,24 @@
+{
+  "name": "stayintop-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StayInTop 个人站点",
+  "scripts": {
+    "build": "npm run build:assets && npm run build:blog",
+    "build:assets": "npm run build:css && npm run build:js",
+    "bump": "node bump.js",
+    "font:subset": "node subset-font.js",
+    "build:css": "sass --no-source-map --style=compressed dev/css/style.scss src/css/style.css",
+    "build:js": "esbuild dev/js/main.js dev/js/site.js dev/js/bg.js dev/js/player.js dev/js/game.js --minify --outdir=src/js --log-level=warning",
+    "build:blog": "node build.js",
+    "serve": "http-server -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "gray-matter": "^4.0.3",
+    "http-server": "^14.1.1",
+    "marked": "^15.0.12",
+    "sass": "^1.103.1",
+    "subset-font": "^2.9.0"
+  }
+}

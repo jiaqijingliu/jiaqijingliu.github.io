@@ -68,7 +68,7 @@
           if (t === "light") c = darkenForLight(c);
           d.style.setProperty("--primary", c);
           d.style.setProperty("--on-primary", onPrimary(c));
-          d.setAttribute("data-width", s.getItem("content-width") || "md");
+          d.setAttribute("data-width", s.getItem("content-width") || (matchMedia("(max-width: 700px)").matches ? "lg" : "md"));
           d.setAttribute("data-select", s.getItem("text-select") || "off");
           d.setAttribute("data-dock", s.getItem("toggle-dock") || "right");
           var dy = parseFloat(s.getItem("toggle-y"));
@@ -81,7 +81,7 @@
     </script>
 
     <link rel="stylesheet" href="../src/css/normalize.css" />
-    <link rel="stylesheet" href="../src/css/style.css?v=140" />
+    <link rel="stylesheet" href="../src/css/style.css?v=149" />
   </head>
 
   <body>
@@ -155,13 +155,25 @@
           <span class="post__read">约 3 分钟</span>
           <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">Date</span></div>
         </div>
-        <div class="post__content"><p>倒计时项目里，用户选定目标日期后，不同时区算出来的剩余天数会差一天。问题出在日期字符串的解析上。</p>
+
+        <div class="post__body">
+          <nav class="post-toc" aria-label="目录">
+          <details class="post-toc__box">
+            <summary class="post-toc__title">目录<span class="post-toc__count">3 节</span></summary>
+            <ol class="post-toc__list">
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-手写一个本地的-todaystr">手写一个本地的 todayStr()</a></li>
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-从字符串还原日期时也要当心">从字符串还原日期时也要当心</a></li>
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-结论">结论</a></li>
+            </ol>
+          </details>
+        </nav>
+          <div class="post__content"><p>倒计时项目里，用户选定目标日期后，不同时区算出来的剩余天数会差一天。问题出在日期字符串的解析上。</p>
 <ul>
 <li><code>new Date(&quot;2026-01-01&quot;)</code> 这种纯日期字符串，按规范是以 <strong>UTC 午夜</strong>解析的；而 <code>new Date(2026, 0, 1)</code> 用的是本地时间。两者看起来一样，差 8 小时。</li>
 <li>代码本意是把截止时间设到当天 23:59:59，用的是本地时间的 <code>setHours(23, 59, 59, 999)</code>。在 UTC+8 下，UTC 午夜正好是当天早上 8 点，所以一直没暴露问题；换成负时区，UTC 午夜其实是<em>前一天</em>，截止时间就整体提前了一天。</li>
 <li>要拿「今天的本地日期字符串」，手写 <code>YYYY-MM-DD</code> 比 <code>toISOString().slice(0, 10)</code> 稳 —— 后者同样是 UTC，晚上打开会拿到明天的日期。</li>
 </ul>
-<h2>手写一个本地的 todayStr()</h2>
+<h2 id="h-手写一个本地的-todaystr">手写一个本地的 todayStr()</h2>
 <pre><code class="language-js">function todayStr() {
   const d = new Date();
   const pad = (n) =&gt; String(n).padStart(2, &quot;0&quot;);
@@ -169,7 +181,7 @@
 }
 </code></pre>
 <p>关键在于三个方法都取的<strong>本地时间</strong>：<code>getFullYear</code> / <code>getMonth</code> / <code>getDate</code>。对应的 <code>getUTCFullYear</code> 系列才是 UTC。</p>
-<h2>从字符串还原日期时也要当心</h2>
+<h2 id="h-从字符串还原日期时也要当心">从字符串还原日期时也要当心</h2>
 <p>如果表单 <code>&lt;input type=&quot;date&quot;&gt;</code> 给的是 <code>&quot;2026-01-01&quot;</code>，想拿它构造一个<strong>本地</strong>零点的 Date，别直接 <code>new Date(value)</code>：</p>
 <pre><code class="language-js">// ✗ 按 UTC 解析，UTC+8 下变成 1 月 1 日早上 8 点
 const d1 = new Date(value);
@@ -179,9 +191,10 @@ const [y, m, day] = value.split(&quot;-&quot;).map(Number);
 const d2 = new Date(y, m - 1, day);
 </code></pre>
 <p>用 <code>d.getDate()</code> 取回来验证一下，能直观看出差别：<code>d1</code> 在东八区是 1 号，在西半球就变成 31 号了。</p>
-<h2>结论</h2>
+<h2 id="h-结论">结论</h2>
 <p>日期只有「时刻」的概念，没有「日期」的概念。<strong>凡是只关心年月日的地方，就只用手写字符串或本地时间构造函数，不要经过 <code>toISOString</code>。</strong></p>
 </div>
+        </div>
 
 
         <p class="post__license">
@@ -284,8 +297,8 @@ const d2 = new Date(y, m - 1, day);
       </button>
     </div>
 
-    <script src="../src/js/site.js?v=140" defer></script>
+    <script src="../src/js/site.js?v=149" defer></script>
 
-    <script src="../src/js/player.js?v=140" defer></script>
+    <script src="../src/js/player.js?v=149" defer></script>
   </body>
 </html>

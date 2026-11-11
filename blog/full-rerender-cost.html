@@ -68,7 +68,7 @@
           if (t === "light") c = darkenForLight(c);
           d.style.setProperty("--primary", c);
           d.style.setProperty("--on-primary", onPrimary(c));
-          d.setAttribute("data-width", s.getItem("content-width") || "md");
+          d.setAttribute("data-width", s.getItem("content-width") || (matchMedia("(max-width: 700px)").matches ? "lg" : "md"));
           d.setAttribute("data-select", s.getItem("text-select") || "off");
           d.setAttribute("data-dock", s.getItem("toggle-dock") || "right");
           var dy = parseFloat(s.getItem("toggle-y"));
@@ -81,7 +81,7 @@
     </script>
 
     <link rel="stylesheet" href="../src/css/normalize.css" />
-    <link rel="stylesheet" href="../src/css/style.css?v=140" />
+    <link rel="stylesheet" href="../src/css/style.css?v=149" />
   </head>
 
   <body>
@@ -155,13 +155,25 @@
           <span class="post__read">约 3 分钟</span>
           <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">DOM</span></div>
         </div>
-        <div class="post__content"><p>待办应用每次改动都重建整个列表。写起来最简单，但有两个不容易第一时间注意到的副作用。</p>
+
+        <div class="post__body">
+          <nav class="post-toc" aria-label="目录">
+          <details class="post-toc__box">
+            <summary class="post-toc__title">目录<span class="post-toc__count">3 节</span></summary>
+            <ol class="post-toc__list">
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-最小代价的修法">最小代价的修法</a></li>
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-动画问题不适合用同一招">动画问题不适合用同一招</a></li>
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-顺带一提事件委托">顺带一提：事件委托</a></li>
+            </ol>
+          </details>
+        </nav>
+          <div class="post__content"><p>待办应用每次改动都重建整个列表。写起来最简单，但有两个不容易第一时间注意到的副作用。</p>
 <ul>
 <li><code>listEl.innerHTML = &quot;&quot;</code> 之后重建所有行，滚动容器 <code>.list</code> 的 <code>scrollTop</code> 会一起归零 —— 滚到列表下面再在搜索框敲一个字，视图会跳回顶部。</li>
 <li>CSS 动画是按元素挂载触发的。重建出来的行都是新元素，<code>@keyframes slideIn</code> 于是一次全部重放 —— 在搜索框里每敲一个字，整个列表就集体滑入一遍。</li>
 <li>不必推翻架构也能修：重建前存下 <code>scrollTop</code> 再还原，或者改成事件委托 + 只更新变化的行。在重建模式下，给每一行单独 <code>addEventListener</code> 也是白付的开销。</li>
 </ul>
-<h2>最小代价的修法</h2>
+<h2 id="h-最小代价的修法">最小代价的修法</h2>
 <pre><code class="language-js">function render(list) {
   const scroller = document.querySelector(&quot;.list&quot;);
   const keep = scroller.scrollTop;   // 先把位置存下来
@@ -171,14 +183,14 @@
 }
 </code></pre>
 <p><code>scrollTop</code> 在元素内容清空时会归零，但容器本身还在，所以赋值回去是有效的。</p>
-<h2>动画问题不适合用同一招</h2>
+<h2 id="h-动画问题不适合用同一招">动画问题不适合用同一招</h2>
 <p>滚动位置能还原，动画重放却不能 —— 它是「新元素挂载」这个事实本身触发的，没有状态可以恢复。三个可选方向：</p>
 <ol>
 <li>只在<strong>首次</strong>渲染时挂动画类，后续更新不加；</li>
 <li>把入场动画挪到 <code>@starting-style</code> / View Transitions，让浏览器区分「新增」和「已存在」；</li>
 <li>干脆改成事件委托 + 精准更新，从根上避免元素重建。</li>
 </ol>
-<h2>顺带一提：事件委托</h2>
+<h2 id="h-顺带一提事件委托">顺带一提：事件委托</h2>
 <p>全量重建时如果给每一行都绑了监听，那些监听会随着旧元素一起被丢弃，白白付了绑定开销。改成在容器上委托一次：</p>
 <pre><code class="language-js">scroller.addEventListener(&quot;click&quot;, (e) =&gt; {
   const row = e.target.closest(&quot;.item&quot;);
@@ -188,6 +200,7 @@
 </code></pre>
 <p>这样重建多少次，监听始终只有一个。</p>
 </div>
+        </div>
 
 
         <p class="post__license">
@@ -290,8 +303,8 @@
       </button>
     </div>
 
-    <script src="../src/js/site.js?v=140" defer></script>
+    <script src="../src/js/site.js?v=149" defer></script>
 
-    <script src="../src/js/player.js?v=140" defer></script>
+    <script src="../src/js/player.js?v=149" defer></script>
   </body>
 </html>

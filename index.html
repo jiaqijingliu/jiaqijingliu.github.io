@@ -68,7 +68,7 @@
           if (t === "light") c = darkenForLight(c);
           d.style.setProperty("--primary", c);
           d.style.setProperty("--on-primary", onPrimary(c));
-          d.setAttribute("data-width", s.getItem("content-width") || "md");
+          d.setAttribute("data-width", s.getItem("content-width") || (matchMedia("(max-width: 700px)").matches ? "lg" : "md"));
           d.setAttribute("data-select", s.getItem("text-select") || "off");
           d.setAttribute("data-dock", s.getItem("toggle-dock") || "right");
           // 「背景」这一项也在这里落一次：不然选了星空的用户刷新时会先按默认
@@ -85,7 +85,7 @@
     </script>
 
     <link rel="stylesheet" href="./src/css/normalize.css" />
-    <link rel="stylesheet" href="./src/css/style.css?v=140" />
+    <link rel="stylesheet" href="./src/css/style.css?v=149" />
   </head>
 
   <body>
@@ -253,10 +253,10 @@
       </button>
     </div>
 
-    <script src="./src/js/site.js?v=140" defer></script>
-    <script src="./src/js/main.js?v=140" defer></script>
-    <script src="./src/js/bg.js?v=140" defer></script>
-    <script src="./src/js/player.js?v=140" defer></script>
-    <script src="./src/js/game.js?v=140" defer></script>
+    <script src="./src/js/site.js?v=149" defer></script>
+    <script src="./src/js/main.js?v=149" defer></script>
+    <script src="./src/js/bg.js?v=149" defer></script>
+    <script src="./src/js/player.js?v=149" defer></script>
+    <script src="./src/js/game.js?v=149" defer></script>
   </body>
 </html>

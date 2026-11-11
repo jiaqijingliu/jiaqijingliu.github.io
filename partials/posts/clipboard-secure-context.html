@@ -8,13 +8,25 @@
           <span class="post__read">约 4 分钟</span>
           <div class="post__tags"><span class="tag">JavaScript</span><span class="tag">浏览器 API</span></div>
         </div>
-        <div class="post__content"><p>名片页的「点击复制联系方式」，在 https 下正常，直接双击打开 html 文件就失效了。</p>
+
+        <div class="post__body">
+          <nav class="post-toc" aria-label="目录">
+          <details class="post-toc__box">
+            <summary class="post-toc__title">目录<span class="post-toc__count">3 节</span></summary>
+            <ol class="post-toc__list">
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-封装成返回布尔值的函数">封装成返回布尔值的函数</a></li>
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-两个容易忽略的点">两个容易忽略的点</a></li>
+              <li class="post-toc__item post-toc__item--lvl0"><a href="#h-为什么还是保留废弃-api">为什么还是保留废弃 API</a></li>
+            </ol>
+          </details>
+        </nav>
+          <div class="post__content"><p>名片页的「点击复制联系方式」，在 https 下正常，直接双击打开 html 文件就失效了。</p>
 <ul>
 <li><code>navigator.clipboard</code> 只在<strong>安全上下文</strong>（https 或 localhost）下存在。用 <code>file://</code> 或普通 http 打开时它是 <code>undefined</code>，直接调用会报错。</li>
 <li>回退方案是经典的三步：建一个隐藏 <code>&lt;textarea&gt;</code> → <code>select()</code> 选中 → <code>document.execCommand(&quot;copy&quot;)</code> → 移除节点。这个 API 已经废弃，但兼容性最广。</li>
 <li>把两条路径封装进一个 async 函数并返回布尔值，调用方只管按真假提示「已复制」或「复制失败，请手动选择」，不用自己判断该走哪条分支。</li>
 </ul>
-<h2>封装成返回布尔值的函数</h2>
+<h2 id="h-封装成返回布尔值的函数">封装成返回布尔值的函数</h2>
 <pre><code class="language-js">async function copyText(text) {
   // 路线一：安全上下文下的标准 API
   if (navigator.clipboard &amp;&amp; window.isSecureContext) {
@@ -47,14 +59,15 @@
 <pre><code class="language-js">const ok = await copyText(text);
 toast(ok ? &quot;已复制&quot; : &quot;复制失败，请手动选择&quot;);
 </code></pre>
-<h2>两个容易忽略的点</h2>
+<h2 id="h-两个容易忽略的点">两个容易忽略的点</h2>
 <ul>
 <li><strong>不要用 <code>display: none</code> 隐藏 textarea。</strong> 隐藏的元素没法 <code>select()</code>，复制必然失败。用 <code>position: fixed</code> 挪到视口外是常规做法。</li>
 <li><strong><code>window.isSecureContext</code> 比判断 <code>location.protocol</code> 准。</strong> 它把 localhost、<code>127.0.0.1</code>、以及通过 https 加载的 iframe 都算进去，和浏览器自己的判断标准一致。</li>
 </ul>
-<h2>为什么还是保留废弃 API</h2>
+<h2 id="h-为什么还是保留废弃-api">为什么还是保留废弃 API</h2>
 <p><code>execCommand(&quot;copy&quot;)</code> 已被标记废弃，但没有替代品能覆盖非安全上下文 —— 而「本地双击打开 html 预览」这种场景恰恰就是非安全上下文。所以两条路都得留着。</p>
 </div>
+        </div>
 
 
         <p class="post__license">

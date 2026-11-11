@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://www.bilibili.com/favicon.ico" />
+    <title>走路时鞋子在叫？ | StayInTop</title>
+    <meta name="description" content="瓷砖地上走路时鞋底吱呀作响，原因不是鞋脏了，而是粘滑摩擦。" />
+
+    <script>
+      // 首次绘制前套用本地保存的外观设置，避免闪一下默认样式再跳回用户的选择。
+      // 枚举型的只写 data-* 属性，具体数值由 CSS 里的 html[data-*] 规则决定；
+      // 主题色和字号是连续值，只能直接写内联自定义属性。
+      (function () {
+        try {
+          var d = document.documentElement;
+          var s = window.localStorage;
+          // 出厂默认是深色，不跟随系统偏好 —— 默认主题色是白色，它在浅色底上
+          // 读不出来（见下面 darkenForLight）
+          var t = s.getItem("theme") || "dark";
+          d.setAttribute("data-theme", t);
+          /* 主题色的三个小函数。和 site.js 里的 lum / darkenForLight / onPrimary
+             是同一份逻辑 —— 它们得赶在首帧之前，等不到 defer 的那个文件，只能
+             在这儿再写一份。改一处记得改另一处。
+
+             lum：感知亮度 0~1，认不出来的值返回 0（当"深色"处理，于是下面两个
+             函数各自退回默认行为，不会算出 NaN）。
+             darkenForLight：亮色模式下把过浅的主题色压深（三通道等比缩小、保住
+             色相，缩到亮度 0.38）。白色主题色压在白色页面上，导航高亮、链接
+             hover 这些「拿主题色当文字色」的地方会整个消失，所以这里自动换一个
+             压深版；原色照旧存着，切回深色模式就变回来。
+             onPrimary：主题色上该压什么颜色。齿轮、播放键都是实心主题色底 + 它。 */
+          function lum(c) {
+            if (!/^#[0-9a-f]{6}$/i.test(String(c))) return 0;
+            var n = parseInt(c.slice(1), 16);
+            return (
+              (0.2126 * ((n >> 16) & 255) +
+                0.7152 * ((n >> 8) & 255) +
+                0.0722 * (n & 255)) /
+              255
+            );
+          }
+          function darkenForLight(c) {
+            var L = lum(c);
+            if (L <= 0.6) return c;
+            var n = parseInt(c.slice(1), 16);
+            var k = 0.38 / L;
+            var f = function (v) {
+              return Math.round(v * k);
+            };
+            return (
+              "#" +
+              (
+                (1 << 24) +
+                (f((n >> 16) & 255) << 16) +
+                (f((n >> 8) & 255) << 8) +
+                f(n & 255)
+              )
+                .toString(16)
+                .slice(1)
+            );
+          }
+          function onPrimary(c) {
+            return lum(c) > 0.6 ? "#1a1a1a" : "#ffffff";
+          }
+          // 主题色永远写一遍（不只是存过才写）：实际用哪个还得看亮暗模式
+          var c = s.getItem("theme-color") || "#ffffff";
+          if (t === "light") c = darkenForLight(c);
+          d.style.setProperty("--primary", c);
+          d.style.setProperty("--on-primary", onPrimary(c));
+          d.setAttribute("data-width", s.getItem("content-width") || (matchMedia("(max-width: 700px)").matches ? "lg" : "md"));
+          d.setAttribute("data-select", s.getItem("text-select") || "off");
+          d.setAttribute("data-dock", s.getItem("toggle-dock") || "right");
+          var dy = parseFloat(s.getItem("toggle-y"));
+          if (dy) d.style.setProperty("--dock-y", dy + "%");
+          // 字号是连续值，没法做成 data-* 枚举，只能直接写内联
+          var fs = parseFloat(s.getItem("font-size"));
+          if (fs) d.style.fontSize = fs + "px";
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="stylesheet" href="../src/css/normalize.css" />
+    <link rel="stylesheet" href="../src/css/style.css?v=149" />
+  </head>
+
+  <body>
+    <nav id="nav">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="切换导航菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <ol>
+        <li><a href="../#/home" title="返回首页">StayInTop</a></li>
+        <li>
+          <a href="../#/home">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M3.4 10.8 12 4l8.6 6.8M5.8 9.5v9.7a1.2 1.2 0 0 0 1.2 1.2h10a1.2 1.2 0 0 0 1.2-1.2V9.5" />
+            </svg>
+            首页
+          </a>
+        </li>
+        <li>
+          <a href="../#/projects">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M3.5 7.4a1.6 1.6 0 0 1 1.6-1.6h3.4l1.9 2.2h8.5a1.6 1.6 0 0 1 1.6 1.6v8.6a1.6 1.6 0 0 1-1.6 1.6H5.1a1.6 1.6 0 0 1-1.6-1.6z" />
+            </svg>
+            项目
+          </a>
+        </li>
+        <li>
+          <a href="../#/blog">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M6.3 3.6h7l4.4 4.4v12.4H6.3zM13.3 3.6v4.4h4.4M9.3 12.5h5.4M9.3 16.1h5.4" />
+            </svg>
+            博客
+          </a>
+        </li>
+        <li>
+          <a href="../#/game">
+
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="2" y="7" width="20" height="11" rx="4" />
+              <path d="M6.5 10.5v4M4.5 12.5h4" />
+              <circle cx="15.6" cy="11.4" r="1" />
+              <circle cx="18.1" cy="13.9" r="1" />
+            </svg>
+            娱乐
+          </a>
+        </li>
+        <li>
+          <a href="../#/about">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 11.7a3.85 3.85 0 1 0 0-7.7 3.85 3.85 0 0 0 0 7.7zM4.6 20.4a7.4 7.4 0 0 1 14.8 0" />
+            </svg>
+            关于
+          </a>
+        </li>
+      </ol>
+    </nav>
+
+    <main>
+
+
+      <article class="post">
+        <a class="post__back" href="../#/blog">← 返回博客</a>
+        <h1 class="post__title">走路时鞋子在叫？</h1>
+        <div class="post__meta">
+          <time datetime="2026-02-15">2026-02-15</time>
+
+          <span class="blog-cat">知识</span>
+          <span class="post__read">约 3 分钟</span>
+          <div class="post__tags"><span class="tag">生活常识</span><span class="tag">物理</span></div>
+        </div>
+
+        <div class="post__body">
+
+          <div class="post__content"><p>日常生活中，在家里走路，穿拖鞋、棉鞋之类，总是会发出吱呀响声。这时父母会说有要擦拭鞋底——虽然有所缓解但仍然存在。有时下雨之后，穿运动鞋类走在学校走廊，也会发出很大的吱呀响声，这时便举步维艰，十分的引人侧目。</p>
+<p>那么，为什么在这种瓷砖下，鞋子会有这种现象呢？</p>
+<h2 id="h-鞋子在硬质表面发出吱吱声的科学原理">鞋子在硬质表面发出吱吱声的科学原理</h2>
+<p><strong>粘滑摩擦</strong></p>
+<p>吱吱声是由两个表面之间的摩擦和振动引起的——在这里是鞋底和瓷砖地板。行走时施加压力时，微小的气泡会被困在鞋底与光滑、非多孔的瓷砖表面之间。当你的脚移动时，这些气泡会迅速压缩并释放，产生细微但可听到的爆裂声或尖叫声。这种现象被称为“<strong>粘滑摩擦</strong>”：鞋底短暂地粘在地板上，然后向前滑动，过程中产生振动并产生噪音。</p>
+<p>这种效果在抛光陶瓷、瓷砖或石材瓷砖上尤为明显，因为它们提供极少的抓地感。与地毯或碎石不同，硬瓷砖能反射声波，促使接触点快速移动。鞋底的成分也起着重要作用。橡胶鞋底，尤其是运动鞋或休闲鞋中使用的较软配方，因其柔韧且容易紧贴平面，更容易出现此类问题。</p>
+<p>以下是主要原因：</p>
+<ul>
+<li><strong>鞋底和鞋垫之间被困的湿气</strong>：脚部的汗水或潮湿环境可能会渗入鞋底中部或鞋底层之间。行走时，这些水分会产生内部移动和摩擦，产生类似地板吱吱声的吱吱声。</li>
+<li><strong>新鞋底粘橡胶</strong>：新制造的橡胶鞋底通常带有略带粘性的表面，设计用来抓地。在光滑的瓷砖上，这种粘性增加了粘附力，使滑动更易发生。</li>
+<li>缓冲<strong>中底中的气囊</strong>：带有厚泡沫中底（常见于跑步或步行鞋）的鞋子，随着时间推移可能会形成微小的空气间隙。这些空腔在压力下振动，放大内部噪音。</li>
+<li><strong>鞋底上的污垢或杂物</strong>：沙子、砂砾或干泥等细小颗粒可能会卡在鞋底的纹路中。当它们在瓷砖上移动时，会产生间歇性的吱吱声或刮擦声。</li>
+<li><strong>松动或磨损的鞋底</strong>：随着时间推移，胶水将鞋底与中底粘合在一起会逐渐退化。部分脱落的鞋底会异常弯曲，每走一步都会发出拍打声或吱吱声。</li>
+<li><strong>过度清洁或抛光的地板</strong>：具有讽刺意味的是，干净的瓷砖地板反而会增加吱吱声。清洁产品会留下残留物，这些残留物起到临时润滑的作用，促使滑动并出现突然的粘附。</li>
+</ul>
+<p>参考文本通过Edge自带翻译，可能出现翻译不准确。</p>
+<p>本文引用链接：<a href="https://www.alibaba.com/product-insights/why-do-my-shoes-squeak-on-tile-floors-and-how-to-stop-it.html">为什么我的鞋子会在瓷砖地板上吱吱作响，以及如何停止</a></p>
+</div>
+        </div>
+
+
+        <p class="post__license">
+          本站所有内容版权归作者所有，保留所有权利（All rights
+          reserved）。未经许可，不得以任何形式转载、摘编或用于商业用途；引用请注明出处并附上原文链接。完整条款见
+          <a href="../copyright.html">版权声明</a>。
+        </p>
+      </article>
+
+    </main>
+
+    <footer>
+      <div class="footer__inner">
+        <a class="footer__brand" href="../#/home">StayInTop</a>
+
+
+        <p class="footer__meta">
+          <span class="footer__copy"
+            >&copy; <span id="year">2026</span> StayInTop &middot; All rights
+            reserved</span
+          >
+
+          <span class="footer__links">
+            <a href="../copyright.html">版权声明</a>
+
+            <a
+              class="footer__ext"
+              href="https://github.com/jiaqijingliu"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </span>
+        </p>
+      </div>
+    </footer>
+
+    <button
+      id="theme-toggle-btn"
+      class="theme-toggle"
+      aria-label="主题设置"
+      title="主题设置"
+    >
+
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4.2" />
+        <path d="M16.2 12H19.4M14.1 15.6 15.7 18.4M9.9 15.6 8.3 18.4M7.8 12H4.6M9.9 8.4 8.3 5.6M14.1 8.4 15.7 5.6" />
+      </svg>
+    </button>
+    <div id="theme-panel" class="theme-panel" hidden>
+      <div class="theme-panel__row">
+        <span class="theme-panel__label">亮暗模式</span>
+
+        <button id="dark-toggle" class="theme-panel__dark-btn" type="button">
+          <svg class="nav-icon nav-icon--moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20.5 14.8A8.7 8.7 0 1 1 9.2 3.5a7 7 0 0 0 11.3 11.3z" />
+          </svg>
+          <svg class="nav-icon nav-icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="2.8" />
+            <path d="M17.2 12h4M15.7 15.7 18.5 18.5M12 17.2v4M8.3 15.7 5.5 18.5M6.8 12h-4M8.3 8.3 5.5 5.5M12 6.8v-4M15.7 8.3 18.5 5.5" />
+          </svg>
+          <span id="dark-toggle-label">深色</span>
+        </button>
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">主题色</span>
+        <div id="theme-swatches" class="theme-swatches"></div>
+        <input type="color" id="theme-color-picker" value="#ffffff" />
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">
+          字号
+          <b id="font-size-value" class="theme-panel__value">16px</b>
+        </span>
+        <input
+          type="range"
+          id="font-size-range"
+          min="13"
+          max="20"
+          step="0.5"
+          value="16"
+          aria-label="正文字号"
+        />
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">内容宽度</span>
+        <div id="width-opts" class="theme-opts"></div>
+      </div>
+
+      <div class="theme-panel__row theme-panel__row--col">
+        <span class="theme-panel__label">文本选中</span>
+        <div id="select-opts" class="theme-opts"></div>
+      </div>
+
+      <button id="theme-reset" class="theme-panel__reset" type="button">
+        恢复默认设置
+      </button>
+    </div>
+
+    <script src="../src/js/site.js?v=149" defer></script>
+
+    <script src="../src/js/player.js?v=149" defer></script>
+  </body>
+</html>

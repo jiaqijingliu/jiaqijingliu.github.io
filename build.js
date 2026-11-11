@@ -24,7 +24,7 @@
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
-const { marked } = require("marked");
+const { Marked } = require("marked");
 
 const ROOT = path.dirname(__filename);
 const POSTS_DIR = path.join(ROOT, "posts");
@@ -137,22 +137,45 @@ function deriveSummary(body) {
 
 /* ---------- 读取与排序 ---------- */
 
+/* 递归收集 posts/ 下**任意层级**的 .md。目录怎么分完全自由（按年、按主题、
+   按草稿区都行），因为 slug 只取文件名、不进 URL —— 移动或重命名目录不会
+   改变任何链接和分类。
+
+   跳过以 _ 或 . 开头的文件和目录：_模板.md 留在根上当模板，.draft/ 之类
+   的临时目录也不会被误读。 */
+function walkPosts(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (/^[_.]/.test(ent.name)) continue;
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) walkPosts(full, out);
+    else if (ent.name.endsWith(".md")) out.push(full);
+  }
+  return out;
+}
+
 function readPosts() {
   if (!fs.existsSync(POSTS_DIR)) {
     console.error(`✗ 找不到 ${path.relative(ROOT, POSTS_DIR)}/ 目录`);
     process.exit(1);
   }
 
-  const posts = fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith(".md") && !/^[_.]/.test(f))
-    .map((f) => {
-      const { data, content } = matter(
-        fs.readFileSync(path.join(POSTS_DIR, f), "utf8")
-      );
-      const slug = String(data.slug || f.replace(/\.md$/, "")).trim();
+  // slug 是全局命名空间（blog/<slug>.html），不同目录下的同名文件会互相
+  // 覆盖，所以这里记下第一次出现的位置，后面的直接跳过并报出冲突双方。
+  const slugOwner = new Map();
+
+  const posts = walkPosts(POSTS_DIR)
+    .map((full) => {
+      const { data, content } = matter(fs.readFileSync(full, "utf8"));
+      const file = path.relative(POSTS_DIR, full).split(path.sep).join("/");
+      // 注意：YAML 会把没加引号的 `2026-10-28` 解析成 Date 对象。直接 String()
+      // 会得到 "Wed Oct 28 2026 08:00:00 GMT+0800 ..."，当文件名用会带冒号和空格，
+      // 构建直接报 ENOENT。slug 允许就是这种纯日期，所以先按日期格式化回来。
+      const rawSlug = data.slug;
+      const slug = String(
+        rawSlug instanceof Date ? toDateStr(rawSlug) : rawSlug || path.basename(full, ".md")
+      ).trim();
       return {
-        file: f,
+        file,
         slug,
         title: String(data.title || slug),
         date: toDateStr(data.date),
@@ -174,6 +197,13 @@ function readPosts() {
         console.warn(`  跳过非法 slug「${p.slug}」（${p.file}）`);
         return false;
       }
+      if (slugOwner.has(p.slug)) {
+        console.warn(
+          `  跳过 ${p.file}：slug「${p.slug}」已被 ${slugOwner.get(p.slug)} 占用`
+        );
+        return false;
+      }
+      slugOwner.set(p.slug, p.file);
       return true;
     });
 
@@ -184,21 +214,99 @@ function readPosts() {
 
 /* ---------- 生成文章页 ---------- */
 
+/* 目录只列到第 4 层（h1 起算是 0），再深的标题缩进封顶；少于两项就不出目录 ——
+   单节目录只是占了正文前面的一行。 */
+const TOC_MIN_ITEMS = 2;
+const TOC_MAX_LEVEL = 3;
+
+// 从 inline token 里递归取纯文本。标题里的 **加粗**、`行内代码`、链接都只留文字，
+// 目录里不重复这些排版（而且链接套链接是非法 HTML）。
+function plainText(tokens) {
+  return (tokens || [])
+    .map((t) => (t.tokens ? plainText(t.tokens) : t.text || ""))
+    .join("");
+}
+
+/* 标题 id。保留中文（\p{L} 覆盖 CJK），去掉标点、空格和 ★ 这类符号；
+   纯符号标题退化成 section。h- 前缀避免和页面上已有的 id（#view、#year、
+   #nav-toggle）撞名 —— 它们同属一个文档命名空间。 */
+function headingId(text, used) {
+  const base =
+    text
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\p{L}\p{N}-]/gu, "")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "") || "section";
+  let id = `h-${base}`;
+  // while 而不是 if：标题本身就叫「x-2」时，补出来的 -2 仍可能撞上后面的标题
+  let n = 1;
+  while (used.has(id)) id = `h-${base}-${++n}`;
+  used.add(id);
+  return id;
+}
+
+/* 一遍渲染同时产出正文和目录：标题 id 由渲染器按文档顺序分配，
+   目录复用同一份 heading 列表，两边不可能对不上。 */
+function renderBody(md) {
+  const headings = [];
+  const used = new Set();
+  const renderer = {
+    heading({ tokens, depth }) {
+      const inner = this.parser.parseInline(tokens);
+      const text = plainText(tokens);
+      const id = headingId(text, used);
+      headings.push({ depth, id, text });
+      return `<h${depth} id="${esc(id)}">${inner}</h${depth}>\n`;
+    },
+  };
+  const html = new Marked({ renderer }).parse(md);
+  return { html, toc: buildToc(headings) };
+}
+
+function buildToc(headings) {
+  if (headings.length < TOC_MIN_ITEMS) return "";
+  const top = Math.min(...headings.map((h) => h.depth));
+  const items = headings
+    .map((h) => {
+      const lvl = Math.min(h.depth - top, TOC_MAX_LEVEL);
+      return `              <li class="post-toc__item post-toc__item--lvl${lvl}"><a href="#${esc(
+        h.id
+      )}">${esc(h.text)}</a></li>`;
+    })
+    .join("\n");
+  // 第一行不带缩进：模板里的 {{toc}} 自己带 8 个空格，其余行按嵌套层级缩进
+  return `<nav class="post-toc" aria-label="目录">
+          <details class="post-toc__box">
+            <summary class="post-toc__title">目录<span class="post-toc__count">${headings.length} 节</span></summary>
+            <ol class="post-toc__list">
+${items}
+            </ol>
+          </details>
+        </nav>`;
+}
+
 function renderPost(post, tpl) {
   const tags = post.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("");
   const mins = readTime(post.body);
+  const { html, toc } = renderBody(post.body);
   return tpl
-    .replace(/\{\{title\}\}/g, esc(post.title))
-    .replace(/\{\{summary\}\}/g, esc(post.summary))
-    .replace(/\{\{date\}\}/g, esc(post.date))
-    .replace(/\{\{readTime\}\}/g, `约 ${mins} 分钟`)
+    // 替换值一律用函数形式：字符串替换会把 $&、$'、$` 当成特殊模式，
+    // 正文里出现这些字符就会被吞掉/展开。
+    .replace(/\{\{title\}\}/g, () => esc(post.title))
+    .replace(/\{\{summary\}\}/g, () => esc(post.summary))
+    .replace(/\{\{date\}\}/g, () => esc(post.date))
+    .replace(/\{\{readTime\}\}/g, () => `约 ${mins} 分钟`)
     // 没写分类时给一个字面上的「—」而不是空串：模板里那两处是并排的
     // <span>，空串会在日期和「约 N 分钟」之间留下一段没有内容的间距。
     // （替换表是闭合的 —— 模板里加了 {{category}} 就必须有这一行，否则
     // 页面上会原样印出这串字符。）
-    .replace(/\{\{category\}\}/g, post.category ? esc(post.category) : "—")
-    .replace(/\{\{tags\}\}/g, tags)
-    .replace(/\{\{content\}\}/g, marked.parse(post.body));
+    .replace(/\{\{category\}\}/g, () => (post.category ? esc(post.category) : "—"))
+    .replace(/\{\{tags\}\}/g, () => tags)
+    // toc 要在 content 之前换：正文代码块里如果写了字面量 {{toc}}，
+    // content 先插进来的话会被再替换一次。
+    .replace(/\{\{toc\}\}/g, () => toc)
+    .replace(/\{\{content\}\}/g, () => html);
 }
 
 /* ---------- 列表片段 ---------- */

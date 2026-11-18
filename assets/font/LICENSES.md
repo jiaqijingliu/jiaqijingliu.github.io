@@ -1,4 +1,4 @@
-# src/font 下的字体来源
+# assets/font 下的字体来源
 
 授权均为 **SIL Open Font License 1.1**（可自由用于商业与非商业项目、可再分发、可嵌入网页）。
 
@@ -48,8 +48,8 @@ npm run build:css && npm run bump
 
 1. 从 Google Fonts 下 latin 子集的 woff2（或在 [google-webfonts-helper](https://gwfh.mranftl.com/fonts) 按子集下载）
 2. 放进本目录
-3. 在 `src/css/_font.scss` 里加一条 `@font-face`
-4. 在 `src/css/_var_global.scss` 的 `:root` 里改 `--logo-font` / `--logo-weight`
+3. 在 `assets/css/_font.scss` 里加一条 `@font-face`
+4. 在 `assets/css/_var_global.scss` 的 `:root` 里改 `--logo-font` / `--logo-weight`
 
 （从前还要在 `site.js` 的 `LOGO_FONTS` 和设置面板里各加一处，那个选项 2026-10-06 删掉了，
 现在只有 `:root` 一处。）

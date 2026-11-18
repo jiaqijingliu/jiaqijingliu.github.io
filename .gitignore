@@ -12,7 +12,7 @@ dev/
 README.md
 
 # Sass 的 source map 会把压缩前的结构带出去，且 build:css 已经用 --no-source-map
-src/css/style.css.map
+assets/css/style.css.map
 
 # 编辑器 / 系统
 .DS_Store

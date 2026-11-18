@@ -1,6 +1,6 @@
-/* 先把 dev/ 里的可读源码压成 src/ 下的产物，再把所有 ?v=N 统一加一，然后重编 blog/。
+/* 先把 dev/ 里的可读源码压成 assets/ 下的产物，再把所有 ?v=N 统一加一，然后重编 blog/。
  *
- * dev/ 是可读源码（带注释）的唯一副本，在 .gitignore 里，公开仓库只提交 src/ 下的
+ * dev/ 是可读源码（带注释）的唯一副本，在 .gitignore 里，公开仓库只提交 assets/ 下的
  * 压缩产物和剥掉注释的 HTML。所以改完 dev/js、dev/css 或 dev/html 之后必须经过
  * 这一步，产物才会跟上。
  *
@@ -19,8 +19,8 @@ const fs = require("fs");
 const { execSync } = require("child_process");
 
 // 1) 可读源码 → 压缩产物。放最前面：Sass/esbuild 出错就直接退出，
-//    不会出现「HTML 版本号升了、src/ 还是旧的」这种半截状态。
-console.log("压缩源码 → src/ …");
+//    不会出现「HTML 版本号升了、assets/ 还是旧的」这种半截状态。
+console.log("压缩源码 → assets/ …");
 execSync("npm run build:assets", { stdio: "inherit" });
 
 // 所有带版本号的 HTML —— 注意是 dev/html/ 下的**源文件**，根目录的产物由

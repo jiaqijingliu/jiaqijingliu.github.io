@@ -22,15 +22,15 @@ const subsetFont = require("subset-font");
 const ROOT = path.resolve(__dirname, "..");
 const FONT_DIR = path.join(ROOT, "src", "font");
 const FONT_BASE = "lxgw-wenkai-mono-lite-medium-subset";
-// 写回的是 dev/css/ 那份源文件（style.scss @use 它）；src/css/ 下没有 _font.scss
+// 写回的是 dev/css/ 那份源文件（style.scss @use 它）；assets/css/ 下没有 _font.scss
 const FONT_CSS = path.join(ROOT, "dev", "css", "_font.scss");
 
 // 上游：AIOVTUE/llqcss 是参考站 daily.yybb.us 用的那一份，family 被它改名成
-// XiaMingXinSong，这里用回本名。SIL OFL 1.1（见 src/font/LICENSES.md）。
+// XiaMingXinSong，这里用回本名。SIL OFL 1.1（见 assets/font/LICENSES.md）。
 const SRC_URL =
   "https://cdn.jsdelivr.net/gh/AIOVTUE/llqcss@main/LXGWWenKaiMonoLite-Medium.ttf";
 
-// 只扫会变成页面文字的东西。src/font 和 src/pic 是二进制，node_modules/.git 不用看。
+// 只扫会变成页面文字的东西。assets/font 和 assets/pic 是二进制，node_modules/.git 不用看。
 const EXTS = new Set([".html", ".js", ".scss", ".css", ".md", ".json"]);
 const SKIP_DIRS = new Set(["node_modules", ".git", "font", "pic"]);
 
@@ -75,7 +75,7 @@ async function main() {
   const hash = crypto.createHash("sha256").update(out).digest("hex").slice(0, 8);
   const name = `${FONT_BASE}.${hash}.woff2`;
 
-  // 先清掉上一版，别在 src/font/ 里越堆越多
+  // 先清掉上一版，别在 assets/font/ 里越堆越多
   for (const f of fs.readdirSync(FONT_DIR)) {
     if (f.startsWith(FONT_BASE + ".") && f.endsWith(".woff2")) {
       fs.unlinkSync(path.join(FONT_DIR, f));
@@ -95,10 +95,10 @@ async function main() {
   fs.writeFileSync(FONT_CSS, next);
 
   console.log(
-    `→ src/font/${name}  ${(out.length / 1024).toFixed(0)} KB` +
+    `→ assets/font/${name}  ${(out.length / 1024).toFixed(0)} KB` +
       `（比原字体小 ${(100 - (out.length / src.length) * 100).toFixed(1)}%）`
   );
-  console.log(`  已把新文件名写回 src/css/_font.scss`);
+  console.log(`  已把新文件名写回 assets/css/_font.scss`);
   console.log("接着跑 npm run build:css && npm run bump。");
 }
 

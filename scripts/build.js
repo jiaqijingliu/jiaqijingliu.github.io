@@ -423,7 +423,7 @@ function noteCardHtml(p, lead) {
 }
 
 /* 站点统计。三个数都现算：篇数、字数、最后更新日期。
-   不放「运行 N 天/时/分」那种参考站上的东西 —— src/js 是刻意零定时器的
+   不放「运行 N 天/时/分」那种参考站上的东西 —— assets/js 是刻意零定时器的
    （见 README），而这个数停在页面上不动反而更怪。 */
 function homeStatsHtml(posts) {
   const chars = posts.reduce((n, p) => n + p.body.length, 0);

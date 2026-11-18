@@ -18,10 +18,12 @@ const path = require("node:path");
 const crypto = require("node:crypto");
 const subsetFont = require("subset-font");
 
-const ROOT = __dirname;
+// 脚本在 scripts/ 下，仓库根是它的上一级
+const ROOT = path.resolve(__dirname, "..");
 const FONT_DIR = path.join(ROOT, "src", "font");
 const FONT_BASE = "lxgw-wenkai-mono-lite-medium-subset";
-const FONT_CSS = path.join(ROOT, "src", "css", "_font.scss");
+// 写回的是 dev/css/ 那份源文件（style.scss @use 它）；src/css/ 下没有 _font.scss
+const FONT_CSS = path.join(ROOT, "dev", "css", "_font.scss");
 
 // 上游：AIOVTUE/llqcss 是参考站 daily.yybb.us 用的那一份，family 被它改名成
 // XiaMingXinSong，这里用回本名。SIL OFL 1.1（见 src/font/LICENSES.md）。

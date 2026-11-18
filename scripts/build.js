@@ -26,7 +26,8 @@ const path = require("path");
 const matter = require("gray-matter");
 const { Marked } = require("marked");
 
-const ROOT = path.dirname(__filename);
+// 脚本在 scripts/ 下，仓库根是它的上一级
+const ROOT = path.resolve(__dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
 const OUT_DIR = path.join(ROOT, "blog");
 // 手写 HTML 的唯一可读副本。目录在 .gitignore 里，公开仓库只有下面这些产物。

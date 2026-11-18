@@ -62,5 +62,5 @@ for (const { file, text } of sources) {
 // blog/<slug>.html 由模板套出来，重新生成才能跟上新版本号；
 // 根目录的 HTML 产物也在这里从 dev/html/ 重新生成并剥掉注释
 console.log("  重新生成 HTML 产物 …");
-execSync("node build.js", { stdio: "inherit" });
+execSync("node scripts/build.js", { stdio: "inherit" });
 console.log(`\n版本号已升到 ?v=${next}，记得连同 blog/ 和根目录的 HTML 产物一起提交。`);

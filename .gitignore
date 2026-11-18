@@ -17,3 +17,4 @@ src/css/style.css.map
 # 编辑器 / 系统
 .DS_Store
 Thumbs.db
+.zcode/

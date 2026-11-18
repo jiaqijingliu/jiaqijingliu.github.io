@@ -1,0 +1,5 @@
+# 全站对爬虫放开。sitemap 由 scripts/build.js 每次构建重新生成（域名现读 CNAME）。
+User-agent: *
+Allow: /
+
+Sitemap: https://www.stayin.top/sitemap.xml

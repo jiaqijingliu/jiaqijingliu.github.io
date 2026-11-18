@@ -32,6 +32,10 @@ const POSTS_DIR = path.join(ROOT, "posts");
 const OUT_DIR = path.join(ROOT, "blog");
 // 手写 HTML 的唯一可读副本。目录在 .gitignore 里，公开仓库只有下面这些产物。
 const SRC_DIR = path.join(ROOT, "dev", "html");
+// 首帧内联脚本的唯一出处（见 injectShared）。挂在 SRC_DIR 下是为了和模板
+// 一样「只在本地存在」—— 产物里它已经被原样展开进三个页面的 <head>。
+const FIRST_PAINT_SRC = path.join(SRC_DIR, "inc", "first-paint.js");
+const FONT_DIR = path.join(ROOT, "assets", "font");
 const TEMPLATE_PATH = path.join(SRC_DIR, "templates", "post.html");
 const BLOG_PARTIAL_SRC = path.join(SRC_DIR, "partials", "blog.html");
 const HOME_PARTIAL_SRC = path.join(SRC_DIR, "partials", "home.html");
@@ -57,6 +61,17 @@ const STATIC_HTML = [
 
 const HOME_LATEST = 5; // 首页放几篇笔记（第一条是大卡，其余进网格）
 const CHARS_PER_MIN = 300; // 中文技术文阅读速度（字/分钟），仅用于估算
+
+// 站点绝对地址，OG 标签和 sitemap 用。域名唯一出处是 CNAME（Cloudflare Pages /
+// GitHub Pages 的自定义域名文件），这里现读 —— 换域名不用回来改这个脚本。
+// 读不到时兜一个当前值，至少产物是可用的。
+const SITE_URL = (() => {
+  try {
+    return "https://" + fs.readFileSync(path.join(ROOT, "CNAME"), "utf8").trim();
+  } catch (e) {
+    return "https://www.stayin.top";
+  }
+})();
 
 // 标记对。key 是 inject() 的第二个参数 —— 注意 file 和 key 是分开的，
 // 同一个 key 可以喂给不同文件（count 就同时喂过首页和博客页），
@@ -291,9 +306,18 @@ function renderPost(post, tpl) {
   const tags = post.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("");
   const mins = readTime(post.body);
   const { html, toc } = renderBody(post.body);
+  const url = `${SITE_URL}/blog/${encodeURIComponent(post.slug)}.html`;
   return tpl
     // 替换值一律用函数形式：字符串替换会把 $&、$'、$` 当成特殊模式，
     // 正文里出现这些字符就会被吞掉/展开。
+    // {{site_url}} / {{url}} / {{json_*}} 是给 <head> 的 OG 与 JSON-LD 用的：
+    // json_* 是 JSON.stringify 原样输出 —— 标题里的引号、反斜杠不会弄坏 JSON，
+    // 千万别换成 esc() 过的值（&quot; 压进 JSON 就不是引号了）。
+    .replace(/\{\{site_url\}\}/g, () => SITE_URL)
+    .replace(/\{\{url\}\}/g, () => url)
+    .replace(/\{\{json_title\}\}/g, () => JSON.stringify(post.title))
+    .replace(/\{\{json_summary\}\}/g, () => JSON.stringify(post.summary))
+    .replace(/\{\{json_date\}\}/g, () => JSON.stringify(post.date))
     .replace(/\{\{title\}\}/g, () => esc(post.title))
     .replace(/\{\{summary\}\}/g, () => esc(post.summary))
     .replace(/\{\{date\}\}/g, () => esc(post.date))
@@ -495,11 +519,13 @@ function stripComments(html) {
   );
 }
 
-// 源码路径 → 同名产物路径，内容剥注释
-function emit(rel) {
+// 源码路径 → 同名产物路径，内容剥注释。prefix 传给 injectShared（根目录页面
+// ""，子目录产物 "../"）—— 只有带占位符的页面（index / copyright）会用到。
+function emit(rel, prefix = "") {
   const dest = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, stripComments(fs.readFileSync(path.join(SRC_DIR, rel), "utf8")));
+  const html = fs.readFileSync(path.join(SRC_DIR, rel), "utf8");
+  fs.writeFileSync(dest, stripComments(injectShared(html, prefix, rel)));
   console.log(`  ✓ ${rel}`);
 }
 
@@ -517,6 +543,47 @@ function injectText(html, key, inner, inline, label) {
   // 会被 String.replace 当成替换模式解释 —— 文章标题或摘要里出现这几个
   // 字符就会被换掉。包一层函数走的是「原样插入」，没有这个解释步骤。
   return html.replace(re, () => replacement);
+}
+
+/* ---------- 跨页面共享注入 ----------
+
+   三个带 <head> 的页面（index.html / templates/post.html / copyright.html）
+   里的三样东西由这里统一落位，模板里只写占位符：
+
+   <!--first-paint--> —— 首帧内联脚本。唯一出处是 dev/html/inc/first-paint.js，
+   原文包进 <script> 注入。它必须内联（等 defer 的文件首帧就闪了），又不能
+   三个模板各抄一份 —— 之前正是「改一处漏三处」的温床。
+   <!--font-preload--> —— 正文霞鹜文楷子集的 preload。文件名带内容哈希，
+   subset-font.js 说了算，所以扫 assets/font 现算，不写死；找不到就警告并
+   留空（preload 缺失只是慢，不是坏）。
+   {{site_url}} —— 站点绝对地址（现读 CNAME，见 SITE_URL），OG 标签用。
+
+   prefix 是资源相对前缀：根目录页面 ""，blog/ 和 templates/ 下的产物 "../"。
+   其余没有占位符的文件进来就是 no-op，调用方不用挑拣。 */
+function injectShared(html, prefix, label) {
+  let out = html;
+  if (out.includes("<!--first-paint-->")) {
+    const body = fs.readFileSync(FIRST_PAINT_SRC, "utf8");
+    // 替换值包成函数 —— 脚本里若有 $&、$' 之类字符会被字符串形式当替换模式解释
+    out = out.replace("<!--first-paint-->", () => "<script>\n" + body + "\n  </script>");
+  }
+  if (out.includes("<!--font-preload-->")) {
+    const re = /^lxgw-wenkai-mono-lite.*\.woff2$/;
+    const font = fs.existsSync(FONT_DIR)
+      ? fs.readdirSync(FONT_DIR).find((f) => re.test(f))
+      : "";
+    if (font) {
+      const link = `<link rel="preload" as="font" type="font/woff2" href="${prefix}assets/font/${font}" crossorigin />`;
+      out = out.replace("<!--font-preload-->", () => link);
+    } else {
+      console.warn(`  ! ${label}：assets/font 里找不到霞鹜文楷子集，字体 preload 未写入`);
+      out = out.replace("<!--font-preload-->", () => "");
+    }
+  }
+  if (out.includes("{{site_url}}")) {
+    out = out.split("{{site_url}}").join(SITE_URL);
+  }
+  return out;
 }
 
 /* 抽出 FRAG 标记之间的内容，做成可以注入 SPA #view 的片段。
@@ -564,7 +631,8 @@ function main() {
   }
 
   for (const p of posts) {
-    const html = renderPost(p, tpl);
+    // 先套 {{}} 再注入共享块 —— 占位符互不重叠，顺序只影响可读性
+    const html = injectShared(renderPost(p, tpl), "../", `blog/${p.slug}.html`);
     fs.writeFileSync(path.join(OUT_DIR, `${p.slug}.html`), stripComments(html));
     writeFragment(
       path.join(FRAG_DIR, `${p.slug}.html`),
@@ -607,12 +675,44 @@ function main() {
   fs.writeFileSync(HOME_PARTIAL, stripComments(homeHtml));
   console.log("已更新 partials/blog.html 与 partials/home.html");
 
-  // 模板和版权页本身也是公开文件（可被直接访问），同样剥注释后写出
-  fs.writeFileSync(TEMPLATE_OUT, stripComments(tpl));
+  // 模板和版权页本身也是公开文件（可被直接访问），同样剥注释后写出。
+  // 模板在 templates/ 子目录，资源前缀带一层 ../；{{title}} 这类文章占位符
+  // 它没有实参，照旧留在产物里（和从前一致 —— 这个页面不是给人看的）。
+  fs.writeFileSync(
+    TEMPLATE_OUT,
+    stripComments(injectShared(tpl, "../", "templates/post.html"))
+  );
   emit("copyright.html");
 
   // 剩下几个没有生成逻辑的页面，原样复制（只剥注释）
   for (const rel of STATIC_HTML) emit(rel);
+
+  writeSitemap(posts);
+}
+
+/* ---------- sitemap.xml ----------
+
+   只有搜索引擎会用：主页、版权页和全部文章静态页。SPA 的 hash 路由
+   （/#/blog 这些）不进 sitemap —— 对爬虫那都是同一个文档。域名现读
+   CNAME（见 SITE_URL），文章的 lastmod 用 frontmatter 的日期。 */
+function writeSitemap(posts) {
+  const urls = [
+    `  <url>\n    <loc>${SITE_URL}/</loc>\n  </url>`,
+    `  <url>\n    <loc>${SITE_URL}/copyright.html</loc>\n  </url>`,
+    ...posts.map(
+      (p) =>
+        `  <url>\n    <loc>${SITE_URL}/blog/${encodeURIComponent(p.slug)}.html</loc>\n` +
+        (p.date ? `    <lastmod>${p.date}</lastmod>\n` : "") +
+        `  </url>`
+    ),
+  ];
+  const xml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.join("\n") +
+    `\n</urlset>\n`;
+  fs.writeFileSync(path.join(ROOT, "sitemap.xml"), xml);
+  console.log("  ✓ sitemap.xml");
 }
 
 main();

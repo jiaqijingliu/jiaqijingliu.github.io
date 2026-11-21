@@ -39,9 +39,16 @@
 | `skills.json` | 7 种技能定义 | — |
 | `jobs.json` | 6 种职业（入职条件 / 收入 / 晋升 / 等级 / 专属事件） | — |
 | `endings.json` | 11 个结局 + 兜底 + 早逝告别词（按 priority 判定） | — |
-| `events-child/teen/young/mid/late.json` | 96 个事件，按人生阶段分五个文件 | — |
+| `events-child/teen/young/mid/late.json` | 骨干剧情事件（96 个，含完整因果链） | — |
+| `events-daily.json` | 日常/意外/世界事件包（26 个，多数带 2-3 情境变体，once:false 靠冷却复用） | — |
+| `events-social.json` | 社交/朋友/恋爱事件包（24 个） | — |
+| `events-career.json` | 职场/财富/晚年事件包（20 个） | — |
+| `events-goal.json` | 人生目标节点（20 岁立志 / 42 岁换目标） | — |
 | `tool-validate.js` | 数据校验器（node 直跑，不进 bundle） | — |
 | `tool-simulate.js` | 无头模拟器（多策略跑完整人生） | `_sim_bundle.cjs` |
+| `tool-fix-fields.js` | 一次性字段修复工具（历史遗留，可删） | — |
+
+**事件总数 174**（骨干 96 + 扩充包 78），变体另计。
 
 **为什么逻辑与数据分离**：事件 / 职业 / 技能 / 结局全部是数据（JSON），引擎是通用执行器。加内容不需要碰逻辑，改平衡不需要找代码。
 
@@ -119,7 +126,39 @@ ending    死亡后填充
 
 命中后记入 `state.chains`（只有 fromEvent 是真实事件 id 才记——引擎里程碑队列触发的节点是「人生起点」，不进因果图）。
 
-### 3.4 结局判定
+### 3.4 事件变体 / 冷却 / 抽取日志（v2 新增）
+
+- **变体**：事件可带 `"variants": [{title, desc}]`，`fireEvent` 时随机抽取写进事件副本（存档序列化副本本身，读档无缝）。
+- **冷却**：`rollQuarterlyEvent` 跳过最近 4 个事件里出现过的 id；同类别在最近 4 事件里出现 2 次 → 权重 ×0.4、3 次 → 跳过。`state.recentEvents`（上限 12 条）随存档保存。
+- **抽取日志**：`state.debugPicks`（上限 40 条）记录 `{age, pool, filtered, picked}`——排查「为什么某事件不出现」直接读这个字段。
+
+### 3.5 恋爱倾向与 NPC 生成（v2 新增）
+
+- `char.orientation`：hetero(88%) / homo(6%) / bi(6%)，出生随机；`loveGenderFor(state)` 统一决定恋爱 NPC 性别——**事件数据不写死对象性别**。
+- `spawn.gender` 支持 `"same"`（室友等同性场景）与缺省（随机；lover/spouse 走倾向）。
+- NPC 姓名从 SURNAMES/GIVEN_M/GIVEN_F 随机；personality/interest 缺省随机；年龄按 `ROLE_AGE_OFFSET` 与玩家年龄估算。
+
+### 3.6 属性联动（v2 新增）
+
+| 联动 | 公式 / 位置 |
+|---|---|
+| 精力上限 | `energyMax = 60 + 健康×0.4`（所有行动的 clamp 上限） |
+| 行动效率 | `moraleFactor = 0.82 + 幸福/280`；压力>70 ×0.85；精力<25 ×0.8 → 学习/工作 |
+| 结识新朋友 | 社交行动概率 `0.18 + 魅力/250 + 情商/400` |
+| 休息质量 | 恢复量 × `(0.85 + 幸福/220)` |
+| 工资 | × `(1 + 声望/500)` |
+| 理财 | 收益率 `+声望/600` |
+| 低健康 | 健康<30 → 每季度幸福 -1 |
+
+### 3.7 人生目标（v2 新增）
+
+`GOALS` 表（engine.js 内，8 种抱负）：`progress(state)/done(state)/applyReward(state)`。`effects.goal` 立下/更换目标；`advanceYear` 年度结算，完成时 `flags.add("goal_done_"+id)` + 奖励 + `out.goalDone`（UI toast）。20 岁 `ev_goal_pick`、42 岁 `ev_goal_review` 由引擎队列触发。
+
+### 3.8 种子随机（v2 新增）
+
+mulberry32：`seedRng(seed)` 设种子，`rng()` 全引擎统一随机入口；`state.seed` 随存档保存。读档恢复方式：`deserialize` 后调用 `seedRng(state.seed)`（由 save.read 完成）——**注意：读档续接的是重放起点，不是逐字节续接**；同种子整局重放可复现关键节点。
+
+### 3.9 结局判定
 
 `computeEnding` 按 `priority` 升序遍历 `endings.json`，第一个条件全过的生效；都不满足走 `fallback`。判定上下文含婚姻、家庭纽带（父母+配偶）、子女关系、朋友数、蝴蝶链数、遗憾标记等。
 

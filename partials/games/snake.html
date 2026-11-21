@@ -1,0 +1,83 @@
+
+
+<section class="cards-section game-page" id="game-snake">
+  <h2 class="game-title">贪吃蛇</h2>
+  <div class="under-line"></div>
+
+
+  <div class="game-field">
+    <div class="game-stage">
+      <canvas class="snake-canvas"></canvas>
+      <div class="game-overlay"></div>
+    </div>
+  </div>
+
+  <p class="game-help">
+    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 或 方向键 转向　
+    <kbd>Enter</kbd> 开始 / 重开　<kbd>P</kbd> 暂停　<kbd>B</kbd> 静音
+  </p>
+
+
+  <details class="game-mhelp">
+    <summary>游戏说明（触屏 / 手柄）</summary>
+    <ul>
+      <li>在画布上滑动转向，一段手势里可以连续变向；右下角按钮暂停。</li>
+      <li>选一张地图，点「开始游戏」—— 开始后自动进入横屏全屏。</li>
+      <li>手柄：十字键 / 左摇杆转向，A 开始 / 确定，Start 暂停。</li>
+      <li>每吃满 5 个食物出现一颗限时金苹果（5 分、长 3 节）；四张地图的最高分分开存在本机。</li>
+    </ul>
+  </details>
+
+  <div class="game-keys">
+    <h3 class="game-keys__title">操作说明</h3>
+    <div class="game-keys__grid">
+      <div class="game-key">
+        <span class="game-key__label">转向</span>
+        <span class="game-key__btn game-key__btn--static">方向键 / WASD</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">开始 / 重开</span>
+        <span class="game-key__btn game-key__btn--static">Enter / 空格</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">暂停</span>
+        <span class="game-key__btn game-key__btn--static">P / Esc</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">静音</span>
+        <span class="game-key__btn game-key__btn--static">B</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">选地图</span>
+        <span class="game-key__btn game-key__btn--static">开始页左右方向键</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">触屏</span>
+        <span class="game-key__btn game-key__btn--static">画布上滑动转向</span>
+      </div>
+    </div>
+    <p class="game-keys__note">
+      每吃满 5 个食物会出现一颗限时金苹果，5 分、长 3 节，超时消失。
+      四张地图的最高分分开记，存在本机。
+    </p>
+
+    <h3 class="game-keys__title game-keys__title--sub">手柄</h3>
+    <div class="game-keys__grid">
+      <div class="game-key">
+        <span class="game-key__label">转向</span>
+        <span class="game-key__btn game-key__btn--static">十字键 / 左摇杆</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">开始 / 确定</span>
+        <span class="game-key__btn game-key__btn--static">A</span>
+      </div>
+      <div class="game-key">
+        <span class="game-key__label">暂停</span>
+        <span class="game-key__btn game-key__btn--static">Start</span>
+      </div>
+    </div>
+    <p class="game-keys__note">
+      插上就能用，按标准映射走 —— 手柄的键位是固定的，不在这张表里改。
+    </p>
+  </div>
+</section>

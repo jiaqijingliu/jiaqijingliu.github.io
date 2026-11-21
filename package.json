@@ -9,7 +9,7 @@
     "bump": "node scripts/bump.js",
     "font:subset": "node scripts/subset-font.js",
     "build:css": "sass --no-source-map --style=compressed dev/css/style.scss assets/css/style.css",
-    "build:js": "esbuild dev/js/main.js dev/js/site.js dev/js/bg.js dev/js/player.js dev/js/game-plane.js dev/js/game-snake.js --minify --outdir=assets/js --log-level=warning",
+    "build:js": "esbuild dev/js/main.js dev/js/site.js dev/js/bg.js dev/js/player.js dev/js/game-plane.js dev/js/game-snake.js dev/js/game-butterfly.js --bundle --minify --format=iife --outdir=assets/js --log-level=warning",
     "build:html": "node scripts/build.js",
     "build:blog": "node scripts/build.js",
     "serve": "http-server -p 8080 -c-1"

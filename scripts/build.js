@@ -57,6 +57,7 @@ const STATIC_HTML = [
   "partials/game.html",
   "partials/games/plane.html",
   "partials/games/snake.html",
+  "partials/games/butterfly.html",
   "partials/projects.html",
 ];
 
